@@ -1,5 +1,9 @@
 # TinyTTSTools - Text-to-Speech Tools for Microcontrollers
 
+[![Arduino Library](https://img.shields.io/badge/Arduino-Library-blue?logo=arduino&logoColor=white)](https://www.arduino.cc/reference/en/libraries/)
+[![CMake](https://img.shields.io/badge/CMake-supported-blue?logo=cmake&logoColor=white)](CMakeLists.txt)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue)](LICENSE)
+
 A flexible, header-only text-to-speech (TTS) library designed specifically for microcontrollers and embedded systems. TinyTTSTools provides high-quality speech synthesis with minimal memory footprint and optional machine learning capabilities.
 
 ## Overview
