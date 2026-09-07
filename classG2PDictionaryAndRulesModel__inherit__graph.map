@@ -1,0 +1,5 @@
+<map id="G2PDictionaryAndRulesModel" name="G2PDictionaryAndRulesModel">
+<area shape="rect" id="node1" title="Default G2P model using basic lookup and rule&#45;based methods." alt="" coords="5,152,221,177"/>
+<area shape="rect" id="node2" href="$classG2PHybridModel.html" title="Hybrid G2P model combining multiple approaches." alt="" coords="48,79,179,104"/>
+<area shape="rect" id="node3" href="$classG2PModelBase.html" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="53,5,173,31"/>
+</map>

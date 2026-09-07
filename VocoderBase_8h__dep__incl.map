@@ -1,0 +1,8 @@
+<map id="src/TinyTTSTools/Vocoder/VocoderBase.h" name="src/TinyTTSTools/Vocoder/VocoderBase.h">
+<area shape="rect" id="node1" title="Base class for audio synthesis/vocoder implementations." alt="" coords="41,5,228,45"/>
+<area shape="rect" id="node2" href="$TinyTTSTools_8h.html" title="Main Text&#45;to&#45;Speech engine class for TinyTTSTools." alt="" coords="63,269,206,295"/>
+<area shape="rect" id="node3" href="$ConcatenatedAudioVocoder_8h.html" title="Base class for concatenative speech synthesis with advanced audio processing." alt="" coords="26,93,242,133"/>
+<area shape="rect" id="node6" href="$FormantVocoder_8h.html" title="Formant&#45;based speech synthesizer for TinyTTSTools." alt="" coords="324,93,510,133"/>
+<area shape="rect" id="node4" href="$DiphoneVocoder_8h.html" title="Diphone&#45;based speech synthesizer for TinyTTSTools." alt="" coords="41,181,228,221"/>
+<area shape="rect" id="node5" href="$PhonemeVocoder_8h.html" title="Phoneme&#45;based speech synthesizer for TinyTTSTools." alt="" coords="252,181,438,221"/>
+</map>

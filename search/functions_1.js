@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['getconfig_0',['getConfig',['../classTinyTTSTools.html#a4a7b276f215e89c02f64104522a87129',1,'TinyTTSTools']]]
+  ['begin_0',['begin',['../classTinyTTSTools.html#a1d352132a29e65cc5fb9897981cf44a0',1,'TinyTTSTools::begin(const TTSConfig &amp;config=TTSConfig())'],['../classTinyTTSTools.html#a63f3a4a09a7f82b983d946bfa2e6904d',1,'TinyTTSTools::begin(int sample_rate)'],['../classTTSLoggerCLass.html#a52247338b95205cf711c2adf5107fab7',1,'TTSLoggerCLass::begin()'],['../classAudioDictionarySD.html#ac980335d04646442a8fb58f621d7d9cb',1,'AudioDictionarySD::begin()'],['../classAudioEncodedDictionarySD.html#a125f03aed2d4acfba4624ed1a4adb89e',1,'AudioEncodedDictionarySD::begin()'],['../classCompactPhonemeDictionary.html#a18ed2aeb0e0f3ef6a6e87172b376752d',1,'CompactPhonemeDictionary::begin()'],['../classG2PNeuralModel.html#acfaa1915630da71b463f6796e2d37127',1,'G2PNeuralModel::begin()']]],
+  ['begini2s_1',['beginI2S',['../TTSExampleUtils_8h.html#a08693a1b5bf8ba09a39bdd096663107b',1,'TTSExample::beginI2S(I2SStreamT &amp;out, uint32_t sampleRate, uint8_t bitsPerSample, uint8_t channels)'],['../TTSExampleUtils_8h.html#a08cddcfd768089f5a448f2cecca7b95c',1,'TTSExample::beginI2S(I2SStreamT &amp;out, const TTSConfig &amp;config)']]],
+  ['bitspersample_2',['bitsPerSample',['../classAudioDictionary.html#a2cdfb145379556ebbab2babe325a9db1',1,'AudioDictionary::bitsPerSample()'],['../classAudioEncodedDictionary.html#a367f5faf3e72c418c22f2015ea2c6df0',1,'AudioEncodedDictionary::bitsPerSample()']]]
 ];

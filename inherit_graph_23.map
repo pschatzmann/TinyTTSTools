@@ -1,0 +1,4 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$structSoundEntry.html" title="Structure for storing audio data for phonemes or diphones." alt="" coords="5,5,101,31"/>
+<area shape="rect" id="node2" href="$classSDSoundEntry.html" title="SoundEntry implementation that reads audio data directly from SD card file on&#45;demand: The file must c..." alt="" coords="149,5,264,31"/>
+</map>

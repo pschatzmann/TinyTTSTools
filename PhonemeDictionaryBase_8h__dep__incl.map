@@ -1,0 +1,13 @@
+<map id="src/TinyTTSTools/Dictionary/PhonemeDictionaryBase.h" name="src/TinyTTSTools/Dictionary/PhonemeDictionaryBase.h">
+<area shape="rect" id="node1" title="Common interface for word&#45;&gt;phoneme lookup dictionaries." alt="" coords="269,5,471,45"/>
+<area shape="rect" id="node2" href="$CompactPhonemeDictionary_8h.html" title="Minimum&#45;memory binary word&#45;&gt;phoneme dictionary for TinyTTSTools." alt="" coords="87,93,309,133"/>
+<area shape="rect" id="node6" href="$G2PDictionaryModel_8h.html" title="Dictionary&#45;based G2P model for TinyTTSTools." alt="" coords="145,372,315,412"/>
+<area shape="rect" id="node9" href="$CompressedPhonemeDictionary_8h.html" title="Further&#45;compressed word&#45;&gt;phoneme dictionary: blocked offset index." alt="" coords="410,93,655,133"/>
+<area shape="rect" id="node3" href="$TinyTTSTools_8h.html" title="Main Text&#45;to&#45;Speech engine class for TinyTTSTools." alt="" coords="5,563,148,588"/>
+<area shape="rect" id="node4" href="$CompactPhonemeDictionaryBuilder_8h.html" title="Compile&#45;time builder that packs a readable, enum&#45;typed {&quot;word&quot;, Phone::X, Phone::Y,..." alt="" coords="63,189,333,229"/>
+<area shape="rect" id="node5" href="$PhonemeDictionaryEN_8h.html" title="Human&#45;readable source for the built&#45;in English phoneme dictionary." alt="" coords="113,284,315,324"/>
+<area shape="rect" id="node7" href="$G2PDictionaryAndRulesModel_8h.html" title="Combined dictionary and rules&#45;based G2P model for TinyTTSTools." alt="" coords="114,467,346,507"/>
+<area shape="rect" id="node8" href="$G2PDictionaryNeuralAndRulesModel_8h.html" title="Combined dictionary, neural and rules&#45;based G2P model for TinyTTSTools." alt="" coords="371,460,593,515"/>
+<area shape="rect" id="node10" href="$CompactCmuDictionaryEN__data_8h_source.html" title=" " alt="" coords="407,181,658,236"/>
+<area shape="rect" id="node11" href="$PhonemeExceptionDictionaryEN__data_8h_source.html" title=" " alt="" coords="683,189,967,229"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="G2PDictionaryModel" name="G2PDictionaryModel">
+<area shape="rect" id="node1" title="Dictionary&#45;based G2P model (fastest, smallest memory)" alt="" coords="164,93,319,119"/>
+<area shape="rect" id="node2" href="$classG2PModelBase.html" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="5,5,125,31"/>
+<area shape="rect" id="node3" href="$classPhonemeDictionaryBase.html" title="Common interface implemented by CompactPhonemeDictionary and CompressedPhonemeDictionary,..." alt="" coords="150,5,333,31"/>
+<area shape="rect" id="node4" href="$structPhonemeEntry.html" title="Phoneme Dictionary Entry (stored in PROGMEM)" alt="" coords="357,5,475,31"/>
+</map>

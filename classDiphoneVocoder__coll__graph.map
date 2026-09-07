@@ -1,0 +1,9 @@
+<map id="DiphoneVocoder" name="DiphoneVocoder">
+<area shape="rect" id="node1" title="Diphone&#45;based speech synthesizer with advanced concatenation." alt="" coords="193,357,321,383"/>
+<area shape="rect" id="node2" href="$classConcatenatedAudioVocoder.html" title="Abstract base class for audio concatenation with click&#45;free transitions." alt="" coords="63,269,264,295"/>
+<area shape="rect" id="node3" href="$classVocoderBase.html" title="Base class for audio synthesis implementations." alt="" coords="142,181,249,207"/>
+<area shape="rect" id="node4" href="$classPhonemes.html" title="Phoneme representation translator and timing information." alt="" coords="14,93,105,119"/>
+<area shape="rect" id="node5" href="$structPhonemeInfo.html" title="Structure for phoneme representation mapping." alt="" coords="5,5,113,31"/>
+<area shape="rect" id="node6" href="$classAudioDictionary.html" title="Base class for audio dictionaries." alt="" coords="288,269,415,295"/>
+<area shape="rect" id="node7" href="$structSoundEntry.html" title="Structure for storing audio data for phonemes or diphones." alt="" coords="303,181,399,207"/>
+</map>

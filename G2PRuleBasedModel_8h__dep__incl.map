@@ -1,0 +1,6 @@
+<map id="src/TinyTTSTools/G2P/G2PRuleBasedModel.h" name="src/TinyTTSTools/G2P/G2PRuleBasedModel.h">
+<area shape="rect" id="node1" title="Rule&#45;based G2P model for TinyTTSTools." alt="" coords="67,5,241,45"/>
+<area shape="rect" id="node2" href="$TinyTTSTools_8h.html" title="Main Text&#45;to&#45;Speech engine class for TinyTTSTools." alt="" coords="5,196,148,221"/>
+<area shape="rect" id="node3" href="$G2PDictionaryAndRulesModel_8h.html" title="Combined dictionary and rules&#45;based G2P model for TinyTTSTools." alt="" coords="38,101,270,141"/>
+<area shape="rect" id="node4" href="$G2PDictionaryNeuralAndRulesModel_8h.html" title="Combined dictionary, neural and rules&#45;based G2P model for TinyTTSTools." alt="" coords="295,93,517,148"/>
+</map>

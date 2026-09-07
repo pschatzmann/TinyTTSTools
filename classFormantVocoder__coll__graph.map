@@ -1,0 +1,11 @@
+<map id="FormantVocoder" name="FormantVocoder">
+<area shape="rect" id="node1" title="Compact real&#45;time formant (parallel resonator) speech synthesizer." alt="" coords="873,105,1001,130"/>
+<area shape="rect" id="node2" href="$classVocoderBase.html" title="Base class for audio synthesis implementations." alt="" coords="567,7,674,33"/>
+<area shape="rect" id="node3" href="$classPhonemes.html" title="Phoneme representation translator and timing information." alt="" coords="279,7,370,33"/>
+<area shape="rect" id="node4" href="$structPhonemeInfo.html" title="Structure for phoneme representation mapping." alt="" coords="5,7,113,33"/>
+<area shape="rect" id="node5" href="$structPhonemeRule.html" title="Table entry describing one phoneme&#39;s acoustic parameters and behavior." alt="" coords="565,57,677,82"/>
+<area shape="rect" id="node6" href="$structFormantParams.html" title="Static formant frequency, amplitude and bandwidth specification." alt="" coords="263,57,387,82"/>
+<area shape="rect" id="node7" href="$structFormantVoiceConfig.html" title="Voice configuration parameters for tuning timbre &amp; prosody." alt="" coords="545,106,697,131"/>
+<area shape="rect" id="node8" href="$structFormantVocoder_1_1FormantFilter.html" title="Filter coefficients and state for a single formant resonator." alt="" coords="509,194,732,219"/>
+<area shape="rect" id="node9" href="$structFormantVocoder_1_1NotchFilter.html" title="Simple IIR notch filter used for nasal anti&#45;formants." alt="" coords="517,254,724,279"/>
+</map>

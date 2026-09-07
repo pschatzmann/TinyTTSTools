@@ -1,0 +1,9 @@
+<map id="TinyTTSTools" name="TinyTTSTools">
+<area shape="rect" id="node1" title="Main Text&#45;to&#45;Speech engine class." alt="" coords="174,269,281,295"/>
+<area shape="rect" id="node2" href="$structTTSConfig.html" title="TTS Configuration structure." alt="" coords="5,181,92,207"/>
+<area shape="rect" id="node3" href="$classG2PModelBase.html" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="117,181,237,207"/>
+<area shape="rect" id="node4" href="$classVocoderBase.html" title="Base class for audio synthesis implementations." alt="" coords="261,181,367,207"/>
+<area shape="rect" id="node5" href="$classPhonemes.html" title="Phoneme representation translator and timing information." alt="" coords="269,93,359,119"/>
+<area shape="rect" id="node6" href="$structPhonemeInfo.html" title="Structure for phoneme representation mapping." alt="" coords="260,5,368,31"/>
+<area shape="rect" id="node7" href="$classPrint.html" title="Mock Print class for non&#45;Arduino environments." alt="" coords="392,181,444,207"/>
+</map>

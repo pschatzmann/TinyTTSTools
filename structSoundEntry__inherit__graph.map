@@ -1,0 +1,4 @@
+<map id="SoundEntry" name="SoundEntry">
+<area shape="rect" id="node1" title="Structure for storing audio data for phonemes or diphones." alt="" coords="15,5,111,31"/>
+<area shape="rect" id="node2" href="$classSDSoundEntry.html" title="SoundEntry implementation that reads audio data directly from SD card file on&#45;demand: The file must c..." alt="" coords="5,79,120,104"/>
+</map>

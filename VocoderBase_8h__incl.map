@@ -1,0 +1,14 @@
+<map id="src/TinyTTSTools/Vocoder/VocoderBase.h" name="src/TinyTTSTools/Vocoder/VocoderBase.h">
+<area shape="rect" id="node1" title="Base class for audio synthesis/vocoder implementations." alt="" coords="309,5,496,45"/>
+<area shape="rect" id="node2" title=" " alt="" coords="415,240,473,265"/>
+<area shape="rect" id="node3" title=" " alt="" coords="543,240,606,265"/>
+<area shape="rect" id="node4" title=" " alt="" coords="231,240,297,265"/>
+<area shape="rect" id="node5" href="$TTSAudioOutput_8h_source.html" title=" " alt="" coords="59,93,250,119"/>
+<area shape="rect" id="node8" href="$TTSTypes_8h.html" title="Core types and structures for TinyTTSTools." alt="" coords="217,167,311,192"/>
+<area shape="rect" id="node9" href="$Phonemes_8h.html" title="Phoneme information for TinyTTSTools." alt="" coords="326,93,479,119"/>
+<area shape="rect" id="node11" href="$StringUtils_8h.html" title="String utility functions for TinyTTSTools." alt="" coords="630,167,783,192"/>
+<area shape="rect" id="node6" title=" " alt="" coords="117,167,192,192"/>
+<area shape="rect" id="node7" title=" " alt="" coords="22,167,93,192"/>
+<area shape="rect" id="node10" title=" " alt="" coords="437,167,504,192"/>
+<area shape="rect" id="node12" title=" " alt="" coords="664,240,749,265"/>
+</map>

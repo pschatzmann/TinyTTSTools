@@ -1,0 +1,11 @@
+<map id="src/TinyTTSTools/Dictionary/AudioDictionary.h" name="src/TinyTTSTools/Dictionary/AudioDictionary.h">
+<area shape="rect" id="node1" title="Abstract base class for audio dictionaries in TinyTTSTools." alt="" coords="439,5,640,45"/>
+<area shape="rect" id="node2" href="$ArpabetAltWAVDictionary_8h_source.html" title=" " alt="" coords="5,93,207,133"/>
+<area shape="rect" id="node3" href="$ArpabetWAVDictionary_8h_source.html" title=" " alt="" coords="231,93,432,133"/>
+<area shape="rect" id="node4" href="$PhonemeVocoder_8h.html" title="Phoneme&#45;based speech synthesizer for TinyTTSTools." alt="" coords="377,181,563,221"/>
+<area shape="rect" id="node6" href="$AudioDictionarySD_8h_source.html" title=" " alt="" coords="508,93,709,133"/>
+<area shape="rect" id="node7" href="$AudioEncodedDictionary_8h.html" title="AudioDictionary implementation for encoded audio data." alt="" coords="733,93,935,133"/>
+<area shape="rect" id="node9" href="$DiphoneVocoder_8h.html" title="Diphone&#45;based speech synthesizer for TinyTTSTools." alt="" coords="943,181,1130,221"/>
+<area shape="rect" id="node5" href="$TinyTTSTools_8h.html" title="Main Text&#45;to&#45;Speech engine class for TinyTTSTools." alt="" coords="595,269,737,295"/>
+<area shape="rect" id="node8" href="$AudioEncodedDictionarySD_8h_source.html" title=" " alt="" coords="704,181,919,221"/>
+</map>

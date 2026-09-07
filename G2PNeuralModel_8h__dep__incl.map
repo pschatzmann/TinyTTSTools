@@ -1,0 +1,4 @@
+<map id="src/TinyTTSTools/G2P/G2PNeuralModel.h" name="src/TinyTTSTools/G2P/G2PNeuralModel.h">
+<area shape="rect" id="node1" title="Neural (GRU) grapheme&#45;to&#45;phoneme fallback model for TinyTTSTools." alt="" coords="37,5,197,45"/>
+<area shape="rect" id="node2" href="$G2PDictionaryNeuralAndRulesModel_8h.html" title="Combined dictionary, neural and rules&#45;based G2P model for TinyTTSTools." alt="" coords="5,93,228,148"/>
+</map>

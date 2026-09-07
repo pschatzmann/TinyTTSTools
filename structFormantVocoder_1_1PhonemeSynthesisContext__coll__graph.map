@@ -1,0 +1,5 @@
+<map id="FormantVocoder::PhonemeSynthesisContext" name="FormantVocoder::PhonemeSynthesisContext">
+<area shape="rect" id="node1" title="Aggregate per&#45;phoneme synthesis parameters and evolving state." alt="" coords="39,108,299,148"/>
+<area shape="rect" id="node2" href="$structFormantParams.html" title="Static formant frequency, amplitude and bandwidth specification." alt="" coords="5,5,129,31"/>
+<area shape="rect" id="node3" href="$structFormantVocoder_1_1PhonemeFlags.html" title="Classification flags derived from a phoneme rule." alt="" coords="154,5,386,31"/>
+</map>

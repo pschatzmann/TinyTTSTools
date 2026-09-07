@@ -1,0 +1,4 @@
+<map id="PhonemeRule" name="PhonemeRule">
+<area shape="rect" id="node1" title="Table entry describing one phoneme&#39;s acoustic parameters and behavior." alt="" coords="11,93,123,119"/>
+<area shape="rect" id="node2" href="$structFormantParams.html" title="Static formant frequency, amplitude and bandwidth specification." alt="" coords="5,5,129,31"/>
+</map>

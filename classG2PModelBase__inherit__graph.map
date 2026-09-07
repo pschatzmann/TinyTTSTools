@@ -1,0 +1,9 @@
+<map id="G2PModelBase" name="G2PModelBase">
+<area shape="rect" id="node1" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="267,5,387,31"/>
+<area shape="rect" id="node2" href="$classG2PDictionaryModel.html" title="Dictionary&#45;based G2P model (fastest, smallest memory)" alt="" coords="5,79,160,104"/>
+<area shape="rect" id="node3" href="$classG2PHybridModel.html" title="Hybrid G2P model combining multiple approaches." alt="" coords="184,79,315,104"/>
+<area shape="rect" id="node6" href="$classG2PNeuralModel.html" title="Neural grapheme&#45;to&#45;phoneme fallback for out&#45;of&#45;dictionary words." alt="" coords="339,79,469,104"/>
+<area shape="rect" id="node7" href="$classG2PRuleBasedModel.html" title="Rule&#45;based G2P model with enhanced linguistic rules." alt="" coords="493,79,651,104"/>
+<area shape="rect" id="node4" href="$classG2PDictionaryAndRulesModel.html" title="Default G2P model using basic lookup and rule&#45;based methods." alt="" coords="20,159,236,185"/>
+<area shape="rect" id="node5" href="$classG2PDictionaryNeuralAndRulesModel.html" title="G2P model chaining dictionary lookup, a neural fallback and rules." alt="" coords="260,152,479,192"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="G2PDictionaryNeuralAndRulesModel" name="G2PDictionaryNeuralAndRulesModel">
+<area shape="rect" id="node1" title="G2P model chaining dictionary lookup, a neural fallback and rules." alt="" coords="5,152,224,192"/>
+<area shape="rect" id="node2" href="$classG2PHybridModel.html" title="Hybrid G2P model combining multiple approaches." alt="" coords="49,79,180,104"/>
+<area shape="rect" id="node3" href="$classG2PModelBase.html" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="55,5,175,31"/>
+</map>

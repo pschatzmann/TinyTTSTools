@@ -1,0 +1,6 @@
+<map id="G2PHybridModel" name="G2PHybridModel">
+<area shape="rect" id="node1" title="Hybrid G2P model combining multiple approaches." alt="" coords="168,79,299,104"/>
+<area shape="rect" id="node3" href="$classG2PDictionaryAndRulesModel.html" title="Default G2P model using basic lookup and rule&#45;based methods." alt="" coords="5,159,221,185"/>
+<area shape="rect" id="node4" href="$classG2PDictionaryNeuralAndRulesModel.html" title="G2P model chaining dictionary lookup, a neural fallback and rules." alt="" coords="245,152,464,192"/>
+<area shape="rect" id="node2" href="$classG2PModelBase.html" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="173,5,293,31"/>
+</map>

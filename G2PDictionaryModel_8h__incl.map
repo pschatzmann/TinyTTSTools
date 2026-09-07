@@ -1,0 +1,18 @@
+<map id="src/TinyTTSTools/G2P/G2PDictionaryModel.h" name="src/TinyTTSTools/G2P/G2PDictionaryModel.h">
+<area shape="rect" id="node1" title="Dictionary&#45;based G2P model for TinyTTSTools." alt="" coords="171,5,342,45"/>
+<area shape="rect" id="node2" title=" " alt="" coords="794,416,860,441"/>
+<area shape="rect" id="node3" title=" " alt="" coords="354,489,412,515"/>
+<area shape="rect" id="node4" href="$G2PModelBase_8h.html" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="421,335,553,361"/>
+<area shape="rect" id="node8" href="$PhonemeDictionaryBase_8h.html" title="Common interface for word&#45;&gt;phoneme lookup dictionaries." alt="" coords="112,328,345,368"/>
+<area shape="rect" id="node10" href="$PhonemeDictionaryEN_8h.html" title="Human&#45;readable source for the built&#45;in English phoneme dictionary." alt="" coords="336,93,598,119"/>
+<area shape="rect" id="node15" href="$StringUtils_8h.html" title="String utility functions for TinyTTSTools." alt="" coords="45,416,198,441"/>
+<area shape="rect" id="node5" href="$TTSTypes_8h.html" title="Core types and structures for TinyTTSTools." alt="" coords="522,416,668,441"/>
+<area shape="rect" id="node6" title=" " alt="" coords="794,489,860,515"/>
+<area shape="rect" id="node7" title=" " alt="" coords="564,489,626,515"/>
+<area shape="rect" id="node9" title=" " alt="" coords="274,416,345,441"/>
+<area shape="rect" id="node11" href="$CompactPhonemeDictionaryBuilder_8h.html" title="Compile&#45;time builder that packs a readable, enum&#45;typed {&quot;word&quot;, Phone::X, Phone::Y,..." alt="" coords="368,167,576,207"/>
+<area shape="rect" id="node12" title=" " alt="" coords="444,255,500,280"/>
+<area shape="rect" id="node13" href="$CompactPhonemeDictionary_8h.html" title="Minimum&#45;memory binary word&#45;&gt;phoneme dictionary for TinyTTSTools." alt="" coords="548,255,767,280"/>
+<area shape="rect" id="node14" href="$Phonemes_8h.html" title="Phoneme information for TinyTTSTools." alt="" coords="629,335,782,361"/>
+<area shape="rect" id="node16" title=" " alt="" coords="79,489,164,515"/>
+</map>

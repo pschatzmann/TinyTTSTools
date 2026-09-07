@@ -1,0 +1,12 @@
+<map id="src/TinyTTSTools/G2P/G2PNeuralModel.h" name="src/TinyTTSTools/G2P/G2PNeuralModel.h">
+<area shape="rect" id="node1" title="Neural (GRU) grapheme&#45;to&#45;phoneme fallback model for TinyTTSTools." alt="" coords="298,5,458,45"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,93,68,119"/>
+<area shape="rect" id="node3" title=" " alt="" coords="129,240,195,265"/>
+<area shape="rect" id="node4" title=" " alt="" coords="645,93,711,119"/>
+<area shape="rect" id="node5" title=" " alt="" coords="318,240,377,265"/>
+<area shape="rect" id="node6" title=" " alt="" coords="441,240,504,265"/>
+<area shape="rect" id="node7" href="$G2PModelBase_8h.html" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="208,93,340,119"/>
+<area shape="rect" id="node9" href="$StringUtils_8h.html" title="String utility functions for TinyTTSTools." alt="" coords="416,167,569,192"/>
+<area shape="rect" id="node8" href="$TTSTypes_8h.html" title="Core types and structures for TinyTTSTools." alt="" coords="143,167,290,192"/>
+<area shape="rect" id="node10" title=" " alt="" coords="529,240,614,265"/>
+</map>

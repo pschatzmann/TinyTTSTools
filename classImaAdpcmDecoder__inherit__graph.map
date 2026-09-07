@@ -1,0 +1,4 @@
+<map id="ImaAdpcmDecoder" name="ImaAdpcmDecoder">
+<area shape="rect" id="node1" title="IMA&#45;ADPCM (WAVE_FORMAT_IMA_ADPCM / DVI&#45;ADPCM), 4 bits/sample, matching what sox &#45;e ima&#45;adpcm produces..." alt="" coords="11,79,158,104"/>
+<area shape="rect" id="node2" href="$classAudioFormatDecoder.html" title="Strategy interface: decode raw bytes in some sample format into individual 16&#45;bit signed PCM samples." alt="" coords="5,5,164,31"/>
+</map>

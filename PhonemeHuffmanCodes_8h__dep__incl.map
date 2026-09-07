@@ -1,0 +1,6 @@
+<map id="src/TinyTTSTools/Dictionary/PhonemeHuffmanCodes.h" name="src/TinyTTSTools/Dictionary/PhonemeHuffmanCodes.h">
+<area shape="rect" id="node1" title="Canonical Huffman codes for packed phoneme bytes." alt="" coords="175,5,377,45"/>
+<area shape="rect" id="node2" href="$CompressedPhonemeDictionary_8h.html" title="Further&#45;compressed word&#45;&gt;phoneme dictionary: blocked offset index." alt="" coords="153,93,399,133"/>
+<area shape="rect" id="node3" href="$CompactCmuDictionaryEN__data_8h_source.html" title=" " alt="" coords="5,181,256,236"/>
+<area shape="rect" id="node4" href="$PhonemeExceptionDictionaryEN__data_8h_source.html" title=" " alt="" coords="281,189,565,229"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="Pcm16Decoder" name="Pcm16Decoder">
+<area shape="rect" id="node1" title="16&#45;bit signed PCM, little&#45;endian, stored as&#45;is (O(1) random access)." alt="" coords="25,79,145,104"/>
+<area shape="rect" id="node2" href="$classAudioFormatDecoder.html" title="Strategy interface: decode raw bytes in some sample format into individual 16&#45;bit signed PCM samples." alt="" coords="5,5,164,31"/>
+</map>

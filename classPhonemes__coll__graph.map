@@ -1,0 +1,4 @@
+<map id="Phonemes" name="Phonemes">
+<area shape="rect" id="node1" title="Phoneme representation translator and timing information." alt="" coords="14,93,105,119"/>
+<area shape="rect" id="node2" href="$structPhonemeInfo.html" title="Structure for phoneme representation mapping." alt="" coords="5,5,113,31"/>
+</map>

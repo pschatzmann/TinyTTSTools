@@ -1,0 +1,4 @@
+<map id="G2PHybridModel" name="G2PHybridModel">
+<area shape="rect" id="node1" title="Hybrid G2P model combining multiple approaches." alt="" coords="5,79,136,104"/>
+<area shape="rect" id="node2" href="$classG2PModelBase.html" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="11,5,131,31"/>
+</map>

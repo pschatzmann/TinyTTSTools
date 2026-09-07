@@ -1,0 +1,6 @@
+<map id="src/TinyTTSTools/Vocoder/ConcatenatedAudioVocoder.h" name="src/TinyTTSTools/Vocoder/ConcatenatedAudioVocoder.h">
+<area shape="rect" id="node1" title="Base class for concatenative speech synthesis with advanced audio processing." alt="" coords="9,5,225,45"/>
+<area shape="rect" id="node2" href="$TinyTTSTools_8h.html" title="Main Text&#45;to&#45;Speech engine class for TinyTTSTools." alt="" coords="46,181,189,207"/>
+<area shape="rect" id="node3" href="$DiphoneVocoder_8h.html" title="Diphone&#45;based speech synthesizer for TinyTTSTools." alt="" coords="24,93,211,133"/>
+<area shape="rect" id="node4" href="$PhonemeVocoder_8h.html" title="Phoneme&#45;based speech synthesizer for TinyTTSTools." alt="" coords="235,93,421,133"/>
+</map>

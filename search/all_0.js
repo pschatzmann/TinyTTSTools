@@ -1,4 +1,29 @@
 var searchData=
 [
-  ['begin_0',['begin',['../classTinyTTSTools.html#a1d352132a29e65cc5fb9897981cf44a0',1,'TinyTTSTools::begin(const TTSConfig &amp;config=TTSConfig())'],['../classTinyTTSTools.html#a63f3a4a09a7f82b983d946bfa2e6904d',1,'TinyTTSTools::begin(int sample_rate)']]]
+  ['a3_0',['a3',['../structFormantParams.html#a0eddcd61b079eb7bfdf0acfea0ae1a39',1,'FormantParams']]],
+  ['addsampletobatch_1',['addSampleToBatch',['../classConcatenatedAudioVocoder.html#ae56441a7ac7bbad7e5d5a18feeb556fb',1,'ConcatenatedAudioVocoder']]],
+  ['applycrossfade_2',['applyCrossfade',['../classFormantVocoder.html#ad5007aa90ac10bb92155f8057c359d0b',1,'FormantVocoder']]],
+  ['applydeesserifneeded_3',['applyDeEsserIfNeeded',['../classFormantVocoder.html#a2ea46e0f0c2903a726940d45b6a020df',1,'FormantVocoder']]],
+  ['applyenhancedg2prules_4',['applyEnhancedG2PRules',['../classG2PRuleBasedModel.html#a478794b907df87b09ff627af78fac316',1,'G2PRuleBasedModel']]],
+  ['applyformantfilter_5',['applyFormantFilter',['../classFormantVocoder.html#a1b642f5a1917f875af11e2684483576d',1,'FormantVocoder']]],
+  ['applynasalnotchesifneeded_6',['applyNasalNotchesIfNeeded',['../classFormantVocoder.html#ad93ad3a88d2fe7875b472a23c3a0eaae',1,'FormantVocoder']]],
+  ['applyphasealignment_7',['applyPhaseAlignment',['../classConcatenatedAudioVocoder.html#a85df342cc1ab7a1883787583b5c45424',1,'ConcatenatedAudioVocoder']]],
+  ['applyrmsnormalization_8',['applyRMSNormalization',['../classFormantVocoder.html#a11484c6022013a4b6da4109a44368dec',1,'FormantVocoder']]],
+  ['applysibilantpostprocessing_9',['applySibilantPostProcessing',['../classFormantVocoder.html#afc07142299af6e66c2aefcf1afdf5766',1,'FormantVocoder']]],
+  ['applysingleletter_10',['applySingleLetter',['../classG2PRuleBasedModel.html#af0b7aaf4788d3fb6dadfc3289c676243',1,'G2PRuleBasedModel']]],
+  ['applystressenergyboost_11',['applyStressEnergyBoost',['../classFormantVocoder.html#a9692133ebffe5e423260418ed7244442',1,'FormantVocoder']]],
+  ['applyvolumefactor_12',['applyVolumeFactor',['../classFormantVocoder.html#a3c9e02c3bd8bedbaf892d2bbde2c3382',1,'FormantVocoder']]],
+  ['arpabet_13',['arpabet',['../structPhonemeInfo.html#a8a9d0f21bfc6e355a61aef44be4e6c4b',1,'PhonemeInfo']]],
+  ['arpabet_14',['ARPAbet',['../TTSTypes_8h.html#a8304a010942f858a2d6f0d670a00a469a3bdc3b267f0d3055714b6d2c6238ad00',1,'TTSTypes.h']]],
+  ['arpabetforindex_15',['arpabetForIndex',['../classG2PNeuralModel.html#ab2baf63ef5ba97c391df8a2f54fb2201',1,'G2PNeuralModel']]],
+  ['audiocallback_5f_16',['audioCallback_',['../classTTSAudioOutputCallback.html#ad6f3da5db683e5780ae71438647e3617',1,'TTSAudioOutputCallback::audioCallback_()'],['../classG2PModelBase.html#a4cfd728126efb99c8e7949775c8c7534',1,'G2PModelBase::audioCallback_()']]],
+  ['audiodatacallback_17',['AudioDataCallback',['../TTSTypes_8h.html#a77ce98af7c33b7c64f76a539650c088a',1,'TTSTypes.h']]],
+  ['audiodictionary_18',['AudioDictionary',['../classAudioDictionary.html#a3bbbf4ad8272aa4d48e4cf945315c0e9',1,'AudioDictionary::AudioDictionary()=default'],['../classAudioDictionary.html#a7bd3dae86168769ff6ecd44ed2cdd6e9',1,'AudioDictionary::AudioDictionary(const SoundEntry *phonemes, size_t numPhonemes, int sampleRateHz, PhonemeType phonemeType, int channels=1, int bitsPerSample=16)'],['../classAudioDictionary.html',1,'AudioDictionary']]],
+  ['audiodictionary_2eh_19',['AudioDictionary.h',['../AudioDictionary_8h.html',1,'']]],
+  ['audiodictionarysd_20',['AudioDictionarySD',['../classAudioDictionarySD.html#a7a9a2b397301b011a32043b4fc47fe32',1,'AudioDictionarySD::AudioDictionarySD()'],['../classAudioDictionarySD.html',1,'AudioDictionarySD']]],
+  ['audioencodeddictionary_21',['AudioEncodedDictionary',['../classAudioEncodedDictionary.html',1,'AudioEncodedDictionary'],['../classAudioEncodedDictionary.html#a52ec37321ec167c0ac48275ee10dabeb',1,'AudioEncodedDictionary::AudioEncodedDictionary()']]],
+  ['audioencodeddictionary_2eh_22',['AudioEncodedDictionary.h',['../AudioEncodedDictionary_8h.html',1,'']]],
+  ['audioencodeddictionarysd_23',['AudioEncodedDictionarySD',['../classAudioEncodedDictionarySD.html',1,'AudioEncodedDictionarySD'],['../classAudioEncodedDictionarySD.html#a5e4f729947f5f16a1c317cb033850fa4',1,'AudioEncodedDictionarySD::AudioEncodedDictionarySD()']]],
+  ['audioformatdecoder_24',['AudioFormatDecoder',['../classAudioFormatDecoder.html',1,'']]],
+  ['audioformatdecoder_2eh_25',['AudioFormatDecoder.h',['../AudioFormatDecoder_8h.html',1,'']]]
 ];

@@ -1,0 +1,5 @@
+<map id="PhonemeDictionaryBase" name="PhonemeDictionaryBase">
+<area shape="rect" id="node1" title="Common interface implemented by CompactPhonemeDictionary and CompressedPhonemeDictionary,..." alt="" coords="139,5,322,31"/>
+<area shape="rect" id="node2" href="$classCompactPhonemeDictionary.html" title="Binary&#45;search word&#45;&gt;phoneme dictionary backed by four flat, flash&#45;resident arrays." alt="" coords="5,79,213,104"/>
+<area shape="rect" id="node3" href="$classCompressedPhonemeDictionary.html" title="Same word&#45;&gt;phoneme lookup as CompactPhonemeDictionary, but smaller on flash for large (&gt;10k word) dat..." alt="" coords="238,79,469,104"/>
+</map>

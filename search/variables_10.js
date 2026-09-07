@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['sample_5frate_0',['sample_rate',['../structTTSConfig.html#ae949f3ba077cb23d776623fde738a317',1,'TTSConfig']]],
+  ['samplebuffer_5f_1',['sampleBuffer_',['../classConcatenatedAudioVocoder.html#a1d63d2f4384db287b90f7ef11ed0039f',1,'ConcatenatedAudioVocoder']]],
+  ['samplerate_5f_2',['sampleRate_',['../classAudioDictionary.html#ad28d5c781365cd678b6185e7505030ed',1,'AudioDictionary']]],
+  ['shimmerpct_3',['shimmerPct',['../structFormantVoiceConfig.html#ab89598bd93d6453f094456f3b9eb43f7',1,'FormantVoiceConfig']]],
+  ['sibilantattack_4',['sibilantAttack',['../structFormantVoiceConfig.html#a3898cd7ddc7131da81e7a279a72eea38',1,'FormantVoiceConfig']]],
+  ['sibilantcompressionratio_5',['sibilantCompressionRatio',['../structFormantVoiceConfig.html#af36750bf66bd423f2db55f3833c89f09',1,'FormantVoiceConfig']]],
+  ['sibilantdynamictargetrms_6',['sibilantDynamicTargetRMS',['../structFormantVoiceConfig.html#a83293d2d8ae2d6dd690ecae32234bcbe',1,'FormantVoiceConfig']]],
+  ['sibilantfinalgain_7',['sibilantFinalGain',['../structFormantVoiceConfig.html#a9bf013accccacfd069d1a480d3202009',1,'FormantVoiceConfig']]],
+  ['sibilantgain_8',['sibilantGain',['../structFormantVoiceConfig.html#a54d2c10144d356fff8e0f24d0394ede0',1,'FormantVoiceConfig']]],
+  ['sibilanthfformantscale_9',['sibilantHFFormantScale',['../structFormantVoiceConfig.html#a032ee3dfccce0ab2dc955224b6e27d03',1,'FormantVoiceConfig']]],
+  ['sibilantlowpassmix_10',['sibilantLowpassMix',['../structFormantVoiceConfig.html#ad621228da91a8a98e6e4ef3be8941366',1,'FormantVoiceConfig']]],
+  ['sibilantrelease_11',['sibilantRelease',['../structFormantVoiceConfig.html#af3ef8440730f81cc679f57f08964e9ac',1,'FormantVoiceConfig']]],
+  ['size_12',['size',['../structSoundEntry.html#a83e8a29635b58800632a287417faf87f',1,'SoundEntry']]],
+  ['spectraltilt_13',['spectralTilt',['../structFormantVoiceConfig.html#a21718c27536542beb953b6cc0c4d9459',1,'FormantVoiceConfig']]],
+  ['stressdecayportion_14',['stressDecayPortion',['../structFormantVoiceConfig.html#a16ac72885e87aad4db73724500170340',1,'FormantVoiceConfig']]],
+  ['stressenergyboostprimary_15',['stressEnergyBoostPrimary',['../structFormantVoiceConfig.html#a65052291e0448c856a44de0ecfad6464',1,'FormantVoiceConfig']]],
+  ['stressenergyboostsecondary_16',['stressEnergyBoostSecondary',['../structFormantVoiceConfig.html#a504fae90290746ec418be377e06cddbc',1,'FormantVoiceConfig']]],
+  ['stresspitchriseprimary_17',['stressPitchRisePrimary',['../structFormantVoiceConfig.html#a48db64d3d9fb3183614c272e9f7c177a',1,'FormantVoiceConfig']]],
+  ['stresspitchrisesecondary_18',['stressPitchRiseSecondary',['../structFormantVoiceConfig.html#afcaac12d12db60f8f0f1875d234b5a6b',1,'FormantVoiceConfig']]],
+  ['symbol_19',['symbol',['../structPhoneme.html#a1e4cce7fa16d3863b5fbf427b2df08a3',1,'Phoneme']]],
+  ['synth_5f_20',['synth_',['../classTinyTTSTools.html#ab42b3811b35108a4a8c14a03f286edff',1,'TinyTTSTools']]]
+];

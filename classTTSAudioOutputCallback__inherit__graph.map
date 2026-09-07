@@ -1,0 +1,4 @@
+<map id="TTSAudioOutputCallback" name="TTSAudioOutputCallback">
+<area shape="rect" id="node1" title="TTS audio output using callback function." alt="" coords="5,79,189,104"/>
+<area shape="rect" id="node2" href="$classPrint.html" title="Mock Print class for non&#45;Arduino environments." alt="" coords="71,5,123,31"/>
+</map>

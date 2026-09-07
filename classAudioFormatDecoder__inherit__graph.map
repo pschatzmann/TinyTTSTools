@@ -1,0 +1,6 @@
+<map id="AudioFormatDecoder" name="AudioFormatDecoder">
+<area shape="rect" id="node1" title="Strategy interface: decode raw bytes in some sample format into individual 16&#45;bit signed PCM samples." alt="" coords="157,5,315,31"/>
+<area shape="rect" id="node2" href="$classImaAdpcmDecoder.html" title="IMA&#45;ADPCM (WAVE_FORMAT_IMA_ADPCM / DVI&#45;ADPCM), 4 bits/sample, matching what sox &#45;e ima&#45;adpcm produces..." alt="" coords="5,79,152,104"/>
+<area shape="rect" id="node3" href="$classPcm16Decoder.html" title="16&#45;bit signed PCM, little&#45;endian, stored as&#45;is (O(1) random access)." alt="" coords="176,79,296,104"/>
+<area shape="rect" id="node4" href="$classPcm8Decoder.html" title="8&#45;bit unsigned PCM &#45;&gt; 16&#45;bit signed (O(1) random access)." alt="" coords="320,79,432,104"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="ConcatenatedAudioVocoder" name="ConcatenatedAudioVocoder">
+<area shape="rect" id="node1" title="Abstract base class for audio concatenation with click&#45;free transitions." alt="" coords="5,256,207,281"/>
+<area shape="rect" id="node2" href="$classVocoderBase.html" title="Base class for audio synthesis implementations." alt="" coords="194,181,301,207"/>
+<area shape="rect" id="node3" href="$classPhonemes.html" title="Phoneme representation translator and timing information." alt="" coords="66,93,157,119"/>
+<area shape="rect" id="node4" href="$structPhonemeInfo.html" title="Structure for phoneme representation mapping." alt="" coords="57,5,165,31"/>
+</map>
