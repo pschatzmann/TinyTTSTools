@@ -1,0 +1,45 @@
+#######################################
+# TinyTTSTools-ML Library Keywords
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+TinyTTSTools	KEYWORD1
+TTSConfig	KEYWORD1
+TTSPhoneme	KEYWORD1
+TTSVoice	KEYWORD1
+Phoneme	KEYWORD1
+TTSAudioConfig	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin	KEYWORD2
+end	KEYWORD2
+loadModel	KEYWORD2
+loadModelFromProgmem	KEYWORD2
+unloadModel	KEYWORD2
+isModelLoaded	KEYWORD2
+speak	KEYWORD2
+speakAsync	KEYWORD2
+textToPhonemes	KEYWORD2
+setVolume	KEYWORD2
+getVolume	KEYWORD2
+pause	KEYWORD2
+resume	KEYWORD2
+stop	KEYWORD2
+isPlaying	KEYWORD2
+setConfig	KEYWORD2
+getConfig	KEYWORD2
+getMemoryUsage	KEYWORD2
+clearCache	KEYWORD2
+checkHardwareCompatibility	KEYWORD2
+estimateMemoryRequirement	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+

@@ -1,0 +1,21 @@
+training/data/
+training/checkpoints/
+.vscode/
+.venv/
+.pio/
+.claude/
+*.wav
+*.pt
+miniaudio.h
+build/
+data/
+
+# Generated intermediate/training artifacts, regenerable via their own
+# setup/ scripts -- not needed as source (see docs/SETUP.md).
+__pycache__/
+*.pyc
+setup/neural/train.tsv
+setup/neural/val.tsv
+setup/neural/g2p_model.bin
+setup/dictionary/cmudict_dump.txt
+setup/dictionary/failures.txt
