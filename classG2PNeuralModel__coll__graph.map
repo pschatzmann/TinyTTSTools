@@ -1,5 +1,5 @@
 <map id="G2PNeuralModel" name="G2PNeuralModel">
 <area shape="rect" id="node1" title="Neural grapheme&#45;to&#45;phoneme fallback for out&#45;of&#45;dictionary words." alt="" coords="93,152,224,177"/>
 <area shape="rect" id="node2" href="$classG2PModelBase.html" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="5,13,125,38"/>
-<area shape="rect" id="node3" href="$structG2PNeuralModel_1_1QuantizedWeight.html" title=" " alt="" coords="149,5,355,45"/>
+<area shape="rect" id="node3" href="$structG2PNeuralModel_1_1QuantizedWeight.html" title="One [rows, hidden_dim_] weight matrix, symmetric per&#45;row INT8." alt="" coords="149,5,355,45"/>
 </map>
