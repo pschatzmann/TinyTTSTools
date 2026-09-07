@@ -53,8 +53,11 @@ class G2PRuleBasedModel : public G2PModelBase {
 
  protected:
 
-  /// One longest-match rule: if `pattern` occurs at position i (optionally
-  /// anchored to the end of the word), emit `phonemes` and advance i past it.
+  /**
+   * @brief One longest-match rule
+   * @details If `pattern` occurs at position i (optionally anchored to the
+   * end of the word), emit `phonemes` and advance i past it.
+   */
   struct Rule {
     const char* pattern;
     const char* phonemes;

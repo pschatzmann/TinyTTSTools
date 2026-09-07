@@ -116,8 +116,10 @@ class CompressedPhonemeDictionary : public PhonemeDictionaryBase {
     return static_cast<int>(len) - static_cast<int>(word.size());
   }
 
-  // Small runtime-built (once) canonical-Huffman decode table, derived from
-  // the readable PHONEME_HUFFMAN_CODES array.
+  /**
+   * @brief Small runtime-built (once) canonical-Huffman decode table
+   * @details Derived from the readable PHONEME_HUFFMAN_CODES array.
+   */
   struct DecodeTables {
     static constexpr uint8_t kMaxLen = 16;
     uint32_t firstCode[kMaxLen + 1] = {};

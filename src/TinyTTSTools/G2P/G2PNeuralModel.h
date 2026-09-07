@@ -86,8 +86,10 @@ class G2PNeuralModel : public G2PModelBase {
   }
 
  protected:
-  // One [rows, hidden_dim_] weight matrix, symmetric per-row int8
-  // (dequantized value = data[r*cols+c] * row_scale[r]).
+  /**
+   * @brief One [rows, hidden_dim_] weight matrix, symmetric per-row INT8
+   * @details Dequantized value = data[r*cols+c] * row_scale[r].
+   */
   struct QuantizedWeight {
     const int8_t* data = nullptr;
     const float* row_scale = nullptr;

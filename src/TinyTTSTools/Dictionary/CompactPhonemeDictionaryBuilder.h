@@ -17,9 +17,12 @@
 #include <cstdint>
 #include "CompactPhonemeDictionary.h"
 
-/// One human-readable dictionary source entry: a word and a pointer to its
-/// already-packed phoneme sequence (see PH_WORD() below -- entries are
-/// built with that macro, never written out by hand).
+/**
+ * @brief One human-readable dictionary source entry
+ * @details A word and a pointer to its already-packed phoneme sequence
+ * (see PH_WORD() below -- entries are built with that macro, never
+ * written out by hand).
+ */
 struct PhonemeWordSource {
   const char* word;
   const uint8_t* phonemeData;
@@ -78,9 +81,12 @@ constexpr size_t cxTotalPhonemeCount(const PhonemeWordSource (&table)[N]) {
   return total;
 }
 
-/// Backing storage for one word's packed phoneme sequence -- one
-/// instantiation per unique `<Ps...>` combination (so identical
-/// pronunciations, e.g. true homophones, automatically share storage).
+/**
+ * @brief Backing storage for one word's packed phoneme sequence
+ * @details One instantiation per unique `<Ps...>` combination (so
+ * identical pronunciations, e.g. true homophones, automatically share
+ * storage).
+ */
 template <Phone... Ps>
 struct PhonemeSeqHolder {
   static constexpr uint8_t values[sizeof...(Ps)] = {cxPackPhone(Ps)...};
