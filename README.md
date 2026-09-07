@@ -69,7 +69,7 @@ Alternatively you can also use the TTSAudioOutputCallback class to output the au
 - [Building on Desktop](docs/BUILDING.md) - CMake build instructions, including how to build and run the test suite
 - [Setup Tools](docs/SETUP.md) - Regenerating the audio/dictionary data files (`setup/`), including the neural G2P training pipeline
 - [Phonemes](docs/PHONEMES.md) - The ARPAbet phoneme set used throughout the library
-- [Class Documentation](https://pschatzmann.github.io/TinyTTSTools/docs/html/annotated.html)
+- [Class Documentation](https://pschatzmann.github.io/TinyTTSTools/annotated.html)
 
 ## Features
 

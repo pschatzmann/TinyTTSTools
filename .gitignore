@@ -9,6 +9,7 @@ training/checkpoints/
 miniaudio.h
 build/
 data/
+html/
 
 # Generated intermediate/training artifacts, regenerable via their own
 # setup/ scripts -- not needed as source (see docs/SETUP.md).
