@@ -54,11 +54,32 @@ G2P model, one vocoder, one `Print`-compatible output, wired together by
 | `FormantVocoder` | None (procedural) | Robotic but intelligible | Tightest flash budgets; no audio assets to ship |
 | `PhonemeVocoder` | `ArpabetWAVDictionary` (~35KB audio data) | Better than formant, no coarticulation between sounds | Small flash budget, some real recorded audio |
 | `DiphoneVocoder` | `DiphoneWAVDictionary` (~893KB audio data, +~1MB total flash once its decoder/concatenation code is linked in -- see [MEMORY.md](MEMORY.md)) | Most natural of the three -- real phoneme-to-phoneme transitions | Flash isn't tight (ESP32-class), best quality wanted |
+| `PSOLAVocoder` | `ArpabetWAVDictionary` (same data as `PhonemeVocoder`) | Same source recordings as `PhonemeVocoder`, re-synthesized | Need to genuinely shift pitch or stretch/compress duration -- see below |
 
-See `examples/AudioFormant`, `examples/AudioPhoneme`, `examples/AudioDiphones`
-for a complete, runnable version of each. Swapping vocoders is a two-line
-change (the constructor and its `#include`) -- the rest of a sketch is
-identical.
+See `examples/AudioFormant`, `examples/AudioPhoneme`, `examples/AudioDiphones`,
+`examples/AudioPSOLA` for a complete, runnable version of each. Swapping
+vocoders is a two-line change (the constructor and its `#include`) -- the
+rest of a sketch is identical.
+
+### PSOLAVocoder: pitch and duration changes
+
+`FormantVocoder`, `PhonemeVocoder`, and `DiphoneVocoder` can only ever
+*truncate* pre-recorded audio to fit a requested duration, and none of them
+can shift pitch on recorded samples at all. `PSOLAVocoder` plays back the
+same `ArpabetWAVDictionary` recordings as `PhonemeVocoder`, but re-synthesizes
+them via TD-PSOLA (Time-Domain Pitch-Synchronous Overlap-Add -- the
+technique the Praat phonetics software is best known for), so it can
+genuinely stretch/compress duration and shift pitch instead:
+
+```cpp
+PSOLAVocoder synth(ArpabetWAVDictionary);
+```
+
+Reach for it specifically when you need `PhonemeSynthesisParams::pitchHz`
+or `speed` to actually change the sound, not just cut it short -- see
+`examples/AudioPSOLA`. It costs more CPU per phoneme than plain playback
+(per-phoneme pitch analysis + overlap-add), so prefer `PhonemeVocoder` when
+you don't need pitch/duration control.
 
 ### Tuning a phoneme's synthesis
 
@@ -71,13 +92,41 @@ params.volume = 0.5f;      // 1.0 = normal; quieter here
 params.durationMs = 300;   // 0 = automatic; force a specific length
 params.pitchHz = 180.0f;   // 0 = default voice pitch
 params.voicing = 0.0f;     // 1.0 = normal voiced, 0.0 = whispered (FormantVocoder only)
+params.speed = 1.5f;       // 1.0 = normal rate, 2.0 = twice as fast, 0.5 = half speed;
+                           // ignored whenever durationMs is set (an explicit fixed
+                           // duration already wins outright over a relative rate)
 
 synth.sayPhoneme(Phone::AA, out, params);
 ```
 
+`pitchHz` and `speed` only genuinely change pitch/duration with
+`PSOLAVocoder` (or `pitchHz` with `FormantVocoder`, which is procedural) --
+`PhonemeVocoder`/`DiphoneVocoder` play back fixed recordings and can only
+truncate, never stretch or re-pitch them.
+
 `Phone` is a type-safe enum alternative to raw ARPAbet strings (`Phone::AA`
 instead of `"AA"`), covering every phoneme plus the stress-marked variants
 (`Phone::IH1`, `Phone::AA2`, ...) used internally by the dictionaries.
+
+### Per-phoneme overrides within one call
+
+`sayPhoneme()`'s `params` applies uniformly to an entire call. To vary
+volume, pitch, or speed independently *per phoneme* within a sequence, use
+`TinyTTSTools::sayPhonemesWithParams()` instead:
+
+```cpp
+PhonemeSynthesisParams loud, quiet;
+loud.volume = 1.0f;
+quiet.volume = 0.1f;
+
+tts.sayPhonemesWithParams(PhonemeType::ARPAbet, {"AA1", "IY0"}, {loud, quiet});
+```
+
+This synthesizes each phoneme in isolation, which only makes sense for a
+vocoder that doesn't need cross-phoneme context -- `PSOLAVocoder` and
+`FormantVocoder` support it; `PhonemeVocoder`/`DiphoneVocoder` refuse it
+outright (logging a warning) rather than silently losing the diphone
+pairing/lookahead context they depend on.
 
 ## Choosing a G2P model (text -> phonemes)
 
