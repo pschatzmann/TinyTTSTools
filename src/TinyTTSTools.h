@@ -308,6 +308,31 @@ class TinyTTSTools {
   }
 
   /**
+   * @brief Synthesize a sequence of phonemes, each with its own independent
+   * synthesis overrides (e.g. a different volume per phoneme)
+   * @param phonemeType The phoneme representation type of every entry in phonemes
+   * @param phonemes Phoneme symbols to synthesize, in order
+   * @param params Per-phoneme overrides, aligned by index with phonemes;
+   * a phoneme past the end of params uses PhonemeSynthesisParams{} (all defaults)
+   * @return true if every phoneme synthesized successfully
+   * @details See VocoderBase::sayPhonemesWithParams() for the important
+   * caveat: this synthesizes each phoneme in isolation, which is only
+   * correct for a vocoder that doesn't need cross-phoneme context.
+   * ConcatenatedAudioVocoder-based vocoders (PhonemeVocoder, DiphoneVocoder)
+   * refuse this call outright rather than silently degrade; use it with
+   * PSOLAVocoder or FormantVocoder.
+   */
+  bool sayPhonemesWithParams(PhonemeType phonemeType,
+                             const std::vector<std::string>& phonemes,
+                             const std::vector<PhonemeSynthesisParams>& params) {
+    if (!synth_) {
+      return false;
+    }
+
+    return synth_->sayPhonemesWithParams(phonemeType, phonemes, params, *p_out_);
+  }
+
+  /**
    * @brief Set or change the audio output destination
    * @param out Reference to Print object for audio output (e.g., Serial, File,
    * custom stream)

@@ -26,6 +26,7 @@
 #include "TinyTTSTools/Basic/TTSExampleUtils.h"
 #include "TinyTTSTools/SoundDictionary/ArpabetWAVDictionary.h"
 #include "TinyTTSTools/SoundDictionary/DiphoneWAVDictionary.h"
+#include "TinyTTSTools/Vocoder/PSOLAVocoder.h"
 #include "TinyTTSTools/Data/dictionary/CompactCmuDictionaryEN_data.h"
 
 #include <unistd.h>
@@ -126,8 +127,8 @@ class DesktopMain {
         return 1;
       }
       auto t0 = std::chrono::steady_clock::now();
-      if (!tts.say(text)) {
-        std::fprintf(stderr, "tts.say() failed\n");
+      if (!speak(tts, text, opt)) {
+        std::fprintf(stderr, "speech synthesis failed\n");
         return 1;
       }
       double elapsed = std::chrono::duration<double>(std::chrono::steady_clock::now() - t0).count();
@@ -150,8 +151,8 @@ class DesktopMain {
       std::fprintf(stderr, "TinyTTSTools.begin() failed\n");
       return 1;
     }
-    if (!tts.say(text)) {
-      std::fprintf(stderr, "tts.say() failed\n");
+    if (!speak(tts, text, opt)) {
+      std::fprintf(stderr, "speech synthesis failed\n");
       return 1;
     }
 
@@ -170,6 +171,34 @@ class DesktopMain {
   }
 
  private:
+  struct Options;
+
+  /**
+   * @brief Speak text, threading --pitch/--speed through when set.
+   * @details TinyTTSTools::say() has no params-accepting overload, so a
+   * non-default pitch/speed bypasses it and replicates say()'s own
+   * text->phonemes->joined-string path (toPhonemes() + space-join,
+   * matching sayPhonemes()'s own joining) down to the params-accepting
+   * sayPhoneme() overload instead.
+   */
+  bool speak(TinyTTSTools& tts, const std::string& text, const Options& opt) {
+    if (opt.pitch_hz <= 0.0f && opt.speed == 1.0f) {
+      return tts.say(text);
+    }
+    std::vector<std::string> phonemes = tts.toPhonemes(text);
+    if (phonemes.empty()) return false;
+    std::string joined;
+    for (const std::string& p : phonemes) {
+      if (p.empty()) continue;
+      if (!joined.empty()) joined += ' ';
+      joined += p;
+    }
+    PhonemeSynthesisParams params;
+    params.pitchHz = opt.pitch_hz;
+    params.speed = opt.speed;
+    return tts.sayPhoneme(g2p_.getDefaultPhonemeType(), joined, params);
+  }
+
   struct Options {
     std::string text;
     bool have_text = false;
@@ -177,7 +206,9 @@ class DesktopMain {
     std::string output_file;
     bool to_stdout = false;
     bool no_play = false;
-    std::string vocoder = "phoneme";  // formant | phoneme | diphone
+    std::string vocoder = "phoneme";  // formant | phoneme | diphone | psola
+    float pitch_hz = 0.0f;            // 0 = vocoder's own default pitch
+    float speed = 1.0f;               // 1.0 = normal rate
     bool full_dict = false;
     bool help_requested = false;
   };
@@ -199,11 +230,26 @@ class DesktopMain {
                   "  --no-play             Skip playback (implied by -o/--stdout).\n"
                   "\n"
                   "Voice:\n"
-                  "  --vocoder NAME        formant | phoneme | diphone (default: phoneme)\n"
+                  "  --vocoder NAME        formant | phoneme | diphone | psola (default: phoneme)\n"
                   "                        formant: procedural, no audio data, most robotic.\n"
-                  "                        phoneme: pre-recorded phoneme samples (ArpabetWAVDictionary).\n"
-                  "                        diphone: pre-recorded diphone samples, most natural\n"
+                  "                        phoneme: pre-recorded samples (ArpabetWAVDictionary),\n"
+                  "                        truncated (never stretched) to fit each phoneme's duration.\n"
+                  "                        diphone: pre-recorded samples, most natural\n"
                   "                        (DiphoneWAVDictionary).\n"
+                  "                        psola: same samples as 'phoneme', but re-synthesized\n"
+                  "                        via TD-PSOLA to genuinely stretch/compress duration and\n"
+                  "                        shift pitch (see --pitch) instead of only ever truncating.\n"
+                  "  --pitch HZ            Override the synthesis pitch. Only audible with\n"
+                  "                        --vocoder formant (procedural) or psola (TD-PSOLA\n"
+                  "                        re-synthesis) -- phoneme/diphone play back pre-recorded\n"
+                  "                        audio verbatim and can't re-pitch it.\n"
+                  "  --speed FACTOR        Speaking-rate multiplier: 1.0 = normal (default),\n"
+                  "                        2.0 = twice as fast, 0.5 = half speed. Slowing down\n"
+                  "                        (< 1.0) only genuinely stretches audio with --vocoder\n"
+                  "                        formant or psola -- phoneme/diphone can only ever\n"
+                  "                        truncate pre-recorded audio, never lengthen it, so a\n"
+                  "                        slower request there just plays the same clip unchanged\n"
+                  "                        once it's already shorter than the slowed-down target.\n"
                   "  --full-dict           Use the full ~123k-word CMU dictionary instead of the\n"
                   "                        small built-in one (see docs/TUTORIAL.md).\n"
                   "\n"
@@ -241,8 +287,21 @@ class DesktopMain {
         const char* v = next(a.c_str());
         if (!v) return false;
         opt.vocoder = v;
-        if (opt.vocoder != "formant" && opt.vocoder != "phoneme" && opt.vocoder != "diphone") {
-          std::fprintf(stderr, "--vocoder must be formant, phoneme, or diphone, got: %s\n", v);
+        if (opt.vocoder != "formant" && opt.vocoder != "phoneme" && opt.vocoder != "diphone" &&
+            opt.vocoder != "psola") {
+          std::fprintf(stderr, "--vocoder must be formant, phoneme, diphone, or psola, got: %s\n", v);
+          return false;
+        }
+      } else if (a == "--pitch") {
+        const char* v = next(a.c_str());
+        if (!v) return false;
+        opt.pitch_hz = std::stof(v);
+      } else if (a == "--speed") {
+        const char* v = next(a.c_str());
+        if (!v) return false;
+        opt.speed = std::stof(v);
+        if (opt.speed <= 0.0f) {
+          std::fprintf(stderr, "--speed must be > 0, got: %s\n", v);
           return false;
         }
       } else if (a == "--full-dict") {
@@ -297,6 +356,9 @@ class DesktopMain {
       diphone_dict_.reset(new AudioDictionary(DIPHONES, NUM_DIPHONES, 8000, PhonemeType::ARPAbet, 1, 16));
       sample_rate_ = diphone_dict_->sampleRate();
       vocoder_.reset(new DiphoneVocoder(*diphone_dict_));
+    } else if (opt.vocoder == "psola") {
+      sample_rate_ = ArpabetWAVDictionary.sampleRate();
+      vocoder_.reset(new PSOLAVocoder(ArpabetWAVDictionary));
     } else {
       sample_rate_ = ArpabetWAVDictionary.sampleRate();
       vocoder_.reset(new PhonemeVocoder(ArpabetWAVDictionary));

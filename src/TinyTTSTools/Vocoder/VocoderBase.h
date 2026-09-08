@@ -36,6 +36,17 @@ struct PhonemeSynthesisParams {
                             ///< unaffected. Only honored by procedural vocoders
                             ///< (e.g. FormantVocoder); concatenative vocoders play back
                             ///< fixed pre-recorded audio and have no source to devoice.
+  float speed = 1.0f;       ///< Speaking-rate multiplier applied to every phoneme's own
+                            ///< natural duration: 1.0 = normal, 2.0 = twice as fast (half
+                            ///< the duration), 0.5 = half speed (twice the duration).
+                            ///< Ignored whenever durationMs is set (an explicit fixed
+                            ///< duration already fully determines length; unlike speed,
+                            ///< it can't scale per-phoneme, so the two aren't combined).
+                            ///< Actually slowing down playback (speed < 1.0) with
+                            ///< pre-recorded audio (PhonemeVocoder/DiphoneVocoder) still
+                            ///< only ever truncates, same as any other duration request --
+                            ///< only PSOLAVocoder (TD-PSOLA) or FormantVocoder (procedural)
+                            ///< can genuinely stretch audio to fill a longer duration.
 };
 
 /**
@@ -110,6 +121,38 @@ class VocoderBase {
    */
   virtual bool sayPhoneme(Phone phone, ::Print &out) {
     return sayPhoneme(phone, out, PhonemeSynthesisParams{});
+  }
+
+  /**
+   * @brief Say/synthesize a sequence of phonemes, each with its own
+   * independent synthesis overrides (e.g. a different volume per phoneme).
+   * @param phonemeType The phoneme representation type of every entry in phonemes
+   * @param phonemes Phoneme symbols to synthesize, in order
+   * @param params Per-phoneme overrides, aligned by index with phonemes;
+   * a phoneme past the end of params (or if params is shorter) uses
+   * PhonemeSynthesisParams{} (all defaults)
+   * @param out Output stream for audio data
+   * @return true if every phoneme synthesized successfully
+   * @details The default implementation calls sayPhoneme() once per
+   * phoneme, so each one is synthesized in isolation with no visibility
+   * of its neighbors. That's fine for a vocoder that already treats every
+   * phoneme independently (e.g. PSOLAVocoder, FormantVocoder), but wrong
+   * for one that relies on seeing the whole sequence in a single call for
+   * cross-phoneme context -- ConcatenatedAudioVocoder (DiphoneVocoder,
+   * PhonemeVocoder) overrides this to refuse rather than silently
+   * fragment speech (see its own override's doc for why).
+   */
+  virtual bool sayPhonemesWithParams(PhonemeType phonemeType,
+                                     const std::vector<std::string>& phonemes,
+                                     const std::vector<PhonemeSynthesisParams>& params,
+                                     ::Print& out) {
+    bool success = true;
+    for (size_t i = 0; i < phonemes.size(); i++) {
+      const PhonemeSynthesisParams& p =
+          i < params.size() ? params[i] : PhonemeSynthesisParams{};
+      if (!sayPhoneme(phonemeType, phonemes[i], out, p)) success = false;
+    }
+    return success;
   }
 
   /**
@@ -233,10 +276,19 @@ class VocoderBase {
    * @brief Resolve an explicit duration override, falling back to a computed default
    * @param defaultDurationMs Duration computed by normal lookup rules
    * @param params Synthesis params that may carry an explicit override (0 = no override)
-   * @return params.durationMs if non-zero, otherwise defaultDurationMs
+   * and/or a speed multiplier (applied only when there's no explicit override --
+   * see PhonemeSynthesisParams::speed's own doc for why the two aren't combined)
+   * @return params.durationMs if non-zero; otherwise defaultDurationMs scaled by
+   * params.speed (unscaled if speed is 1.0 or non-positive)
    */
   static uint16_t resolveDuration(uint16_t defaultDurationMs, const PhonemeSynthesisParams& params) {
-    return params.durationMs > 0 ? params.durationMs : defaultDurationMs;
+    if (params.durationMs > 0) return params.durationMs;
+    if (params.speed > 0.0f && params.speed != 1.0f) {
+      float scaled = defaultDurationMs / params.speed;
+      if (scaled < 1.0f) scaled = 1.0f;
+      return static_cast<uint16_t>(scaled + 0.5f);
+    }
+    return defaultDurationMs;
   }
 
   /**

@@ -52,6 +52,28 @@ class ConcatenatedAudioVocoder : public VocoderBase {
   }
 
   /**
+   * @brief Refuses per-phoneme params: unlike PSOLAVocoder/FormantVocoder,
+   * this vocoder needs the whole sequence in one call for cross-unit
+   * context (DiphoneVocoder can't form a diphone at all from a single
+   * phoneme; PhonemeVocoder loses lookahead/coarticulation) -- silently
+   * falling back to the base class's one-phoneme-at-a-time default would
+   * quietly fragment speech quality with no indication why. Use the
+   * single-params sayPhoneme()/sayPhonemes() overload instead.
+   * @return always false
+   */
+  bool sayPhonemesWithParams(PhonemeType phonemeType,
+                             const std::vector<std::string>& phonemes,
+                             const std::vector<PhonemeSynthesisParams>& params,
+                             ::Print& out) override {
+    (void)phonemeType; (void)phonemes; (void)params; (void)out;
+    TTS_LOGW("ConcatenatedAudioVocoder: per-phoneme params are not supported "
+              "-- it needs the whole sequence in one call for cross-unit "
+              "context (diphone pairing / lookahead); use sayPhoneme() with "
+              "one shared PhonemeSynthesisParams instead");
+    return false;
+  }
+
+  /**
    * @brief Set the fade-out duration
    * @param durationMs Fade-out duration in milliseconds
    * @details Fade-out is always applied to a unit's ending whenever it isn't

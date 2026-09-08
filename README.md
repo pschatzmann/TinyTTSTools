@@ -53,6 +53,11 @@ The following classes use pre-recorded (compressed) audio in PROGMEM:
   - **Pros**: More natural speech with smooth phoneme transitions
   - **Cons**: Larger dictionary required
 
+#### Sample-Based Re-synthesis
+- **[`PSOLAVocoder`](https://pschatzmann.github.io/TinyTTSTools/classPSOLAVocoder.html)** - Re-synthesizes the same phoneme samples as `PhonemeVocoder` via TD-PSOLA (Time-Domain Pitch-Synchronous Overlap-Add), the technique the Praat phonetics software is best known for
+  - **Pros**: Genuinely shifts pitch and stretches/compresses duration (`PhonemeSynthesisParams::pitchHz`/`speed`), instead of only ever truncating pre-recorded audio
+  - **Cons**: Higher CPU cost than plain playback; same dictionary size as `PhonemeVocoder`
+
 ## Audio Output
 
 Any subclass of [Print](https://pschatzmann.github.io/TinyTTSTools/classPrint.html) can be used to output the audio. We recommend that you use the output classes provided by the Arduino Audio Tools:
@@ -88,6 +93,7 @@ See the `examples/` directory for complete usage examples:
 - `AudioFormant/` - Text-to-speech using `FormantVocoder` (no audio data required)
 - `AudioPhoneme/` - Text-to-speech using `PhonemeVocoder` (pre-recorded phoneme samples)
 - `AudioBiphones/` - Text-to-speech using `DiphoneVocoder` (pre-recorded diphone samples)
+- `AudioPSOLA/` - Text-to-speech using `PSOLAVocoder` (TD-PSOLA re-synthesis with pitch/speed control)
 - `G2PCustomDictionary/` - Adding custom pronunciations, phoneme conversion only (no audio)
 - `G2PNeural/` - Dictionary + neural + rule-based G2P fallback chain, phoneme conversion only (no audio)
 
