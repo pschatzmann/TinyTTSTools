@@ -9,10 +9,11 @@ var searchData=
   ['default_5fdictionary_5f_6',['default_dictionary_',['../classG2PDictionaryModel.html#a36e96741756c17922e50394767ba080f',1,'G2PDictionaryModel']]],
   ['defaultphonemetype_7',['defaultPhonemeType',['../classG2PModelBase.html#a61cc76d3621fb1dbeca65856950aae4d',1,'G2PModelBase::defaultPhonemeType()'],['../classVocoderBase.html#a544126aa20e547d44ddfa78299573359',1,'VocoderBase::defaultPhonemeType()']]],
   ['dictionary_5f_8',['dictionary_',['../classPhonemeVocoder.html#ae0c855106fea382112155e4ef363ee97',1,'PhonemeVocoder::dictionary_()'],['../classDiphoneVocoder.html#a36b1c36e9d0e045c4b5ef8386beb0b91',1,'DiphoneVocoder::dictionary_()']]],
-  ['diphonevocoder_9',['DiphoneVocoder',['../classDiphoneVocoder.html',1,'DiphoneVocoder'],['../classDiphoneVocoder.html#a6b6ba09c08183745613322d58aaaeb6a',1,'DiphoneVocoder::DiphoneVocoder()']]],
-  ['diphonevocoder_2eh_10',['DiphoneVocoder.h',['../DiphoneVocoder_8h.html',1,'']]],
-  ['duration_5fms_11',['duration_ms',['../structPhonemeInfo.html#a1515174e803f5ed66314841569464f7f',1,'PhonemeInfo']]],
-  ['durationms_12',['durationMs',['../structPhonemeSynthesisParams.html#aab4df22177dcfe445bc1f6fbd8c24dc1',1,'PhonemeSynthesisParams']]],
-  ['dynamicphonemedictionary_13',['DynamicPhonemeDictionary',['../classDynamicPhonemeDictionary.html',1,'']]],
-  ['dynamicphonemedictionary_2eh_14',['DynamicPhonemeDictionary.h',['../DynamicPhonemeDictionary_8h.html',1,'']]]
+  ['diphonesidedurationms_9',['diphoneSideDurationMs',['../classDiphoneVocoder.html#a2cde7ab13fa062b9176f12babd27f290',1,'DiphoneVocoder']]],
+  ['diphonevocoder_10',['DiphoneVocoder',['../classDiphoneVocoder.html',1,'DiphoneVocoder'],['../classDiphoneVocoder.html#a6b6ba09c08183745613322d58aaaeb6a',1,'DiphoneVocoder::DiphoneVocoder()']]],
+  ['diphonevocoder_2eh_11',['DiphoneVocoder.h',['../DiphoneVocoder_8h.html',1,'']]],
+  ['duration_5fms_12',['duration_ms',['../structPhonemeInfo.html#a1515174e803f5ed66314841569464f7f',1,'PhonemeInfo']]],
+  ['durationms_13',['durationMs',['../structPhonemeSynthesisParams.html#aab4df22177dcfe445bc1f6fbd8c24dc1',1,'PhonemeSynthesisParams']]],
+  ['dynamicphonemedictionary_14',['DynamicPhonemeDictionary',['../classDynamicPhonemeDictionary.html',1,'']]],
+  ['dynamicphonemedictionary_2eh_15',['DynamicPhonemeDictionary.h',['../DynamicPhonemeDictionary_8h.html',1,'']]]
 ];

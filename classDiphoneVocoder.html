@@ -73,6 +73,7 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
 <a href="classDiphoneVocoder-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">DiphoneVocoder Class Reference</div></div>
 </div><!--header-->
@@ -184,6 +185,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:afb20541d6bb84c3d493208c1ea758480"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiphoneVocoder.html#afb20541d6bb84c3d493208c1ea758480">synthesizeSegment</a> (std::vector&lt; std::string &gt; phonemes, <a class="el" href="classPrint.html">::Print</a> &amp;out, const <a class="el" href="structPhonemeSynthesisParams.html">PhonemeSynthesisParams</a> &amp;params, <a class="el" href="TTSTypes_8h.html#a8304a010942f858a2d6f0d670a00a469">PhonemeType</a> phonemeType)</td></tr>
 <tr class="memdesc:afb20541d6bb84c3d493208c1ea758480"><td class="mdescLeft">&#160;</td><td class="mdescRight">Synthesize one silence-free phoneme segment (typically one word)  <br /></td></tr>
 <tr class="separator:afb20541d6bb84c3d493208c1ea758480"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cde7ab13fa062b9176f12babd27f290"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiphoneVocoder.html#a2cde7ab13fa062b9176f12babd27f290">diphoneSideDurationMs</a> (<a class="el" href="TTSTypes_8h.html#a8304a010942f858a2d6f0d670a00a469">PhonemeType</a> phonemeType, const std::string &amp;phoneme) const</td></tr>
+<tr class="separator:a2cde7ab13fa062b9176f12babd27f290"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac13791100a61fa3ef7e0531bb1593ef"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structSoundEntry.html">SoundEntry</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiphoneVocoder.html#aac13791100a61fa3ef7e0531bb1593ef">getAudioEntry</a> (const std::string &amp;identifier) override</td></tr>
 <tr class="memdesc:aac13791100a61fa3ef7e0531bb1593ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get audio entry by diphone identifier (implements <a class="el" href="classConcatenatedAudioVocoder.html" title="Abstract base class for audio concatenation with click-free transitions.">ConcatenatedAudioVocoder</a> interface)  <br /></td></tr>
 <tr class="separator:aac13791100a61fa3ef7e0531bb1593ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -318,16 +321,22 @@ int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>lastNegativeAmplit
 <tr class="memdesc:a4935eea882eab989b99134fe8bc1ef70 inherit pro_attribs_classVocoderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Phoneme translator for converting between representation types. <br /></td></tr>
 <tr class="separator:a4935eea882eab989b99134fe8bc1ef70 inherit pro_attribs_classVocoderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
+Static Protected Attributes</h2></td></tr>
+<tr class="memitem:a1cf3256784436052aa5282df2b927348"><td class="memItemLeft" align="right" valign="top"><a id="a1cf3256784436052aa5282df2b927348" name="a1cf3256784436052aa5282df2b927348"></a>
+static constexpr uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>kBoundarySilenceMs</b> = 50</td></tr>
+<tr class="separator:a1cf3256784436052aa5282df2b927348"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_static_attribs_classConcatenatedAudioVocoder"><td colspan="2" onclick="javascript:toggleInherit('pro_static_attribs_classConcatenatedAudioVocoder')"><img src="closed.png" alt="-"/>&#160;Static Protected Attributes inherited from <a class="el" href="classConcatenatedAudioVocoder.html">ConcatenatedAudioVocoder</a></td></tr>
+<tr class="memitem:a1b038f32a50be17864b2060fbc656e59 inherit pro_static_attribs_classConcatenatedAudioVocoder"><td class="memItemLeft" align="right" valign="top">static constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConcatenatedAudioVocoder.html#a1b038f32a50be17864b2060fbc656e59">kNominalRecordingPitchHz</a> = 110.0f</td></tr>
+<tr class="memdesc:a1b038f32a50be17864b2060fbc656e59 inherit pro_static_attribs_classConcatenatedAudioVocoder"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ratio mapping a requested pitch to a source-sample read index step.  <br /></td></tr>
+<tr class="separator:a1b038f32a50be17864b2060fbc656e59 inherit pro_static_attribs_classConcatenatedAudioVocoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_static_methods_classVocoderBase"><td colspan="2" onclick="javascript:toggleInherit('pro_static_methods_classVocoderBase')"><img src="closed.png" alt="-"/>&#160;Static Protected Member Functions inherited from <a class="el" href="classVocoderBase.html">VocoderBase</a></td></tr>
 <tr class="memitem:adbe1ea23f5b4862ee7f94d75d5bd023a inherit pro_static_methods_classVocoderBase"><td class="memItemLeft" align="right" valign="top">static uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVocoderBase.html#adbe1ea23f5b4862ee7f94d75d5bd023a">resolveDuration</a> (uint16_t defaultDurationMs, const <a class="el" href="structPhonemeSynthesisParams.html">PhonemeSynthesisParams</a> &amp;params)</td></tr>
 <tr class="memdesc:adbe1ea23f5b4862ee7f94d75d5bd023a inherit pro_static_methods_classVocoderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolve an explicit duration override, falling back to a computed default.  <br /></td></tr>
 <tr class="separator:adbe1ea23f5b4862ee7f94d75d5bd023a inherit pro_static_methods_classVocoderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_static_attribs_classConcatenatedAudioVocoder"><td colspan="2" onclick="javascript:toggleInherit('pro_static_attribs_classConcatenatedAudioVocoder')"><img src="closed.png" alt="-"/>&#160;Static Protected Attributes inherited from <a class="el" href="classConcatenatedAudioVocoder.html">ConcatenatedAudioVocoder</a></td></tr>
-<tr class="memitem:a1b038f32a50be17864b2060fbc656e59 inherit pro_static_attribs_classConcatenatedAudioVocoder"><td class="memItemLeft" align="right" valign="top">static constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConcatenatedAudioVocoder.html#a1b038f32a50be17864b2060fbc656e59">kNominalRecordingPitchHz</a> = 110.0f</td></tr>
-<tr class="memdesc:a1b038f32a50be17864b2060fbc656e59 inherit pro_static_attribs_classConcatenatedAudioVocoder"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ratio mapping a requested pitch to a source-sample read index step.  <br /></td></tr>
-<tr class="separator:a1b038f32a50be17864b2060fbc656e59 inherit pro_static_attribs_classConcatenatedAudioVocoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Diphone-based speech synthesizer with advanced concatenation. </p>
@@ -391,6 +400,43 @@ Memory footprint: ~893KB flash for the default <code>DiphoneWAVDictionary</code>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2cde7ab13fa062b9176f12babd27f290" name="a2cde7ab13fa062b9176f12babd27f290"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cde7ab13fa062b9176f12babd27f290">&#9670;&#160;</a></span>diphoneSideDurationMs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t DiphoneVocoder::diphoneSideDurationMs </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="TTSTypes_8h.html#a8304a010942f858a2d6f0d670a00a469">PhonemeType</a>&#160;</td>
+          <td class="paramname"><em>phonemeType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>phoneme</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>One side's duration contribution to a diphone: half of a real phoneme's natural duration, or kBoundarySilenceMs for the SIL side of a word-boundary diphone (see kBoundarySilenceMs's own doc for why SIL needs different handling here than every other phoneme). </p>
+
+</div>
+</div>
 <a id="aac13791100a61fa3ef7e0531bb1593ef" name="aac13791100a61fa3ef7e0531bb1593ef"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aac13791100a61fa3ef7e0531bb1593ef">&#9670;&#160;</a></span>getAudioEntry()</h2>
 
