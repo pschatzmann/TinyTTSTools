@@ -14,10 +14,11 @@ var searchData=
   ['sibilantrelease_11',['sibilantRelease',['../structFormantVoiceConfig.html#af3ef8440730f81cc679f57f08964e9ac',1,'FormantVoiceConfig']]],
   ['size_12',['size',['../structSoundEntry.html#a83e8a29635b58800632a287417faf87f',1,'SoundEntry']]],
   ['spectraltilt_13',['spectralTilt',['../structFormantVoiceConfig.html#a21718c27536542beb953b6cc0c4d9459',1,'FormantVoiceConfig']]],
-  ['stressdecayportion_14',['stressDecayPortion',['../structFormantVoiceConfig.html#a16ac72885e87aad4db73724500170340',1,'FormantVoiceConfig']]],
-  ['stressenergyboostprimary_15',['stressEnergyBoostPrimary',['../structFormantVoiceConfig.html#a65052291e0448c856a44de0ecfad6464',1,'FormantVoiceConfig']]],
-  ['stressenergyboostsecondary_16',['stressEnergyBoostSecondary',['../structFormantVoiceConfig.html#a504fae90290746ec418be377e06cddbc',1,'FormantVoiceConfig']]],
-  ['stresspitchriseprimary_17',['stressPitchRisePrimary',['../structFormantVoiceConfig.html#a48db64d3d9fb3183614c272e9f7c177a',1,'FormantVoiceConfig']]],
-  ['stresspitchrisesecondary_18',['stressPitchRiseSecondary',['../structFormantVoiceConfig.html#afcaac12d12db60f8f0f1875d234b5a6b',1,'FormantVoiceConfig']]],
-  ['synth_5f_19',['synth_',['../classTinyTTSTools.html#ab42b3811b35108a4a8c14a03f286edff',1,'TinyTTSTools']]]
+  ['speed_14',['speed',['../structPhonemeSynthesisParams.html#a6200acca55165b10c319cd5136c410fc',1,'PhonemeSynthesisParams']]],
+  ['stressdecayportion_15',['stressDecayPortion',['../structFormantVoiceConfig.html#a16ac72885e87aad4db73724500170340',1,'FormantVoiceConfig']]],
+  ['stressenergyboostprimary_16',['stressEnergyBoostPrimary',['../structFormantVoiceConfig.html#a65052291e0448c856a44de0ecfad6464',1,'FormantVoiceConfig']]],
+  ['stressenergyboostsecondary_17',['stressEnergyBoostSecondary',['../structFormantVoiceConfig.html#a504fae90290746ec418be377e06cddbc',1,'FormantVoiceConfig']]],
+  ['stresspitchriseprimary_18',['stressPitchRisePrimary',['../structFormantVoiceConfig.html#a48db64d3d9fb3183614c272e9f7c177a',1,'FormantVoiceConfig']]],
+  ['stresspitchrisesecondary_19',['stressPitchRiseSecondary',['../structFormantVoiceConfig.html#afcaac12d12db60f8f0f1875d234b5a6b',1,'FormantVoiceConfig']]],
+  ['synth_5f_20',['synth_',['../classTinyTTSTools.html#ab42b3811b35108a4a8c14a03f286edff',1,'TinyTTSTools']]]
 ];

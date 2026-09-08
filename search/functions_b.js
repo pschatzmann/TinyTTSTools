@@ -12,5 +12,6 @@ var searchData=
   ['processsequencewithlookahead_9',['processSequenceWithLookahead',['../classConcatenatedAudioVocoder.html#a1c2c6badeae6deb9f0567ddb4fcb12f8',1,'ConcatenatedAudioVocoder::processSequenceWithLookahead()'],['../classDiphoneVocoder.html#a5500184e81b418bdc50de810924e166a',1,'DiphoneVocoder::processSequenceWithLookahead()']]],
   ['processsimplefadeout_10',['processSimpleFadeOut',['../classConcatenatedAudioVocoder.html#a58ecd3ff697d3431d1eafe659fd84354',1,'ConcatenatedAudioVocoder']]],
   ['processsinglephoneme_11',['processSinglePhoneme',['../classVocoderBase.html#a948bd76fb69d916cb4e2f48e4f00478e',1,'VocoderBase']]],
-  ['processunitcombination_12',['processUnitCombination',['../classConcatenatedAudioVocoder.html#a17d60dce760d181f82487f811d26cb39',1,'ConcatenatedAudioVocoder']]]
+  ['processunitcombination_12',['processUnitCombination',['../classConcatenatedAudioVocoder.html#a17d60dce760d181f82487f811d26cb39',1,'ConcatenatedAudioVocoder']]],
+  ['psolavocoder_13',['PSOLAVocoder',['../classPSOLAVocoder.html#a842ffe11fcc751a0f5ee2ccac237c167',1,'PSOLAVocoder']]]
 ];

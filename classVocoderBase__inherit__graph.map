@@ -1,7 +1,8 @@
 <map id="VocoderBase" name="VocoderBase">
-<area shape="rect" id="node1" title="Base class for audio synthesis implementations." alt="" coords="188,5,295,31"/>
+<area shape="rect" id="node1" title="Base class for audio synthesis implementations." alt="" coords="283,5,389,31"/>
 <area shape="rect" id="node2" href="$classConcatenatedAudioVocoder.html" title="Abstract base class for audio concatenation with click&#45;free transitions." alt="" coords="46,79,247,104"/>
 <area shape="rect" id="node5" href="$classFormantVocoder.html" title="Compact real&#45;time formant (parallel resonator) speech synthesizer." alt="" coords="272,79,400,104"/>
+<area shape="rect" id="node6" href="$classPSOLAVocoder.html" title="Speech synthesizer using TD&#45;PSOLA (Time&#45;Domain Pitch&#45;Synchronous Overlap&#45;Add) on pre&#45;recorded phoneme..." alt="" coords="425,79,541,104"/>
 <area shape="rect" id="node3" href="$classDiphoneVocoder.html" title="Diphone&#45;based speech synthesizer with advanced concatenation." alt="" coords="5,152,133,177"/>
 <area shape="rect" id="node4" href="$classPhonemeVocoder.html" title="Phoneme&#45;based speech synthesizer with advanced concatenation." alt="" coords="158,152,293,177"/>
 </map>

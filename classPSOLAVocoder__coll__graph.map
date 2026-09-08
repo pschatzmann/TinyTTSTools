@@ -1,0 +1,6 @@
+<map id="PSOLAVocoder" name="PSOLAVocoder">
+<area shape="rect" id="node1" title="Speech synthesizer using TD&#45;PSOLA (Time&#45;Domain Pitch&#45;Synchronous Overlap&#45;Add) on pre&#45;recorded phoneme..." alt="" coords="5,256,121,281"/>
+<area shape="rect" id="node2" href="$classVocoderBase.html" title="Base class for audio synthesis implementations." alt="" coords="10,181,117,207"/>
+<area shape="rect" id="node3" href="$classPhonemes.html" title="Phoneme representation translator and timing information." alt="" coords="18,93,109,119"/>
+<area shape="rect" id="node4" href="$structPhonemeInfo.html" title="Structure for phoneme representation mapping." alt="" coords="9,5,117,31"/>
+</map>

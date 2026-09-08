@@ -1,16 +1,17 @@
 <map id="src/TinyTTSTools/Basic/StringUtils.h" name="src/TinyTTSTools/Basic/StringUtils.h">
 <area shape="rect" id="node1" title="String utility functions for TinyTTSTools." alt="" coords="544,5,714,45"/>
-<area shape="rect" id="node2" href="$TinyTTSTools_8h.html" title="Main Text&#45;to&#45;Speech engine class for TinyTTSTools." alt="" coords="560,372,703,397"/>
+<area shape="rect" id="node2" href="$TinyTTSTools_8h.html" title="Main Text&#45;to&#45;Speech engine class for TinyTTSTools." alt="" coords="586,372,728,397"/>
 <area shape="rect" id="node3" href="$Tokenizer_8h.html" title="Text preprocessing and tokenization for TinyTTSTools." alt="" coords="48,284,218,324"/>
 <area shape="rect" id="node4" href="$G2PDictionaryModel_8h.html" title="Dictionary&#45;based G2P model for TinyTTSTools." alt="" coords="170,93,341,133"/>
 <area shape="rect" id="node7" href="$G2PHybridModel_8h.html" title="Convert word to phonemes using multiple models in priority order." alt="" coords="365,93,525,133"/>
 <area shape="rect" id="node8" href="$G2PNeuralModel_8h.html" title="Neural (GRU) grapheme&#45;to&#45;phoneme fallback model for TinyTTSTools." alt="" coords="549,93,709,133"/>
 <area shape="rect" id="node9" href="$G2PRuleBasedModel_8h.html" title="Rule&#45;based G2P model for TinyTTSTools." alt="" coords="733,93,906,133"/>
-<area shape="rect" id="node10" href="$ConcatenatedAudioVocoder_8h.html" title="Base class for concatenative speech synthesis with advanced audio processing." alt="" coords="981,189,1197,229"/>
-<area shape="rect" id="node11" href="$DiphoneVocoder_8h.html" title="Diphone&#45;based speech synthesizer for TinyTTSTools." alt="" coords="669,284,856,324"/>
-<area shape="rect" id="node13" href="$VocoderBase_8h.html" title="Base class for audio synthesis/vocoder implementations." alt="" coords="1086,93,1273,133"/>
-<area shape="rect" id="node5" href="$G2PDictionaryAndRulesModel_8h.html" title="Combined dictionary and rules&#45;based G2P model for TinyTTSTools." alt="" coords="344,189,576,229"/>
-<area shape="rect" id="node6" href="$G2PDictionaryNeuralAndRulesModel_8h.html" title="Combined dictionary, neural and rules&#45;based G2P model for TinyTTSTools." alt="" coords="600,181,823,236"/>
-<area shape="rect" id="node12" href="$PhonemeVocoder_8h.html" title="Phoneme&#45;based speech synthesizer for TinyTTSTools." alt="" coords="880,284,1066,324"/>
-<area shape="rect" id="node14" href="$FormantVocoder_8h.html" title="Formant&#45;based speech synthesizer for TinyTTSTools." alt="" coords="1141,284,1328,324"/>
+<area shape="rect" id="node10" href="$ConcatenatedAudioVocoder_8h.html" title="Base class for concatenative speech synthesis with advanced audio processing." alt="" coords="829,189,1045,229"/>
+<area shape="rect" id="node11" href="$DiphoneVocoder_8h.html" title="Diphone&#45;based speech synthesizer for TinyTTSTools." alt="" coords="956,284,1142,324"/>
+<area shape="rect" id="node13" href="$VocoderBase_8h.html" title="Base class for audio synthesis/vocoder implementations." alt="" coords="1120,93,1306,133"/>
+<area shape="rect" id="node5" href="$G2PDictionaryAndRulesModel_8h.html" title="Combined dictionary and rules&#45;based G2P model for TinyTTSTools." alt="" coords="226,189,458,229"/>
+<area shape="rect" id="node6" href="$G2PDictionaryNeuralAndRulesModel_8h.html" title="Combined dictionary, neural and rules&#45;based G2P model for TinyTTSTools." alt="" coords="532,181,755,236"/>
+<area shape="rect" id="node12" href="$PhonemeVocoder_8h.html" title="Phoneme&#45;based speech synthesizer for TinyTTSTools." alt="" coords="694,284,881,324"/>
+<area shape="rect" id="node14" href="$FormantVocoder_8h.html" title="Formant&#45;based speech synthesizer for TinyTTSTools." alt="" coords="1217,284,1404,324"/>
+<area shape="rect" id="node15" href="$PSOLAVocoder_8h.html" title="TD&#45;PSOLA&#45;based speech synthesizer for TinyTTSTools." alt="" coords="1268,189,1454,229"/>
 </map>

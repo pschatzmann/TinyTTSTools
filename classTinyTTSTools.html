@@ -141,6 +141,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae3b0d2797107ea28d598ab6701128bad"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTinyTTSTools.html#ae3b0d2797107ea28d598ab6701128bad">sayPhoneme</a> (<a class="el" href="TTSTypes_8h.html#a8304a010942f858a2d6f0d670a00a469">PhonemeType</a> phonemeType, const std::string &amp;phoneme, const <a class="el" href="structPhonemeSynthesisParams.html">PhonemeSynthesisParams</a> &amp;params)</td></tr>
 <tr class="memdesc:ae3b0d2797107ea28d598ab6701128bad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Synthesize a single phoneme with optional volume/duration/pitch overrides.  <br /></td></tr>
 <tr class="separator:ae3b0d2797107ea28d598ab6701128bad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab17cd6433253e68751fa2e5297ec02ab"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTinyTTSTools.html#ab17cd6433253e68751fa2e5297ec02ab">sayPhonemesWithParams</a> (<a class="el" href="TTSTypes_8h.html#a8304a010942f858a2d6f0d670a00a469">PhonemeType</a> phonemeType, const std::vector&lt; std::string &gt; &amp;phonemes, const std::vector&lt; <a class="el" href="structPhonemeSynthesisParams.html">PhonemeSynthesisParams</a> &gt; &amp;params)</td></tr>
+<tr class="memdesc:ab17cd6433253e68751fa2e5297ec02ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Synthesize a sequence of phonemes, each with its own independent synthesis overrides (e.g. a different volume per phoneme)  <br /></td></tr>
+<tr class="separator:ab17cd6433253e68751fa2e5297ec02ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7235f64e3f1b6bff2a0c41e6830875a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTinyTTSTools.html#ab7235f64e3f1b6bff2a0c41e6830875a">setOutput</a> (<a class="el" href="classPrint.html">Print</a> &amp;out)</td></tr>
 <tr class="memdesc:ab7235f64e3f1b6bff2a0c41e6830875a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set or change the audio output destination.  <br /></td></tr>
 <tr class="separator:ab7235f64e3f1b6bff2a0c41e6830875a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -625,6 +628,60 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>initialized_</b> = fa
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if synthesis successful, false on error</dd></dl>
 <p>Allows direct synthesis from phoneme sequences without text preprocessing. Audio data is written to the configured <a class="el" href="classPrint.html" title="Mock Print class for non-Arduino environments.">Print</a> output object as PCM samples. </p>
+
+</div>
+</div>
+<a id="ab17cd6433253e68751fa2e5297ec02ab" name="ab17cd6433253e68751fa2e5297ec02ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab17cd6433253e68751fa2e5297ec02ab">&#9670;&#160;</a></span>sayPhonemesWithParams()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TinyTTSTools::sayPhonemesWithParams </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="TTSTypes_8h.html#a8304a010942f858a2d6f0d670a00a469">PhonemeType</a>&#160;</td>
+          <td class="paramname"><em>phonemeType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; std::string &gt; &amp;&#160;</td>
+          <td class="paramname"><em>phonemes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="structPhonemeSynthesisParams.html">PhonemeSynthesisParams</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>params</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Synthesize a sequence of phonemes, each with its own independent synthesis overrides (e.g. a different volume per phoneme) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">phonemeType</td><td>The phoneme representation type of every entry in phonemes </td></tr>
+    <tr><td class="paramname">phonemes</td><td>Phoneme symbols to synthesize, in order </td></tr>
+    <tr><td class="paramname">params</td><td>Per-phoneme overrides, aligned by index with phonemes; a phoneme past the end of params uses <a class="el" href="structPhonemeSynthesisParams.html" title="Optional per-call synthesis attributes for sayPhoneme()">PhonemeSynthesisParams</a>{} (all defaults) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if every phoneme synthesized successfully</dd></dl>
+<p>See <a class="el" href="classVocoderBase.html#ab0c3417a133820f3d48f8ba15cb45288" title="Say/synthesize a sequence of phonemes, each with its own independent synthesis overrides (e....">VocoderBase::sayPhonemesWithParams()</a> for the important caveat: this synthesizes each phoneme in isolation, which is only correct for a vocoder that doesn't need cross-phoneme context. ConcatenatedAudioVocoder-based vocoders (<a class="el" href="classPhonemeVocoder.html" title="Phoneme-based speech synthesizer with advanced concatenation.">PhonemeVocoder</a>, <a class="el" href="classDiphoneVocoder.html" title="Diphone-based speech synthesizer with advanced concatenation.">DiphoneVocoder</a>) refuse this call outright rather than silently degrade; use it with <a class="el" href="classPSOLAVocoder.html" title="Speech synthesizer using TD-PSOLA (Time-Domain Pitch-Synchronous Overlap-Add) on pre-recorded phoneme...">PSOLAVocoder</a> or <a class="el" href="classFormantVocoder.html" title="Compact real-time formant (parallel resonator) speech synthesizer.">FormantVocoder</a>. </p>
 
 </div>
 </div>

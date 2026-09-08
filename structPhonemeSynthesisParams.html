@@ -97,12 +97,29 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>pitchHz</b> = 0.0f</
 <tr class="separator:aa61430ce4c122919e9b8b7fc5384e013"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab04ee6eebf2e555b32ea9411b9180560"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPhonemeSynthesisParams.html#ab04ee6eebf2e555b32ea9411b9180560">voicing</a> = 1.0f</td></tr>
 <tr class="separator:ab04ee6eebf2e555b32ea9411b9180560"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6200acca55165b10c319cd5136c410fc"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPhonemeSynthesisParams.html#a6200acca55165b10c319cd5136c410fc">speed</a> = 1.0f</td></tr>
+<tr class="separator:a6200acca55165b10c319cd5136c410fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Optional per-call synthesis attributes for sayPhoneme() </p>
 <p>All fields are optional overrides of the vocoder's own defaults; a value of 0 (or 1.0 for volume) means "use the vocoder's normal
 behavior" so existing call sites are unaffected by this struct's addition. </p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="a6200acca55165b10c319cd5136c410fc" name="a6200acca55165b10c319cd5136c410fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6200acca55165b10c319cd5136c410fc">&#9670;&#160;</a></span>speed</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float PhonemeSynthesisParams::speed = 1.0f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Speaking-rate multiplier applied to every phoneme's own natural duration: 1.0 = normal, 2.0 = twice as fast (half the duration), 0.5 = half speed (twice the duration). Ignored whenever durationMs is set (an explicit fixed duration already fully determines length; unlike speed, it can't scale per-phoneme, so the two aren't combined). Actually slowing down playback (speed &lt; 1.0) with pre-recorded audio (PhonemeVocoder/DiphoneVocoder) still only ever truncates, same as any other duration request &ndash; only <a class="el" href="classPSOLAVocoder.html" title="Speech synthesizer using TD-PSOLA (Time-Domain Pitch-Synchronous Overlap-Add) on pre-recorded phoneme...">PSOLAVocoder</a> (TD-PSOLA) or <a class="el" href="classFormantVocoder.html" title="Compact real-time formant (parallel resonator) speech synthesizer.">FormantVocoder</a> (procedural) can genuinely stretch audio to fill a longer duration. </p>
+
+</div>
+</div>
 <a id="ab04ee6eebf2e555b32ea9411b9180560" name="ab04ee6eebf2e555b32ea9411b9180560"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab04ee6eebf2e555b32ea9411b9180560">&#9670;&#160;</a></span>voicing</h2>
 

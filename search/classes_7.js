@@ -15,5 +15,6 @@ var searchData=
   ['phonemevocoder_12',['PhonemeVocoder',['../classPhonemeVocoder.html',1,'']]],
   ['phonemewordsource_13',['PhonemeWordSource',['../structPhonemeWordSource.html',1,'']]],
   ['print_14',['Print',['../classPrint.html',1,'']]],
-  ['psramallocator_15',['PsramAllocator',['../structPsramAllocator.html',1,'']]]
+  ['psolavocoder_15',['PSOLAVocoder',['../classPSOLAVocoder.html',1,'']]],
+  ['psramallocator_16',['PsramAllocator',['../structPsramAllocator.html',1,'']]]
 ];

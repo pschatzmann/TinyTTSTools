@@ -111,6 +111,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8fffb826b40833b539780d0243e7bfeb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConcatenatedAudioVocoder.html#a8fffb826b40833b539780d0243e7bfeb">ConcatenatedAudioVocoder</a> (size_t batchSize=256)</td></tr>
 <tr class="memdesc:a8fffb826b40833b539780d0243e7bfeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
 <tr class="separator:a8fffb826b40833b539780d0243e7bfeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a197bad60ad453b9245ceff557d43b342"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConcatenatedAudioVocoder.html#a197bad60ad453b9245ceff557d43b342">sayPhonemesWithParams</a> (<a class="el" href="TTSTypes_8h.html#a8304a010942f858a2d6f0d670a00a469">PhonemeType</a> phonemeType, const std::vector&lt; std::string &gt; &amp;phonemes, const std::vector&lt; <a class="el" href="structPhonemeSynthesisParams.html">PhonemeSynthesisParams</a> &gt; &amp;params, <a class="el" href="classPrint.html">::Print</a> &amp;out) override</td></tr>
+<tr class="memdesc:a197bad60ad453b9245ceff557d43b342"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refuses per-phoneme params: unlike PSOLAVocoder/FormantVocoder, this vocoder needs the whole sequence in one call for cross-unit context (<a class="el" href="classDiphoneVocoder.html" title="Diphone-based speech synthesizer with advanced concatenation.">DiphoneVocoder</a> can't form a diphone at all from a single phoneme; <a class="el" href="classPhonemeVocoder.html" title="Phoneme-based speech synthesizer with advanced concatenation.">PhonemeVocoder</a> loses lookahead/coarticulation) &ndash; silently falling back to the base class's one-phoneme-at-a-time default would quietly fragment speech quality with no indication why. Use the single-params <a class="el" href="classVocoderBase.html#a1c97e201bc95cac01aa8833713a04973" title="Say/synthesize audio for a phoneme with optional synthesis overrides.">sayPhoneme()</a>/sayPhonemes() overload instead.  <br /></td></tr>
+<tr class="separator:a197bad60ad453b9245ceff557d43b342"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab96b6dae7c6422df442505acd41d359a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConcatenatedAudioVocoder.html#ab96b6dae7c6422df442505acd41d359a">setFadeOutDuration</a> (float durationMs)</td></tr>
 <tr class="memdesc:ab96b6dae7c6422df442505acd41d359a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the fade-out duration.  <br /></td></tr>
 <tr class="separator:ab96b6dae7c6422df442505acd41d359a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -146,6 +149,9 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~VocoderBase</b> (
 <tr class="memitem:afbfb63a3e8cb39381154e9d043238be1 inherit pub_methods_classVocoderBase"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVocoderBase.html#afbfb63a3e8cb39381154e9d043238be1">sayPhoneme</a> (<a class="el" href="Phonemes_8h.html#aeeab8f4174cf26a2e3436da4790f6063">Phone</a> phone, <a class="el" href="classPrint.html">::Print</a> &amp;out)</td></tr>
 <tr class="memdesc:afbfb63a3e8cb39381154e9d043238be1 inherit pub_methods_classVocoderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Say/synthesize audio for a phoneme given as a Phone enum value.  <br /></td></tr>
 <tr class="separator:afbfb63a3e8cb39381154e9d043238be1 inherit pub_methods_classVocoderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0c3417a133820f3d48f8ba15cb45288 inherit pub_methods_classVocoderBase"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVocoderBase.html#ab0c3417a133820f3d48f8ba15cb45288">sayPhonemesWithParams</a> (<a class="el" href="TTSTypes_8h.html#a8304a010942f858a2d6f0d670a00a469">PhonemeType</a> phonemeType, const std::vector&lt; std::string &gt; &amp;phonemes, const std::vector&lt; <a class="el" href="structPhonemeSynthesisParams.html">PhonemeSynthesisParams</a> &gt; &amp;params, <a class="el" href="classPrint.html">::Print</a> &amp;out)</td></tr>
+<tr class="memdesc:ab0c3417a133820f3d48f8ba15cb45288 inherit pub_methods_classVocoderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Say/synthesize a sequence of phonemes, each with its own independent synthesis overrides (e.g. a different volume per phoneme).  <br /></td></tr>
+<tr class="separator:ab0c3417a133820f3d48f8ba15cb45288 inherit pub_methods_classVocoderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17931669a729cb59de016aa16e7719e5 inherit pub_methods_classVocoderBase"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVocoderBase.html#a17931669a729cb59de016aa16e7719e5">isReady</a> () const</td></tr>
 <tr class="memdesc:a17931669a729cb59de016aa16e7719e5 inherit pub_methods_classVocoderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if vocoder is ready for synthesis.  <br /></td></tr>
 <tr class="separator:a17931669a729cb59de016aa16e7719e5 inherit pub_methods_classVocoderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1092,6 +1098,59 @@ Additional Inherited Members</h2></td></tr>
 <p>Implements <a class="el" href="classVocoderBase.html#a794b9bceb129eb5be7a2ca065bb8c62d">VocoderBase</a>.</p>
 
 <p>Implemented in <a class="el" href="classDiphoneVocoder.html#a11a60557f0e90c10b64425e4724c59b4">DiphoneVocoder</a>, and <a class="el" href="classPhonemeVocoder.html#af7a3754ca7f94b0cd31cc77e3c92f2f2">PhonemeVocoder</a>.</p>
+
+</div>
+</div>
+<a id="a197bad60ad453b9245ceff557d43b342" name="a197bad60ad453b9245ceff557d43b342"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a197bad60ad453b9245ceff557d43b342">&#9670;&#160;</a></span>sayPhonemesWithParams()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ConcatenatedAudioVocoder::sayPhonemesWithParams </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="TTSTypes_8h.html#a8304a010942f858a2d6f0d670a00a469">PhonemeType</a>&#160;</td>
+          <td class="paramname"><em>phonemeType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; std::string &gt; &amp;&#160;</td>
+          <td class="paramname"><em>phonemes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="structPhonemeSynthesisParams.html">PhonemeSynthesisParams</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>params</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classPrint.html">::Print</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Refuses per-phoneme params: unlike PSOLAVocoder/FormantVocoder, this vocoder needs the whole sequence in one call for cross-unit context (<a class="el" href="classDiphoneVocoder.html" title="Diphone-based speech synthesizer with advanced concatenation.">DiphoneVocoder</a> can't form a diphone at all from a single phoneme; <a class="el" href="classPhonemeVocoder.html" title="Phoneme-based speech synthesizer with advanced concatenation.">PhonemeVocoder</a> loses lookahead/coarticulation) &ndash; silently falling back to the base class's one-phoneme-at-a-time default would quietly fragment speech quality with no indication why. Use the single-params <a class="el" href="classVocoderBase.html#a1c97e201bc95cac01aa8833713a04973" title="Say/synthesize audio for a phoneme with optional synthesis overrides.">sayPhoneme()</a>/sayPhonemes() overload instead. </p>
+<dl class="section return"><dt>Returns</dt><dd>always false </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classVocoderBase.html#ab0c3417a133820f3d48f8ba15cb45288">VocoderBase</a>.</p>
 
 </div>
 </div>

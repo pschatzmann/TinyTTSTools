@@ -88,9 +88,10 @@ Inheritance diagram for VocoderBase:</div>
 <div class="dyncontent">
 <div class="center"><img src="classVocoderBase__inherit__graph.png" border="0" usemap="#aVocoderBase_inherit__map" alt="Inheritance graph"/></div>
 <map name="aVocoderBase_inherit__map" id="aVocoderBase_inherit__map">
-<area shape="rect" title="Base class for audio synthesis implementations." alt="" coords="188,5,295,31"/>
+<area shape="rect" title="Base class for audio synthesis implementations." alt="" coords="283,5,389,31"/>
 <area shape="rect" href="classConcatenatedAudioVocoder.html" title="Abstract base class for audio concatenation with click&#45;free transitions." alt="" coords="46,79,247,104"/>
 <area shape="rect" href="classFormantVocoder.html" title="Compact real&#45;time formant (parallel resonator) speech synthesizer." alt="" coords="272,79,400,104"/>
+<area shape="rect" href="classPSOLAVocoder.html" title="Speech synthesizer using TD&#45;PSOLA (Time&#45;Domain Pitch&#45;Synchronous Overlap&#45;Add) on pre&#45;recorded phoneme..." alt="" coords="425,79,541,104"/>
 <area shape="rect" href="classDiphoneVocoder.html" title="Diphone&#45;based speech synthesizer with advanced concatenation." alt="" coords="5,152,133,177"/>
 <area shape="rect" href="classPhonemeVocoder.html" title="Phoneme&#45;based speech synthesizer with advanced concatenation." alt="" coords="158,152,293,177"/>
 </map>
@@ -124,6 +125,9 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~VocoderBase</b> (
 <tr class="memitem:afbfb63a3e8cb39381154e9d043238be1"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVocoderBase.html#afbfb63a3e8cb39381154e9d043238be1">sayPhoneme</a> (<a class="el" href="Phonemes_8h.html#aeeab8f4174cf26a2e3436da4790f6063">Phone</a> phone, <a class="el" href="classPrint.html">::Print</a> &amp;out)</td></tr>
 <tr class="memdesc:afbfb63a3e8cb39381154e9d043238be1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Say/synthesize audio for a phoneme given as a Phone enum value.  <br /></td></tr>
 <tr class="separator:afbfb63a3e8cb39381154e9d043238be1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0c3417a133820f3d48f8ba15cb45288"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVocoderBase.html#ab0c3417a133820f3d48f8ba15cb45288">sayPhonemesWithParams</a> (<a class="el" href="TTSTypes_8h.html#a8304a010942f858a2d6f0d670a00a469">PhonemeType</a> phonemeType, const std::vector&lt; std::string &gt; &amp;phonemes, const std::vector&lt; <a class="el" href="structPhonemeSynthesisParams.html">PhonemeSynthesisParams</a> &gt; &amp;params, <a class="el" href="classPrint.html">::Print</a> &amp;out)</td></tr>
+<tr class="memdesc:ab0c3417a133820f3d48f8ba15cb45288"><td class="mdescLeft">&#160;</td><td class="mdescRight">Say/synthesize a sequence of phonemes, each with its own independent synthesis overrides (e.g. a different volume per phoneme).  <br /></td></tr>
+<tr class="separator:ab0c3417a133820f3d48f8ba15cb45288"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17931669a729cb59de016aa16e7719e5"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVocoderBase.html#a17931669a729cb59de016aa16e7719e5">isReady</a> () const</td></tr>
 <tr class="memdesc:a17931669a729cb59de016aa16e7719e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if vocoder is ready for synthesis.  <br /></td></tr>
 <tr class="separator:a17931669a729cb59de016aa16e7719e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -283,7 +287,7 @@ Protected Attributes</h2></td></tr>
 <p>Get vocoder type name. </p>
 <dl class="section return"><dt>Returns</dt><dd>String identifying the vocoder type </dd></dl>
 
-<p>Implemented in <a class="el" href="classDiphoneVocoder.html#ac8a0a28219ec89df1659a6a2583448b3">DiphoneVocoder</a>, <a class="el" href="classFormantVocoder.html#aab728b5117078ecd1bef88acf1a55ed0">FormantVocoder</a>, and <a class="el" href="classPhonemeVocoder.html#a641213fc20b862ee77ef4364e91e7e72">PhonemeVocoder</a>.</p>
+<p>Implemented in <a class="el" href="classDiphoneVocoder.html#ac8a0a28219ec89df1659a6a2583448b3">DiphoneVocoder</a>, <a class="el" href="classFormantVocoder.html#aab728b5117078ecd1bef88acf1a55ed0">FormantVocoder</a>, <a class="el" href="classPhonemeVocoder.html#a641213fc20b862ee77ef4364e91e7e72">PhonemeVocoder</a>, and <a class="el" href="classPSOLAVocoder.html#a2fe1feb3decb8167b8597cdfce3462e5">PSOLAVocoder</a>.</p>
 
 </div>
 </div>
@@ -313,7 +317,7 @@ Protected Attributes</h2></td></tr>
 <p>Check if vocoder is ready for synthesis. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if ready, false otherwise </dd></dl>
 
-<p>Reimplemented in <a class="el" href="classDiphoneVocoder.html#a24e1fb42c5b5c4995d6f969a890082e8">DiphoneVocoder</a>, and <a class="el" href="classPhonemeVocoder.html#af4b50a86fea475a8e9ae1a75538fec6b">PhonemeVocoder</a>.</p>
+<p>Reimplemented in <a class="el" href="classDiphoneVocoder.html#a24e1fb42c5b5c4995d6f969a890082e8">DiphoneVocoder</a>, <a class="el" href="classPhonemeVocoder.html#af4b50a86fea475a8e9ae1a75538fec6b">PhonemeVocoder</a>, and <a class="el" href="classPSOLAVocoder.html#a90f45d92515cf2a4f4a7288b69405758">PSOLAVocoder</a>.</p>
 
 </div>
 </div>
@@ -513,11 +517,11 @@ Protected Attributes</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">defaultDurationMs</td><td>Duration computed by normal lookup rules </td></tr>
-    <tr><td class="paramname">params</td><td>Synthesis params that may carry an explicit override (0 = no override) </td></tr>
+    <tr><td class="paramname">params</td><td>Synthesis params that may carry an explicit override (0 = no override) and/or a speed multiplier (applied only when there's no explicit override &ndash; see <a class="el" href="structPhonemeSynthesisParams.html#a6200acca55165b10c319cd5136c410fc">PhonemeSynthesisParams::speed</a>'s own doc for why the two aren't combined) </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>params.durationMs if non-zero, otherwise defaultDurationMs </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>params.durationMs if non-zero; otherwise defaultDurationMs scaled by params.speed (unscaled if speed is 1.0 or non-positive) </dd></dl>
 
 </div>
 </div>
@@ -547,7 +551,7 @@ Protected Attributes</h2></td></tr>
 <p>Get sample rate for silence generation (must be implemented by subclasses) </p>
 <dl class="section return"><dt>Returns</dt><dd>Sample rate in Hz </dd></dl>
 
-<p>Implemented in <a class="el" href="classConcatenatedAudioVocoder.html#ab775221e78b3bc31ca392327e896925c">ConcatenatedAudioVocoder</a>, <a class="el" href="classDiphoneVocoder.html#a11a60557f0e90c10b64425e4724c59b4">DiphoneVocoder</a>, <a class="el" href="classFormantVocoder.html#a9065153e242f1cb8388a8c932ff8bb97">FormantVocoder</a>, and <a class="el" href="classPhonemeVocoder.html#af7a3754ca7f94b0cd31cc77e3c92f2f2">PhonemeVocoder</a>.</p>
+<p>Implemented in <a class="el" href="classConcatenatedAudioVocoder.html#ab775221e78b3bc31ca392327e896925c">ConcatenatedAudioVocoder</a>, <a class="el" href="classDiphoneVocoder.html#a11a60557f0e90c10b64425e4724c59b4">DiphoneVocoder</a>, <a class="el" href="classFormantVocoder.html#a9065153e242f1cb8388a8c932ff8bb97">FormantVocoder</a>, <a class="el" href="classPhonemeVocoder.html#af7a3754ca7f94b0cd31cc77e3c92f2f2">PhonemeVocoder</a>, and <a class="el" href="classPSOLAVocoder.html#a24a2d9e91943f57657ffcaa80ad8309d">PSOLAVocoder</a>.</p>
 
 </div>
 </div>
@@ -764,6 +768,69 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ab0c3417a133820f3d48f8ba15cb45288" name="ab0c3417a133820f3d48f8ba15cb45288"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0c3417a133820f3d48f8ba15cb45288">&#9670;&#160;</a></span>sayPhonemesWithParams()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool VocoderBase::sayPhonemesWithParams </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="TTSTypes_8h.html#a8304a010942f858a2d6f0d670a00a469">PhonemeType</a>&#160;</td>
+          <td class="paramname"><em>phonemeType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; std::string &gt; &amp;&#160;</td>
+          <td class="paramname"><em>phonemes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="structPhonemeSynthesisParams.html">PhonemeSynthesisParams</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>params</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classPrint.html">::Print</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Say/synthesize a sequence of phonemes, each with its own independent synthesis overrides (e.g. a different volume per phoneme). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">phonemeType</td><td>The phoneme representation type of every entry in phonemes </td></tr>
+    <tr><td class="paramname">phonemes</td><td>Phoneme symbols to synthesize, in order </td></tr>
+    <tr><td class="paramname">params</td><td>Per-phoneme overrides, aligned by index with phonemes; a phoneme past the end of params (or if params is shorter) uses <a class="el" href="structPhonemeSynthesisParams.html" title="Optional per-call synthesis attributes for sayPhoneme()">PhonemeSynthesisParams</a>{} (all defaults) </td></tr>
+    <tr><td class="paramname">out</td><td>Output stream for audio data </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if every phoneme synthesized successfully</dd></dl>
+<p>The default implementation calls <a class="el" href="classVocoderBase.html#a1c97e201bc95cac01aa8833713a04973" title="Say/synthesize audio for a phoneme with optional synthesis overrides.">sayPhoneme()</a> once per phoneme, so each one is synthesized in isolation with no visibility of its neighbors. That's fine for a vocoder that already treats every phoneme independently (e.g. <a class="el" href="classPSOLAVocoder.html" title="Speech synthesizer using TD-PSOLA (Time-Domain Pitch-Synchronous Overlap-Add) on pre-recorded phoneme...">PSOLAVocoder</a>, <a class="el" href="classFormantVocoder.html" title="Compact real-time formant (parallel resonator) speech synthesizer.">FormantVocoder</a>), but wrong for one that relies on seeing the whole sequence in a single call for cross-phoneme context &ndash; <a class="el" href="classConcatenatedAudioVocoder.html" title="Abstract base class for audio concatenation with click-free transitions.">ConcatenatedAudioVocoder</a> (<a class="el" href="classDiphoneVocoder.html" title="Diphone-based speech synthesizer with advanced concatenation.">DiphoneVocoder</a>, <a class="el" href="classPhonemeVocoder.html" title="Phoneme-based speech synthesizer with advanced concatenation.">PhonemeVocoder</a>) overrides this to refuse rather than silently fragment speech (see its own override's doc for why). </p>
+
+<p>Reimplemented in <a class="el" href="classConcatenatedAudioVocoder.html#a197bad60ad453b9245ceff557d43b342">ConcatenatedAudioVocoder</a>.</p>
+
+</div>
+</div>
 <a id="a4e26ece49481c3d92065277a7c87975c" name="a4e26ece49481c3d92065277a7c87975c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4e26ece49481c3d92065277a7c87975c">&#9670;&#160;</a></span>setDefaultPhonemeType()</h2>
 
@@ -895,7 +962,7 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if synthesis successful, false otherwise </dd></dl>
 
-<p>Reimplemented in <a class="el" href="classConcatenatedAudioVocoder.html#ad7f436eb78506cee636654fb17131bbc">ConcatenatedAudioVocoder</a>, <a class="el" href="classDiphoneVocoder.html#a11d761bfd264153c7394069ea6cfb716">DiphoneVocoder</a>, and <a class="el" href="classFormantVocoder.html#a70a16569ad4e57dee077440bce8c97a8">FormantVocoder</a>.</p>
+<p>Reimplemented in <a class="el" href="classConcatenatedAudioVocoder.html#ad7f436eb78506cee636654fb17131bbc">ConcatenatedAudioVocoder</a>, <a class="el" href="classDiphoneVocoder.html#a11d761bfd264153c7394069ea6cfb716">DiphoneVocoder</a>, <a class="el" href="classFormantVocoder.html#a70a16569ad4e57dee077440bce8c97a8">FormantVocoder</a>, and <a class="el" href="classPSOLAVocoder.html#ad77627cfd6654b9bf6943544637882af">PSOLAVocoder</a>.</p>
 
 </div>
 </div>
