@@ -54,6 +54,30 @@ struct FormantVoiceConfig {
   /// @details Natural downward pitch drift during phonemes. 0 = no declination
   float pitchFallPerSec = 3.0f;
 
+  /// @brief Voice's own default speaking-rate multiplier (1.0 = normal)
+  /// @details Composes with (multiplies) PhonemeSynthesisParams::speed at
+  /// call time rather than replacing it -- a caller's own speed request
+  /// still applies on top of this voice's natural rate. Same idea as the
+  /// "speed" parameter in SoftVoice's SAM engine (github.com/pschatzmann/
+  /// arduino-SAM), which bakes a default rate into each named voice.
+  float speedScale = 1.0f;
+
+  // === VOICE TIMBRE (SAM-style mouth/throat scaling) ===
+  // Same idea as SAM's SetMouthThroat(): a single scale factor applied
+  // uniformly across every phoneme's F1 ("mouth") or F2 ("throat"), on
+  // top of FormantRules.h's own per-phoneme absolute values -- not a
+  // replacement for that table, just a cheap, uniform "vocal tract size"
+  // knob layered on top of it. 1.0 = neutral (FormantRules.h's own values,
+  // unscaled).
+
+  /// @brief Uniform F1 (mouth cavity) scale factor across every phoneme
+  /// @details >1.0 = larger/deeper mouth resonance (F1 raised), <1.0 = smaller
+  float mouthScale = 1.0f;
+
+  /// @brief Uniform F2 (throat cavity) scale factor across every phoneme
+  /// @details >1.0 = larger/deeper throat resonance (F2 raised), <1.0 = smaller
+  float throatScale = 1.0f;
+
   // === FORMANT PROCESSING ===
 
   /// @brief Enable optional 4th formant for enhanced clarity
@@ -549,4 +573,81 @@ static const FormantVoiceConfig Robotic{
     0.8f,      // sibilantFinalGain
     0.0f       // sibilantLowpassMix - No softening
 };
+
+/**
+ * @brief Layer SAM-style mouth/throat/speed/pitch onto an existing base voice
+ * @details Starts from `base` (inheriting all its already-tuned naturalness/
+ * dynamics dials) and overrides just the four character-defining knobs --
+ * mirrors how github.com/pschatzmann/arduino-SAM defines its named voices
+ * as (speed, pitch, throat, mouth) tuples layered on its own default voice.
+ */
+static inline FormantVoiceConfig withVoiceCharacter(FormantVoiceConfig base,
+                                                    float baseF0,
+                                                    float mouthScale,
+                                                    float throatScale,
+                                                    float speedScale) {
+  base.baseF0 = baseF0;
+  base.mouthScale = mouthScale;
+  base.throatScale = throatScale;
+  base.speedScale = speedScale;
+  return base;
+}
+
+// ============================================================================
+// SAM-INSPIRED CHARACTER VOICES
+// ============================================================================
+// mouthScale/throatScale/speedScale below are exact ratios of SAM's own
+// (mouth, throat, speed) values for each named voice against its own
+// neutral "Sam" voice (mouth=128, throat=128, speed=72) -- see
+// arduino-SAM's SetMouthThroat()/trans() (mouth scales F1, throat scales
+// F2, both normalized around 128) and its README's voice table. baseF0
+// (Hz) and any extra per-character dial tweaks below are this library's
+// own choice to match each name's character, NOT a translation of SAM's
+// own "pitch" parameter -- that parameter is an inverse, non-linear unit
+// internal to SAM's own C64-derived engine, not a Hz value, and reverse-
+// engineering its exact mapping wasn't attempted.
+
+/// @brief Bright, small-sounding voice (SAM: mouth=160, throat=110, speed=72)
+static const FormantVoiceConfig Elf =
+    withVoiceCharacter(AdultFemale, 220.0f, 160.0f / 128.0f, 110.0f / 128.0f, 72.0f / 72.0f);
+
+/// @brief Fast, mechanical voice (SAM: mouth=190, throat=190, speed=92)
+/// @details Built on `Robotic` (already monotone/mechanical) rather than
+/// `AdultMale` -- SAM's own "Little Robot" name implies the same
+/// no-naturalness character this library's `Robotic` preset already has.
+static const FormantVoiceConfig LittleRobot =
+    withVoiceCharacter(Robotic, 140.0f, 190.0f / 128.0f, 190.0f / 128.0f, 92.0f / 72.0f);
+
+/// @brief Deep, congested-sounding voice (SAM: mouth=105, throat=110, speed=82)
+static const FormantVoiceConfig StuffyGuy = [] {
+  FormantVoiceConfig c = withVoiceCharacter(AdultMale, 110.0f, 105.0f / 128.0f,
+                                            110.0f / 128.0f, 82.0f / 72.0f);
+  // "Stuffy" (congested/nasal) character: exaggerate the existing nasal
+  // processing rather than add a new mechanism.
+  c.nasalLowpass = 0.5f;
+  c.nasalNotchDepth = 0.8f;
+  return c;
+}();
+
+/// @brief Frail, higher-pitched voice (SAM: mouth=145, throat=145, speed=82)
+static const FormantVoiceConfig LittleOldLady = [] {
+  FormantVoiceConfig c = withVoiceCharacter(AdultFemale, 190.0f, 145.0f / 128.0f,
+                                            145.0f / 128.0f, 82.0f / 72.0f);
+  // Frail/aged character: more pitch/amplitude irregularity and breath.
+  c.jitterPct = 0.03f;
+  c.shimmerPct = 0.04f;
+  c.breathiness = 0.12f;
+  return c;
+}();
+
+/// @brief Otherworldly voice (SAM: mouth=200, throat=150, speed=100)
+static const FormantVoiceConfig ExtraTerrestrial = [] {
+  FormantVoiceConfig c = withVoiceCharacter(AdultMale, 170.0f, 200.0f / 128.0f,
+                                            150.0f / 128.0f, 100.0f / 72.0f);
+  // Otherworldly character: wider, more irregular formant wobble.
+  c.formantRandomCents = 35.0f;
+  c.enableF4 = true;
+  return c;
+}();
+
 }  // namespace FormantVoice

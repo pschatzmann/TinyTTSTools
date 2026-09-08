@@ -34,7 +34,7 @@ Useful CMake options (pass as `-D<OPTION>=<VALUE>` to the `cmake ..` step):
 |---|---|---|
 | `BUILD_EXAMPLES` | `ON` | Build everything under `examples/` |
 | `BUILD_TESTS` | `ON` | Build the regression tests under `tests/` |
-| `ADD_AUDIO_TOOLS` | `ON` | Fetch arduino-audio-tools and build the audio-output examples (`AudioFormant`, `AudioPhoneme`, `AudioDiphones`) that need it |
+| `ADD_AUDIO_TOOLS` | `ON` | Fetch arduino-audio-tools and build the audio-output examples (`AudioFormant`, `AudioPhoneme`, `AudioDiphones`, `AudioPSOLA`) that need it |
 | `BUILD_DESKTOP_MAIN` | `OFF` | Build the desktop CLI (`./tinyttstools`, see [desktop/README.md](../desktop/README.md)) -- the actual way to hear synthesized speech on desktop; see the note below about why the `.ino` examples can't do this directly |
 
 For example, a fast library+tests-only configure with no network
@@ -129,11 +129,11 @@ echo "Hello world" | ./desktop/tinyttstools --stdout | aplay  # pipe-friendly
 ```
 
 See [desktop/README.md](../desktop/README.md) for the full option list
-(`--vocoder formant|phoneme|diphone`, `--full-dict`, `--file`, ...). This
-target needs `ADD_AUDIO_TOOLS=ON` (the default) for `MiniAudioStream`
-playback, and fetches (or reuses a local sibling checkout of)
-[miniaudio](https://github.com/mackron/miniaudio) the first time it's
-configured.
+(`--vocoder formant|phoneme|diphone|psola`, `--pitch`, `--speed`,
+`--full-dict`, `--file`, ...). This target needs `ADD_AUDIO_TOOLS=ON` (the
+default) for `MiniAudioStream` playback, and fetches (or reuses a local
+sibling checkout of) [miniaudio](https://github.com/mackron/miniaudio) the
+first time it's configured.
 
 ## Troubleshooting
 

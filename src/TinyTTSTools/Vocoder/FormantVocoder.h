@@ -761,17 +761,33 @@ class FormantVocoder : public VocoderBase {
                                PhonemeSynthesisContext& ctx,
                                const PhonemeSynthesisParams& params) {
     ctx.phonStr = stripStress(phoneme, ctx.stress);
-    float defaultDuration = getPhoneDuration(ctx.phonStr);
-    ctx.duration = params.durationMs > 0
-                       ? (params.durationMs / 1000.0f)
-                       : defaultDuration;
+    uint16_t defaultDurationMs =
+        static_cast<uint16_t>(getPhoneDuration(ctx.phonStr) * 1000.0f + 0.5f);
+    // cfg_.speedScale is this voice's own default rate; a caller's own
+    // params.speed still composes with (multiplies) it rather than being
+    // overridden by it.
+    PhonemeSynthesisParams effectiveParams = params;
+    effectiveParams.speed *= cfg_.speedScale;
+    ctx.duration = resolveDuration(defaultDurationMs, effectiveParams) / 1000.0f;
     ctx.numSamples = (size_t)(ctx.duration * sampleRate_);
     if (ctx.numSamples > audioBuffer_.size())
       audioBuffer_.resize(ctx.numSamples);
     ctx.params = getFormantParams(ctx.phonStr);
+    // SAM-style "mouth"/"throat" scaling: a uniform F1/F2 multiplier across
+    // every phoneme, layered on top of FormantRules.h's own per-phoneme
+    // values (see FormantVoiceConfig::mouthScale/throatScale doc).
+    ctx.params.f1 *= cfg_.mouthScale;
+    ctx.params.f2 *= cfg_.throatScale;
     ctx.target2 = ctx.params;
     ctx.dynamic = false;
     setupDiphthongTargets(ctx.phonStr, ctx.target2, ctx.dynamic);
+    // Diphthong targets are looked up as their own independent
+    // FormantParams (not derived from ctx.params), so they need the same
+    // mouth/throat scaling applied separately.
+    if (ctx.dynamic) {
+      ctx.target2.f1 *= cfg_.mouthScale;
+      ctx.target2.f2 *= cfg_.throatScale;
+    }
     randomizeFormantsIfNeeded(ctx.params, ctx.phonStr);
     configureInitialFilters(ctx.params);
     // Snapshot where the previous phoneme's formants ended up (see the

@@ -81,6 +81,55 @@ or `speed` to actually change the sound, not just cut it short -- see
 (per-phoneme pitch analysis + overlap-add), so prefer `PhonemeVocoder` when
 you don't need pitch/duration control.
 
+### FormantVocoder voice presets
+
+`FormantVocoder` reads a `FormantVoiceConfig` (fundamental frequency,
+naturalness, dynamics, and more) that shapes every phoneme it synthesizes.
+Swap it any time via `setVoiceConfig()`:
+
+```cpp
+FormantVocoder synth(16000);
+synth.setVoiceConfig(FormantVoice::AdultFemale);
+```
+
+Predefined voices, all in the `FormantVoice` namespace:
+
+| Voice | Character |
+|---|---|
+| `AdultMale` (default) | Balanced general-purpose male voice, ~120Hz |
+| `AdultFemale` | Brighter, ~200Hz, 4th formant enabled for clarity |
+| `DeepMale` | Bass/baritone, ~85Hz, darker spectral balance |
+| `Child` | High-pitched, ~280Hz, minimal roughness |
+| `Robotic` | No jitter/shimmer/breathiness/stress -- perfectly mechanical |
+| `Elf` | Bright, small-sounding |
+| `LittleRobot` | Fast, mechanical (built on `Robotic`) |
+| `StuffyGuy` | Deep, congested/nasal-sounding |
+| `LittleOldLady` | Frail, higher-pitched, more breath/irregularity |
+| `ExtraTerrestrial` | Otherworldly, wider formant wobble |
+
+The last five are inspired by [arduino-SAM](https://github.com/pschatzmann/arduino-SAM)'s
+named voices, via two config fields modeled on SAM's own `SetMouthThroat()`:
+
+```cpp
+cfg.mouthScale = 1.25f;    // uniform F1 scale across every phoneme (1.0 = neutral)
+cfg.throatScale = 0.86f;   // uniform F2 scale across every phoneme (1.0 = neutral)
+cfg.speedScale = 1.0f;     // this voice's own default rate, composes with
+                           // PhonemeSynthesisParams::speed rather than replacing it
+```
+
+Unlike `FormantRules.h`'s per-phoneme absolute formant values, `mouthScale`/
+`throatScale` are a single multiplier applied uniformly across every
+phoneme -- a cheap way to shift the whole "vocal tract size" without
+touching the per-phoneme table. Build a custom character the same way the
+built-in ones are defined, by layering onto an existing voice:
+
+```cpp
+FormantVoiceConfig myVoice = FormantVoice::AdultMale;
+myVoice.mouthScale = 1.4f;
+myVoice.throatScale = 1.4f;
+synth.setVoiceConfig(myVoice);
+```
+
 ### Tuning a phoneme's synthesis
 
 Every vocoder accepts an optional `PhonemeSynthesisParams` on `sayPhoneme()`
