@@ -113,6 +113,15 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a43a09704f18caf529954cded2b9d57bb"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structFormantVoiceConfig.html#a43a09704f18caf529954cded2b9d57bb">pitchFallPerSec</a> = 3.0f</td></tr>
 <tr class="memdesc:a43a09704f18caf529954cded2b9d57bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pitch declination rate in Hz per second.  <br /></td></tr>
 <tr class="separator:a43a09704f18caf529954cded2b9d57bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ee4e34cb659858689476d7e2e07b0cb"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structFormantVoiceConfig.html#a5ee4e34cb659858689476d7e2e07b0cb">speedScale</a> = 1.0f</td></tr>
+<tr class="memdesc:a5ee4e34cb659858689476d7e2e07b0cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Voice's own default speaking-rate multiplier (1.0 = normal)  <br /></td></tr>
+<tr class="separator:a5ee4e34cb659858689476d7e2e07b0cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a689019b2d4fe9ff3c91e9d011b44c21c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structFormantVoiceConfig.html#a689019b2d4fe9ff3c91e9d011b44c21c">mouthScale</a> = 1.0f</td></tr>
+<tr class="memdesc:a689019b2d4fe9ff3c91e9d011b44c21c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uniform F1 (mouth cavity) scale factor across every phoneme.  <br /></td></tr>
+<tr class="separator:a689019b2d4fe9ff3c91e9d011b44c21c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1e0dac72f7fa7e8fdd0680c6b1e7f3f"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structFormantVoiceConfig.html#ad1e0dac72f7fa7e8fdd0680c6b1e7f3f">throatScale</a> = 1.0f</td></tr>
+<tr class="memdesc:ad1e0dac72f7fa7e8fdd0680c6b1e7f3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uniform F2 (throat cavity) scale factor across every phoneme.  <br /></td></tr>
+<tr class="separator:ad1e0dac72f7fa7e8fdd0680c6b1e7f3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc477dd786b58cd40286768e41641c8b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structFormantVoiceConfig.html#afc477dd786b58cd40286768e41641c8b">enableF4</a> = false</td></tr>
 <tr class="memdesc:afc477dd786b58cd40286768e41641c8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable optional 4th formant for enhanced clarity.  <br /></td></tr>
 <tr class="separator:afc477dd786b58cd40286768e41641c8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -441,6 +450,23 @@ Public Attributes</h2></td></tr>
 
 <p>Pitch jitter amplitude as fraction of baseF0 (0.0-0.05) </p>
 <p>Adds natural pitch variation. Higher values = more roughness </p>
+
+</div>
+</div>
+<a id="a689019b2d4fe9ff3c91e9d011b44c21c" name="a689019b2d4fe9ff3c91e9d011b44c21c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a689019b2d4fe9ff3c91e9d011b44c21c">&#9670;&#160;</a></span>mouthScale</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float FormantVoiceConfig::mouthScale = 1.0f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Uniform F1 (mouth cavity) scale factor across every phoneme. </p>
+<p>&gt;1.0 = larger/deeper mouth resonance (F1 raised), &lt;1.0 = smaller </p>
 
 </div>
 </div>
@@ -784,6 +810,23 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a5ee4e34cb659858689476d7e2e07b0cb" name="a5ee4e34cb659858689476d7e2e07b0cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ee4e34cb659858689476d7e2e07b0cb">&#9670;&#160;</a></span>speedScale</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float FormantVoiceConfig::speedScale = 1.0f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Voice's own default speaking-rate multiplier (1.0 = normal) </p>
+<p>Composes with (multiplies) <a class="el" href="structPhonemeSynthesisParams.html#a6200acca55165b10c319cd5136c410fc">PhonemeSynthesisParams::speed</a> at call time rather than replacing it &ndash; a caller's own speed request still applies on top of this voice's natural rate. Same idea as the "speed" parameter in SoftVoice's SAM engine (github.com/pschatzmann/ arduino-SAM), which bakes a default rate into each named voice. </p>
+
+</div>
+</div>
 <a id="a16ac72885e87aad4db73724500170340" name="a16ac72885e87aad4db73724500170340"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a16ac72885e87aad4db73724500170340">&#9670;&#160;</a></span>stressDecayPortion</h2>
 
@@ -883,6 +926,23 @@ Public Attributes</h2></td></tr>
 
 <p>Target RMS level for voiced sounds (PCM units) </p>
 <p>Controls overall loudness. Range: 3000-8000 </p>
+
+</div>
+</div>
+<a id="ad1e0dac72f7fa7e8fdd0680c6b1e7f3f" name="ad1e0dac72f7fa7e8fdd0680c6b1e7f3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1e0dac72f7fa7e8fdd0680c6b1e7f3f">&#9670;&#160;</a></span>throatScale</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float FormantVoiceConfig::throatScale = 1.0f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Uniform F2 (throat cavity) scale factor across every phoneme. </p>
+<p>&gt;1.0 = larger/deeper throat resonance (F2 raised), &lt;1.0 = smaller </p>
 
 </div>
 </div>
