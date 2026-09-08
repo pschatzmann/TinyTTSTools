@@ -19,6 +19,10 @@
  * @brief Default G2P model using basic lookup and rule-based methods
  * @details Combines dictionary lookup and rule-based phoneme generation
  *          for efficient and accurate conversion.
+ * @note Memory footprint: ~10KB flash (default 535-word dictionary +
+ * rule-based fallback, which uses no data tables of its own). See
+ * https://github.com/pschatzmann/TinyTTSTools/blob/main/docs/MEMORY.md for a
+ * comparison table across all vocoders and G2P models.
  */
 class G2PDictionaryAndRulesModel : public G2PHybridModel {
  public:

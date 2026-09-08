@@ -18,6 +18,15 @@
 #include "Arduino.h"
 #endif
 
+// TTSLoggerClass::begin() takes a Print& for its output stream. On real
+// Arduino, Arduino.h (just included) already declares it; on desktop,
+// TTSAudioOutput.h provides the same cross-platform resolution the rest
+// of this library uses (a real Print via AudioTools when IS_MIN_DESKTOP
+// is set, or its own minimal stub otherwise) -- without this, any
+// translation unit that includes TTSLogger.h without having already
+// pulled in a Print declaration from elsewhere fails to compile.
+#include "TTSAudioOutput.h"
+
 /**
  * @brief Logging levels for TTS operations
  */
@@ -39,7 +48,7 @@ enum class TTSLogLevel {
  * @details Provides consistent logging across different platforms (Arduino, PC)
  *          with configurable log levels and output destinations.
  */
-class TTSLoggerCLass {
+class TTSLoggerClass {
  public:
   /**
    * @brief Initialize the logger with log level and output stream
@@ -137,7 +146,13 @@ class TTSLoggerCLass {
   }
 };
 
-static TTSLoggerCLass TTSLogger;
+// A C++17 inline variable, not `static` -- `static` at header scope gives
+// every including translation unit its own separate instance (internal
+// linkage), so a `TTSLogger.begin(...)` call in one .cpp would silently
+// have no effect on the instance any other .cpp/.ino sees. `inline` gives
+// the whole program exactly one shared instance, which is what a global
+// logger needs to actually be global.
+inline TTSLoggerClass TTSLogger;
 
 // Logging macros with printf-style formatting support
 #define TTS_LOGD(fmt, ...) TTSLogger.log(TTSLogLevel::DEBUG, fmt, ##__VA_ARGS__)

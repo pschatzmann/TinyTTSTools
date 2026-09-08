@@ -31,7 +31,7 @@ def main():
         f"({len(entries)} words), ported from tronghieuit/tiny-tts's exported "
         "cmudict via TinyTTS. Blocked offset index + Huffman-coded phonemes -- "
         "see CompressedPhonemeDictionary.h and PhonemeHuffmanCodes.h.",
-        include_path="../../Dictionary/CompressedPhonemeDictionary.h",
+        include_path="../../PhonemeDictionary/CompressedPhonemeDictionary.h",
     )
 
 

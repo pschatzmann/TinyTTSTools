@@ -41,6 +41,10 @@
  * `g2p.getDictionaryModel().useCompactDictionary(PHONEME_EXCEPTION_DICTIONARY_EN)`
  * pushes accuracy over 99% at the cost of ~2.2MB flash, with no change to
  * this class at all.
+ * @note Memory footprint: no data tables at all -- pure code, negligible
+ * flash beyond the rules themselves. See
+ * https://github.com/pschatzmann/TinyTTSTools/blob/main/docs/MEMORY.md for a
+ * comparison table across all vocoders and G2P models.
  */
 class G2PRuleBasedModel : public G2PModelBase {
  public:

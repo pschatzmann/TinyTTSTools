@@ -10,7 +10,7 @@
 #include "AudioTools.h"
 #include "TinyTTSTools.h"
 #include "TinyTTSTools/Basic/TTSExampleUtils.h"
-#include "TinyTTSTools/Dictionary/DiphoneWAVDictionary.h"
+#include "TinyTTSTools/SoundDictionary/DiphoneWAVDictionary.h"
 #include "TinyTTSTools/Vocoder/DiphoneVocoder.h"
 
 // Global TTS instance with DiphoneVocoder

@@ -31,6 +31,11 @@
  * for alternate phoneme sets. The engine adds basic naturalness features
  * (jitter, shimmer, spectral tilt, diphthong interpolation, stress shaping,
  * nasal notches, sibilant control and adaptive RMS leveling).
+ * @note Memory footprint: no audio data required (procedural synthesis) --
+ * the smallest flash footprint of the available vocoders, at the cost of a
+ * more robotic sound. See
+ * https://github.com/pschatzmann/TinyTTSTools/blob/main/docs/MEMORY.md for a
+ * comparison table across all vocoders and G2P models.
  */
 class FormantVocoder : public VocoderBase {
  public:

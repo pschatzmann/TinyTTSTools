@@ -1,6 +1,6 @@
 """Computes canonical Huffman codes for packed phoneme bytes from real
 corpus frequencies, and emits the readable
-src/TinyTTSTools/Dictionary/PhonemeHuffmanCodes.h table.
+src/TinyTTSTools/PhonemeDictionary/PhonemeHuffmanCodes.h table.
 
 Usage (from the TinyTTSTools repo root, after regenerating
 setup/dictionary/cmudict_dump.txt and failures.txt -- see dump_cmudict.cpp /
@@ -16,7 +16,7 @@ from pack_common import load_entries, count_phoneme_frequencies, packed_byte_nam
 HERE = os.path.dirname(os.path.abspath(__file__))
 CMUDICT_DUMP = os.path.join(HERE, "cmudict_dump.txt")
 FAILURES_DUMP = os.path.join(HERE, "failures.txt")
-OUT = os.path.join(HERE, "..", "..", "src", "TinyTTSTools", "Dictionary", "PhonemeHuffmanCodes.h")
+OUT = os.path.join(HERE, "..", "..", "src", "TinyTTSTools", "PhonemeDictionary", "PhonemeHuffmanCodes.h")
 
 
 def build_code_lengths(freq):

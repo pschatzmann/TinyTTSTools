@@ -6,6 +6,7 @@ generates a header file containing the binary data as C++ arrays.
 """
 
 import os
+import shutil
 import struct
 from pathlib import Path
 
@@ -114,15 +115,31 @@ def generate_cpp_headers(input_dir, output_dir):
                 'name': name,
                 'array_name': array_name,
                 'size': len(wav_data),
-                'header_file': f"{name}.h"
+                'header_file': f"{name}.h",
+                'source_wav': wav_file,
             })
-            
+
             print(f"Generated {individual_header_file}: {len(wav_data)} bytes")
             
         except Exception as e:
             print(f"Error processing {wav_file}: {e}")
             continue
     
+    # Also copy each source WAV verbatim into data/audio/diphones/ -- the
+    # runtime-loadable counterpart to the PROGMEM headers above (see
+    # data/README.md), used by AudioEncodedDictionarySD instead of
+    # DiphoneWAVDictionary. Kept in sync here so it never drifts from the
+    # PROGMEM data: both are generated from the exact same source files in
+    # the same run, not maintained separately.
+    # output_path is .../src/TinyTTSTools/Data/wav/diphones, so five
+    # levels up is the repo root.
+    repo_root = output_path.parent.parent.parent.parent.parent
+    data_dir = repo_root / 'data' / 'audio' / 'diphones'
+    data_dir.mkdir(parents=True, exist_ok=True)
+    for entry in sound_entries:
+        shutil.copy2(entry['source_wav'], data_dir / f"{entry['name']}.wav")
+    print(f"Copied {len(sound_entries)} WAV files to {data_dir}")
+
     # Generate an umbrella header that just #includes every individual
     # per-diphone header, one level up from output_path (Data/wav/), e.g.
     # Data/wav/diphones.h including Data/wav/diphones/AA_B.h -- matches the
@@ -170,11 +187,11 @@ def generate_cpp_headers(input_dir, output_dir):
     main_header_content.append(f'const size_t NUM_DIPHONES = {len(sound_entries)};')
 
     # Write main dictionary header file directly to
-    # src/TinyTTSTools/Dictionary/DiphoneWAVDictionary.h (a sibling of
+    # src/TinyTTSTools/SoundDictionary/DiphoneWAVDictionary.h (a sibling of
     # Data/, not output_path.parent.parent -- that stale assumption
     # predates the Data/ subfolder reorg and pointed at
     # src/TinyTTSTools/DiphoneWAVDictionary.h, which nothing includes).
-    main_header_file = output_path.parent.parent.parent / "Dictionary" / "DiphoneWAVDictionary.h"
+    main_header_file = output_path.parent.parent.parent / "SoundDictionary" / "DiphoneWAVDictionary.h"
     try:
         with open(main_header_file, 'w') as f:
             f.write('\n'.join(main_header_content))

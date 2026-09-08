@@ -68,7 +68,9 @@ Alternatively you can also use the [TTSAudioOutputCallback](https://pschatzmann.
 - [Tutorial](docs/TUTORIAL.md) - Full walkthrough: choosing a vocoder and G2P model, tuning synthesis, audio output
 - [Building on Desktop](docs/BUILDING.md) - CMake build instructions, including how to build and run the test suite
 - [Setup Tools](docs/SETUP.md) - Regenerating the audio/dictionary data files (`setup/`), including the neural G2P training pipeline
+- [Loadable Data](data/README.md) - The same audio data as real `.wav` files, for `AudioDictionarySD`/`AudioEncodedDictionarySD` (SD card/LittleFS) instead of PROGMEM
 - [Phonemes](docs/PHONEMES.md) - The ARPAbet phoneme set used throughout the library
+- [Memory Usage](docs/MEMORY.md) - Flash/RAM cost of each vocoder, G2P model and dictionary format
 - [Class Documentation](https://pschatzmann.github.io/TinyTTSTools/annotated.html)
 
 ## Features

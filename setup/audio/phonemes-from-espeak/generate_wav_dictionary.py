@@ -7,6 +7,7 @@ and generates a header file containing the binary data as C++ arrays.
 
 import os
 import sys
+import shutil
 import struct
 import argparse
 from pathlib import Path
@@ -118,15 +119,28 @@ def generate_cpp_headers(input_dir, output_dir, format_name, force_overwrite=Fal
                 'name': name,
                 'array_name': array_name,
                 'size': len(wav_data),
-                'header_file': f"{name}.h"
+                'header_file': f"{name}.h",
+                'source_wav': wav_file,
             })
-            
+
             print(f"Generated {individual_header_file}: {len(wav_data)} bytes")
             
         except Exception as e:
             print(f"Error processing {wav_file}: {e}")
             continue
     
+    # Also copy each source WAV verbatim into data/audio/arpabet/ -- the
+    # runtime-loadable counterpart to the PROGMEM headers above (see
+    # data/README.md), used by AudioDictionarySD instead of
+    # ArpabetWAVDictionary. Kept in sync here so it never drifts from the
+    # PROGMEM data: both are generated from the exact same source files in
+    # the same run, not maintained separately.
+    data_dir = find_project_root() / 'data' / 'audio' / 'arpabet'
+    data_dir.mkdir(parents=True, exist_ok=True)
+    for entry in sound_entries:
+        shutil.copy2(entry['source_wav'], data_dir / f"{entry['name']}.wav")
+    print(f"Copied {len(sound_entries)} WAV files to {data_dir}")
+
     # Umbrella header: Data/wav/arpabet.h including each individual
     # Data/wav/arpabet/{NAME}.h -- lets the main dictionary header include
     # just one line instead of 41, matching the convention already used
@@ -179,11 +193,11 @@ def generate_cpp_headers(input_dir, output_dir, format_name, force_overwrite=Fal
     
     
     # Write main dictionary header file
-    # Data/wav/arpabet -> Data/wav -> Data -> TinyTTSTools -> Dictionary/ArpabetWAVDictionary.h
+    # Data/wav/arpabet -> Data/wav -> Data -> TinyTTSTools -> SoundDictionary/ArpabetWAVDictionary.h
     # (a sibling of Data/, not output_path.parent.parent -- that stale
     # assumption predates the Data/ subfolder reorg and pointed at
     # src/TinyTTSTools/ArpabetWAVDictionary.h, which nothing includes).
-    main_header_file = output_path.parent.parent.parent / "Dictionary" / "ArpabetWAVDictionary.h"
+    main_header_file = output_path.parent.parent.parent / "SoundDictionary" / "ArpabetWAVDictionary.h"
     
     # Check if main header file already exists
     if main_header_file.exists() and not force_overwrite:

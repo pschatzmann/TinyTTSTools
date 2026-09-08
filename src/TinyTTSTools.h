@@ -12,11 +12,12 @@
 
 // Include all modular components
 #include "TinyTTSTools/Basic/TTSTypes.h"
+#include "TinyTTSTools/Basic/TTSLogger.h"
 #include "TinyTTSTools/Basic/StringUtils.h"
 #include "TinyTTSTools/Basic/TTSAudioOutput.h"
 #include "TinyTTSTools/Basic/Tokenizer.h"
-#include "TinyTTSTools/Dictionary/CompactPhonemeDictionary.h"
-#include "TinyTTSTools/Dictionary/AudioEncodedDictionary.h"
+#include "TinyTTSTools/PhonemeDictionary/CompactPhonemeDictionary.h"
+#include "TinyTTSTools/SoundDictionary/AudioEncodedDictionary.h"
 #include "TinyTTSTools/G2P/G2PDictionaryAndRulesModel.h"
 #include "TinyTTSTools/G2P/G2PDictionaryModel.h"
 #include "TinyTTSTools/G2P/G2PHybridModel.h"

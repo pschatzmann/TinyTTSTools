@@ -17,7 +17,7 @@
 #include <string>
 #include "TestUtils.h"
 #include "TinyTTSTools/Vocoder/PhonemeVocoder.h"
-#include "TinyTTSTools/Dictionary/ArpabetWAVDictionary.h"
+#include "TinyTTSTools/SoundDictionary/ArpabetWAVDictionary.h"
 
 class CapturePrint : public Print {
  public:

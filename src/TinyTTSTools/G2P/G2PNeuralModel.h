@@ -18,6 +18,7 @@
 
 #include "G2PModelBase.h"
 #include "../Basic/StringUtils.h"
+#include "../Basic/TTSLogger.h"
 
 /**
  * @brief Neural grapheme-to-phoneme fallback for out-of-dictionary words
@@ -55,6 +56,11 @@
  * of this specific English model file -- a differently-trained model
  * (another language, or a retrained English one) would need its own
  * graphemeIndex() and output table, not just a different weights blob.
+ * @note Memory footprint: ~970KB flash for the shipped weights (measured:
+ * 992,716 bytes), no RAM overhead beyond a small decode buffer (no tensor
+ * arena, no runtime library). See
+ * https://github.com/pschatzmann/TinyTTSTools/blob/main/docs/MEMORY.md for a
+ * comparison table across all vocoders and G2P models.
  */
 class G2PNeuralModel : public G2PModelBase {
  public:
@@ -64,6 +70,10 @@ class G2PNeuralModel : public G2PModelBase {
   bool begin(const uint8_t* buf, size_t len) {
     size_t pos = 0;
     initialized_ = parseWeights(buf, len, pos);
+    if (!initialized_) {
+      TTS_LOGE("G2PNeuralModel: failed to parse weights buffer "
+                "(%zu bytes) -- malformed or truncated", len);
+    }
     return initialized_;
   }
 

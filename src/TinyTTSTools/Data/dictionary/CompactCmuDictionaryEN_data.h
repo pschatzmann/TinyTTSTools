@@ -3,7 +3,7 @@
 #pragma once
 #include <cstdint>
 #include <cstddef>
-#include "../../Dictionary/CompressedPhonemeDictionary.h"
+#include "../../PhonemeDictionary/CompressedPhonemeDictionary.h"
 
 static const uint32_t COMPACT_CMUDICT_EN_WORD_BLOCK_OFFSETS[] = {
   0,90,145,203,256,354,445,503,552,593,645,690,733,802,851,904,

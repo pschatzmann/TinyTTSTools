@@ -8,7 +8,7 @@
  */
 #include "AudioTools.h"
 #include "TinyTTSTools.h"
-#include "TinyTTSTools/Dictionary/ArpabetWAVDictionary.h"
+#include "TinyTTSTools/SoundDictionary/ArpabetWAVDictionary.h"
 #include "TinyTTSTools/Basic/TTSExampleUtils.h"
 
 // Global TTS instance with PhonemeVocoder

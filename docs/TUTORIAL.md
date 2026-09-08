@@ -52,8 +52,8 @@ G2P model, one vocoder, one `Print`-compatible output, wired together by
 | Vocoder | Data needed | Quality | When to use |
 |---|---|---|---|
 | `FormantVocoder` | None (procedural) | Robotic but intelligible | Tightest flash budgets; no audio assets to ship |
-| `PhonemeVocoder` | `ArpabetWAVDictionary` (~35KB) | Better than formant, no coarticulation between sounds | Small flash budget, some real recorded audio |
-| `DiphoneVocoder` | `DiphoneWAVDictionary` (~893KB) | Most natural of the three -- real phoneme-to-phoneme transitions | Flash isn't tight (ESP32-class), best quality wanted |
+| `PhonemeVocoder` | `ArpabetWAVDictionary` (~35KB audio data) | Better than formant, no coarticulation between sounds | Small flash budget, some real recorded audio |
+| `DiphoneVocoder` | `DiphoneWAVDictionary` (~893KB audio data, +~1MB total flash once its decoder/concatenation code is linked in -- see [MEMORY.md](MEMORY.md)) | Most natural of the three -- real phoneme-to-phoneme transitions | Flash isn't tight (ESP32-class), best quality wanted |
 
 See `examples/AudioFormant`, `examples/AudioPhoneme`, `examples/AudioBiphones`
 for a complete, runnable version of each. Swapping vocoders is a two-line
@@ -86,7 +86,7 @@ instead of `"AA"`), covering every phoneme plus the stress-marked variants
 | `G2PDictionaryModel` (default 534-word dictionary) | Common/curated words only | 100% for words it contains, 0% otherwise | Small |
 | + `G2PRuleBasedModel` fallback (`G2PDictionaryAndRulesModel`) | Any word | ~17% for words outside the dictionary (English spelling is fundamentally ambiguous without a stress model) | Small |
 | + `G2PNeuralModel` fallback (`G2PDictionaryNeuralAndRulesModel`) | Any word, including genuinely novel ones (proper nouns, made-up words) | ~74% for words outside the dictionary | +~970KB |
-| Full CMU dictionary (`COMPACT_CMUDICT_EN`, 123k words) | Nearly all real English words | ~100% for words it contains | +~1.8MB |
+| Full CMU dictionary (`COMPACT_CMUDICT_EN`, 123k words) | Nearly all real English words | ~100% for words it contains | +~1.74MB |
 
 Start with `G2PDictionaryAndRulesModel` (the default in every audio
 example). Reach for the others as needed:
@@ -125,7 +125,11 @@ how, for example, `"quietly"` and `"whispers"` were fixed for the
 
 **Your own vocabulary only** (embedded product with a fixed, known set of
 words -- device names, commands, units): see `examples/G2PCustomDictionary`
-for `setPhonemeDictionary()`.
+for `setPhonemeDictionary()` (a fixed, pre-sorted array, set once). If you
+need to add or correct pronunciations at runtime instead -- learned from
+user input, a config file, or growing incrementally -- use
+`DynamicPhonemeDictionary` (`PhonemeDictionary/DynamicPhonemeDictionary.h`) via
+`useCompactDictionary()`, and call `add()`/`remove()` any time after.
 
 ## Multi-word text and pauses
 

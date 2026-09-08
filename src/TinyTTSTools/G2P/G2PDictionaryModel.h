@@ -13,8 +13,8 @@
 #include <cstring>
 #include <string>
 #include "G2PModelBase.h"
-#include "../Dictionary/PhonemeDictionaryBase.h"
-#include "../Dictionary/PhonemeDictionaryEN.h"
+#include "../PhonemeDictionary/PhonemeDictionaryBase.h"
+#include "../PhonemeDictionary/PhonemeDictionaryEN.h"
 #include "../Basic/StringUtils.h"
 
 /**
@@ -31,6 +31,12 @@
  * dictionary can still be supplied via setPhonemeDictionary() using the
  * simple PhonemeEntry array format, which is more convenient for a sketch
  * defining a handful of custom pronunciations.
+ * @note Memory footprint: the built-in default (535-word) dictionary
+ * measures ~10KB flash; swapping in the full `COMPACT_CMUDICT_EN`
+ * (123k words, via useCompactDictionary()) adds ~1.74MB. See
+ * https://github.com/pschatzmann/TinyTTSTools/blob/main/docs/MEMORY.md for a
+ * comparison table across all vocoders and G2P models, and
+ * CompressedPhonemeDictionarySD.h to load it from SD/PSRAM instead.
  */
 class G2PDictionaryModel : public G2PModelBase {
  public:

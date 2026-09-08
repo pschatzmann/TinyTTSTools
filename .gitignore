@@ -5,10 +5,10 @@ training/checkpoints/
 .pio/
 .claude/
 *.wav
+!/data/**/*.wav
 *.pt
 miniaudio.h
 build/
-data/
 html/
 
 # Generated intermediate/training artifacts, regenerable via their own

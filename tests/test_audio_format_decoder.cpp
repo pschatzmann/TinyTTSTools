@@ -18,9 +18,8 @@
 #include <cstdlib>
 #include <cstring>
 #include "TestUtils.h"
-#include "TinyTTSTools/Dictionary/AudioFormatDecoder.h"
-#include "TinyTTSTools/Dictionary/DiphoneWAVDictionary.h"
-#include "TinyTTSTools/Dictionary/ArpabetAltWAVDictionary.h"
+#include "TinyTTSTools/SoundDictionary/AudioFormatDecoder.h"
+#include "TinyTTSTools/SoundDictionary/DiphoneWAVDictionary.h"
 
 static void testPcm8Decoder() {
   const uint8_t data[] = {0, 128, 255, 64};
@@ -71,23 +70,21 @@ static void testAdpcmDecoderAgainstSoxReference() {
 }
 
 // Regression test for a second instance of the same "wrong bits value" bug
-// class: ArpabetAltWAVDictionary.h reuses the real IMA-ADPCM {P}_SIL diphone
-// data as standalone phoneme sounds, but was hand-written with bits=8
-// (PCM8) instead of bits=4, so it decoded the same compressed bytes wrong
-// in a different way. Fixed via generate_arpabet_alt_dictionary.py. Checks
-// it against the exact same DIPHONES["AA_SIL"] samples since it is, byte
-// for byte, the same underlying data.
-static void testArpabetAltMatchesDiphoneSource() {
-  const SoundEntry* alt = nullptr;
-  for (size_t i = 0; i < NUM_ARPABET_ALT_PHONEMES; i++) {
-    if (strcmp(ARPABET_ALT_PHONEMES[i].name, "AA") == 0) {
-      alt = &ARPABET_ALT_PHONEMES[i];
-      break;
-    }
-  }
-  CHECK(alt != nullptr);
-  if (!alt) return;
-  CHECK_EQ(alt->bits, static_cast<uint8_t>(4));  // must be ADPCM, not PCM8
+// class: this project previously shipped a whole separate generated class
+// (ArpabetAltWAVDictionary, removed 2025-09) that reused the real
+// IMA-ADPCM {P}_SIL diphone data as standalone phoneme sounds, but was
+// hand-written with bits=8 (PCM8) instead of bits=4, so it decoded the
+// same compressed bytes wrong in a different way. That class was a public,
+// AudioDictionary-shaped, Doxygen-visible fixture that looked usable but
+// wasn't (each entry is only ~half a phoneme's real duration, by
+// diphone-generation design) -- purely a regression-test vehicle wearing
+// production clothes. This inlined version keeps the exact same coverage
+// (a manually bits=4-tagged SoundEntry over the same underlying bytes,
+// checked against DIPHONES["AA_SIL"]) without shipping a public class
+// whose only real purpose was to be wrong on purpose in a controlled way.
+static void testManualBitsFourMatchesDiphoneSource() {
+  SoundEntry manual("AA", sound_data_AA_SIL_size, sound_data_AA_SIL, 4);
+  CHECK_EQ(manual.bits, static_cast<uint8_t>(4));  // must be ADPCM, not PCM8
 
   const SoundEntry* src = nullptr;
   for (size_t i = 0; i < NUM_DIPHONES; i++) {
@@ -99,11 +96,11 @@ static void testArpabetAltMatchesDiphoneSource() {
   CHECK(src != nullptr);
   if (!src) return;
 
-  CHECK_EQ(alt->samples(), src->samples());
-  size_t n = alt->samples();
+  CHECK_EQ(manual.samples(), src->samples());
+  size_t n = manual.samples();
   bool allMatch = true;
   for (size_t i = 0; i < n; i++) {
-    if ((*alt)[i] != (*src)[i]) {
+    if (manual[i] != (*src)[i]) {
       allMatch = false;
       break;
     }
@@ -115,6 +112,6 @@ int main() {
   testPcm8Decoder();
   testPcm16Decoder();
   testAdpcmDecoderAgainstSoxReference();
-  testArpabetAltMatchesDiphoneSource();
+  testManualBitsFourMatchesDiphoneSource();
   return testSummary();
 }

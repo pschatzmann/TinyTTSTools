@@ -12,7 +12,7 @@
 
 #include "AudioTools.h"
 #include "TinyTTSTools.h"  // also aliases I2SStream to MiniAudioStream on desktop builds
-#include "TinyTTSTools/Dictionary/ArpabetWAVDictionary.h"
+#include "TinyTTSTools/SoundDictionary/ArpabetWAVDictionary.h"
 #include "TinyTTSTools/Vocoder/PhonemeVocoder.h"
 #include "TinyTTSTools/Basic/Phonemes.h"
 #include "TinyTTSTools/Basic/TTSExampleUtils.h"

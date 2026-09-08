@@ -40,22 +40,46 @@
  * never touch the phoneme bitstream -- so this doesn't add per-comparison
  * cost, only a bounded decode-and-skip within the target word's block to
  * find where its phoneme bits start.
+ * @note Memory footprint: the full 123k-word CMU dictionary
+ * (`COMPACT_CMUDICT_EN`) measures ~1.74MB (measured: 1,820,804 bytes) in
+ * this format -- roughly 15 bytes/word, the large majority of which is the
+ * raw word text itself (Huffman coding only shrinks the phoneme data, not
+ * the words). See
+ * https://github.com/pschatzmann/TinyTTSTools/blob/main/docs/MEMORY.md for a
+ * comparison table across all vocoders and G2P models, and
+ * CompressedPhonemeDictionarySD.h to load this from SD/PSRAM instead of
+ * flash.
  */
 class CompressedPhonemeDictionary : public PhonemeDictionaryBase {
  public:
   static constexpr size_t BLOCK_SIZE = 8;
 
+  CompressedPhonemeDictionary() = default;
+
   CompressedPhonemeDictionary(const uint32_t* wordBlockOffsets, const uint8_t* wordLengths,
                               const char* wordsBlob, const uint32_t* phonemeBlockBitOffsets,
                               const uint8_t* phonemeCounts, const uint8_t* phonemeBits,
-                              size_t count)
-      : wordBlockOffsets_(wordBlockOffsets),
-        wordLengths_(wordLengths),
-        wordsBlob_(wordsBlob),
-        phonemeBlockBitOffsets_(phonemeBlockBitOffsets),
-        phonemeCounts_(phonemeCounts),
-        phonemeBits_(phonemeBits),
-        count_(count) {}
+                              size_t count) {
+    begin(wordBlockOffsets, wordLengths, wordsBlob, phonemeBlockBitOffsets, phonemeCounts,
+          phonemeBits, count);
+  }
+
+  /// (Re)point this dictionary at the six backing arrays. None of the
+  /// pointers are copied -- they must outlive this object. Lets a loader
+  /// (e.g. one that reads these arrays from a file into an owned buffer)
+  /// construct this object default, then bind it once the data is ready.
+  bool begin(const uint32_t* wordBlockOffsets, const uint8_t* wordLengths,
+            const char* wordsBlob, const uint32_t* phonemeBlockBitOffsets,
+            const uint8_t* phonemeCounts, const uint8_t* phonemeBits, size_t count) {
+    wordBlockOffsets_ = wordBlockOffsets;
+    wordLengths_ = wordLengths;
+    wordsBlob_ = wordsBlob;
+    phonemeBlockBitOffsets_ = phonemeBlockBitOffsets;
+    phonemeCounts_ = phonemeCounts;
+    phonemeBits_ = phonemeBits;
+    count_ = count;
+    return count_ > 0;
+  }
 
   size_t size() const override { return count_; }
 
@@ -93,13 +117,13 @@ class CompressedPhonemeDictionary : public PhonemeDictionaryBase {
   }
 
  protected:
-  const uint32_t* wordBlockOffsets_;
-  const uint8_t* wordLengths_;
-  const char* wordsBlob_;
-  const uint32_t* phonemeBlockBitOffsets_;
-  const uint8_t* phonemeCounts_;
-  const uint8_t* phonemeBits_;
-  size_t count_;
+  const uint32_t* wordBlockOffsets_ = nullptr;
+  const uint8_t* wordLengths_ = nullptr;
+  const char* wordsBlob_ = nullptr;
+  const uint32_t* phonemeBlockBitOffsets_ = nullptr;
+  const uint8_t* phonemeCounts_ = nullptr;
+  const uint8_t* phonemeBits_ = nullptr;
+  size_t count_ = 0;
 
   uint32_t wordByteOffset(size_t idx) const {
     size_t block = idx / BLOCK_SIZE;

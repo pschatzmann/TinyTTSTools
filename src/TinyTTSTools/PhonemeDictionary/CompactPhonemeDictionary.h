@@ -45,6 +45,13 @@
  *
  * Entries must be sorted by word (binary search), exactly like the old
  * PhonemeEntry tables.
+ * @note Memory footprint: ~8 bytes/word of pure index overhead (two 4-byte
+ * cumulative offsets), plus 1 byte/phoneme and the raw word text -- e.g. the
+ * built-in 535-word default dictionary measures ~10KB total. For larger
+ * (>10k word) dictionaries, prefer CompressedPhonemeDictionary, which trades
+ * some CPU per lookup for a smaller flash footprint. See
+ * https://github.com/pschatzmann/TinyTTSTools/blob/main/docs/MEMORY.md for a
+ * comparison table across all vocoders and G2P models.
  */
 class CompactPhonemeDictionary : public PhonemeDictionaryBase {
  public:

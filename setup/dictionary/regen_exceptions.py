@@ -1,5 +1,5 @@
 """Regenerates
-src/TinyTTSTools/Dictionary/PhonemeExceptionDictionaryEN_data.h from
+src/TinyTTSTools/PhonemeDictionary/PhonemeExceptionDictionaryEN_data.h from
 setup/dictionary/failures.txt (see dump_failures.cpp) using the current
 canonical Huffman codes (see build_huffman.py).
 
@@ -14,7 +14,7 @@ from build_huffman import load_huffman_codes_from_corpus
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, "failures.txt")
-OUT = os.path.join(HERE, "..", "..", "src", "TinyTTSTools", "Dictionary",
+OUT = os.path.join(HERE, "..", "..", "src", "TinyTTSTools", "PhonemeDictionary",
                    "PhonemeExceptionDictionaryEN_data.h")
 
 

@@ -12,11 +12,11 @@
 #include <string>
 #include "TestUtils.h"
 #include "TinyTTSTools/Basic/Phonemes.h"
-#include "TinyTTSTools/Dictionary/PhonemeDictionaryEN.h"
+#include "TinyTTSTools/PhonemeDictionary/PhonemeDictionaryEN.h"
 #include "TinyTTSTools/G2P/G2PDictionaryModel.h"
 #include "TinyTTSTools/G2P/G2PDictionaryAndRulesModel.h"
 #include "TinyTTSTools/Data/dictionary/CompactCmuDictionaryEN_data.h"
-#include "TinyTTSTools/Dictionary/PhonemeExceptionDictionaryEN_data.h"
+#include "TinyTTSTools/PhonemeDictionary/PhonemeExceptionDictionaryEN_data.h"
 
 static void testPhonemesTable() {
   Phonemes p;

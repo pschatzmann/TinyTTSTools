@@ -41,6 +41,10 @@
  * G2PDictionaryNeuralAndRulesModel g2p;
  * g2p.getNeuralModel().begin(G2P_NEURAL_MODEL_WEIGHTS, G2P_NEURAL_MODEL_WEIGHTS_LEN);
  * @endcode
+ * @note Memory footprint: ~10KB flash (dictionary + rules) if begin() is
+ * never called; +~970KB once the neural fallback's weights are loaded. See
+ * https://github.com/pschatzmann/TinyTTSTools/blob/main/docs/MEMORY.md for a
+ * comparison table across all vocoders and G2P models.
  */
 class G2PDictionaryNeuralAndRulesModel : public G2PHybridModel {
  public:

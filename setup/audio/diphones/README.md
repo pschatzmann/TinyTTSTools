@@ -66,20 +66,19 @@ done
 ```bash
 # Convert ADPCM WAV files to C++ header files
 python3 generate_wav_dictionary.py
-
-# Regenerate ArpabetAltWAVDictionary.h (single-phoneme dictionary built by
-# reusing each phoneme's own {P}_SIL diphone) after the diphone data above
-# changes -- see generate_arpabet_alt_dictionary.py
-python3 generate_arpabet_alt_dictionary.py
 ```
 
-`ArpabetAltWAVDictionary.h` had the same "wrong bits value" bug as the main
-diphone dictionary, but as `bits=8` (PCM8) instead of the default-to-16
-bug: it was hand-written/hand-adapted (no generator referenced it) and its
-own header comment claimed "PCM8 WAV files" even though it reuses the same
-real IMA-ADPCM `{P}_SIL` diphone data as `DIPHONES`. Fixed by adding
-`generate_arpabet_alt_dictionary.py`, which assembles it from the existing
-diphone headers with `bits=4`.
+(Removed 2025-09: this directory used to also have
+`generate_arpabet_alt_dictionary.py`, producing `ArpabetAltWAVDictionary.h`
+-- a single-phoneme dictionary built by reusing each phoneme's own
+`{P}_SIL` diphone. It had the same "wrong bits value" bug class as the
+main diphone dictionary (hand-written as `bits=8`/PCM8 instead of the real
+`bits=4`/IMA-ADPCM), and even once fixed, it was a public,
+`AudioDictionary`-shaped class that looked like a real standalone-phoneme
+dictionary but wasn't -- each entry is only ~half a phoneme's real
+duration by diphone-generation design. The regression test it existed for
+is now inlined directly in `tests/test_audio_format_decoder.cpp`, with no
+separate generated class in the public API.)
 
 ## Directory Structure
 

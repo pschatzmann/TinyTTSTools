@@ -20,15 +20,23 @@
 
 #include "AudioDictionary.h"
 #include "SoundEntry.h"
+#include "../Memory/PsramAllocator.h"
+#include "../Basic/TTSLogger.h"
 
 /**
  * @brief Audio dictionary for encoded audio data with on-demand decoding
- * 
+ * @tparam Allocator Allocator for the decoded-PCM buffer (`decoded_buffer_`),
+ * which holds one phoneme's fully-decoded audio at a time. Defaults to
+ * `std::allocator<uint8_t>` (ordinary heap/internal RAM); pass
+ * `PsramAllocator<uint8_t>` (see Memory/PsramAllocator.h) to place it in
+ * PSRAM on ESP32 instead.
+ *
  * This class provides an AudioDictionary implementation that can handle
  * encoded audio data (MP3, AAC, etc.) and decode it on-demand using
  * the provided AudioDecoder. The phoneme data is typically provided as
  * an array of SoundEntry objects stored in PROGMEM to conserve RAM.
  */
+template <typename Allocator = std::allocator<uint8_t>>
 class AudioEncodedDictionary : public AudioDictionary, public AudioOutput {
  public:
   /**
@@ -94,7 +102,7 @@ class AudioEncodedDictionary : public AudioDictionary, public AudioOutput {
    * @brief Release all decoded data to free memory
    * This can be called to free memory after synthesis is complete
    */
-  void releaseAllDecodedData() {
+  virtual void releaseAllDecodedData() {
     decoded_buffer_.clear();
     decoded_buffer_.shrink_to_fit();
   }
@@ -111,13 +119,7 @@ class AudioEncodedDictionary : public AudioDictionary, public AudioOutput {
     return size;
   }
 
- private:
-  AudioDecoder& decoder_;
-  const SoundEntry* phonemes_;
-  size_t num_entries_;
-  std::vector<uint8_t> decoded_buffer_;
-  SoundEntry current_sound_entry_;
-
+ protected:
   /**
    * @brief Decode encoded audio data
    * @param data Pointer to encoded audio data
@@ -133,12 +135,15 @@ class AudioEncodedDictionary : public AudioDictionary, public AudioOutput {
 
     // Initialize decoder
     if (!decoder_.begin()) {
+      TTS_LOGE("AudioEncodedDictionary: decoder.begin() failed");
       return nullptr;
     }
 
     // Decode the encoded data
     size_t written = decoder_.write(data, size);
     if (written != size) {
+      TTS_LOGE("AudioEncodedDictionary: decoder accepted %zu of %zu bytes",
+                written, size);
       decoder_.end();
       return nullptr;
     }
@@ -152,4 +157,11 @@ class AudioEncodedDictionary : public AudioDictionary, public AudioOutput {
     
     return &current_sound_entry_;
   }
+
+ private:
+  AudioDecoder& decoder_;
+  const SoundEntry* phonemes_;
+  size_t num_entries_;
+  std::vector<uint8_t, Allocator> decoded_buffer_;
+  SoundEntry current_sound_entry_;
 };

@@ -32,7 +32,7 @@
 #include <vector>
 #include "TestUtils.h"
 #include "TinyTTSTools/Vocoder/DiphoneVocoder.h"
-#include "TinyTTSTools/Dictionary/DiphoneWAVDictionary.h"
+#include "TinyTTSTools/SoundDictionary/DiphoneWAVDictionary.h"
 
 class CapturePrint : public Print {
  public:

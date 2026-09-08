@@ -12,7 +12,6 @@
 
 #include <cstdint>
 #include <string>
-#include <vector>
 
 #define TTS_DEFAULT_SAMPLE_RATE 8000
 
@@ -47,24 +46,6 @@ typedef void (*SpeechCompleteCallback)();
  * @details Called when an error occurs during speech synthesis
  */
 typedef void (*SpeechErrorCallback)(const char* error);
-
-/**
- * @brief Phoneme structure for TTS processing
- * @details Represents a single phoneme with its properties
- */
-struct Phoneme {
-  std::string symbol;           ///< Phoneme symbol (e.g., "AH", "B", "IY")
-  float duration;               ///< Duration in seconds
-  std::vector<float> features;  ///< Feature vector for neural processing
-
-  /**
-   * @brief Constructor for Phoneme
-   * @param sym Phoneme symbol string
-   * @param dur Duration in seconds (default: 0.1)
-   */
-  Phoneme(const std::string& sym = "", float dur = 0.1f)
-      : symbol(sym), duration(dur) {}
-};
 
 /**
  * @brief Phoneme Dictionary Entry (stored in PROGMEM)

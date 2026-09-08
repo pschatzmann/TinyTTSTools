@@ -1,6 +1,6 @@
 """Packs a (word, [tokens]) entry list into the CompressedPhonemeDictionary
 binary format: a blocked word-offset index + Huffman-coded phoneme
-bitstream. See src/TinyTTSTools/Dictionary/CompressedPhonemeDictionary.h for
+bitstream. See src/TinyTTSTools/PhonemeDictionary/CompressedPhonemeDictionary.h for
 the format this must match exactly.
 """
 from pack_common import pack_phoneme_token
@@ -97,7 +97,7 @@ def emit_cpp_header(path, var_prefix, packed, guard_comment,
     CompressedPhonemeDictionary <var_prefix>(...)` global. `include_path` is
     the #include path to CompressedPhonemeDictionary.h *relative to `path`*
     -- e.g. plain "CompressedPhonemeDictionary.h" for a file placed directly
-    in src/TinyTTSTools/Dictionary/, or "../../Dictionary/..." for one
+    in src/TinyTTSTools/PhonemeDictionary/, or "../../PhonemeDictionary/..." for one
     placed under src/TinyTTSTools/Data/dictionary/."""
     with open(path, "w") as f:
         f.write(f"// {guard_comment}\n")
@@ -151,3 +151,69 @@ def emit_cpp_header(path, var_prefix, packed, guard_comment,
 
     total = (len(wbo) * 4 + len(wl) + len(wb) + len(pbo) * 4 + len(pc) + len(pbits))
     print(f"Wrote {path}: {total} bytes ({total/1024:.1f} KB)")
+
+
+def _pad4(buf: bytearray):
+    """Pad `buf` with zero bytes to a 4-byte boundary in place -- every
+    uint32_t array in the binary format below must start 4-byte aligned,
+    since CompressedPhonemeDictionarySD (see
+    src/TinyTTSTools/PhonemeDictionary/CompressedPhonemeDictionarySD.h) reads it
+    straight into a byte buffer and reinterprets slices of it as
+    `const uint32_t*` without copying -- an unaligned uint32_t read is
+    undefined behavior (and traps outright on some microcontrollers)."""
+    while len(buf) % 4 != 0:
+        buf.append(0)
+
+
+def emit_binary_file(path, packed):
+    """Emits the runtime-loadable binary form of `packed` for
+    CompressedPhonemeDictionarySD (see
+    src/TinyTTSTools/PhonemeDictionary/CompressedPhonemeDictionarySD.h) to load
+    from SD/LittleFS at runtime -- e.g. into PSRAM on ESP32 -- instead of
+    compiling the same six arrays into flash via emit_cpp_header(). Layout
+    (little-endian, matching every real target this library ships to):
+
+        uint32 magic ("TPD1")
+        uint32 version (1)
+        uint32 count
+        uint32 num_blocks
+        uint32 words_blob_len
+        uint32 phoneme_bits_len
+        uint32 word_block_offsets[num_blocks]
+        uint8  word_lengths[count]            (padded to a 4-byte boundary)
+        char   words_blob[words_blob_len]     (padded to a 4-byte boundary)
+        uint32 phoneme_block_bit_offsets[num_blocks]
+        uint8  phoneme_counts[count]          (padded to a 4-byte boundary)
+        uint8  phoneme_bits[phoneme_bits_len]
+
+    This must be kept in exact sync with
+    CompressedPhonemeDictionarySD::begin()'s parsing -- there's no version
+    negotiation beyond the `version` field failing a strict equality check.
+    """
+    import struct
+
+    wbo = packed["word_block_offsets"]
+    wl = packed["word_lengths"]
+    wb = packed["words_blob"]
+    pbo = packed["phoneme_block_bit_offsets"]
+    pc = packed["phoneme_counts"]
+    pbits = packed["phoneme_bits"]
+    count = packed["count"]
+
+    out = bytearray()
+    out += struct.pack("<6I", 0x31445054, 1, count, len(wbo), len(wb), len(pbits))
+    for v in wbo:
+        out += struct.pack("<I", v)
+    out += wl
+    _pad4(out)
+    out += wb
+    _pad4(out)
+    for v in pbo:
+        out += struct.pack("<I", v)
+    out += pc
+    _pad4(out)
+    out += pbits
+
+    with open(path, "wb") as f:
+        f.write(out)
+    print(f"Wrote {path}: {len(out)} bytes ({len(out)/1024:.1f} KB)")

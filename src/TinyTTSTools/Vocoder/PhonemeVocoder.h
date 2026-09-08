@@ -18,9 +18,9 @@
 #include <string>
 #include <vector>
 
-#include "../Dictionary/AudioDictionary.h"
+#include "../SoundDictionary/AudioDictionary.h"
 #include "ConcatenatedAudioVocoder.h"
-#include "../Dictionary/ArpabetWAVDictionary.h"
+#include "../SoundDictionary/ArpabetWAVDictionary.h"
 
 /**
  * @brief Phoneme-based speech synthesizer with advanced concatenation
@@ -57,6 +57,13 @@
  *
  * @note This class depends on the Arduino Audio Tools library for audio decoding.
  *       The AudioDecoder interface is provided by the Audio Tools library.
+ * @note Memory footprint: ~35KB flash for the default `ArpabetWAVDictionary`
+ * of individual phoneme samples alone (verified against the linked binary,
+ * not just the source file size). This class also pulls in
+ * ConcatenatedAudioVocoder's cross-fade/coarticulation code and an audio
+ * decoder, which add code size on top of that -- see
+ * https://github.com/pschatzmann/TinyTTSTools/blob/main/docs/MEMORY.md for a
+ * comparison table across all vocoders and G2P models.
  */
 class PhonemeVocoder : public ConcatenatedAudioVocoder {
  public:

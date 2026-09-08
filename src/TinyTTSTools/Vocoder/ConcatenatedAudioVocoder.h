@@ -19,7 +19,8 @@
 #include "VocoderBase.h"
 #include "../Basic/Phonemes.h"
 #include "../Basic/StringUtils.h"
-#include "../Dictionary/SoundEntry.h"
+#include "../Basic/TTSLogger.h"
+#include "../SoundDictionary/SoundEntry.h"
 
 /**
  * @brief Abstract base class for audio concatenation with click-free transitions
@@ -550,6 +551,8 @@ class ConcatenatedAudioVocoder : public VocoderBase {
       // Get current unit entry
       const SoundEntry* currentEntry = getAudioEntry(currentUnit);
       if (!currentEntry) {
+        TTS_LOGW("ConcatenatedAudioVocoder: no audio entry for '%s' -- "
+                  "dropped from output", currentUnit.c_str());
         success = false;
         continue;
       }
