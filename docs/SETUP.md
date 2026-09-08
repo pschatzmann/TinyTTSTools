@@ -60,7 +60,7 @@ the only pipeline here.
 ## Audio: diphones (`audio/diphones/`)
 
 Generates `DiphoneWAVDictionary.h` (used by `DiphoneVocoder`, e.g.
-`examples/AudioBiphones`) -- one real MBROLA recording per phoneme-pair
+`examples/AudioDiphones`) -- one real MBROLA recording per phoneme-pair
 transition (each diphone spans roughly the second half of phoneme 1
 through the first half of phoneme 2), IMA-ADPCM @ 8kHz. Full coverage: a
 2025-09 audit confirmed 0% missing diphones against the entire 123k-word

@@ -55,7 +55,7 @@ G2P model, one vocoder, one `Print`-compatible output, wired together by
 | `PhonemeVocoder` | `ArpabetWAVDictionary` (~35KB audio data) | Better than formant, no coarticulation between sounds | Small flash budget, some real recorded audio |
 | `DiphoneVocoder` | `DiphoneWAVDictionary` (~893KB audio data, +~1MB total flash once its decoder/concatenation code is linked in -- see [MEMORY.md](MEMORY.md)) | Most natural of the three -- real phoneme-to-phoneme transitions | Flash isn't tight (ESP32-class), best quality wanted |
 
-See `examples/AudioFormant`, `examples/AudioPhoneme`, `examples/AudioBiphones`
+See `examples/AudioFormant`, `examples/AudioPhoneme`, `examples/AudioDiphones`
 for a complete, runnable version of each. Swapping vocoders is a two-line
 change (the constructor and its `#include`) -- the rest of a sketch is
 identical.
@@ -121,7 +121,7 @@ runtime library).
 `PhonemeDictionaryEN.h`'s `PH_WORD(...)` table (entries must stay sorted
 alphabetically) rather than reaching for a bigger dictionary -- this is
 how, for example, `"quietly"` and `"whispers"` were fixed for the
-`examples/AudioBiphones`/`AudioPhoneme` demo phrase.
+`examples/AudioDiphones`/`AudioPhoneme` demo phrase.
 
 **Your own vocabulary only** (embedded product with a fixed, known set of
 words -- device names, commands, units): see `examples/G2PCustomDictionary`

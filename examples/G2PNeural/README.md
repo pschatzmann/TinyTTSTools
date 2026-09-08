@@ -92,5 +92,5 @@ table -- not new engine code.
 ## Related examples
 
 - `G2PCustomDictionary/` -- custom phoneme dictionary usage
-- `AudioPhoneme/`, `AudioBiphones/`, `AudioFormant/` -- audio synthesis
+- `AudioPhoneme/`, `AudioDiphones/`, `AudioFormant/` -- audio synthesis
   examples (this one is phoneme conversion only, no audio output)

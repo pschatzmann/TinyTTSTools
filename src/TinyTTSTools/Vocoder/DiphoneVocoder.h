@@ -62,10 +62,10 @@
  * for the most natural output. Budget noticeably more than that for the
  * whole feature: this class also pulls in ConcatenatedAudioVocoder's
  * cross-fade/coarticulation code and an ADPCM decoder, which adds real code
- * size on top of the data (an `AudioBiphones` desktop build measured
+ * size on top of the data (an `AudioDiphones` desktop build measured
  * roughly +1.0MB total vs. an equivalent FormantVocoder-based sketch; a
  * real microcontroller build can be higher still -- an ESP32 build of
- * `AudioBiphones` has overflowed the default partition at ~1.5MB). See
+ * `AudioDiphones` has overflowed the default partition at ~1.5MB). See
  * https://github.com/pschatzmann/TinyTTSTools/blob/main/docs/MEMORY.md
  * for a comparison table across all vocoders and G2P models.
  */

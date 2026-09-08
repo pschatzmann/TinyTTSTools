@@ -34,7 +34,7 @@ Useful CMake options (pass as `-D<OPTION>=<VALUE>` to the `cmake ..` step):
 |---|---|---|
 | `BUILD_EXAMPLES` | `ON` | Build everything under `examples/` |
 | `BUILD_TESTS` | `ON` | Build the regression tests under `tests/` |
-| `ADD_AUDIO_TOOLS` | `ON` | Fetch arduino-audio-tools and build the audio-output examples (`AudioFormant`, `AudioPhoneme`, `AudioBiphones`) that need it |
+| `ADD_AUDIO_TOOLS` | `ON` | Fetch arduino-audio-tools and build the audio-output examples (`AudioFormant`, `AudioPhoneme`, `AudioDiphones`) that need it |
 | `BUILD_DESKTOP_MAIN` | `OFF` | Build the desktop CLI (`./tinyttstools`, see [desktop/README.md](../desktop/README.md)) -- the actual way to hear synthesized speech on desktop; see the note below about why the `.ino` examples can't do this directly |
 
 For example, a fast library+tests-only configure with no network
@@ -94,7 +94,7 @@ Each example under `examples/` is a normal CMake target (built from its
 `.ino` file, compiled as C++). Build just one instead of everything:
 
 ```bash
-cmake --build . --target AudioBiphones -j4
+cmake --build . --target AudioDiphones -j4
 ```
 
 Examples that don't need `ADD_AUDIO_TOOLS` (`G2PCustomDictionary`,

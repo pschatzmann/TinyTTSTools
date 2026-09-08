@@ -24,7 +24,7 @@ data + the code that data requires:
 |---|---|---|---|---|---|
 | [`FormantVocoder`](https://pschatzmann.github.io/TinyTTSTools/classFormantVocoder.html) | None (procedural synthesis) | ~0 (no data table) | baseline | Small, fixed (a handful of filter-state floats per instance) | Smallest footprint of the three; more robotic sound |
 | [`PhonemeVocoder`](https://pschatzmann.github.io/TinyTTSTools/classPhonemeVocoder.html) | `ArpabetWAVDictionary` | ~35KB *(measured: 35,000 bytes)* | ~35KB+ (decoder/concatenation code adds a small amount) | Small, streaming (decodes one unit at a time) | Individual phoneme samples; no coarticulation between sounds |
-| [`DiphoneVocoder`](https://pschatzmann.github.io/TinyTTSTools/classDiphoneVocoder.html) | `DiphoneWAVDictionary` | ~893KB *(measured: 913,664 bytes)* | **+~1.0MB** (desktop build; a real board with less aggressive dead-code elimination can be noticeably higher -- an ESP32 build of `AudioBiphones` has overflowed the default partition at ~1.5MB) | Small, streaming | Diphone samples; most natural of the three, but budget flash for the code this data needs, not just the data itself |
+| [`DiphoneVocoder`](https://pschatzmann.github.io/TinyTTSTools/classDiphoneVocoder.html) | `DiphoneWAVDictionary` | ~893KB *(measured: 913,664 bytes)* | **+~1.0MB** (desktop build; a real board with less aggressive dead-code elimination can be noticeably higher -- an ESP32 build of `AudioDiphones` has overflowed the default partition at ~1.5MB) | Small, streaming | Diphone samples; most natural of the three, but budget flash for the code this data needs, not just the data itself |
 
 ## G2P models (text -> phonemes)
 
@@ -87,7 +87,7 @@ vocoder's synthesis buffer.
 
 - Rule-model figures: pure code, no data table, verified by inspection.
 - "Audio data (measured)" figures come from `nm -S` on the compiled desktop
-  `AudioPhoneme`/`AudioBiphones` example binaries, summing the size of every
+  `AudioPhoneme`/`AudioDiphones` example binaries, summing the size of every
   linked `phoneme_data_*`/`sound_data_*` symbol -- the true linked size of
   the sample data, not just the source `.h` file's byte count.
 - "Example flash vs. `AudioFormant`" figures come from comparing `size`
@@ -103,4 +103,4 @@ vocoder's synthesis buffer.
 comparison between vocoders/models, not a substitute for measuring your own
 actual target build -- microcontroller toolchains (avr-gcc, xtensa-esp32)
 optimize, pad and dead-code-eliminate differently, and real-world numbers
-can come in higher, as the ESP32 `AudioBiphones` case above shows.
+can come in higher, as the ESP32 `AudioDiphones` case above shows.

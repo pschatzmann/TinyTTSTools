@@ -1,4 +1,4 @@
 cmake_minimum_required(VERSION 3.16)
-project(AudioBiphones)
+project(AudioDiphones)
 
-add_tinytts_example(AudioBiphones AudioBiphones.ino)
+add_tinytts_example(AudioDiphones AudioDiphones.ino)

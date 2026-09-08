@@ -92,7 +92,7 @@ Alternatively you can also use the [TTSAudioOutputCallback](https://pschatzmann.
 See the `examples/` directory for complete usage examples:
 - `AudioFormant/` - Text-to-speech using `FormantVocoder` (no audio data required)
 - `AudioPhoneme/` - Text-to-speech using `PhonemeVocoder` (pre-recorded phoneme samples)
-- `AudioBiphones/` - Text-to-speech using `DiphoneVocoder` (pre-recorded diphone samples)
+- `AudioDiphones/` - Text-to-speech using `DiphoneVocoder` (pre-recorded diphone samples)
 - `AudioPSOLA/` - Text-to-speech using `PSOLAVocoder` (TD-PSOLA re-synthesis with pitch/speed control)
 - `G2PCustomDictionary/` - Adding custom pronunciations, phoneme conversion only (no audio)
 - `G2PNeural/` - Dictionary + neural + rule-based G2P fallback chain, phoneme conversion only (no audio)

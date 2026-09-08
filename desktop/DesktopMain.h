@@ -352,7 +352,7 @@ class DesktopMain {
       // DiphoneWAVDictionary.h only defines the raw DIPHONES/NUM_DIPHONES
       // SoundEntry array (unlike ArpabetWAVDictionary.h, which also
       // builds a ready-made AudioDictionary global) -- wrap it here, same
-      // as examples/AudioBiphones does.
+      // as examples/AudioDiphones does.
       diphone_dict_.reset(new AudioDictionary(DIPHONES, NUM_DIPHONES, 8000, PhonemeType::ARPAbet, 1, 16));
       sample_rate_ = diphone_dict_->sampleRate();
       vocoder_.reset(new DiphoneVocoder(*diphone_dict_));

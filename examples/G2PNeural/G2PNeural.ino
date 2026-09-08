@@ -15,7 +15,7 @@
  * straight through to rules.
  *
  * This example focuses on phoneme conversion only and does not include
- * audio synthesis -- see AudioPhoneme/AudioBiphones/AudioFormant for that.
+ * audio synthesis -- see AudioPhoneme/AudioDiphones/AudioFormant for that.
  */
 
 // AudioTools.h is not used for audio here -- on real Arduino, Serial/delay
