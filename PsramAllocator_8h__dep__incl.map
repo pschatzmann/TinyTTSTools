@@ -1,0 +1,8 @@
+<map id="src/TinyTTSTools/Memory/PsramAllocator.h" name="src/TinyTTSTools/Memory/PsramAllocator.h">
+<area shape="rect" id="node1" title="Standard C++ Allocator that prefers PSRAM for its backing storage." alt="" coords="423,5,611,45"/>
+<area shape="rect" id="node2" href="$CompressedPhonemeDictionarySD_8h.html" title="Runtime&#45;loadable (SD card / LittleFS) word&#45;&gt;phoneme dictionary." alt="" coords="5,93,240,148"/>
+<area shape="rect" id="node3" href="$AudioDictionarySD_8h_source.html" title=" " alt="" coords="265,101,506,141"/>
+<area shape="rect" id="node4" href="$AudioEncodedDictionary_8h.html" title="AudioDictionary implementation for encoded audio data." alt="" coords="530,101,771,141"/>
+<area shape="rect" id="node6" href="$AudioEncodedDictionarySD_8h_source.html" title=" " alt="" coords="689,196,930,236"/>
+<area shape="rect" id="node5" href="$TinyTTSTools_8h.html" title="Main Text&#45;to&#45;Speech engine class for TinyTTSTools." alt="" coords="522,203,665,229"/>
+</map>

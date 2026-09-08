@@ -86,10 +86,11 @@ Inheritance diagram for AudioDictionary:</div>
 <div class="dyncontent">
 <div class="center"><img src="classAudioDictionary__inherit__graph.png" border="0" usemap="#aAudioDictionary_inherit__map" alt="Inheritance graph"/></div>
 <map name="aAudioDictionary_inherit__map" id="aAudioDictionary_inherit__map">
-<area shape="rect" title="Base class for audio dictionaries." alt="" coords="107,5,234,31"/>
-<area shape="rect" href="classAudioDictionarySD.html" title="AudioDictionary implementation with minimal RAM usage and direct SD card file access." alt="" coords="5,79,149,104"/>
-<area shape="rect" href="classAudioEncodedDictionary.html" title="Audio dictionary for encoded audio data with on&#45;demand decoding." alt="" coords="173,79,355,104"/>
-<area shape="rect" href="classAudioEncodedDictionarySD.html" title="AudioDictionary implementation for encoded audio files on SD card." alt="" coords="165,152,363,177"/>
+<area shape="rect" title="Base class for audio dictionaries." alt="" coords="5,77,132,102"/>
+<area shape="rect" href="classAudioEncodedDictionary.html" title=" " alt="" coords="180,5,392,45"/>
+<area shape="rect" href="classAudioDictionarySD.html" title="AudioDictionary implementation with minimal RAM usage and direct SD card file access." alt="" coords="209,69,363,109"/>
+<area shape="rect" href="classAudioEncodedDictionary.html" title="Audio dictionary for encoded audio data with on&#45;demand decoding." alt="" coords="195,133,377,173"/>
+<area shape="rect" href="classAudioEncodedDictionarySD.html" title="AudioDictionary implementation for encoded audio files on SD card." alt="" coords="440,133,639,173"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -258,7 +259,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>bitsPerSample_</b> = 1
 <p>Get the number of bits per sample. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of bits per sample (8, 16, 24, 32) </dd></dl>
 
-<p>Reimplemented in <a class="el" href="classAudioEncodedDictionary.html#a367f5faf3e72c418c22f2015ea2c6df0">AudioEncodedDictionary</a>.</p>
+<p>Reimplemented in <a class="el" href="classAudioEncodedDictionary.html#a22e4c5073ddd0fabd99b71f8ea32d62d">AudioEncodedDictionary&lt; Allocator &gt;</a>, and <a class="el" href="classAudioEncodedDictionary.html#a22e4c5073ddd0fabd99b71f8ea32d62d">AudioEncodedDictionary&lt; std::allocator&lt; uint8_t &gt; &gt;</a>.</p>
 
 </div>
 </div>
@@ -288,7 +289,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>bitsPerSample_</b> = 1
 <p>Get the number of audio channels. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of audio channels (1 for mono, 2 for stereo, etc.) - default 1 </dd></dl>
 
-<p>Reimplemented in <a class="el" href="classAudioEncodedDictionary.html#ae74a94b3fdd396243c04ffa15437049f">AudioEncodedDictionary</a>.</p>
+<p>Reimplemented in <a class="el" href="classAudioEncodedDictionary.html#adbbb0e1d43eb10b9998458ca1238dc22">AudioEncodedDictionary&lt; Allocator &gt;</a>, and <a class="el" href="classAudioEncodedDictionary.html#adbbb0e1d43eb10b9998458ca1238dc22">AudioEncodedDictionary&lt; std::allocator&lt; uint8_t &gt; &gt;</a>.</p>
 
 </div>
 </div>
@@ -325,7 +326,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>bitsPerSample_</b> = 1
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to <a class="el" href="structSoundEntry.html" title="Structure for storing audio data for phonemes or diphones.">SoundEntry</a> if found, nullptr otherwise </dd></dl>
 
-<p>Reimplemented in <a class="el" href="classAudioDictionarySD.html#a2f5ae1e329b83b7b8d84f9477d47a71b">AudioDictionarySD</a>, <a class="el" href="classAudioEncodedDictionary.html#a2abdf7a9c17811cfb45d3c777209f9dc">AudioEncodedDictionary</a>, and <a class="el" href="classAudioEncodedDictionarySD.html#a19d854a1503e566e30d4510547ad5180">AudioEncodedDictionarySD</a>.</p>
+<p>Reimplemented in <a class="el" href="classAudioDictionarySD.html#a80e62235af6008750b3a9180bbc10e4e">AudioDictionarySD&lt; Allocator &gt;</a>, <a class="el" href="classAudioEncodedDictionary.html#a794a9ad64d56f2659c844f1d1a08a9e1">AudioEncodedDictionary&lt; Allocator &gt;</a>, <a class="el" href="classAudioEncodedDictionary.html#a794a9ad64d56f2659c844f1d1a08a9e1">AudioEncodedDictionary&lt; std::allocator&lt; uint8_t &gt; &gt;</a>, and <a class="el" href="classAudioEncodedDictionarySD.html#a36867817372e6fa2184cf74fc86e62ed">AudioEncodedDictionarySD&lt; Allocator &gt;</a>.</p>
 
 </div>
 </div>
@@ -383,12 +384,12 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>bitsPerSample_</b> = 1
 <p>Get the sample rate of the audio data. </p>
 <dl class="section return"><dt>Returns</dt><dd>Sample rate in Hz </dd></dl>
 
-<p>Reimplemented in <a class="el" href="classAudioEncodedDictionary.html#ac21736d950c67455f6421454d6d6dd83">AudioEncodedDictionary</a>.</p>
+<p>Reimplemented in <a class="el" href="classAudioEncodedDictionary.html#a3e475e2ece39c91ef34b04b6e2cc3ede">AudioEncodedDictionary&lt; Allocator &gt;</a>, and <a class="el" href="classAudioEncodedDictionary.html#a3e475e2ece39c91ef34b04b6e2cc3ede">AudioEncodedDictionary&lt; std::allocator&lt; uint8_t &gt; &gt;</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/TinyTTSTools/Dictionary/<a class="el" href="AudioDictionary_8h_source.html">AudioDictionary.h</a></li>
+<li>src/TinyTTSTools/SoundDictionary/<a class="el" href="AudioDictionary_8h_source.html">AudioDictionary.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

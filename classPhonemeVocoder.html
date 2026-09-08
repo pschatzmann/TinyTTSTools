@@ -306,7 +306,7 @@ int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>lastNegativeAmplit
 <tr class="separator:a544126aa20e547d44ddfa78299573359 inherit pro_attribs_classVocoderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4935eea882eab989b99134fe8bc1ef70 inherit pro_attribs_classVocoderBase"><td class="memItemLeft" align="right" valign="top"><a id="a4935eea882eab989b99134fe8bc1ef70" name="a4935eea882eab989b99134fe8bc1ef70"></a>
 <a class="el" href="classPhonemes.html">Phonemes</a>&#160;</td><td class="memItemRight" valign="bottom"><b>translator_</b></td></tr>
-<tr class="memdesc:a4935eea882eab989b99134fe8bc1ef70 inherit pro_attribs_classVocoderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structPhoneme.html" title="Phoneme structure for TTS processing.">Phoneme</a> translator for converting between representation types. <br /></td></tr>
+<tr class="memdesc:a4935eea882eab989b99134fe8bc1ef70 inherit pro_attribs_classVocoderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Phoneme translator for converting between representation types. <br /></td></tr>
 <tr class="separator:a4935eea882eab989b99134fe8bc1ef70 inherit pro_attribs_classVocoderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
@@ -337,12 +337,14 @@ Usage Examples</h2>
 <h3><a class="anchor" id="autotoc_md3"></a>
 Default (recommended) – just construct and use:</h3>
 <div class="fragment"><div class="line"><a class="code hl_class" href="classPhonemeVocoder.html">PhonemeVocoder</a> synth(ArpabetWAVDictionary);</div>
-<div class="ttc" id="aclassPhonemeVocoder_html"><div class="ttname"><a href="classPhonemeVocoder.html">PhonemeVocoder</a></div><div class="ttdoc">Phoneme-based speech synthesizer with advanced concatenation.</div><div class="ttdef"><b>Definition:</b> PhonemeVocoder.h:61</div></div>
+<div class="ttc" id="aclassPhonemeVocoder_html"><div class="ttname"><a href="classPhonemeVocoder.html">PhonemeVocoder</a></div><div class="ttdoc">Phoneme-based speech synthesizer with advanced concatenation.</div><div class="ttdef"><b>Definition:</b> PhonemeVocoder.h:68</div></div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md4"></a>
 Tuning for tight memory/CPU budgets:</h3>
 <div class="fragment"><div class="line">synth.setCrossFade(<span class="keyword">false</span>);  <span class="comment">// skip the ~128 byte tail buffer + blending cost</span></div>
 <div class="line">synth.setBatchSize(128);    <span class="comment">// smaller batches for responsiveness</span></div>
-</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>This class depends on the Arduino Audio Tools library for audio decoding. The AudioDecoder interface is provided by the Audio Tools library. </dd></dl>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>This class depends on the Arduino Audio Tools library for audio decoding. The AudioDecoder interface is provided by the Audio Tools library. </dd>
+<dd>
+Memory footprint: ~35KB flash for the default <code>ArpabetWAVDictionary</code> of individual phoneme samples alone (verified against the linked binary, not just the source file size). This class also pulls in <a class="el" href="classConcatenatedAudioVocoder.html" title="Abstract base class for audio concatenation with click-free transitions.">ConcatenatedAudioVocoder</a>'s cross-fade/coarticulation code and an audio decoder, which add code size on top of that &ndash; see <a href="https://github.com/pschatzmann/TinyTTSTools/blob/main/docs/MEMORY.md">https://github.com/pschatzmann/TinyTTSTools/blob/main/docs/MEMORY.md</a> for a comparison table across all vocoders and G2P models. </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4e4fbe35c7331d8e871bf610884b0c66" name="a4e4fbe35c7331d8e871bf610884b0c66"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4e4fbe35c7331d8e871bf610884b0c66">&#9670;&#160;</a></span>PhonemeVocoder()</h2>
@@ -417,7 +419,7 @@ Tuning for tight memory/CPU budgets:</h3>
 <p>Get audio entry by phoneme identifier (implements <a class="el" href="classConcatenatedAudioVocoder.html" title="Abstract base class for audio concatenation with click-free transitions.">ConcatenatedAudioVocoder</a> interface) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">identifier</td><td><a class="el" href="structPhoneme.html" title="Phoneme structure for TTS processing.">Phoneme</a> identifier </td></tr>
+    <tr><td class="paramname">identifier</td><td>Phoneme identifier </td></tr>
   </table>
   </dd>
 </dl>

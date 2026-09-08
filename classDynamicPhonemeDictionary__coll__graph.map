@@ -1,0 +1,4 @@
+<map id="DynamicPhonemeDictionary&lt; Allocator &gt;" name="DynamicPhonemeDictionary&lt; Allocator &gt;">
+<area shape="rect" id="node1" title="A word&#45;&gt;phoneme dictionary you can add() to at runtime, one entry at a time." alt="" coords="5,79,213,119"/>
+<area shape="rect" id="node2" href="$classPhonemeDictionaryBase.html" title="Common interface implemented by CompactPhonemeDictionary and CompressedPhonemeDictionary,..." alt="" coords="18,5,201,31"/>
+</map>

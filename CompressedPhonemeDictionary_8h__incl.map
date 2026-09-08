@@ -1,12 +1,12 @@
-<map id="src/TinyTTSTools/Dictionary/CompressedPhonemeDictionary.h" name="src/TinyTTSTools/Dictionary/CompressedPhonemeDictionary.h">
-<area shape="rect" id="node1" title="Further&#45;compressed word&#45;&gt;phoneme dictionary: blocked offset index." alt="" coords="194,5,439,45"/>
-<area shape="rect" id="node2" title=" " alt="" coords="115,240,182,265"/>
-<area shape="rect" id="node3" title=" " alt="" coords="279,167,346,192"/>
-<area shape="rect" id="node4" title=" " alt="" coords="374,240,433,265"/>
-<area shape="rect" id="node5" href="$Phonemes_8h.html" title="Phoneme information for TinyTTSTools." alt="" coords="59,93,212,119"/>
-<area shape="rect" id="node8" href="$PhonemeDictionaryBase_8h.html" title="Common interface for word&#45;&gt;phoneme lookup dictionaries." alt="" coords="503,93,698,119"/>
-<area shape="rect" id="node10" href="$PhonemeHuffmanCodes_8h.html" title="Canonical Huffman codes for packed phoneme bytes." alt="" coords="288,93,479,119"/>
-<area shape="rect" id="node6" title=" " alt="" coords="5,240,68,265"/>
-<area shape="rect" id="node7" href="$TTSTypes_8h.html" title="Core types and structures for TinyTTSTools." alt="" coords="59,167,153,192"/>
-<area shape="rect" id="node9" title=" " alt="" coords="440,167,511,192"/>
+<map id="src/TinyTTSTools/PhonemeDictionary/CompressedPhonemeDictionary.h" name="src/TinyTTSTools/PhonemeDictionary/CompressedPhonemeDictionary.h">
+<area shape="rect" id="node1" title="Further&#45;compressed word&#45;&gt;phoneme dictionary: blocked offset index." alt="" coords="147,5,382,60"/>
+<area shape="rect" id="node2" title=" " alt="" coords="178,255,244,280"/>
+<area shape="rect" id="node3" title=" " alt="" coords="20,181,87,207"/>
+<area shape="rect" id="node4" title=" " alt="" coords="478,255,536,280"/>
+<area shape="rect" id="node5" href="$Phonemes_8h.html" title="Phoneme information for TinyTTSTools." alt="" coords="90,108,244,133"/>
+<area shape="rect" id="node8" href="$PhonemeDictionaryBase_8h.html" title="Common interface for word&#45;&gt;phoneme lookup dictionaries." alt="" coords="483,108,678,133"/>
+<area shape="rect" id="node10" href="$PhonemeHuffmanCodes_8h.html" title="Canonical Huffman codes for packed phoneme bytes." alt="" coords="268,108,458,133"/>
+<area shape="rect" id="node6" title=" " alt="" coords="162,181,225,207"/>
+<area shape="rect" id="node7" href="$TTSTypes_8h.html" title="Core types and structures for TinyTTSTools." alt="" coords="249,181,344,207"/>
+<area shape="rect" id="node9" title=" " alt="" coords="472,181,542,207"/>
 </map>

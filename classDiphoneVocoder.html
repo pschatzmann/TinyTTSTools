@@ -315,7 +315,7 @@ int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>lastNegativeAmplit
 <tr class="separator:a544126aa20e547d44ddfa78299573359 inherit pro_attribs_classVocoderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4935eea882eab989b99134fe8bc1ef70 inherit pro_attribs_classVocoderBase"><td class="memItemLeft" align="right" valign="top"><a id="a4935eea882eab989b99134fe8bc1ef70" name="a4935eea882eab989b99134fe8bc1ef70"></a>
 <a class="el" href="classPhonemes.html">Phonemes</a>&#160;</td><td class="memItemRight" valign="bottom"><b>translator_</b></td></tr>
-<tr class="memdesc:a4935eea882eab989b99134fe8bc1ef70 inherit pro_attribs_classVocoderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structPhoneme.html" title="Phoneme structure for TTS processing.">Phoneme</a> translator for converting between representation types. <br /></td></tr>
+<tr class="memdesc:a4935eea882eab989b99134fe8bc1ef70 inherit pro_attribs_classVocoderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Phoneme translator for converting between representation types. <br /></td></tr>
 <tr class="separator:a4935eea882eab989b99134fe8bc1ef70 inherit pro_attribs_classVocoderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
@@ -341,7 +341,9 @@ Diphone Processing</h2>
 <li>Applies advanced concatenation between adjacent diphones</li>
 <li>Uses roughly half of each constituent phoneme's natural duration, matching how the diphone audio itself is generated (half-of-phone1 + half-of-phone2, so consecutive diphones reconstruct each shared phoneme's duration once when played back-to-back)</li>
 </ul>
-<dl class="section note"><dt>Note</dt><dd>This class uses an <a class="el" href="classAudioDictionary.html" title="Base class for audio dictionaries.">AudioDictionary</a> to access diphone audio data. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This class uses an <a class="el" href="classAudioDictionary.html" title="Base class for audio dictionaries.">AudioDictionary</a> to access diphone audio data. </dd>
+<dd>
+Memory footprint: ~893KB flash for the default <code>DiphoneWAVDictionary</code> audio data alone &ndash; the largest of the available vocoders, in exchange for the most natural output. Budget noticeably more than that for the whole feature: this class also pulls in <a class="el" href="classConcatenatedAudioVocoder.html" title="Abstract base class for audio concatenation with click-free transitions.">ConcatenatedAudioVocoder</a>'s cross-fade/coarticulation code and an ADPCM decoder, which adds real code size on top of the data (an <code>AudioBiphones</code> desktop build measured roughly +1.0MB total vs. an equivalent FormantVocoder-based sketch; a real microcontroller build can be higher still &ndash; an ESP32 build of <code>AudioBiphones</code> has overflowed the default partition at ~1.5MB). See <a href="https://github.com/pschatzmann/TinyTTSTools/blob/main/docs/MEMORY.md">https://github.com/pschatzmann/TinyTTSTools/blob/main/docs/MEMORY.md</a> for a comparison table across all vocoders and G2P models. </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a6b6ba09c08183745613322d58aaaeb6a" name="a6b6ba09c08183745613322d58aaaeb6a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6b6ba09c08183745613322d58aaaeb6a">&#9670;&#160;</a></span>DiphoneVocoder()</h2>
@@ -578,7 +580,7 @@ Diphone Processing</h2>
 <p>Override sequence processing for diphone-specific logic. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">sequence</td><td><a class="el" href="structPhoneme.html" title="Phoneme structure for TTS processing.">Phoneme</a> sequence to convert to diphones </td></tr>
+    <tr><td class="paramname">sequence</td><td>Phoneme sequence to convert to diphones </td></tr>
     <tr><td class="paramname">out</td><td>Output stream for audio data </td></tr>
     <tr><td class="paramname">params</td><td>Optional volume/duration/pitch overrides </td></tr>
   </table>

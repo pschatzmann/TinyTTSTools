@@ -1,5 +1,5 @@
-<map id="AudioDictionarySD" name="AudioDictionarySD">
-<area shape="rect" id="node1" title="AudioDictionary implementation with minimal RAM usage and direct SD card file access." alt="" coords="5,168,149,193"/>
-<area shape="rect" id="node2" href="$classAudioDictionary.html" title="Base class for audio dictionaries." alt="" coords="14,93,141,119"/>
-<area shape="rect" id="node3" href="$structSoundEntry.html" title="Structure for storing audio data for phonemes or diphones." alt="" coords="29,5,125,31"/>
+<map id="AudioDictionarySD&lt; Allocator &gt;" name="AudioDictionarySD&lt; Allocator &gt;">
+<area shape="rect" id="node1" title="AudioDictionary implementation with minimal RAM usage and direct SD card file access." alt="" coords="5,168,160,208"/>
+<area shape="rect" id="node2" href="$classAudioDictionary.html" title="Base class for audio dictionaries." alt="" coords="19,93,146,119"/>
+<area shape="rect" id="node3" href="$structSoundEntry.html" title="Structure for storing audio data for phonemes or diphones." alt="" coords="35,5,131,31"/>
 </map>

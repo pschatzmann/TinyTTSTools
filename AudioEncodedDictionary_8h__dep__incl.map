@@ -1,5 +1,5 @@
-<map id="src/TinyTTSTools/Dictionary/AudioEncodedDictionary.h" name="src/TinyTTSTools/Dictionary/AudioEncodedDictionary.h">
-<area shape="rect" id="node1" title="AudioDictionary implementation for encoded audio data." alt="" coords="77,5,279,45"/>
+<map id="src/TinyTTSTools/SoundDictionary/AudioEncodedDictionary.h" name="src/TinyTTSTools/SoundDictionary/AudioEncodedDictionary.h">
+<area shape="rect" id="node1" title="AudioDictionary implementation for encoded audio data." alt="" coords="64,5,305,45"/>
 <area shape="rect" id="node2" href="$TinyTTSTools_8h.html" title="Main Text&#45;to&#45;Speech engine class for TinyTTSTools." alt="" coords="5,101,148,126"/>
-<area shape="rect" id="node3" href="$AudioEncodedDictionarySD_8h_source.html" title=" " alt="" coords="172,93,387,133"/>
+<area shape="rect" id="node3" href="$AudioEncodedDictionarySD_8h_source.html" title=" " alt="" coords="172,93,413,133"/>
 </map>

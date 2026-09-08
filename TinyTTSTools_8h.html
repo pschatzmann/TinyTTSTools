@@ -82,11 +82,12 @@ $(function() {
 <p>Main Text-to-Speech engine class for <a class="el" href="classTinyTTSTools.html" title="Main Text-to-Speech engine class.">TinyTTSTools</a>.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="TTSTypes_8h_source.html">TinyTTSTools/Basic/TTSTypes.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="TTSLogger_8h_source.html">TinyTTSTools/Basic/TTSLogger.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="StringUtils_8h_source.html">TinyTTSTools/Basic/StringUtils.h</a>&quot;</code><br />
 <code>#include &quot;TinyTTSTools/Basic/TTSAudioOutput.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="Tokenizer_8h_source.html">TinyTTSTools/Basic/Tokenizer.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="CompactPhonemeDictionary_8h_source.html">TinyTTSTools/Dictionary/CompactPhonemeDictionary.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="AudioEncodedDictionary_8h_source.html">TinyTTSTools/Dictionary/AudioEncodedDictionary.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="CompactPhonemeDictionary_8h_source.html">TinyTTSTools/PhonemeDictionary/CompactPhonemeDictionary.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="AudioEncodedDictionary_8h_source.html">TinyTTSTools/SoundDictionary/AudioEncodedDictionary.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="G2PDictionaryAndRulesModel_8h_source.html">TinyTTSTools/G2P/G2PDictionaryAndRulesModel.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="G2PDictionaryModel_8h_source.html">TinyTTSTools/G2P/G2PDictionaryModel.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="G2PHybridModel_8h_source.html">TinyTTSTools/G2P/G2PHybridModel.h</a>&quot;</code><br />
@@ -102,56 +103,56 @@ Include dependency graph for TinyTTSTools.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="TinyTTSTools_8h__incl.png" border="0" usemap="#asrc_2TinyTTSTools_8h" alt=""/></div>
 <map name="asrc_2TinyTTSTools_8h" id="asrc_2TinyTTSTools_8h">
-<area shape="rect" title="Main Text&#45;to&#45;Speech engine class for TinyTTSTools." alt="" coords="1438,5,1581,31"/>
-<area shape="rect" href="TTSTypes_8h.html" title="Core types and structures for TinyTTSTools." alt="" coords="1908,592,2055,632"/>
-<area shape="rect" href="StringUtils_8h.html" title="String utility functions for TinyTTSTools." alt="" coords="1004,504,1151,544"/>
-<area shape="rect" href="TTSAudioOutput_8h_source.html" title=" " alt="" coords="2057,504,2204,544"/>
-<area shape="rect" href="Tokenizer_8h.html" title="Text preprocessing and tokenization for TinyTTSTools." alt="" coords="609,416,756,456"/>
-<area shape="rect" href="CompactPhonemeDictionary_8h.html" title="Minimum&#45;memory binary word&#45;&gt;phoneme dictionary for TinyTTSTools." alt="" coords="2203,416,2426,456"/>
-<area shape="rect" href="AudioEncodedDictionary_8h.html" title="AudioDictionary implementation for encoded audio data." alt="" coords="519,328,713,368"/>
-<area shape="rect" href="G2PDictionaryAndRulesModel_8h.html" title="Combined dictionary and rules&#45;based G2P model for TinyTTSTools." alt="" coords="1041,79,1276,119"/>
-<area shape="rect" href="G2PHybridModel_8h.html" title="Convert word to phonemes using multiple models in priority order." alt="" coords="882,423,1025,449"/>
-<area shape="rect" href="G2PModelBase_8h.html" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="1175,511,1307,537"/>
-<area shape="rect" href="G2PDictionaryModel_8h.html" title="Dictionary&#45;based G2P model for TinyTTSTools." alt="" coords="1335,167,1502,192"/>
-<area shape="rect" href="G2PRuleBasedModel_8h.html" title="Rule&#45;based G2P model for TinyTTSTools." alt="" coords="1049,423,1218,449"/>
-<area shape="rect" href="ConcatenatedAudioVocoder_8h.html" title="Base class for concatenative speech synthesis with advanced audio processing." alt="" coords="2003,328,2219,368"/>
-<area shape="rect" href="VocoderBase_8h.html" title="Base class for audio synthesis/vocoder implementations." alt="" coords="2010,423,2129,449"/>
-<area shape="rect" href="DiphoneVocoder_8h.html" title="Diphone&#45;based speech synthesizer for TinyTTSTools." alt="" coords="2480,240,2643,280"/>
-<area shape="rect" href="FormantVocoder_8h.html" title="Formant&#45;based speech synthesizer for TinyTTSTools." alt="" coords="2947,328,3109,368"/>
-<area shape="rect" href="PhonemeVocoder_8h.html" title="Phoneme&#45;based speech synthesizer for TinyTTSTools." alt="" coords="2293,240,2456,280"/>
-<area shape="rect" title=" " alt="" coords="3676,680,3743,705"/>
-<area shape="rect" title=" " alt="" coords="1308,680,1367,705"/>
-<area shape="rect" title=" " alt="" coords="1859,680,1922,705"/>
-<area shape="rect" title=" " alt="" coords="1105,599,1191,625"/>
-<area shape="rect" title=" " alt="" coords="2079,599,2153,625"/>
-<area shape="rect" title=" " alt="" coords="3413,599,3483,625"/>
-<area shape="rect" title=" " alt="" coords="661,511,726,537"/>
-<area shape="rect" title=" " alt="" coords="2575,599,2641,625"/>
-<area shape="rect" href="Phonemes_8h.html" title="Phoneme information for TinyTTSTools." alt="" coords="2330,511,2483,537"/>
-<area shape="rect" href="PhonemeDictionaryBase_8h.html" title="Common interface for word&#45;&gt;phoneme lookup dictionaries." alt="" coords="1737,511,1932,537"/>
-<area shape="rect" title=" " alt="" coords="3065,680,3135,705"/>
-<area shape="rect" title=" " alt="" coords="338,423,483,449"/>
-<area shape="rect" title=" " alt="" coords="31,416,211,456"/>
-<area shape="rect" title=" " alt="" coords="236,423,313,449"/>
-<area shape="rect" href="AudioDictionary_8h.html" title="Abstract base class for audio dictionaries in TinyTTSTools." alt="" coords="2551,423,2687,449"/>
-<area shape="rect" href="SoundEntry_8h.html" title="Sound entry structure for audio dictionary storage." alt="" coords="2913,511,3020,537"/>
-<area shape="rect" href="AudioFormatDecoder_8h.html" title="Pluggable sample&#45;format decoders used by SoundEntry." alt="" coords="3015,599,3185,625"/>
-<area shape="rect" href="PhonemeDictionaryEN_8h.html" title="Human&#45;readable source for the built&#45;in English phoneme dictionary." alt="" coords="2678,247,2941,273"/>
-<area shape="rect" href="CompactPhonemeDictionaryBuilder_8h.html" title="Compile&#45;time builder that packs a readable, enum&#45;typed {&quot;word&quot;, Phone::X, Phone::Y,..." alt="" coords="2715,328,2923,368"/>
-<area shape="rect" title=" " alt="" coords="1851,423,1907,449"/>
-<area shape="rect" title=" " alt="" coords="3066,423,3129,449"/>
-<area shape="rect" href="FormantVoiceConfig_8h.html" title="Voice configuration structures and predefined voice types for FormantVocoder." alt="" coords="3497,511,3661,537"/>
-<area shape="rect" href="FormantRules_8h_source.html" title=" " alt="" coords="3349,511,3473,537"/>
-<area shape="rect" href="ArpabetWAVDictionary_8h_source.html" title=" " alt="" coords="3161,335,3423,361"/>
-<area shape="rect" href="arpabet_8h_source.html" title=" " alt="" coords="4016,511,4179,537"/>
-<area shape="rect" href="AA_8h_source.html" title=" " alt="" coords="3783,599,3889,625"/>
-<area shape="rect" href="AE_8h_source.html" title=" " alt="" coords="3914,599,4019,625"/>
-<area shape="rect" href="AH_8h_source.html" title=" " alt="" coords="4044,599,4151,625"/>
-<area shape="rect" href="AH0_8h_source.html" title=" " alt="" coords="4175,599,4289,625"/>
-<area shape="rect" href="AO_8h_source.html" title=" " alt="" coords="4313,599,4420,625"/>
-<area shape="rect" href="AW_8h_source.html" title=" " alt="" coords="4445,599,4553,625"/>
-<area shape="rect" href="AY_8h_source.html" title=" " alt="" coords="4577,599,4679,625"/>
-<area shape="rect" href="B_8h_source.html" title=" " alt="" coords="3661,599,3758,625"/>
+<area shape="rect" title="Main Text&#45;to&#45;Speech engine class for TinyTTSTools." alt="" coords="1351,5,1494,31"/>
+<area shape="rect" href="TTSTypes_8h.html" title="Core types and structures for TinyTTSTools." alt="" coords="2631,592,2777,632"/>
+<area shape="rect" href="TTSLogger_8h.html" title="Unified logging class for TinyTTSTools library." alt="" coords="420,416,567,456"/>
+<area shape="rect" href="TTSAudioOutput_8h_source.html" title=" " alt="" coords="2849,511,2989,537"/>
+<area shape="rect" href="StringUtils_8h.html" title="String utility functions for TinyTTSTools." alt="" coords="1008,504,1155,544"/>
+<area shape="rect" href="Tokenizer_8h.html" title="Text preprocessing and tokenization for TinyTTSTools." alt="" coords="249,416,396,456"/>
+<area shape="rect" href="CompactPhonemeDictionary_8h.html" title="Minimum&#45;memory binary word&#45;&gt;phoneme dictionary for TinyTTSTools." alt="" coords="2230,416,2469,456"/>
+<area shape="rect" href="AudioEncodedDictionary_8h.html" title="AudioDictionary implementation for encoded audio data." alt="" coords="604,240,823,280"/>
+<area shape="rect" href="G2PDictionaryAndRulesModel_8h.html" title="Combined dictionary and rules&#45;based G2P model for TinyTTSTools." alt="" coords="983,79,1217,119"/>
+<area shape="rect" href="G2PHybridModel_8h.html" title="Convert word to phonemes using multiple models in priority order." alt="" coords="1070,423,1213,449"/>
+<area shape="rect" href="G2PModelBase_8h.html" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="1230,511,1362,537"/>
+<area shape="rect" href="G2PDictionaryModel_8h.html" title="Dictionary&#45;based G2P model for TinyTTSTools." alt="" coords="1339,167,1506,192"/>
+<area shape="rect" href="G2PRuleBasedModel_8h.html" title="Rule&#45;based G2P model for TinyTTSTools." alt="" coords="877,423,1046,449"/>
+<area shape="rect" href="ConcatenatedAudioVocoder_8h.html" title="Base class for concatenative speech synthesis with advanced audio processing." alt="" coords="1744,328,1960,368"/>
+<area shape="rect" href="VocoderBase_8h.html" title="Base class for audio synthesis/vocoder implementations." alt="" coords="2545,423,2663,449"/>
+<area shape="rect" href="DiphoneVocoder_8h.html" title="Diphone&#45;based speech synthesizer for TinyTTSTools." alt="" coords="1575,240,1737,280"/>
+<area shape="rect" href="FormantVocoder_8h.html" title="Formant&#45;based speech synthesizer for TinyTTSTools." alt="" coords="3101,328,3264,368"/>
+<area shape="rect" href="PhonemeVocoder_8h.html" title="Phoneme&#45;based speech synthesizer for TinyTTSTools." alt="" coords="2085,240,2248,280"/>
+<area shape="rect" title=" " alt="" coords="3599,680,3665,705"/>
+<area shape="rect" title=" " alt="" coords="1421,680,1480,705"/>
+<area shape="rect" title=" " alt="" coords="523,511,594,537"/>
+<area shape="rect" title=" " alt="" coords="619,511,680,537"/>
+<area shape="rect" title=" " alt="" coords="2881,599,2956,625"/>
+<area shape="rect" title=" " alt="" coords="3151,599,3222,625"/>
+<area shape="rect" title=" " alt="" coords="1059,599,1144,625"/>
+<area shape="rect" title=" " alt="" coords="1891,599,1954,625"/>
+<area shape="rect" title=" " alt="" coords="331,511,397,537"/>
+<area shape="rect" title=" " alt="" coords="2276,599,2343,625"/>
+<area shape="rect" href="Phonemes_8h.html" title="Phoneme information for TinyTTSTools." alt="" coords="2315,511,2469,537"/>
+<area shape="rect" href="PhonemeDictionaryBase_8h.html" title="Common interface for word&#45;&gt;phoneme lookup dictionaries." alt="" coords="1589,511,1784,537"/>
+<area shape="rect" title=" " alt="" coords="3002,680,3073,705"/>
+<area shape="rect" title=" " alt="" coords="371,335,517,361"/>
+<area shape="rect" title=" " alt="" coords="541,328,721,368"/>
+<area shape="rect" title=" " alt="" coords="745,335,823,361"/>
+<area shape="rect" href="AudioDictionary_8h.html" title="Abstract base class for audio dictionaries in TinyTTSTools." alt="" coords="2840,423,2976,449"/>
+<area shape="rect" href="SoundEntry_8h.html" title="Sound entry structure for audio dictionary storage." alt="" coords="3604,511,3711,537"/>
+<area shape="rect" href="PsramAllocator_8h.html" title="Standard C++ Allocator that prefers PSRAM for its backing storage." alt="" coords="144,335,347,361"/>
+<area shape="rect" href="AudioFormatDecoder_8h.html" title="Pluggable sample&#45;format decoders used by SoundEntry." alt="" coords="3348,599,3519,625"/>
+<area shape="rect" title=" " alt="" coords="591,423,641,449"/>
+<area shape="rect" href="PhonemeDictionaryEN_8h.html" title="Human&#45;readable source for the built&#45;in English phoneme dictionary." alt="" coords="1823,240,2007,280"/>
+<area shape="rect" href="CompactPhonemeDictionaryBuilder_8h.html" title="Compile&#45;time builder that packs a readable, enum&#45;typed {&quot;word&quot;, Phone::X, Phone::Y,..." alt="" coords="2245,328,2453,368"/>
+<area shape="rect" title=" " alt="" coords="1997,423,2053,449"/>
+<area shape="rect" title=" " alt="" coords="3102,423,3165,449"/>
+<area shape="rect" href="FormantVoiceConfig_8h.html" title="Voice configuration structures and predefined voice types for FormantVocoder." alt="" coords="3115,511,3279,537"/>
+<area shape="rect" href="FormantRules_8h_source.html" title=" " alt="" coords="3303,511,3427,537"/>
+<area shape="rect" href="ArpabetWAVDictionary_8h_source.html" title=" " alt="" coords="3495,328,3678,368"/>
+<area shape="rect" href="arpabet_8h_source.html" title=" " alt="" coords="3867,511,4029,537"/>
+<area shape="rect" href="AA_8h_source.html" title=" " alt="" coords="3796,599,3903,625"/>
+<area shape="rect" href="AE_8h_source.html" title=" " alt="" coords="3927,599,4033,625"/>
+<area shape="rect" href="AH_8h_source.html" title=" " alt="" coords="4057,599,4164,625"/>
 </map>
 </div>
 </div>

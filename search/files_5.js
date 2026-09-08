@@ -4,5 +4,6 @@ var searchData=
   ['phonemedictionaryen_2eh_1',['PhonemeDictionaryEN.h',['../PhonemeDictionaryEN_8h.html',1,'']]],
   ['phonemehuffmancodes_2eh_2',['PhonemeHuffmanCodes.h',['../PhonemeHuffmanCodes_8h.html',1,'']]],
   ['phonemes_2eh_3',['Phonemes.h',['../Phonemes_8h.html',1,'']]],
-  ['phonemevocoder_2eh_4',['PhonemeVocoder.h',['../PhonemeVocoder_8h.html',1,'']]]
+  ['phonemevocoder_2eh_4',['PhonemeVocoder.h',['../PhonemeVocoder_8h.html',1,'']]],
+  ['psramallocator_2eh_5',['PsramAllocator.h',['../PsramAllocator_8h.html',1,'']]]
 ];

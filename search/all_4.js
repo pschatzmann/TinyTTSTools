@@ -5,6 +5,6 @@ var searchData=
   ['enableformantrandom_2',['enableFormantRandom',['../structFormantVoiceConfig.html#aa824df8ee58db0b461bad222fa95d66d',1,'FormantVoiceConfig']]],
   ['enablenasalnotch_3',['enableNasalNotch',['../structFormantVoiceConfig.html#ae0abc75e58b83d2f93bf33f4e41ce50d',1,'FormantVoiceConfig']]],
   ['enablestresspitch_4',['enableStressPitch',['../structFormantVoiceConfig.html#a278e731ba8d1661099adfa87e3d0e8c0',1,'FormantVoiceConfig']]],
-  ['end_5',['end',['../classTTSLoggerCLass.html#a7b929621479c16a9639962110e8ff727',1,'TTSLoggerCLass']]],
+  ['end_5',['end',['../classTTSLoggerClass.html#aa03868b89dc02ec73b068fd0e74e66af',1,'TTSLoggerClass']]],
   ['errorcallback_5f_6',['errorCallback_',['../classTinyTTSTools.html#ae5a4cd9ebed5aa1692e4e918e08dadc7',1,'TinyTTSTools::errorCallback_()'],['../classG2PModelBase.html#af2af7d9b9efd7f9430ba415e0c84c45a',1,'G2PModelBase::errorCallback_()']]]
 ];

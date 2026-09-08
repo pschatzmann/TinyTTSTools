@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>TinyTTSTools: SDSoundEntry Class Reference</title>
+<title>TinyTTSTools: SDSoundEntry&lt; Allocator &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -72,7 +72,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classSDSoundEntry-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">SDSoundEntry Class Reference</div></div>
+  <div class="headertitle"><div class="title">SDSoundEntry&lt; Allocator &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -81,39 +81,39 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="AudioDictionarySD_8h_source.html">AudioDictionarySD.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for SDSoundEntry:</div>
+Inheritance diagram for SDSoundEntry&lt; Allocator &gt;:</div>
 <div class="dyncontent">
-<div class="center"><img src="classSDSoundEntry__inherit__graph.png" border="0" usemap="#aSDSoundEntry_inherit__map" alt="Inheritance graph"/></div>
-<map name="aSDSoundEntry_inherit__map" id="aSDSoundEntry_inherit__map">
-<area shape="rect" title="SoundEntry implementation that reads audio data directly from SD card file on&#45;demand: The file must c..." alt="" coords="5,79,120,104"/>
-<area shape="rect" href="structSoundEntry.html" title="Structure for storing audio data for phonemes or diphones." alt="" coords="15,5,111,31"/>
+<div class="center"><img src="classSDSoundEntry__inherit__graph.png" border="0" usemap="#aSDSoundEntry_3_01Allocator_01_4_inherit__map" alt="Inheritance graph"/></div>
+<map name="aSDSoundEntry_3_01Allocator_01_4_inherit__map" id="aSDSoundEntry_3_01Allocator_01_4_inherit__map">
+<area shape="rect" title="SoundEntry implementation that reads audio data directly from SD card file on&#45;demand: The file must c..." alt="" coords="5,79,208,104"/>
+<area shape="rect" href="structSoundEntry.html" title="Structure for storing audio data for phonemes or diphones." alt="" coords="59,5,155,31"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
-Collaboration diagram for SDSoundEntry:</div>
+Collaboration diagram for SDSoundEntry&lt; Allocator &gt;:</div>
 <div class="dyncontent">
-<div class="center"><img src="classSDSoundEntry__coll__graph.png" border="0" usemap="#aSDSoundEntry_coll__map" alt="Collaboration graph"/></div>
-<map name="aSDSoundEntry_coll__map" id="aSDSoundEntry_coll__map">
-<area shape="rect" title="SoundEntry implementation that reads audio data directly from SD card file on&#45;demand: The file must c..." alt="" coords="5,79,120,104"/>
-<area shape="rect" href="structSoundEntry.html" title="Structure for storing audio data for phonemes or diphones." alt="" coords="15,5,111,31"/>
+<div class="center"><img src="classSDSoundEntry__coll__graph.png" border="0" usemap="#aSDSoundEntry_3_01Allocator_01_4_coll__map" alt="Collaboration graph"/></div>
+<map name="aSDSoundEntry_3_01Allocator_01_4_coll__map" id="aSDSoundEntry_3_01Allocator_01_4_coll__map">
+<area shape="rect" title="SoundEntry implementation that reads audio data directly from SD card file on&#45;demand: The file must c..." alt="" coords="5,79,208,104"/>
+<area shape="rect" href="structSoundEntry.html" title="Structure for storing audio data for phonemes or diphones." alt="" coords="59,5,155,31"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a38e191b67b38adb85b7abed388888478"><td class="memItemLeft" align="right" valign="top"><a id="a38e191b67b38adb85b7abed388888478" name="a38e191b67b38adb85b7abed388888478"></a>
+<tr class="memitem:a0535da27d611c2eb35b1186bdf898f1e"><td class="memItemLeft" align="right" valign="top"><a id="a0535da27d611c2eb35b1186bdf898f1e" name="a0535da27d611c2eb35b1186bdf898f1e"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>SDSoundEntry</b> (size_t header_size=44, int bits_per_sample=16)</td></tr>
-<tr class="separator:a38e191b67b38adb85b7abed388888478"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef2ad650ace4ba831de3eb954ee50530"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSDSoundEntry.html#aef2ad650ace4ba831de3eb954ee50530">loadPhoneme</a> (const char *phoneme_name, const char *filepath)</td></tr>
-<tr class="memdesc:aef2ad650ace4ba831de3eb954ee50530"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load phoneme data from the specified file path.  <br /></td></tr>
-<tr class="separator:aef2ad650ace4ba831de3eb954ee50530"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5fef806abd893cc08162e260a98c0a3e"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSDSoundEntry.html#a5fef806abd893cc08162e260a98c0a3e">samples</a> () const override</td></tr>
-<tr class="memdesc:a5fef806abd893cc08162e260a98c0a3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get number of samples in the audio data.  <br /></td></tr>
-<tr class="separator:a5fef806abd893cc08162e260a98c0a3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6f0e975ac5bb6050f704eb6f3a039dd"><td class="memItemLeft" align="right" valign="top"><a id="aa6f0e975ac5bb6050f704eb6f3a039dd" name="aa6f0e975ac5bb6050f704eb6f3a039dd"></a>
+<tr class="separator:a0535da27d611c2eb35b1186bdf898f1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b695275f814586b34bb617a4e4ea152"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSDSoundEntry.html#a0b695275f814586b34bb617a4e4ea152">loadPhoneme</a> (const char *phoneme_name, const char *filepath)</td></tr>
+<tr class="memdesc:a0b695275f814586b34bb617a4e4ea152"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load phoneme data from the specified file path.  <br /></td></tr>
+<tr class="separator:a0b695275f814586b34bb617a4e4ea152"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6614c9c6098de55ec566ca4799da5ce5"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSDSoundEntry.html#a6614c9c6098de55ec566ca4799da5ce5">samples</a> () const override</td></tr>
+<tr class="memdesc:a6614c9c6098de55ec566ca4799da5ce5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get number of samples in the audio data.  <br /></td></tr>
+<tr class="separator:a6614c9c6098de55ec566ca4799da5ce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03d3a44a0bd108c75ab4b949bec84ad0"><td class="memItemLeft" align="right" valign="top"><a id="a03d3a44a0bd108c75ab4b949bec84ad0" name="a03d3a44a0bd108c75ab4b949bec84ad0"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>releaseData</b> ()</td></tr>
-<tr class="memdesc:aa6f0e975ac5bb6050f704eb6f3a039dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Release loaded audio data to free memory. <br /></td></tr>
-<tr class="separator:aa6f0e975ac5bb6050f704eb6f3a039dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a03d3a44a0bd108c75ab4b949bec84ad0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Release loaded audio data to free memory. <br /></td></tr>
+<tr class="separator:a03d3a44a0bd108c75ab4b949bec84ad0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_structSoundEntry"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_structSoundEntry')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="structSoundEntry.html">SoundEntry</a></td></tr>
 <tr class="memitem:aedcc4df610d5fe9cecb5ff2cda54ca99 inherit pub_methods_structSoundEntry"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSoundEntry.html#aedcc4df610d5fe9cecb5ff2cda54ca99">SoundEntry</a> (const char *<a class="el" href="structSoundEntry.html#a2f84411027f059c1ce3eb5569f8c83a5">name</a>, uint16_t <a class="el" href="structSoundEntry.html#a83e8a29635b58800632a287417faf87f">size</a>, const uint8_t *audioData, int <a class="el" href="structSoundEntry.html#aea226425ae53478f294d026037459310">bits</a>=16)</td></tr>
 <tr class="memdesc:aedcc4df610d5fe9cecb5ff2cda54ca99 inherit pub_methods_structSoundEntry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor to initialize a <a class="el" href="structSoundEntry.html" title="Structure for storing audio data for phonemes or diphones.">SoundEntry</a>.  <br /></td></tr>
@@ -142,20 +142,29 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:aea226425ae53478f294d026037459310 inherit pub_attribs_structSoundEntry"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="structSoundEntry.html" title="Structure for storing audio data for phonemes or diphones.">SoundEntry</a> implementation that reads audio data directly from SD card file on-demand: The file must contain PCM 8bit unsigned or 16 bit signed audio data. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename Allocator = std::allocator&lt;uint8_t&gt;&gt;<br />
+class SDSoundEntry&lt; Allocator &gt;</div><p><a class="el" href="structSoundEntry.html" title="Structure for storing audio data for phonemes or diphones.">SoundEntry</a> implementation that reads audio data directly from SD card file on-demand: The file must contain PCM 8bit unsigned or 16 bit signed audio data. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Allocator</td><td>Allocator for the loaded-file buffer (<code>raw_data_</code>), which holds one phoneme's raw audio for as long as it's in use. Defaults to <code>std::allocator&lt;uint8_t&gt;</code>; pass <code><a class="el" href="structPsramAllocator.html" title="A minimal C++11 Allocator that requests PSRAM on ESP32 and falls back to internal RAM (still on-devic...">PsramAllocator</a>&lt;uint8_t&gt;</code> (see <a class="el" href="PsramAllocator_8h.html" title="Standard C++ Allocator that prefers PSRAM for its backing storage.">Memory/PsramAllocator.h</a>) to load it into PSRAM on ESP32 instead.</td></tr>
+  </table>
+  </dd>
+</dl>
 <p>This class extends <a class="el" href="structSoundEntry.html" title="Structure for storing audio data for phonemes or diphones.">SoundEntry</a> to provide direct file access without any caching or preloading. Files are accessed by deduced filename using Arduino SD library. Data is stored in original format and converted to 16-bit on access. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="aef2ad650ace4ba831de3eb954ee50530" name="aef2ad650ace4ba831de3eb954ee50530"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef2ad650ace4ba831de3eb954ee50530">&#9670;&#160;</a></span>loadPhoneme()</h2>
+<a id="a0b695275f814586b34bb617a4e4ea152" name="a0b695275f814586b34bb617a4e4ea152"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b695275f814586b34bb617a4e4ea152">&#9670;&#160;</a></span>loadPhoneme()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename Allocator  = std::allocator&lt;uint8_t&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void SDSoundEntry::loadPhoneme </td>
+          <td class="memname">void <a class="el" href="classSDSoundEntry.html">SDSoundEntry</a>&lt; Allocator &gt;::loadPhoneme </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>phoneme_name</em>, </td>
@@ -190,17 +199,19 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a5fef806abd893cc08162e260a98c0a3e" name="a5fef806abd893cc08162e260a98c0a3e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5fef806abd893cc08162e260a98c0a3e">&#9670;&#160;</a></span>samples()</h2>
+<a id="a6614c9c6098de55ec566ca4799da5ce5" name="a6614c9c6098de55ec566ca4799da5ce5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6614c9c6098de55ec566ca4799da5ce5">&#9670;&#160;</a></span>samples()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename Allocator  = std::allocator&lt;uint8_t&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t SDSoundEntry::samples </td>
+          <td class="memname">size_t <a class="el" href="classSDSoundEntry.html">SDSoundEntry</a>&lt; Allocator &gt;::samples </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -221,7 +232,7 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/TinyTTSTools/Dictionary/<a class="el" href="AudioDictionarySD_8h_source.html">AudioDictionarySD.h</a></li>
+<li>src/TinyTTSTools/SoundDictionary/<a class="el" href="AudioDictionarySD_8h_source.html">AudioDictionarySD.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -77,11 +77,12 @@ $(function() {
 </div><table border="0" cellspacing="10" cellpadding="0">
 <tr><td><img src="inherit_graph_0.png" border="0" usemap="#aAudioDictionary" alt=""/>
 <map name="aAudioDictionary" id="aAudioDictionary">
-<area shape="rect" href="classAudioDictionary.html" title="Base class for audio dictionaries." alt="" coords="5,5,132,31"/>
-<area shape="rect" href="classAudioDictionarySD.html" title="AudioDictionary implementation with minimal RAM usage and direct SD card file access." alt="" coords="199,5,343,31"/>
-<area shape="rect" href="classAudioEncodedDictionary.html" title="Audio dictionary for encoded audio data with on&#45;demand decoding." alt="" coords="180,55,361,80"/>
-<area shape="rect" href="classAudioEncodedDictionarySD.html" title="AudioDictionary implementation for encoded audio files on SD card." alt="" coords="409,55,608,80"/>
-<area shape="rect" title=" " alt="" coords="17,55,120,80"/>
+<area shape="rect" href="classAudioDictionary.html" title="Base class for audio dictionaries." alt="" coords="5,77,132,102"/>
+<area shape="rect" href="classAudioEncodedDictionary.html" title=" " alt="" coords="180,69,392,109"/>
+<area shape="rect" href="classAudioDictionarySD.html" title="AudioDictionary implementation with minimal RAM usage and direct SD card file access." alt="" coords="209,133,363,173"/>
+<area shape="rect" href="classAudioEncodedDictionary.html" title="Audio dictionary for encoded audio data with on&#45;demand decoding." alt="" coords="195,5,377,45"/>
+<area shape="rect" href="classAudioEncodedDictionarySD.html" title="AudioDictionary implementation for encoded audio files on SD card." alt="" coords="440,5,639,45"/>
+<area shape="rect" title=" " alt="" coords="17,21,120,46"/>
 </map>
 </td></tr>
 <tr><td><img src="inherit_graph_1.png" border="0" usemap="#aAudioFormatDecoder" alt=""/>
@@ -153,63 +154,66 @@ $(function() {
 <area shape="rect" href="structG2PRuleBasedModel_1_1Rule.html" title="One longest&#45;match rule." alt="" coords="5,5,200,31"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_13.png" border="0" usemap="#aPhoneme" alt=""/>
-<map name="aPhoneme" id="aPhoneme">
-<area shape="rect" href="structPhoneme.html" title="Phoneme structure for TTS processing." alt="" coords="5,5,88,31"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_14.png" border="0" usemap="#aPhonemeDictionaryBase" alt=""/>
+<tr><td><img src="inherit_graph_13.png" border="0" usemap="#aPhonemeDictionaryBase" alt=""/>
 <map name="aPhonemeDictionaryBase" id="aPhonemeDictionaryBase">
-<area shape="rect" href="classPhonemeDictionaryBase.html" title="Common interface implemented by CompactPhonemeDictionary and CompressedPhonemeDictionary,..." alt="" coords="5,31,188,56"/>
+<area shape="rect" href="classPhonemeDictionaryBase.html" title="Common interface implemented by CompactPhonemeDictionary and CompressedPhonemeDictionary,..." alt="" coords="5,84,188,109"/>
 <area shape="rect" href="classCompactPhonemeDictionary.html" title="Binary&#45;search word&#45;&gt;phoneme dictionary backed by four flat, flash&#45;resident arrays." alt="" coords="247,5,455,31"/>
 <area shape="rect" href="classCompressedPhonemeDictionary.html" title="Same word&#45;&gt;phoneme lookup as CompactPhonemeDictionary, but smaller on flash for large (&gt;10k word) dat..." alt="" coords="236,55,467,80"/>
+<area shape="rect" href="classCompressedPhonemeDictionarySD.html" title="Loads a CompressedPhonemeDictionary&#39;s six backing arrays from a single binary file (SD card,..." alt="" coords="236,105,467,145"/>
+<area shape="rect" href="classDynamicPhonemeDictionary.html" title="A word&#45;&gt;phoneme dictionary you can add() to at runtime, one entry at a time." alt="" coords="247,169,455,209"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_15.png" border="0" usemap="#aPhonemeEntry" alt=""/>
+<tr><td><img src="inherit_graph_14.png" border="0" usemap="#aPhonemeEntry" alt=""/>
 <map name="aPhonemeEntry" id="aPhonemeEntry">
 <area shape="rect" href="structPhonemeEntry.html" title="Phoneme Dictionary Entry (stored in PROGMEM)" alt="" coords="5,5,123,31"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_16.png" border="0" usemap="#aPhonemeHuffmanCode" alt=""/>
+<tr><td><img src="inherit_graph_15.png" border="0" usemap="#aPhonemeHuffmanCode" alt=""/>
 <map name="aPhonemeHuffmanCode" id="aPhonemeHuffmanCode">
 <area shape="rect" href="structPhonemeHuffmanCode.html" title="One packed phoneme byte&#39;s canonical Huffman code." alt="" coords="5,5,177,31"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_17.png" border="0" usemap="#aPhonemeInfo" alt=""/>
+<tr><td><img src="inherit_graph_16.png" border="0" usemap="#aPhonemeInfo" alt=""/>
 <map name="aPhonemeInfo" id="aPhonemeInfo">
 <area shape="rect" href="structPhonemeInfo.html" title="Structure for phoneme representation mapping." alt="" coords="5,5,113,31"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_18.png" border="0" usemap="#aPhonemeRule" alt=""/>
+<tr><td><img src="inherit_graph_17.png" border="0" usemap="#aPhonemeRule" alt=""/>
 <map name="aPhonemeRule" id="aPhonemeRule">
 <area shape="rect" href="structPhonemeRule.html" title="Table entry describing one phoneme&#39;s acoustic parameters and behavior." alt="" coords="5,5,117,31"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_19.png" border="0" usemap="#aPhonemes" alt=""/>
+<tr><td><img src="inherit_graph_18.png" border="0" usemap="#aPhonemes" alt=""/>
 <map name="aPhonemes" id="aPhonemes">
 <area shape="rect" href="classPhonemes.html" title="Phoneme representation translator and timing information." alt="" coords="5,5,96,31"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_20.png" border="0" usemap="#aPhonemeSynthesisParams" alt=""/>
+<tr><td><img src="inherit_graph_19.png" border="0" usemap="#aPhonemeSynthesisParams" alt=""/>
 <map name="aPhonemeSynthesisParams" id="aPhonemeSynthesisParams">
 <area shape="rect" href="structPhonemeSynthesisParams.html" title="Optional per&#45;call synthesis attributes for sayPhoneme()" alt="" coords="5,5,200,31"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_21.png" border="0" usemap="#aPhonemeWordSource" alt=""/>
+<tr><td><img src="inherit_graph_20.png" border="0" usemap="#aPhonemeWordSource" alt=""/>
 <map name="aPhonemeWordSource" id="aPhonemeWordSource">
 <area shape="rect" href="structPhonemeWordSource.html" title="One human&#45;readable dictionary source entry." alt="" coords="5,5,165,31"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_22.png" border="0" usemap="#aPrint" alt=""/>
+<tr><td><img src="inherit_graph_21.png" border="0" usemap="#aPrint" alt=""/>
 <map name="aPrint" id="aPrint">
 <area shape="rect" href="classPrint.html" title="Mock Print class for non&#45;Arduino environments." alt="" coords="5,5,57,31"/>
 <area shape="rect" href="classTTSAudioOutputCallback.html" title="TTS audio output using callback function." alt="" coords="105,5,289,31"/>
 </map>
 </td></tr>
+<tr><td><img src="inherit_graph_22.png" border="0" usemap="#aPsramAllocator_3_01T_01_4" alt=""/>
+<map name="aPsramAllocator_3_01T_01_4" id="aPsramAllocator_3_01T_01_4">
+<area shape="rect" href="structPsramAllocator.html" title="A minimal C++11 Allocator that requests PSRAM on ESP32 and falls back to internal RAM (still on&#45;devic..." alt="" coords="5,5,164,31"/>
+</map>
+</td></tr>
 <tr><td><img src="inherit_graph_23.png" border="0" usemap="#aSoundEntry" alt=""/>
 <map name="aSoundEntry" id="aSoundEntry">
-<area shape="rect" href="structSoundEntry.html" title="Structure for storing audio data for phonemes or diphones." alt="" coords="5,5,101,31"/>
-<area shape="rect" href="classSDSoundEntry.html" title="SoundEntry implementation that reads audio data directly from SD card file on&#45;demand: The file must c..." alt="" coords="149,5,264,31"/>
+<area shape="rect" href="structSoundEntry.html" title="Structure for storing audio data for phonemes or diphones." alt="" coords="5,42,101,67"/>
+<area shape="rect" href="classSDSoundEntry.html" title=" " alt="" coords="166,5,335,45"/>
+<area shape="rect" href="classSDSoundEntry.html" title="SoundEntry implementation that reads audio data directly from SD card file on&#45;demand: The file must c..." alt="" coords="149,70,352,95"/>
 </map>
 </td></tr>
 <tr><td><img src="inherit_graph_24.png" border="0" usemap="#aStringUtils" alt=""/>
@@ -237,9 +241,9 @@ $(function() {
 <area shape="rect" href="structTTSConfig.html" title="TTS Configuration structure." alt="" coords="5,5,92,31"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_29.png" border="0" usemap="#aTTSLoggerCLass" alt=""/>
-<map name="aTTSLoggerCLass" id="aTTSLoggerCLass">
-<area shape="rect" href="classTTSLoggerCLass.html" title="Unified logging class for TinyTTSTools library." alt="" coords="5,5,133,31"/>
+<tr><td><img src="inherit_graph_29.png" border="0" usemap="#aTTSLoggerClass" alt=""/>
+<map name="aTTSLoggerClass" id="aTTSLoggerClass">
+<area shape="rect" href="classTTSLoggerClass.html" title="Unified logging class for TinyTTSTools library." alt="" coords="5,5,131,31"/>
 </map>
 </td></tr>
 <tr><td><img src="inherit_graph_30.png" border="0" usemap="#aVocoderBase" alt=""/>

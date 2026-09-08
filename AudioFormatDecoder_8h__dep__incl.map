@@ -1,15 +1,14 @@
-<map id="src/TinyTTSTools/Dictionary/AudioFormatDecoder.h" name="src/TinyTTSTools/Dictionary/AudioFormatDecoder.h">
-<area shape="rect" id="node1" title="Pluggable sample&#45;format decoders used by SoundEntry." alt="" coords="559,5,760,45"/>
-<area shape="rect" id="node2" href="$SoundEntry_8h.html" title="Sound entry structure for audio dictionary storage." alt="" coords="559,93,760,133"/>
-<area shape="rect" id="node3" href="$ArpabetAltWAVDictionary_8h_source.html" title=" " alt="" coords="5,269,207,309"/>
-<area shape="rect" id="node4" href="$ArpabetWAVDictionary_8h_source.html" title=" " alt="" coords="231,269,432,309"/>
-<area shape="rect" id="node7" href="$AudioDictionary_8h.html" title="Abstract base class for audio dictionaries in TinyTTSTools." alt="" coords="420,181,621,221"/>
-<area shape="rect" id="node8" href="$AudioDictionarySD_8h_source.html" title=" " alt="" coords="559,269,760,309"/>
-<area shape="rect" id="node9" href="$AudioEncodedDictionary_8h.html" title="AudioDictionary implementation for encoded audio data." alt="" coords="1025,269,1227,309"/>
-<area shape="rect" id="node12" href="$DiphoneWAVDictionary_8h_source.html" title=" " alt="" coords="799,181,1000,221"/>
-<area shape="rect" id="node13" href="$ConcatenatedAudioVocoder_8h.html" title="Base class for concatenative speech synthesis with advanced audio processing." alt="" coords="785,269,1001,309"/>
-<area shape="rect" id="node5" href="$PhonemeVocoder_8h.html" title="Phoneme&#45;based speech synthesizer for TinyTTSTools." alt="" coords="417,357,603,397"/>
-<area shape="rect" id="node6" href="$TinyTTSTools_8h.html" title="Main Text&#45;to&#45;Speech engine class for TinyTTSTools." alt="" coords="727,445,869,471"/>
-<area shape="rect" id="node11" href="$DiphoneVocoder_8h.html" title="Diphone&#45;based speech synthesizer for TinyTTSTools." alt="" coords="639,357,826,397"/>
-<area shape="rect" id="node10" href="$AudioEncodedDictionarySD_8h_source.html" title=" " alt="" coords="901,357,1116,397"/>
+<map id="src/TinyTTSTools/SoundDictionary/AudioFormatDecoder.h" name="src/TinyTTSTools/SoundDictionary/AudioFormatDecoder.h">
+<area shape="rect" id="node1" title="Pluggable sample&#45;format decoders used by SoundEntry." alt="" coords="533,5,775,45"/>
+<area shape="rect" id="node2" href="$SoundEntry_8h.html" title="Sound entry structure for audio dictionary storage." alt="" coords="533,93,775,133"/>
+<area shape="rect" id="node3" href="$ArpabetWAVDictionary_8h_source.html" title=" " alt="" coords="5,269,247,309"/>
+<area shape="rect" id="node6" href="$AudioDictionary_8h.html" title="Abstract base class for audio dictionaries in TinyTTSTools." alt="" coords="455,181,696,221"/>
+<area shape="rect" id="node7" href="$AudioDictionarySD_8h_source.html" title=" " alt="" coords="879,269,1120,309"/>
+<area shape="rect" id="node8" href="$AudioEncodedDictionary_8h.html" title="AudioDictionary implementation for encoded audio data." alt="" coords="613,269,855,309"/>
+<area shape="rect" id="node11" href="$DiphoneWAVDictionary_8h_source.html" title=" " alt="" coords="823,181,1064,221"/>
+<area shape="rect" id="node12" href="$ConcatenatedAudioVocoder_8h.html" title="Base class for concatenative speech synthesis with advanced audio processing." alt="" coords="322,269,538,309"/>
+<area shape="rect" id="node4" href="$PhonemeVocoder_8h.html" title="Phoneme&#45;based speech synthesizer for TinyTTSTools." alt="" coords="198,357,385,397"/>
+<area shape="rect" id="node5" href="$TinyTTSTools_8h.html" title="Main Text&#45;to&#45;Speech engine class for TinyTTSTools." alt="" coords="420,445,563,471"/>
+<area shape="rect" id="node10" href="$DiphoneVocoder_8h.html" title="Diphone&#45;based speech synthesizer for TinyTTSTools." alt="" coords="463,357,650,397"/>
+<area shape="rect" id="node9" href="$AudioEncodedDictionarySD_8h_source.html" title=" " alt="" coords="725,357,967,397"/>
 </map>

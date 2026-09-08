@@ -1,8 +1,8 @@
-<map id="src/TinyTTSTools/Dictionary/CompactPhonemeDictionaryBuilder.h" name="src/TinyTTSTools/Dictionary/CompactPhonemeDictionaryBuilder.h">
-<area shape="rect" id="node1" title="Compile&#45;time builder that packs a readable, enum&#45;typed {&quot;word&quot;, Phone::X, Phone::Y,..." alt="" coords="19,5,289,45"/>
-<area shape="rect" id="node2" href="$PhonemeDictionaryEN_8h.html" title="Human&#45;readable source for the built&#45;in English phoneme dictionary." alt="" coords="53,93,255,133"/>
-<area shape="rect" id="node3" href="$G2PDictionaryModel_8h.html" title="Dictionary&#45;based G2P model for TinyTTSTools." alt="" coords="69,181,239,221"/>
-<area shape="rect" id="node4" href="$TinyTTSTools_8h.html" title="Main Text&#45;to&#45;Speech engine class for TinyTTSTools." alt="" coords="5,372,148,397"/>
-<area shape="rect" id="node5" href="$G2PDictionaryAndRulesModel_8h.html" title="Combined dictionary and rules&#45;based G2P model for TinyTTSTools." alt="" coords="38,277,270,317"/>
-<area shape="rect" id="node6" href="$G2PDictionaryNeuralAndRulesModel_8h.html" title="Combined dictionary, neural and rules&#45;based G2P model for TinyTTSTools." alt="" coords="295,269,517,324"/>
+<map id="src/TinyTTSTools/PhonemeDictionary/CompactPhonemeDictionaryBuilder.h" name="src/TinyTTSTools/PhonemeDictionary/CompactPhonemeDictionaryBuilder.h">
+<area shape="rect" id="node1" title="Compile&#45;time builder that packs a readable, enum&#45;typed {&quot;word&quot;, Phone::X, Phone::Y,..." alt="" coords="15,5,293,60"/>
+<area shape="rect" id="node2" href="$PhonemeDictionaryEN_8h.html" title="Human&#45;readable source for the built&#45;in English phoneme dictionary." alt="" coords="29,108,279,148"/>
+<area shape="rect" id="node3" href="$G2PDictionaryModel_8h.html" title="Dictionary&#45;based G2P model for TinyTTSTools." alt="" coords="69,196,239,236"/>
+<area shape="rect" id="node4" href="$TinyTTSTools_8h.html" title="Main Text&#45;to&#45;Speech engine class for TinyTTSTools." alt="" coords="5,387,148,412"/>
+<area shape="rect" id="node5" href="$G2PDictionaryAndRulesModel_8h.html" title="Combined dictionary and rules&#45;based G2P model for TinyTTSTools." alt="" coords="38,291,270,331"/>
+<area shape="rect" id="node6" href="$G2PDictionaryNeuralAndRulesModel_8h.html" title="Combined dictionary, neural and rules&#45;based G2P model for TinyTTSTools." alt="" coords="295,284,517,339"/>
 </map>

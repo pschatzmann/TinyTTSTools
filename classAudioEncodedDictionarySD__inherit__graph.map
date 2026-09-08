@@ -1,6 +1,6 @@
-<map id="AudioEncodedDictionarySD" name="AudioEncodedDictionarySD">
-<area shape="rect" id="node1" title="AudioDictionary implementation for encoded audio files on SD card." alt="" coords="39,152,237,177"/>
-<area shape="rect" id="node2" href="$classAudioEncodedDictionary.html" title="Audio dictionary for encoded audio data with on&#45;demand decoding." alt="" coords="47,79,229,104"/>
+<map id="AudioEncodedDictionarySD&lt; Allocator &gt;" name="AudioEncodedDictionarySD&lt; Allocator &gt;">
+<area shape="rect" id="node1" title="AudioDictionary implementation for encoded audio files on SD card." alt="" coords="39,167,237,207"/>
+<area shape="rect" id="node2" href="$classAudioEncodedDictionary.html" title="Audio dictionary for encoded audio data with on&#45;demand decoding." alt="" coords="47,79,229,119"/>
 <area shape="rect" id="node3" href="$classAudioDictionary.html" title="Base class for audio dictionaries." alt="" coords="5,5,132,31"/>
 <area shape="rect" id="node4" title=" " alt="" coords="156,5,259,31"/>
 </map>

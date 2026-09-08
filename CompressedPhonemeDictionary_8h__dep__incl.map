@@ -1,5 +1,6 @@
-<map id="src/TinyTTSTools/Dictionary/CompressedPhonemeDictionary.h" name="src/TinyTTSTools/Dictionary/CompressedPhonemeDictionary.h">
-<area shape="rect" id="node1" title="Further&#45;compressed word&#45;&gt;phoneme dictionary: blocked offset index." alt="" coords="153,5,399,45"/>
-<area shape="rect" id="node2" href="$CompactCmuDictionaryEN__data_8h_source.html" title=" " alt="" coords="5,93,256,148"/>
-<area shape="rect" id="node3" href="$PhonemeExceptionDictionaryEN__data_8h_source.html" title=" " alt="" coords="281,101,565,141"/>
+<map id="src/TinyTTSTools/PhonemeDictionary/CompressedPhonemeDictionary.h" name="src/TinyTTSTools/PhonemeDictionary/CompressedPhonemeDictionary.h">
+<area shape="rect" id="node1" title="Further&#45;compressed word&#45;&gt;phoneme dictionary: blocked offset index." alt="" coords="280,5,515,60"/>
+<area shape="rect" id="node2" href="$CompactCmuDictionaryEN__data_8h_source.html" title=" " alt="" coords="5,108,256,163"/>
+<area shape="rect" id="node3" href="$CompressedPhonemeDictionarySD_8h.html" title="Runtime&#45;loadable (SD card / LittleFS) word&#45;&gt;phoneme dictionary." alt="" coords="280,108,515,163"/>
+<area shape="rect" id="node4" href="$PhonemeExceptionDictionaryEN__data_8h_source.html" title=" " alt="" coords="539,108,824,163"/>
 </map>

@@ -1,7 +1,6 @@
 <map id="src/TinyTTSTools/Basic/TTSExampleUtils.h" name="src/TinyTTSTools/Basic/TTSExampleUtils.h">
-<area shape="rect" id="node1" title="Small helpers to remove boilerplate duplicated across example sketches (Serial startup,..." alt="" coords="41,5,210,45"/>
-<area shape="rect" id="node2" href="$TTSTypes_8h.html" title="Core types and structures for TinyTTSTools." alt="" coords="78,93,173,119"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,167,72,192"/>
-<area shape="rect" id="node4" title=" " alt="" coords="96,167,155,192"/>
-<area shape="rect" id="node5" title=" " alt="" coords="179,167,242,192"/>
+<area shape="rect" id="node1" title="Small helpers to remove boilerplate duplicated across example sketches (Serial startup,..." alt="" coords="5,5,175,45"/>
+<area shape="rect" id="node2" href="$TTSTypes_8h.html" title="Core types and structures for TinyTTSTools." alt="" coords="43,93,137,119"/>
+<area shape="rect" id="node3" title=" " alt="" coords="14,167,81,192"/>
+<area shape="rect" id="node4" title=" " alt="" coords="105,167,163,192"/>
 </map>

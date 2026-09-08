@@ -1,5 +1,5 @@
-<map id="AudioEncodedDictionary" name="AudioEncodedDictionary">
-<area shape="rect" id="node1" title="Audio dictionary for encoded audio data with on&#45;demand decoding." alt="" coords="82,168,263,193"/>
+<map id="AudioEncodedDictionary&lt; Allocator &gt;" name="AudioEncodedDictionary&lt; Allocator &gt;">
+<area shape="rect" id="node1" title="Audio dictionary for encoded audio data with on&#45;demand decoding." alt="" coords="82,168,263,208"/>
 <area shape="rect" id="node2" href="$classAudioDictionary.html" title="Base class for audio dictionaries." alt="" coords="5,93,132,119"/>
 <area shape="rect" id="node3" href="$structSoundEntry.html" title="Structure for storing audio data for phonemes or diphones." alt="" coords="21,5,117,31"/>
 <area shape="rect" id="node4" title=" " alt="" coords="156,93,259,119"/>

@@ -1,5 +1,5 @@
-<map id="src/TinyTTSTools/Dictionary/PhonemeDictionaryBase.h" name="src/TinyTTSTools/Dictionary/PhonemeDictionaryBase.h">
-<area shape="rect" id="node1" title="Common interface for word&#45;&gt;phoneme lookup dictionaries." alt="" coords="5,5,207,45"/>
-<area shape="rect" id="node2" title=" " alt="" coords="27,93,97,119"/>
-<area shape="rect" id="node3" title=" " alt="" coords="122,93,181,119"/>
+<map id="src/TinyTTSTools/PhonemeDictionary/PhonemeDictionaryBase.h" name="src/TinyTTSTools/PhonemeDictionary/PhonemeDictionaryBase.h">
+<area shape="rect" id="node1" title="Common interface for word&#45;&gt;phoneme lookup dictionaries." alt="" coords="5,5,227,60"/>
+<area shape="rect" id="node2" title=" " alt="" coords="37,108,107,133"/>
+<area shape="rect" id="node3" title=" " alt="" coords="132,108,191,133"/>
 </map>

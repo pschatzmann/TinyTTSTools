@@ -1,5 +1,5 @@
-<map id="src/TinyTTSTools/Dictionary/PhonemeHuffmanCodes.h" name="src/TinyTTSTools/Dictionary/PhonemeHuffmanCodes.h">
-<area shape="rect" id="node1" title="Canonical Huffman codes for packed phoneme bytes." alt="" coords="5,5,207,45"/>
-<area shape="rect" id="node2" title=" " alt="" coords="26,93,93,119"/>
-<area shape="rect" id="node3" title=" " alt="" coords="117,93,188,119"/>
+<map id="src/TinyTTSTools/PhonemeDictionary/PhonemeHuffmanCodes.h" name="src/TinyTTSTools/PhonemeDictionary/PhonemeHuffmanCodes.h">
+<area shape="rect" id="node1" title="Canonical Huffman codes for packed phoneme bytes." alt="" coords="5,5,268,45"/>
+<area shape="rect" id="node2" title=" " alt="" coords="57,93,123,119"/>
+<area shape="rect" id="node3" title=" " alt="" coords="148,93,219,119"/>
 </map>

@@ -421,7 +421,7 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>previousOverlap_</b
 <tr class="separator:a544126aa20e547d44ddfa78299573359 inherit pro_attribs_classVocoderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4935eea882eab989b99134fe8bc1ef70 inherit pro_attribs_classVocoderBase"><td class="memItemLeft" align="right" valign="top"><a id="a4935eea882eab989b99134fe8bc1ef70" name="a4935eea882eab989b99134fe8bc1ef70"></a>
 <a class="el" href="classPhonemes.html">Phonemes</a>&#160;</td><td class="memItemRight" valign="bottom"><b>translator_</b></td></tr>
-<tr class="memdesc:a4935eea882eab989b99134fe8bc1ef70 inherit pro_attribs_classVocoderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structPhoneme.html" title="Phoneme structure for TTS processing.">Phoneme</a> translator for converting between representation types. <br /></td></tr>
+<tr class="memdesc:a4935eea882eab989b99134fe8bc1ef70 inherit pro_attribs_classVocoderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Phoneme translator for converting between representation types. <br /></td></tr>
 <tr class="separator:a4935eea882eab989b99134fe8bc1ef70 inherit pro_attribs_classVocoderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
@@ -433,7 +433,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Compact real-time formant (parallel resonator) speech synthesizer. </p>
-<p>Uses a table of phoneme rules (see <a class="el" href="FormantRules_8h_source.html">FormantRules.h</a>) defining formant frequencies, bandwidths, amplitudes, flags, diphthong targets and default durations. A custom rule table can be injected via the constructor for alternate phoneme sets. The engine adds basic naturalness features (jitter, shimmer, spectral tilt, diphthong interpolation, stress shaping, nasal notches, sibilant control and adaptive RMS leveling). </p>
+<p>Uses a table of phoneme rules (see <a class="el" href="FormantRules_8h_source.html">FormantRules.h</a>) defining formant frequencies, bandwidths, amplitudes, flags, diphthong targets and default durations. A custom rule table can be injected via the constructor for alternate phoneme sets. The engine adds basic naturalness features (jitter, shimmer, spectral tilt, diphthong interpolation, stress shaping, nasal notches, sibilant control and adaptive RMS leveling). </p><dl class="section note"><dt>Note</dt><dd>Memory footprint: no audio data required (procedural synthesis) &ndash; the smallest flash footprint of the available vocoders, at the cost of a more robotic sound. See <a href="https://github.com/pschatzmann/TinyTTSTools/blob/main/docs/MEMORY.md">https://github.com/pschatzmann/TinyTTSTools/blob/main/docs/MEMORY.md</a> for a comparison table across all vocoders and G2P models. </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a5819713969ac11ef50c465690233a893" name="a5819713969ac11ef50c465690233a893"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5819713969ac11ef50c465690233a893">&#9670;&#160;</a></span>FormantVocoder()</h2>

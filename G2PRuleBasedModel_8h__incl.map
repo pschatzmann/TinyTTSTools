@@ -3,9 +3,9 @@
 <area shape="rect" id="node2" title=" " alt="" coords="5,93,72,119"/>
 <area shape="rect" id="node3" title=" " alt="" coords="143,240,201,265"/>
 <area shape="rect" id="node4" href="$G2PModelBase_8h.html" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="147,93,279,119"/>
-<area shape="rect" id="node8" href="$StringUtils_8h.html" title="String utility functions for TinyTTSTools." alt="" coords="369,167,522,192"/>
+<area shape="rect" id="node7" href="$StringUtils_8h.html" title="String utility functions for TinyTTSTools." alt="" coords="345,93,498,119"/>
 <area shape="rect" id="node5" href="$TTSTypes_8h.html" title="Core types and structures for TinyTTSTools." alt="" coords="197,167,344,192"/>
-<area shape="rect" id="node6" title=" " alt="" coords="231,240,297,265"/>
-<area shape="rect" id="node7" title=" " alt="" coords="322,240,385,265"/>
-<area shape="rect" id="node9" title=" " alt="" coords="409,240,495,265"/>
+<area shape="rect" id="node6" title=" " alt="" coords="237,240,304,265"/>
+<area shape="rect" id="node8" title=" " alt="" coords="419,167,504,192"/>
+<area shape="rect" id="node9" title=" " alt="" coords="529,167,591,192"/>
 </map>

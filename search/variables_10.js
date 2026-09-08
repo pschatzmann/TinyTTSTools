@@ -19,6 +19,5 @@ var searchData=
   ['stressenergyboostsecondary_16',['stressEnergyBoostSecondary',['../structFormantVoiceConfig.html#a504fae90290746ec418be377e06cddbc',1,'FormantVoiceConfig']]],
   ['stresspitchriseprimary_17',['stressPitchRisePrimary',['../structFormantVoiceConfig.html#a48db64d3d9fb3183614c272e9f7c177a',1,'FormantVoiceConfig']]],
   ['stresspitchrisesecondary_18',['stressPitchRiseSecondary',['../structFormantVoiceConfig.html#afcaac12d12db60f8f0f1875d234b5a6b',1,'FormantVoiceConfig']]],
-  ['symbol_19',['symbol',['../structPhoneme.html#a1e4cce7fa16d3863b5fbf427b2df08a3',1,'Phoneme']]],
-  ['synth_5f_20',['synth_',['../classTinyTTSTools.html#ab42b3811b35108a4a8c14a03f286edff',1,'TinyTTSTools']]]
+  ['synth_5f_19',['synth_',['../classTinyTTSTools.html#ab42b3811b35108a4a8c14a03f286edff',1,'TinyTTSTools']]]
 ];

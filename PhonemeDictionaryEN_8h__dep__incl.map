@@ -1,5 +1,5 @@
-<map id="src/TinyTTSTools/Dictionary/PhonemeDictionaryEN.h" name="src/TinyTTSTools/Dictionary/PhonemeDictionaryEN.h">
-<area shape="rect" id="node1" title="Human&#45;readable source for the built&#45;in English phoneme dictionary." alt="" coords="53,5,255,45"/>
+<map id="src/TinyTTSTools/PhonemeDictionary/PhonemeDictionaryEN.h" name="src/TinyTTSTools/PhonemeDictionary/PhonemeDictionaryEN.h">
+<area shape="rect" id="node1" title="Human&#45;readable source for the built&#45;in English phoneme dictionary." alt="" coords="29,5,279,45"/>
 <area shape="rect" id="node2" href="$G2PDictionaryModel_8h.html" title="Dictionary&#45;based G2P model for TinyTTSTools." alt="" coords="69,93,239,133"/>
 <area shape="rect" id="node3" href="$TinyTTSTools_8h.html" title="Main Text&#45;to&#45;Speech engine class for TinyTTSTools." alt="" coords="5,284,148,309"/>
 <area shape="rect" id="node4" href="$G2PDictionaryAndRulesModel_8h.html" title="Combined dictionary and rules&#45;based G2P model for TinyTTSTools." alt="" coords="38,189,270,229"/>

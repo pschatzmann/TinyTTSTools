@@ -1,5 +1,7 @@
 <map id="PhonemeDictionaryBase" name="PhonemeDictionaryBase">
-<area shape="rect" id="node1" title="Common interface implemented by CompactPhonemeDictionary and CompressedPhonemeDictionary,..." alt="" coords="139,5,322,31"/>
-<area shape="rect" id="node2" href="$classCompactPhonemeDictionary.html" title="Binary&#45;search word&#45;&gt;phoneme dictionary backed by four flat, flash&#45;resident arrays." alt="" coords="5,79,213,104"/>
-<area shape="rect" id="node3" href="$classCompressedPhonemeDictionary.html" title="Same word&#45;&gt;phoneme lookup as CompactPhonemeDictionary, but smaller on flash for large (&gt;10k word) dat..." alt="" coords="238,79,469,104"/>
+<area shape="rect" id="node1" title="Common interface implemented by CompactPhonemeDictionary and CompressedPhonemeDictionary,..." alt="" coords="5,84,188,109"/>
+<area shape="rect" id="node2" href="$classCompactPhonemeDictionary.html" title="Binary&#45;search word&#45;&gt;phoneme dictionary backed by four flat, flash&#45;resident arrays." alt="" coords="247,5,455,31"/>
+<area shape="rect" id="node3" href="$classCompressedPhonemeDictionary.html" title="Same word&#45;&gt;phoneme lookup as CompactPhonemeDictionary, but smaller on flash for large (&gt;10k word) dat..." alt="" coords="236,55,467,80"/>
+<area shape="rect" id="node4" href="$classCompressedPhonemeDictionarySD.html" title="Loads a CompressedPhonemeDictionary&#39;s six backing arrays from a single binary file (SD card,..." alt="" coords="236,105,467,145"/>
+<area shape="rect" id="node5" href="$classDynamicPhonemeDictionary.html" title="A word&#45;&gt;phoneme dictionary you can add() to at runtime, one entry at a time." alt="" coords="247,169,455,209"/>
 </map>

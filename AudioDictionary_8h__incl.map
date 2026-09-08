@@ -1,11 +1,10 @@
-<map id="src/TinyTTSTools/Dictionary/AudioDictionary.h" name="src/TinyTTSTools/Dictionary/AudioDictionary.h">
-<area shape="rect" id="node1" title="Abstract base class for audio dictionaries in TinyTTSTools." alt="" coords="136,5,337,45"/>
-<area shape="rect" id="node2" title=" " alt="" coords="9,240,80,265"/>
-<area shape="rect" id="node3" title=" " alt="" coords="410,93,477,119"/>
-<area shape="rect" id="node4" href="$TTSTypes_8h.html" title="Core types and structures for TinyTTSTools." alt="" coords="239,93,386,119"/>
-<area shape="rect" id="node8" href="$SoundEntry_8h.html" title="Sound entry structure for audio dictionary storage." alt="" coords="109,93,215,119"/>
-<area shape="rect" id="node5" title=" " alt="" coords="195,240,262,265"/>
-<area shape="rect" id="node6" title=" " alt="" coords="317,167,375,192"/>
-<area shape="rect" id="node7" title=" " alt="" coords="400,167,463,192"/>
-<area shape="rect" id="node9" href="$AudioFormatDecoder_8h.html" title="Pluggable sample&#45;format decoders used by SoundEntry." alt="" coords="21,167,191,192"/>
+<map id="src/TinyTTSTools/SoundDictionary/AudioDictionary.h" name="src/TinyTTSTools/SoundDictionary/AudioDictionary.h">
+<area shape="rect" id="node1" title="Abstract base class for audio dictionaries in TinyTTSTools." alt="" coords="82,5,323,45"/>
+<area shape="rect" id="node2" title=" " alt="" coords="8,240,79,265"/>
+<area shape="rect" id="node3" title=" " alt="" coords="376,93,442,119"/>
+<area shape="rect" id="node4" href="$TTSTypes_8h.html" title="Core types and structures for TinyTTSTools." alt="" coords="205,93,352,119"/>
+<area shape="rect" id="node7" href="$SoundEntry_8h.html" title="Sound entry structure for audio dictionary storage." alt="" coords="74,93,181,119"/>
+<area shape="rect" id="node5" title=" " alt="" coords="194,240,261,265"/>
+<area shape="rect" id="node6" title=" " alt="" coords="316,167,374,192"/>
+<area shape="rect" id="node8" href="$AudioFormatDecoder_8h.html" title="Pluggable sample&#45;format decoders used by SoundEntry." alt="" coords="20,167,190,192"/>
 </map>

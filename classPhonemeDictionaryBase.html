@@ -85,9 +85,11 @@ Inheritance diagram for PhonemeDictionaryBase:</div>
 <div class="dyncontent">
 <div class="center"><img src="classPhonemeDictionaryBase__inherit__graph.png" border="0" usemap="#aPhonemeDictionaryBase_inherit__map" alt="Inheritance graph"/></div>
 <map name="aPhonemeDictionaryBase_inherit__map" id="aPhonemeDictionaryBase_inherit__map">
-<area shape="rect" title="Common interface implemented by CompactPhonemeDictionary and CompressedPhonemeDictionary,..." alt="" coords="139,5,322,31"/>
-<area shape="rect" href="classCompactPhonemeDictionary.html" title="Binary&#45;search word&#45;&gt;phoneme dictionary backed by four flat, flash&#45;resident arrays." alt="" coords="5,79,213,104"/>
-<area shape="rect" href="classCompressedPhonemeDictionary.html" title="Same word&#45;&gt;phoneme lookup as CompactPhonemeDictionary, but smaller on flash for large (&gt;10k word) dat..." alt="" coords="238,79,469,104"/>
+<area shape="rect" title="Common interface implemented by CompactPhonemeDictionary and CompressedPhonemeDictionary,..." alt="" coords="5,84,188,109"/>
+<area shape="rect" href="classCompactPhonemeDictionary.html" title="Binary&#45;search word&#45;&gt;phoneme dictionary backed by four flat, flash&#45;resident arrays." alt="" coords="247,5,455,31"/>
+<area shape="rect" href="classCompressedPhonemeDictionary.html" title="Same word&#45;&gt;phoneme lookup as CompactPhonemeDictionary, but smaller on flash for large (&gt;10k word) dat..." alt="" coords="236,55,467,80"/>
+<area shape="rect" href="classCompressedPhonemeDictionarySD.html" title="Loads a CompressedPhonemeDictionary&#39;s six backing arrays from a single binary file (SD card,..." alt="" coords="236,105,467,145"/>
+<area shape="rect" href="classDynamicPhonemeDictionary.html" title="A word&#45;&gt;phoneme dictionary you can add() to at runtime, one entry at a time." alt="" coords="247,169,455,209"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -138,7 +140,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>lookup</b> (co
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classCompactPhonemeDictionary.html#a470fe37aad149ebff896eac36d84db0f">CompactPhonemeDictionary</a>.</p>
+<p>Implemented in <a class="el" href="classCompactPhonemeDictionary.html#a470fe37aad149ebff896eac36d84db0f">CompactPhonemeDictionary</a>, and <a class="el" href="classDynamicPhonemeDictionary.html#ab047501dc1817a2849008c01cd1f83a9">DynamicPhonemeDictionary&lt; Allocator &gt;</a>.</p>
 
 </div>
 </div>
@@ -170,7 +172,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>lookup</b> (co
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/TinyTTSTools/Dictionary/<a class="el" href="PhonemeDictionaryBase_8h_source.html">PhonemeDictionaryBase.h</a></li>
+<li>src/TinyTTSTools/PhonemeDictionary/<a class="el" href="PhonemeDictionaryBase_8h_source.html">PhonemeDictionaryBase.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

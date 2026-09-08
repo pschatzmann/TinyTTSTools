@@ -19,7 +19,7 @@ var searchData=
   ['ttsconfig_16',['TTSConfig',['../structTTSConfig.html',1,'']]],
   ['ttsexampleutils_2eh_17',['TTSExampleUtils.h',['../TTSExampleUtils_8h.html',1,'']]],
   ['ttslogger_2eh_18',['TTSLogger.h',['../TTSLogger_8h.html',1,'']]],
-  ['ttsloggerclass_19',['TTSLoggerCLass',['../classTTSLoggerCLass.html',1,'']]],
+  ['ttsloggerclass_19',['TTSLoggerClass',['../classTTSLoggerClass.html',1,'']]],
   ['ttsloglevel_20',['TTSLogLevel',['../TTSLogger_8h.html#a47860ac4df7c27c348a7f5549e2c498f',1,'TTSLogger.h']]],
   ['ttstypes_2eh_21',['TTSTypes.h',['../TTSTypes_8h.html',1,'']]]
 ];

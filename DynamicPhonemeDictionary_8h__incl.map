@@ -1,0 +1,9 @@
+<map id="src/TinyTTSTools/PhonemeDictionary/DynamicPhonemeDictionary.h" name="src/TinyTTSTools/PhonemeDictionary/DynamicPhonemeDictionary.h">
+<area shape="rect" id="node1" title="Runtime&#45;mutable word&#45;&gt;phoneme dictionary." alt="" coords="51,5,341,45"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,93,91,119"/>
+<area shape="rect" id="node3" title=" " alt="" coords="208,167,267,192"/>
+<area shape="rect" id="node4" title=" " alt="" coords="166,93,226,119"/>
+<area shape="rect" id="node5" title=" " alt="" coords="250,93,313,119"/>
+<area shape="rect" id="node6" href="$PhonemeDictionaryBase_8h.html" title="Common interface for word&#45;&gt;phoneme lookup dictionaries." alt="" coords="337,93,532,119"/>
+<area shape="rect" id="node7" title=" " alt="" coords="399,167,470,192"/>
+</map>

@@ -1,6 +1,7 @@
 var searchData=
 [
   ['sdsoundentry_0',['SDSoundEntry',['../classSDSoundEntry.html',1,'']]],
-  ['soundentry_1',['SoundEntry',['../structSoundEntry.html',1,'']]],
-  ['stringutils_2',['StringUtils',['../classStringUtils.html',1,'']]]
+  ['sdsoundentry_3c_20std_3a_3aallocator_3c_20uint8_5ft_20_3e_20_3e_1',['SDSoundEntry&lt; std::allocator&lt; uint8_t &gt; &gt;',['../classSDSoundEntry.html',1,'']]],
+  ['soundentry_2',['SoundEntry',['../structSoundEntry.html',1,'']]],
+  ['stringutils_3',['StringUtils',['../classStringUtils.html',1,'']]]
 ];

@@ -1,10 +1,10 @@
 <map id="src/TinyTTSTools/G2P/G2PHybridModel.h" name="src/TinyTTSTools/G2P/G2PHybridModel.h">
-<area shape="rect" id="node1" title="Convert word to phonemes using multiple models in priority order." alt="" coords="108,5,268,45"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,240,64,265"/>
-<area shape="rect" id="node3" title=" " alt="" coords="213,240,275,265"/>
-<area shape="rect" id="node4" href="$G2PModelBase_8h.html" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="67,93,199,119"/>
-<area shape="rect" id="node7" href="$StringUtils_8h.html" title="String utility functions for TinyTTSTools." alt="" coords="282,167,435,192"/>
-<area shape="rect" id="node5" href="$TTSTypes_8h.html" title="Core types and structures for TinyTTSTools." alt="" coords="60,167,207,192"/>
-<area shape="rect" id="node6" title=" " alt="" coords="100,240,167,265"/>
-<area shape="rect" id="node8" title=" " alt="" coords="316,240,401,265"/>
+<area shape="rect" id="node1" title="Convert word to phonemes using multiple models in priority order." alt="" coords="129,5,289,45"/>
+<area shape="rect" id="node2" title=" " alt="" coords="262,240,321,265"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,167,68,192"/>
+<area shape="rect" id="node4" href="$G2PModelBase_8h.html" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="304,93,436,119"/>
+<area shape="rect" id="node7" href="$StringUtils_8h.html" title="String utility functions for TinyTTSTools." alt="" coords="75,93,228,119"/>
+<area shape="rect" id="node5" href="$TTSTypes_8h.html" title="Core types and structures for TinyTTSTools." alt="" coords="354,167,501,192"/>
+<area shape="rect" id="node6" title=" " alt="" coords="394,240,461,265"/>
+<area shape="rect" id="node8" title=" " alt="" coords="143,167,229,192"/>
 </map>
