@@ -233,9 +233,10 @@ class DiphoneVocoder : public ConcatenatedAudioVocoder {
 
       // Calculate duration for the diphone: each side contributes roughly
       // half its natural phoneme duration, matching how the audio itself
-      // was generated.
-      uint16_t duration1 = phonemes_.getPhonemeDuration(phonemeType, phonemes[i]) / 2;
-      uint16_t duration2 = phonemes_.getPhonemeDuration(phonemeType, phonemes[i + 1]) / 2;
+      // was generated -- except SIL, a special case (see
+      // diphoneSideDurationMs()'s doc).
+      uint16_t duration1 = diphoneSideDurationMs(phonemeType, phonemes[i]);
+      uint16_t duration2 = diphoneSideDurationMs(phonemeType, phonemes[i + 1]);
       uint16_t diphoneDuration = resolveDuration(duration1 + duration2, params);
 
       // Get current diphone entry
@@ -257,6 +258,31 @@ class DiphoneVocoder : public ConcatenatedAudioVocoder {
     }
 
     return success;
+  }
+
+  // The fixed silence portion generate_relevant_diphones.sh actually bakes
+  // into every SIL_<phoneme>/<phoneme>_SIL recording's boundary side (its
+  // own SILENCE_BOUNDARY_MS constant) -- unrelated to SIL's own
+  // Phonemes.h table duration (400ms), which is how long a real inter-word
+  // *pause* should last, not how much silence a diphone recording's edge
+  // contains. Confirmed empirically: real SIL_HH/HH_SIL/SIL_T/T_SIL
+  // recordings measure ~87.5-128ms total, matching this constant's
+  // contribution + the other side's real half-duration; using SIL's own
+  // 400ms/2=200ms here instead overstated every boundary diphone's target
+  // by 100-160ms. That happened to have no audible effect only because
+  // processUnitCombination() treats the duration as a truncation ceiling,
+  // never a stretch/pad target -- an inflated-but-unenforced number is
+  // still wrong to compute, and a future change to that consumption logic
+  // could turn this into real dead-air at every word boundary.
+  static constexpr uint16_t kBoundarySilenceMs = 50;
+
+  /// One side's duration contribution to a diphone: half of a real
+  /// phoneme's natural duration, or kBoundarySilenceMs for the SIL side of
+  /// a word-boundary diphone (see kBoundarySilenceMs's own doc for why
+  /// SIL needs different handling here than every other phoneme).
+  uint16_t diphoneSideDurationMs(PhonemeType phonemeType, const std::string& phoneme) const {
+    if (phoneme == "SIL") return kBoundarySilenceMs;
+    return phonemes_.getPhonemeDuration(phonemeType, phoneme) / 2;
   }
 
   /**

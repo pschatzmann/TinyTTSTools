@@ -35,6 +35,7 @@ Useful CMake options (pass as `-D<OPTION>=<VALUE>` to the `cmake ..` step):
 | `BUILD_EXAMPLES` | `ON` | Build everything under `examples/` |
 | `BUILD_TESTS` | `ON` | Build the regression tests under `tests/` |
 | `ADD_AUDIO_TOOLS` | `ON` | Fetch arduino-audio-tools and build the audio-output examples (`AudioFormant`, `AudioPhoneme`, `AudioBiphones`) that need it |
+| `BUILD_DESKTOP_MAIN` | `OFF` | Build the desktop CLI (`./tinyttstools`, see [desktop/README.md](../desktop/README.md)) -- the actual way to hear synthesized speech on desktop; see the note below about why the `.ino` examples can't do this directly |
 
 For example, a fast library+tests-only configure with no network
 dependency:
@@ -100,12 +101,39 @@ Examples that don't need `ADD_AUDIO_TOOLS` (`G2PCustomDictionary`,
 `G2PNeural` -- phoneme conversion only, no audio output) build even with
 that option off.
 
-Note: example binaries call `TTSExample::waitForSerial()` in `setup()`,
-which blocks until a serial connection is available -- on real hardware
-that's the point (wait for you to open the serial monitor), but it means
-running an example binary directly in a desktop/CI shell will hang. Build
-them to verify they compile; run them on an actual board (or adapt
-`setup()` for a one-shot desktop demo, as needed) to see their output.
+Note: example binaries call `TTSExample::waitForSerial()` in `setup()` --
+on real hardware that's the point (wait for you to open the serial
+monitor), and on the desktop emulation it turns out `Serial` reports
+ready immediately, so `setup()`/`loop()` actually run rather than hanging
+as you might expect. That means running an example binary directly *does*
+synthesize and play audio through the desktop's real audio device --  but
+`loop()` repeats forever (matching the real-hardware examples' own
+`while(true)`-style behavior), so the process itself never exits on its
+own; run it under `timeout` for a one-shot listen (e.g.
+`timeout 15 ./examples/AudioPhoneme/AudioPhoneme`), or use the desktop CLI
+below for a proper one-shot, scriptable way to render or play arbitrary
+text.
+
+## Desktop CLI (`./tinyttstools`)
+
+For actually listening to (or capturing) synthesized speech on desktop --
+rather than building an `.ino` example and guessing at its hard-coded
+phrase -- build the desktop CLI:
+
+```bash
+cmake .. -DBUILD_DESKTOP_MAIN=ON
+cmake --build . --target tinyttstools_desktop -j4
+./desktop/tinyttstools "Hello world"                     # plays through your speakers
+./desktop/tinyttstools -o out.wav "Hello world"           # writes a WAV file instead
+echo "Hello world" | ./desktop/tinyttstools --stdout | aplay  # pipe-friendly
+```
+
+See [desktop/README.md](../desktop/README.md) for the full option list
+(`--vocoder formant|phoneme|diphone`, `--full-dict`, `--file`, ...). This
+target needs `ADD_AUDIO_TOOLS=ON` (the default) for `MiniAudioStream`
+playback, and fetches (or reuses a local sibling checkout of)
+[miniaudio](https://github.com/mackron/miniaudio) the first time it's
+configured.
 
 ## Troubleshooting
 
