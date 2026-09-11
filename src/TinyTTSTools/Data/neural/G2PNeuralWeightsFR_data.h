@@ -2,10 +2,9 @@
 // fallback -- trained by setup/neural-fr/train_g2p_model.py,
 // exported by setup/neural-fr/export_g2p_model.py. See
 // setup/neural-fr/README.md (or docs/SETUP.md) for how to retrain.
-// NOT wired into G2PNeuralModel.h yet -- its PHONEME_TABLE is
-// English-specific; a French-language model needs its own
-// arpabetForIndex()-equivalent table matching this model's
-// vocab.py index-for-index -- see docs/ADDING_A_LANGUAGE.md.
+// Wired into G2PNeuralModel.h via G2PNeuralLanguage::FR --
+// pass that to begin() alongside this array (see
+// G2PNeuralModel.h's class doc and docs/ADDING_A_LANGUAGE.md).
 //
 // Real payload is 939276 bytes despite this header's larger
 // text size (C string literal octal escapes, ~4 bytes of source

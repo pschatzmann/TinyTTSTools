@@ -80,18 +80,27 @@ Novel words (no dictionary could ever contain these):
 
 ## Multi-language note
 
-The architecture is parametric -- hidden size, vocabulary sizes, and the
-entire output phoneme table are read from the weight file, not hardcoded.
-The only English-specific code is `graphemeIndex()` (a plain a-z lookup)
-and the output-index-to-ARPAbet table (metadata of this specific trained
-model). A different language needs its own weights and its own
-`graphemeIndex()`/output table -- not new engine code. This is already
-underway: `setup/neural-de/fr/es/` run the same training pipeline
-for German/French/Spanish (built from the OLaPh corpus); French (94.8%
-validation exact-match), Spanish (98.7%) and German (71.2%) are all
-trained but not yet wired into `G2PNeuralModel.h`'s output table. See
-[`docs/ADDING_A_LANGUAGE.md`](../../docs/ADDING_A_LANGUAGE.md) for the
-full picture.
+The architecture is parametric -- hidden size and vocabulary sizes are read
+from the weight file, not hardcoded. The only per-language code is
+`graphemeIndexFor()` (grapheme -> vocab index, UTF-8-aware for accented
+letters) and `symbolForIndex()` (output-index-to-phoneme table, metadata
+of that specific trained model) -- selected via the `G2PNeuralLanguage`
+enum passed to `begin()`. German, French and Spanish are wired up the same
+way as English:
+
+```cpp
+#include "TinyTTSTools/Data/neural/G2PNeuralWeightsDE_data.h"
+
+g2p.getNeuralModel().begin(G2P_NEURAL_MODEL_WEIGHTS_DE, G2P_NEURAL_MODEL_WEIGHTS_DE_LEN,
+                            G2PNeuralLanguage::DE);
+```
+
+`setup/neural-de/fr/es/` run the same training pipeline for
+German/French/Spanish (built from the OLaPh corpus): French reached 94.8%
+validation exact-match, Spanish 98.7%, and German 71.2% (German's heavier
+compounding and less regular orthography make it a genuinely harder case).
+See [`docs/ADDING_A_LANGUAGE.md`](../../docs/ADDING_A_LANGUAGE.md) for the
+full picture, including how to add a fifth language.
 
 ## Related examples
 

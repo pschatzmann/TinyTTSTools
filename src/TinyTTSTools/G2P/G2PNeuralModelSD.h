@@ -39,16 +39,17 @@
  * buffer and the model share one lifetime -- same zero-copy convention
  * `G2PNeuralModel::begin()` itself already documents.
  *
- * Whichever weights file you load must already have a matching
- * `arpabetForIndex()`/output table compiled into `G2PNeuralModel.h` --
- * that table is fixed metadata of one specific trained model, not
- * something a weights file carries or this class infers (see
- * `G2PNeuralModel`'s own class doc, and docs/ADDING_A_LANGUAGE.md for a
- * non-English model needing its own table).
+ * Whichever weights file you load must be paired with the matching
+ * `G2PNeuralLanguage` (default EN) -- each language has its own
+ * grapheme/phoneme vocabulary compiled into `G2PNeuralModel.h`
+ * (`graphemeIndexFor()`/`symbolForIndex()`); mismatching the file and the
+ * language argument silently produces garbage output, since the weights
+ * carry no self-describing language tag (see `G2PNeuralModel`'s own class
+ * doc, and docs/ADDING_A_LANGUAGE.md).
  *
  * @code
  * G2PNeuralModelSD<PsramAllocator<uint8_t>> neural;
- * neural.begin("/neural/g2p_model_en.bin");
+ * neural.begin("/neural/g2p_model_en.bin");  // or _de/_fr/_es.bin with the matching language
  * g2p.getNeuralModel(); // or use `neural` directly as a G2PModelBase
  * @endcode
  */
@@ -59,12 +60,14 @@ class G2PNeuralModelSD : public G2PModelBase {
    * @brief Load the model's weights from `filePath`
    * @param filePath Path to a file written by `export_g2p_model.py`'s
    * `--output-bin` (default `g2p_model.bin`)
+   * @param language Which grapheme/phoneme vocabulary `filePath`'s weights
+   * were trained with -- must match (see class doc above)
    * @return true if the file was read and its header is valid; false on a
    * missing/short/truncated file or a malformed header (in which case this
    * model behaves as uninitialized -- `wordToPhonemes()` always returns
    * "", matching a never-`begin()`'d `G2PNeuralModel`)
    */
-  bool begin(const char* filePath) {
+  bool begin(const char* filePath, G2PNeuralLanguage language = G2PNeuralLanguage::EN) {
     buffer_.clear();
     model_ = G2PNeuralModel();
     initialized_ = false;  // G2PModelBase's flag -- distinct from model_'s own
@@ -86,7 +89,7 @@ class G2PNeuralModelSD : public G2PModelBase {
       return false;
     }
 
-    if (!model_.begin(buffer_.data(), buffer_.size())) {
+    if (!model_.begin(buffer_.data(), buffer_.size(), language)) {
       // G2PNeuralModel::begin() already logged the specific parse failure.
       buffer_.clear();
       return false;

@@ -19,8 +19,8 @@ with a small vocabulary and `FormantVocoder`-only audio).
 | ...also SD/PSRAM-loadable | ✅ | ✅ | ✅ | `data/dictionary/olaph_{de,fr,es}.bin` + `CompressedPhonemeDictionaryWideSD` |
 | Neural G2P vocabulary + data prep | ✅ scaffolded | ✅ scaffolded | ✅ scaffolded | `setup/neural-de/fr/es/vocab.py`, `prepare_data.py` |
 | Neural G2P **trained weights** | ✅ trained (71.2% val exact-match) | ✅ trained (94.8% val exact-match) | ✅ trained (98.7% val exact-match) | `setup/neural-de/fr/es/g2p_model.pt` |
-| ...wired into `G2PNeuralModel.h` | ❌ | ❌ (weights exist, no output table yet) | ❌ (same) | -- |
-| Desktop CLI wiring | ✅ `--language de/fr/es` | ✅ | ✅ | `desktop/DesktopMain.h` |
+| ...wired into `G2PNeuralModel.h` | ✅ `G2PNeuralLanguage::DE` | ✅ `G2PNeuralLanguage::FR` | ✅ `G2PNeuralLanguage::ES` | -- |
+| Desktop CLI wiring | ✅ `--language de/fr/es`, `--neural` | ✅ | ✅ | `desktop/DesktopMain.h` |
 | Diphone audio (`DiphoneVocoder`) | ❌ none | ❌ none | ❌ none | -- |
 
 None of the three has a hand-verified pronunciation corpus the way English
@@ -299,10 +299,15 @@ see [MEMORY.md](MEMORY.md).
    `python3 export_g2p_model.py && python3 validate_export.py`. This also
    copies the binary to `data/neural/g2p_model_{xx}.bin` (SD/PSRAM,
    `G2PNeuralModelSD`) automatically -- see `data/README.md`.
-6. Update `G2PNeuralModel.h` (or a new language-specific equivalent) with
-   a `PHONEME_TABLE` matching your `vocab.py` index-for-index -- that
-   table is fixed metadata of one specific trained model, not inferred
-   automatically.
+6. Add a `G2PNeuralLanguage` enumerator (in `G2PNeuralModel.h`) for the
+   new language, plus its own case in `graphemeIndexFor()` (grapheme ->
+   vocab index, matching `vocab.py`'s `GRAPHEMES` order -- watch for
+   accented letters needing `decodeUtf8()`'s multi-byte handling, not just
+   plain a-z) and `symbolForIndex()` (a `PHONEME_TABLE` matching
+   `vocab.py` index-for-index). Both tables are fixed metadata of one
+   specific trained model, not inferred automatically from the weights
+   file. Call `begin(weights, len, G2PNeuralLanguage::XX)` with the
+   matching enumerator -- see DE/FR/ES for the pattern already wired up.
 
 ## Step 8: Tests
 

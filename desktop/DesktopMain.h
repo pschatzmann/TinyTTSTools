@@ -35,6 +35,9 @@
 #include "TinyTTSTools/G2P/G2PHybridModel.h"
 #include "TinyTTSTools/G2P/G2PNeuralModel.h"
 #include "TinyTTSTools/Data/neural/G2PNeuralWeightsEN_data.h"
+#include "TinyTTSTools/Data/neural/G2PNeuralWeightsDE_data.h"
+#include "TinyTTSTools/Data/neural/G2PNeuralWeightsFR_data.h"
+#include "TinyTTSTools/Data/neural/G2PNeuralWeightsES_data.h"
 
 #include <unistd.h>
 
@@ -278,14 +281,12 @@ class DesktopMain {
                   "  --full-dict           Use the full ~123k-word CMU dictionary instead of the\n"
                   "                        small built-in one (see docs/TUTORIAL.md). English\n"
                   "                        (--language en) only -- ignored otherwise.\n"
-                  "  --neural              Add the neural GRU G2P fallback (~970KB weights) for\n"
-                  "                        genuinely novel words (proper nouns, made-up words)\n"
-                  "                        that the dictionary doesn't cover, tried before the\n"
-                  "                        rule-based fallback. English (--language en) only for\n"
-                  "                        now -- trained weights for de/fr/es exist but aren't\n"
-                  "                        yet wired into the engine's output table (see\n"
-                  "                        docs/ADDING_A_LANGUAGE.md), so --neural is ignored\n"
-                  "                        (with a warning) for other languages.\n"
+                  "  --neural              Add the neural GRU G2P fallback (~970KB-1.1MB weights,\n"
+                  "                        depending on --language) for genuinely novel words\n"
+                  "                        (proper nouns, made-up words) that the dictionary\n"
+                  "                        doesn't cover, tried before the rule-based fallback.\n"
+                  "                        Works with any --language (en/de/fr/es), each using\n"
+                  "                        its own trained weights and vocabulary.\n"
                   "\n"
                   "  -h, --help            Show this help text.\n",
                   prog, prog, prog);
@@ -417,18 +418,26 @@ class DesktopMain {
     g2pDictionaryModel_.useCompactDictionary(*dict);
     g2p_.addModel(g2pDictionaryModel_);
     if (opt.use_neural) {
-      if (opt.language == "en") {
-        if (g2pNeuralModel_.begin(G2P_NEURAL_MODEL_WEIGHTS_EN, G2P_NEURAL_MODEL_WEIGHTS_EN_LEN)) {
-          g2p_.addModel(g2pNeuralModel_);
-        } else {
-          std::fprintf(stderr, "--neural: failed to load neural G2P weights -- falling back to rules only\n");
-        }
+      const uint8_t* weights = G2P_NEURAL_MODEL_WEIGHTS_EN;
+      size_t weights_len = G2P_NEURAL_MODEL_WEIGHTS_EN_LEN;
+      G2PNeuralLanguage neural_lang = G2PNeuralLanguage::EN;
+      if (opt.language == "de") {
+        weights = G2P_NEURAL_MODEL_WEIGHTS_DE;
+        weights_len = G2P_NEURAL_MODEL_WEIGHTS_DE_LEN;
+        neural_lang = G2PNeuralLanguage::DE;
+      } else if (opt.language == "fr") {
+        weights = G2P_NEURAL_MODEL_WEIGHTS_FR;
+        weights_len = G2P_NEURAL_MODEL_WEIGHTS_FR_LEN;
+        neural_lang = G2PNeuralLanguage::FR;
+      } else if (opt.language == "es") {
+        weights = G2P_NEURAL_MODEL_WEIGHTS_ES;
+        weights_len = G2P_NEURAL_MODEL_WEIGHTS_ES_LEN;
+        neural_lang = G2PNeuralLanguage::ES;
+      }
+      if (g2pNeuralModel_.begin(weights, weights_len, neural_lang)) {
+        g2p_.addModel(g2pNeuralModel_);
       } else {
-        std::fprintf(stderr,
-                      "--neural is English-only for now (de/fr/es weights exist but aren't yet "
-                      "wired into the engine's output table -- see docs/ADDING_A_LANGUAGE.md) "
-                      "-- ignoring for --language %s\n",
-                      opt.language.c_str());
+        std::fprintf(stderr, "--neural: failed to load neural G2P weights -- falling back to rules only\n");
       }
     }
     g2p_.addModel(*rules);
@@ -516,7 +525,7 @@ class DesktopMain {
   }
 
   G2PDictionaryModel g2pDictionaryModel_;
-  G2PNeuralModel g2pNeuralModel_;  ///< neural GRU fallback, opt-in via --neural (EN only)
+  G2PNeuralModel g2pNeuralModel_;  ///< neural GRU fallback, opt-in via --neural (all 4 languages)
   G2PRuleBasedModelEN g2pRulesEN_;
   G2PRuleBasedModelDE g2pRulesDE_;
   G2PRuleBasedModelFR g2pRulesFR_;

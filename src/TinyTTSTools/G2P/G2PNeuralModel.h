@@ -21,6 +21,19 @@
 #include "../Basic/TTSLogger.h"
 
 /**
+ * @brief Which language-specific grapheme/phoneme vocabulary a
+ * G2PNeuralModel should decode with.
+ * @details Each language was trained with its own grapheme set (input
+ * alphabet, including that language's accented letters) and its own
+ * phoneme output table (see setup/neural-{en,de,fr,es}/vocab.py) -- the
+ * weights blob (Data/neural/G2PNeuralWeights{EN,DE,FR,ES}_data.h) only
+ * carries the trained numbers, not which vocabulary they were trained
+ * against, so the caller must say which one via begin()'s `language`
+ * parameter, matching the weights file passed alongside it.
+ */
+enum class G2PNeuralLanguage { EN, DE, FR, ES };
+
+/**
  * @brief Neural grapheme-to-phoneme fallback for out-of-dictionary words
  * @details A small (~833K-param) single-layer GRU encoder-decoder,
  * greedy-decoded. Ported from the sibling TinyTTS project's
@@ -51,11 +64,12 @@
  * projection) stays float32. Plain hand-written dequantize-on-the-fly
  * arithmetic -- no TensorFlow Lite dependency.
  *
- * The input grapheme vocabulary ('<pad>','<unk>','</s>','a'..'z') and
- * output phoneme vocabulary (see kArpabetTable) are both fixed properties
- * of this specific English model file -- a differently-trained model
- * (another language, or a retrained English one) would need its own
- * graphemeIndex() and output table, not just a different weights blob.
+ * The input grapheme vocabulary ('<pad>','<unk>','</s>', plus that
+ * language's letters) and output phoneme vocabulary are both fixed
+ * properties of the specific trained model file (see
+ * setup/neural-{en,de,fr,es}/vocab.py) -- pass the matching
+ * G2PNeuralLanguage to begin() alongside its weights so this class
+ * decodes with the right tables (graphemeIndexFor()/arpabetForIndexFor()).
  * @note Memory footprint: ~970KB flash for the shipped weights (measured:
  * 992,716 bytes), no RAM overhead beyond a small decode buffer (no tensor
  * arena, no runtime library). See
@@ -64,10 +78,15 @@
  */
 class G2PNeuralModel : public G2PModelBase {
  public:
-  /// Parses `buf` (the binary format G2PNeuralWeightsEN_data.h embeds)
-  /// without copying -- `buf` must outlive this object. Returns false on a
-  /// malformed/truncated buffer.
-  bool begin(const uint8_t* buf, size_t len) {
+  /// Parses `buf` (the binary format G2PNeuralWeights{EN,DE,FR,ES}_data.h
+  /// embed) without copying -- `buf` must outlive this object. `language`
+  /// selects which grapheme/phoneme vocabulary to decode with and MUST
+  /// match the weights file being passed (e.g. G2PNeuralLanguage::DE with
+  /// G2P_NEURAL_MODEL_WEIGHTS_DE) -- mismatching the two silently produces
+  /// garbage output, since the weights carry no self-describing language
+  /// tag. Returns false on a malformed/truncated buffer.
+  bool begin(const uint8_t* buf, size_t len, G2PNeuralLanguage language = G2PNeuralLanguage::EN) {
+    language_ = language;
     size_t pos = 0;
     initialized_ = parseWeights(buf, len, pos);
     if (!initialized_) {
@@ -77,20 +96,20 @@ class G2PNeuralModel : public G2PModelBase {
     return initialized_;
   }
 
-  /// @param word Input word (converted to lowercase; non a-z characters
-  /// fall through to <unk> handling in graphemeIndex())
-  /// @return Space-separated ARPAbet phoneme string, or "" if not
-  /// initialized or decoding produced nothing
+  /// @param word Input word (converted to lowercase; characters outside
+  /// the selected language's grapheme set fall through to <unk> handling)
+  /// @return Space-separated phoneme string, or "" if not initialized or
+  /// decoding produced nothing
   std::string wordToPhonemes(const std::string& word) override {
     if (!initialized_) return "";
     std::string lower = StringUtils::toLowerCase(word);
     std::vector<int> indices = predict(lower);
     std::string out;
     for (int idx : indices) {
-      const char* arp = arpabetForIndex(idx);
-      if (!arp || !arp[0]) continue;
+      const char* sym = symbolForIndex(language_, idx);
+      if (!sym || !sym[0]) continue;
       if (!out.empty()) out += ' ';
-      out += arp;
+      out += sym;
     }
     return out;
   }
@@ -112,8 +131,8 @@ class G2PNeuralModel : public G2PModelBase {
   /// assumed impossible).
   std::vector<int> predict(const std::string& word) const {
     std::vector<float> h(hidden_dim_, 0.0f);
-    for (char c : word) {
-      gruStep(embRow(enc_emb_, graphemeIndex(c)), h, enc_w_ih_, enc_w_hh_, enc_b_ih_, enc_b_hh_);
+    for (uint32_t cp : decodeUtf8(word)) {
+      gruStep(embRow(enc_emb_, graphemeIndexFor(language_, cp)), h, enc_w_ih_, enc_w_hh_, enc_b_ih_, enc_b_hh_);
     }
     gruStep(embRow(enc_emb_, 2 /* </s> */), h, enc_w_ih_, enc_w_hh_, enc_b_ih_, enc_b_hh_);
 
@@ -151,9 +170,9 @@ class G2PNeuralModel : public G2PModelBase {
 
     // The original format also stores a (symbol_id, tone) pair per output
     // class, resolved against TinyTTS's own multi-lingual symbol table --
-    // not needed here since arpabetForIndex() maps straight from output
-    // index to ARPAbet, but still present in the buffer and must be
-    // skipped to validate the buffer's total length.
+    // not needed here since symbolForIndex() maps straight from output
+    // index to that language's phoneme table, but still present in the
+    // buffer and must be skipped to validate the buffer's total length.
     if (pos + 2 * (size_t)num_phonemes_ > len) return false;
     pos += 2 * (size_t)num_phonemes_;
     return true;
@@ -194,9 +213,93 @@ class G2PNeuralModel : public G2PModelBase {
     return w->row_scale != nullptr;
   }
 
-  // Fixed vocab order matching the exported model: ['<pad>','<unk>','</s>','a'..'z'].
-  static int graphemeIndex(char c) {
-    if (c >= 'a' && c <= 'z') return 3 + (c - 'a');
+  /// Decodes a UTF-8 byte string into Unicode codepoints -- needed since
+  /// DE/FR/ES grapheme sets include accented letters (2-byte UTF-8
+  /// sequences), unlike EN's plain a-z. An invalid/truncated multi-byte
+  /// sequence decodes to U+FFFD (falls through to <unk> in
+  /// graphemeIndexFor()) rather than desyncing the byte stream.
+  static std::vector<uint32_t> decodeUtf8(const std::string& s) {
+    std::vector<uint32_t> out;
+    size_t i = 0;
+    size_t n = s.size();
+    while (i < n) {
+      uint8_t c = (uint8_t)s[i];
+      if (c < 0x80) {
+        out.push_back(c);
+        i += 1;
+      } else if ((c & 0xE0) == 0xC0 && i + 1 < n) {
+        out.push_back(((uint32_t)(c & 0x1F) << 6) | ((uint8_t)s[i + 1] & 0x3F));
+        i += 2;
+      } else if ((c & 0xF0) == 0xE0 && i + 2 < n) {
+        out.push_back(((uint32_t)(c & 0x0F) << 12) | (((uint8_t)s[i + 1] & 0x3F) << 6) |
+                      ((uint8_t)s[i + 2] & 0x3F));
+        i += 3;
+      } else if ((c & 0xF8) == 0xF0 && i + 3 < n) {
+        out.push_back(((uint32_t)(c & 0x07) << 18) | (((uint8_t)s[i + 1] & 0x3F) << 12) |
+                      (((uint8_t)s[i + 2] & 0x3F) << 6) | ((uint8_t)s[i + 3] & 0x3F));
+        i += 4;
+      } else {
+        out.push_back(0xFFFD);
+        i += 1;
+      }
+    }
+    return out;
+  }
+
+  /// Maps a Unicode codepoint to its grapheme-vocab index for `lang`,
+  /// matching that language's vocab.py GRAPHEMES list index-for-index
+  /// (['<pad>','<unk>','</s>'] then 'a'..'z' then the language's own
+  /// accented letters, in the exact order vocab.py lists them -- order
+  /// matters, it's what the model was trained against). Falls back to
+  /// <unk> (index 1) for anything outside that set.
+  static int graphemeIndexFor(G2PNeuralLanguage lang, uint32_t cp) {
+    if (cp >= 'a' && cp <= 'z') return 3 + (int)(cp - 'a');
+    switch (lang) {
+      case G2PNeuralLanguage::DE: {
+        // vocab.py: a..z + ['ä','ü','ö','ß','-']
+        switch (cp) {
+          case 0x00E4: return 29;  // ä
+          case 0x00FC: return 30;  // ü
+          case 0x00F6: return 31;  // ö
+          case 0x00DF: return 32;  // ß
+          case 0x002D: return 33;  // -
+        }
+        break;
+      }
+      case G2PNeuralLanguage::FR: {
+        // vocab.py: a..z + ['é','â','è','ç','î','ê','û','ô','ï',"'",'œ','à']
+        switch (cp) {
+          case 0x00E9: return 29;  // é
+          case 0x00E2: return 30;  // â
+          case 0x00E8: return 31;  // è
+          case 0x00E7: return 32;  // ç
+          case 0x00EE: return 33;  // î
+          case 0x00EA: return 34;  // ê
+          case 0x00FB: return 35;  // û
+          case 0x00F4: return 36;  // ô
+          case 0x00EF: return 37;  // ï
+          case 0x0027: return 38;  // '
+          case 0x0153: return 39;  // œ
+          case 0x00E0: return 40;  // à
+        }
+        break;
+      }
+      case G2PNeuralLanguage::ES: {
+        // vocab.py: a..z + ['á','í','é','ó','ñ','ú','ü']
+        switch (cp) {
+          case 0x00E1: return 29;  // á
+          case 0x00ED: return 30;  // í
+          case 0x00E9: return 31;  // é
+          case 0x00F3: return 32;  // ó
+          case 0x00F1: return 33;  // ñ
+          case 0x00FA: return 34;  // ú
+          case 0x00FC: return 35;  // ü
+        }
+        break;
+      }
+      case G2PNeuralLanguage::EN:
+        break;
+    }
     return 1;  // <unk>
   }
 
@@ -246,34 +349,93 @@ class G2PNeuralModel : public G2PModelBase {
     return best;
   }
 
-  /// Maps a decoder output-class index directly to its ARPAbet symbol,
-  /// including the stress digit TinyTTSTools uses (a trailing '1'/'2' for
-  /// primary/secondary stress, or the dedicated AH0/ER0 reduced-vowel
-  /// phonemes for CMU's digit-0/"unstressed" AH and ER specifically --
-  /// TinyTTSTools has no distinct reduced-vowel phoneme for the other
-  /// vowels, so their digit-0 case maps to the plain symbol). This table
-  /// is fixed metadata of the specific shipped model
-  /// (G2PNeuralWeightsEN_data.h): it was read directly off that binary's own
-  /// embedded (symbol, tone) pairs, cross-referenced against TinyTTS's
-  /// multi-lingual symbol table, not computed generically -- a
-  /// differently-trained model would need a different table here.
-  static const char* arpabetForIndex(int idx) {
-    static constexpr const char* kTable[74] = {
-        nullptr, nullptr, nullptr, nullptr,  // 0-3: pad/unk/<s>/</s> -- never emitted
-        "AA", "AA1", "AA2", "AE", "AE1", "AE2", "AH0", "AH1", "AH2",
-        "AO", "AO1", "AO2", "AW", "AW1", "AW2", "AY", "AY1", "AY2",
-        "B", "CH", "D", "DH",
-        "EH", "EH1", "EH2", "ER0", "ER1", "ER2", "EY", "EY1", "EY2",
-        "F", "G", "HH",
-        "IH", "IH1", "IH2", "IY", "IY1", "IY2",
-        "JH", "K", "L", "M", "N", "NG",
-        "OW", "OW1", "OW2", "OY", "OY1", "OY2",
-        "P", "R", "S", "SH", "T", "TH",
-        "UH", "UH1", "UH2", "UW", "UW", "UW1", "UW2",
-        "V", "W", "Y", "Z", "ZH",
-    };
-    if (idx < 0 || idx >= 74) return nullptr;
-    return kTable[idx];
+  /// Maps a decoder output-class index directly to its phoneme symbol for
+  /// `lang`, including the stress digit TinyTTSTools uses (a trailing
+  /// '1'/'2' for primary/secondary stress, or the dedicated AH0/ER0
+  /// reduced-vowel phonemes for CMU's digit-0/"unstressed" AH and ER
+  /// specifically -- TinyTTSTools has no distinct reduced-vowel phoneme
+  /// for the other vowels, so their digit-0 case maps to the plain
+  /// symbol). Each table is fixed metadata of that language's specific
+  /// shipped model (Data/neural/G2PNeuralWeights{EN,DE,FR,ES}_data.h),
+  /// read off setup/neural-{en,de,fr,es}/vocab.py's PHONEME_TABLE
+  /// index-for-index, matching TinyTTSTools's own multi-lingual symbol
+  /// table (see PhonemeDictionaryDE/FR/ES.h) -- not computed generically.
+  static const char* symbolForIndex(G2PNeuralLanguage lang, int idx) {
+    switch (lang) {
+      case G2PNeuralLanguage::EN: {
+        static constexpr const char* kTable[74] = {
+            nullptr, nullptr, nullptr, nullptr,  // 0-3: pad/unk/<s>/</s> -- never emitted
+            "AA", "AA1", "AA2", "AE", "AE1", "AE2", "AH0", "AH1", "AH2",
+            "AO", "AO1", "AO2", "AW", "AW1", "AW2", "AY", "AY1", "AY2",
+            "B", "CH", "D", "DH",
+            "EH", "EH1", "EH2", "ER0", "ER1", "ER2", "EY", "EY1", "EY2",
+            "F", "G", "HH",
+            "IH", "IH1", "IH2", "IY", "IY1", "IY2",
+            "JH", "K", "L", "M", "N", "NG",
+            "OW", "OW1", "OW2", "OY", "OY1", "OY2",
+            "P", "R", "S", "SH", "T", "TH",
+            "UH", "UH1", "UH2", "UW", "UW", "UW1", "UW2",
+            "V", "W", "Y", "Z", "ZH",
+        };
+        if (idx < 0 || idx >= 74) return nullptr;
+        return kTable[idx];
+      }
+      case G2PNeuralLanguage::DE: {
+        static constexpr const char* kTable[159] = {
+            nullptr, nullptr, nullptr, nullptr,
+            "AA1", "AA2", "AA:", "AC", "AE", "AF", "AF1", "AF2",
+            "AF:", "AH0", "AN", "AN:", "AO", "AO1", "AO2", "AO:",
+            "AW", "AW1", "AW2", "AY", "AY1", "AY2", "B", "B1",
+            "B2", "C", "C1", "C2", "CH", "CH1", "CH2", "D",
+            "D1", "D2", "EC", "EH", "EH1", "EH2", "EH:", "EN",
+            "EN:", "EP", "EP1", "EP2", "EP:", "F", "F1", "F2",
+            "G", "G1", "G2", "GS", "GS1", "GS2", "HH", "HH1",
+            "HH2", "IH", "IH1", "IH2", "IY", "IY1", "IY2", "IY:",
+            "JH", "JH1", "JH2", "K", "K1", "K2", "L", "L1",
+            "L2", "L=", "M", "M1", "M2", "M=", "N", "N1",
+            "N2", "N=", "NG", "NG=", "OE", "OE1", "OE2", "OE:",
+            "OF", "OF1", "OF2", "OF:", "ON", "ON:", "OP", "OP1",
+            "OP2", "OP:", "OP~", "P", "P1", "P2", "PF", "PF1",
+            "PF2", "R", "RR", "RT", "RU", "RU1", "RU2", "S",
+            "S1", "S2", "SH", "SH1", "SH2", "T", "T1", "T2",
+            "TH", "TS", "TS1", "TS2", "UF", "UF0", "UF01", "UF02",
+            "UF1", "UF2", "UF:", "UH", "UH1", "UH2", "UW", "UW1",
+            "UW2", "UW:", "V", "V1", "V2", "W", "W1", "X",
+            "X1", "Y", "Y1", "Y2", "Z", "Z1", "Z2", "ZH",
+            "ZH1", "ZH2", "Z_0",
+        };
+        if (idx < 0 || idx >= 159) return nullptr;
+        return kTable[idx];
+      }
+      case G2PNeuralLanguage::FR: {
+        static constexpr const char* kTable[42] = {
+            nullptr, nullptr, nullptr, nullptr,
+            "AA", "AF", "AH0", "AN", "AO", "B", "D", "EH",
+            "EN", "EP", "F", "G", "HU", "IY", "K", "L",
+            "M", "N", "NG", "NY", "OE", "OF", "ON", "OP",
+            "P", "RU", "RU:", "S", "SH", "T", "UF", "UN",
+            "UW", "V", "W", "Y", "Z", "ZH",
+        };
+        if (idx < 0 || idx >= 42) return nullptr;
+        return kTable[idx];
+      }
+      case G2PNeuralLanguage::ES: {
+        static constexpr const char* kTable[65] = {
+            nullptr, nullptr, nullptr, nullptr,
+            "AF", "AF1", "B", "B1", "BETA", "BETA1", "CH", "D",
+            "D1", "DH", "DH1", "EP", "EP1", "F", "F1", "G",
+            "G1", "GH", "GH1", "IY", "IY1", "JZ", "JZ1", "K",
+            "K1", "L", "L1", "LY", "LY1", "M", "M1", "N",
+            "N1", "NG", "NG1", "NY", "NY1", "OP", "OP1", "P",
+            "P1", "RR", "RR1", "RT", "RT1", "S", "S1", "SH",
+            "T", "T1", "TH", "TH1", "UW", "UW1", "W", "X",
+            "X1", "Y", "Y1", "Z", "Z1",
+        };
+        if (idx < 0 || idx >= 65) return nullptr;
+        return kTable[idx];
+      }
+    }
+    return nullptr;
   }
 
   const float* enc_emb_ = nullptr;
@@ -289,4 +451,5 @@ class G2PNeuralModel : public G2PModelBase {
   int num_graphemes_ = 0;
   int num_dec_symbols_ = 0;
   int num_phonemes_ = 0;
+  G2PNeuralLanguage language_ = G2PNeuralLanguage::EN;
 };
