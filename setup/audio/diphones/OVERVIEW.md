@@ -1,5 +1,13 @@
 # Diphone Speech Synthesis: Technical Overview
 
+> **Note on notation**: examples below write a diphone name with an
+> underscore (`SIL_K`, `K_AE`, ...) as a readable illustration of the
+> theory. The actual shipped dictionary (`DiphoneWAVDictionary.h`) keys
+> diphones with a space instead (`"SIL K"`, `"K AE"`) to avoid colliding
+> with `PhonemeModifier`'s underscore-prefixed X-SAMPA tags -- see
+> `docs/PHONEMES.md`. This file is unaffected otherwise; it's about the
+> synthesis technique, not the storage format.
+
 ## Introduction
 
 **Diphone synthesis** is a concatenative speech synthesis technique that uses speech units called "diphones" to generate natural-sounding speech. Unlike phoneme-based synthesis, which concatenates individual phonemes, diphone synthesis captures the acoustic transitions between phonemes, resulting in more fluid and natural speech output.

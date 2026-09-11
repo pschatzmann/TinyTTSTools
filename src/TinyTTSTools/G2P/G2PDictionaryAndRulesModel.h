@@ -13,7 +13,7 @@
 #include <string>
 #include "G2PHybridModel.h"
 #include "G2PDictionaryModel.h"
-#include "G2PRuleBasedModel.h"
+#include "G2PRuleBasedModelEN.h"
 
 /**
  * @brief Default G2P model using basic lookup and rule-based methods
@@ -38,7 +38,7 @@ class G2PDictionaryAndRulesModel : public G2PHybridModel {
 
   G2PDictionaryModel& getDictionaryModel() { return g2pDictionaryModel_; }
 
-  G2PRuleBasedModel& getRuleBasedModel() { return g2pRuleBasedModel_; }
+  G2PRuleBasedModelEN& getRuleBasedModel() { return g2pRuleBasedModel_; }
 
   /**
    * @brief Convert word to phonemes using dictionary and rules
@@ -51,5 +51,5 @@ class G2PDictionaryAndRulesModel : public G2PHybridModel {
 
  protected:
   G2PDictionaryModel g2pDictionaryModel_;  ///< Dictionary-based model
-  G2PRuleBasedModel g2pRuleBasedModel_;    ///< Rule-based model
+  G2PRuleBasedModelEN g2pRuleBasedModel_;    ///< Rule-based model
 };

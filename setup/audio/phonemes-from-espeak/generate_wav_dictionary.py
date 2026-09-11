@@ -40,6 +40,21 @@ def read_wav_data(file_path):
         
         return b''  # No data chunk found
 
+# A WAV file's stem is normally both the filesystem-safe identifier
+# (individual header filename, C++ array name) AND the runtime lookup key
+# embedded in ArpabetWAVDictionary's SoundEntry (what
+# AudioDictionary::getSoundEntry() matches against). Those need to diverge
+# for a modifier-tagged phoneme like "AF:" (German long a, see
+# PhonemeModifiers.h) -- a literal colon in a filename/#include path is
+# legal on Linux but not portably safe across the toolchains this library
+# targets (Arduino IDE, Windows-hosted ESP-IDF, ...), so such a phoneme's
+# WAV file uses "-" in place of the tag's ":" (e.g. "AF-.wav") and is
+# mapped here back to its real tagged lookup key -- the file/array naming
+# stays ASCII-safe, only the string SoundEntry is constructed with ":".
+DISPLAY_NAME_OVERRIDES = {
+    "AF-": "AF:",
+}
+
 def generate_cpp_headers(input_dir, output_dir, format_name, force_overwrite=False):
     """Generate separate C++ header files for each WAV file and a main dictionary header"""
     
@@ -68,16 +83,18 @@ def generate_cpp_headers(input_dir, output_dir, format_name, force_overwrite=Fal
     sound_entries = []
     
     for wav_file in wav_files:
-        # Get filename without extension
+        # Get filename without extension (filesystem-safe identifier) and
+        # its runtime lookup key (may differ -- see DISPLAY_NAME_OVERRIDES).
         name = wav_file.stem
-        
+        display_name = DISPLAY_NAME_OVERRIDES.get(name, name)
+
         # Read WAV data
         try:
             wav_data = read_wav_data(wav_file)
             if not wav_data:
                 print(f"Warning: No data found in {wav_file}")
                 continue
-                
+
             # Generate C++ array name (replace special chars with underscores)
             array_name = f"phoneme_data_{name.replace('-', '_').replace(' ', '_')}"
             
@@ -114,9 +131,18 @@ def generate_cpp_headers(input_dir, output_dir, format_name, force_overwrite=Fal
             with open(individual_header_file, 'w') as f:
                 f.write('\n'.join(individual_header_content))
             
-            # Store entry info
+            # Store entry info. 'name' stays filesystem-safe (used for the
+            # data/audio/arpabet/ copy AudioDictionarySD reads directly by
+            # phoneme-name path -- colon is illegal in FAT32 filenames, the
+            # typical SD card filesystem, so a tagged phoneme like "AF:"
+            # can't round-trip through that class's simple path convention
+            # regardless of what we name things here; 'display_name' is
+            # the real runtime lookup key, used only for the in-memory
+            # ArpabetWAVDictionary SoundEntry string (a C string literal,
+            # no filesystem involved).
             sound_entries.append({
                 'name': name,
+                'display_name': display_name,
                 'array_name': array_name,
                 'size': len(wav_data),
                 'header_file': f"{name}.h",
@@ -175,7 +201,7 @@ def generate_cpp_headers(input_dir, output_dir, format_name, force_overwrite=Fal
     for i, entry in enumerate(sound_entries):
         comma = ',' if i < len(sound_entries) - 1 else ''
         # Include 8-bit format in SoundEntry constructor
-        main_header_content.append(f'    SoundEntry("{entry["name"]}", {entry["size"]}, {entry["array_name"]}, 8){comma}')
+        main_header_content.append(f'    SoundEntry("{entry["display_name"]}", {entry["size"]}, {entry["array_name"]}, 8){comma}')
     
     main_header_content.append('};')
     main_header_content.append('')

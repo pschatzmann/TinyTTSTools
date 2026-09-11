@@ -28,6 +28,11 @@
 #include "TinyTTSTools/SoundDictionary/DiphoneWAVDictionary.h"
 #include "TinyTTSTools/Vocoder/PSOLAVocoder.h"
 #include "TinyTTSTools/Data/dictionary/CompactCmuDictionaryEN_data.h"
+#include "TinyTTSTools/PhonemeDictionary/PhonemeDictionaryDE.h"
+#include "TinyTTSTools/PhonemeDictionary/PhonemeDictionaryFR.h"
+#include "TinyTTSTools/PhonemeDictionary/PhonemeDictionaryES.h"
+#include "TinyTTSTools/G2P/G2PDictionaryModel.h"
+#include "TinyTTSTools/G2P/G2PHybridModel.h"
 
 #include <unistd.h>
 
@@ -86,9 +91,17 @@ class DesktopMain {
     std::string text;
     if (!resolveText(opt, text)) return 1;
 
+    if (!buildG2P(opt)) return 1;
     if (!buildVocoder(opt)) return 1;
     if (opt.full_dict) {
-      g2p_.getDictionaryModel().useCompactDictionary(COMPACT_CMUDICT_EN);
+      if (opt.language == "en") {
+        g2pDictionaryModel_.useCompactDictionary(COMPACT_CMUDICT_EN);
+      } else {
+        std::fprintf(stderr,
+                      "--full-dict is English-only (no equivalent bundled for --language %s) "
+                      "-- ignoring\n",
+                      opt.language.c_str());
+      }
     }
 
     TTSConfig config{(uint32_t)sample_rate_, 16, 1};
@@ -207,6 +220,8 @@ class DesktopMain {
     bool to_stdout = false;
     bool no_play = false;
     std::string vocoder = "phoneme";  // formant | phoneme | diphone | psola
+    bool vocoder_explicit = false;    // true once the user passes --vocoder
+    std::string language = "en";      // en | de | fr | es
     float pitch_hz = 0.0f;            // 0 = vocoder's own default pitch
     float speed = 1.0f;               // 1.0 = normal rate
     bool full_dict = false;
@@ -230,7 +245,14 @@ class DesktopMain {
                   "  --no-play             Skip playback (implied by -o/--stdout).\n"
                   "\n"
                   "Voice:\n"
-                  "  --vocoder NAME        formant | phoneme | diphone | psola (default: phoneme)\n"
+                  "  --language LANG       en | de | fr | es (default: en). Selects the small\n"
+                  "                        built-in dictionary + rule-based G2P fallback for that\n"
+                  "                        language (see PhonemeDictionaryDE/FR/ES.h,\n"
+                  "                        G2PRuleBasedModelDE/FR/ES.h). de/fr/es have no bundled\n"
+                  "                        audio recordings, so --vocoder defaults to 'formant'\n"
+                  "                        (procedural) for them unless overridden.\n"
+                  "  --vocoder NAME        formant | phoneme | diphone | psola (default: phoneme,\n"
+                  "                        or formant when --language isn't en)\n"
                   "                        formant: procedural, no audio data, most robotic.\n"
                   "                        phoneme: pre-recorded samples (ArpabetWAVDictionary),\n"
                   "                        truncated (never stretched) to fit each phoneme's duration.\n"
@@ -251,7 +273,8 @@ class DesktopMain {
                   "                        slower request there just plays the same clip unchanged\n"
                   "                        once it's already shorter than the slowed-down target.\n"
                   "  --full-dict           Use the full ~123k-word CMU dictionary instead of the\n"
-                  "                        small built-in one (see docs/TUTORIAL.md).\n"
+                  "                        small built-in one (see docs/TUTORIAL.md). English\n"
+                  "                        (--language en) only -- ignored otherwise.\n"
                   "\n"
                   "  -h, --help            Show this help text.\n",
                   prog, prog, prog);
@@ -287,9 +310,19 @@ class DesktopMain {
         const char* v = next(a.c_str());
         if (!v) return false;
         opt.vocoder = v;
+        opt.vocoder_explicit = true;
         if (opt.vocoder != "formant" && opt.vocoder != "phoneme" && opt.vocoder != "diphone" &&
             opt.vocoder != "psola") {
           std::fprintf(stderr, "--vocoder must be formant, phoneme, diphone, or psola, got: %s\n", v);
+          return false;
+        }
+      } else if (a == "--language" || a == "--lang") {
+        const char* v = next(a.c_str());
+        if (!v) return false;
+        opt.language = v;
+        if (opt.language != "en" && opt.language != "de" && opt.language != "fr" &&
+            opt.language != "es") {
+          std::fprintf(stderr, "--language must be en, de, fr, or es, got: %s\n", v);
           return false;
         }
       } else if (a == "--pitch") {
@@ -344,11 +377,65 @@ class DesktopMain {
     return true;
   }
 
+  /**
+   * @brief Wires g2p_ (a G2PHybridModel) to the small built-in dictionary
+   * plus rule-based fallback for `opt.language`, mirroring
+   * G2PDictionaryAndRulesModel's own dictionary-then-rules composition but
+   * picking the language-specific dictionary/rules pair instead of always
+   * English's.
+   */
+  bool buildG2P(const Options& opt) {
+    const PhonemeDictionaryBase* dict = &COMPACT_PHONEME_DICTIONARY_EN;
+    G2PModelBase* rules = &g2pRulesEN_;
+    if (opt.language == "de") {
+      dict = &COMPACT_PHONEME_DICTIONARY_DE;
+      rules = &g2pRulesDE_;
+    } else if (opt.language == "fr") {
+      dict = &COMPACT_PHONEME_DICTIONARY_FR;
+      rules = &g2pRulesFR_;
+    } else if (opt.language == "es") {
+      dict = &COMPACT_PHONEME_DICTIONARY_ES;
+      rules = &g2pRulesES_;
+    } else if (opt.language != "en") {
+      std::fprintf(stderr, "--language must be en, de, fr, or es, got: %s\n",
+                    opt.language.c_str());
+      return false;
+    }
+    g2pDictionaryModel_.useCompactDictionary(*dict);
+    g2p_.addModel(g2pDictionaryModel_);
+    g2p_.addModel(*rules);
+    return true;
+  }
+
   bool buildVocoder(const Options& opt) {
-    if (opt.vocoder == "formant") {
+    std::string vocoder = opt.vocoder;
+    if (opt.language != "en") {
+      // ArpabetWAVDictionary now also has real recordings for the ~23
+      // international phonemes PhonemeDictionaryDE/FR/ES.h actually use
+      // (see setup/audio/phonemes-from-espeak/
+      // generate_international_phonemes_mbrola.sh), but DiphoneWAVDictionary
+      // is still English-only (no international diphone pairs), and
+      // ArpabetWAVDictionary itself doesn't cover every one of the ~78
+      // international ids -- only the ones the bundled DE/FR/ES
+      // dictionaries/rules reference. phoneme/psola can therefore work for
+      // German/French/Spanish text now, with occasional per-phoneme
+      // fallback-to-base gaps (logged via TTS_LOGW); diphone still can't.
+      // FormantVocoder remains the only vocoder with full international
+      // coverage, so it's still the default unless overridden.
+      if (!opt.vocoder_explicit) {
+        vocoder = "formant";
+      } else if (vocoder == "diphone") {
+        std::fprintf(stderr,
+                      "warning: --vocoder diphone has no %s diphone recordings -- expect "
+                      "missing or wrong sounds; --vocoder formant or phoneme/psola (partial "
+                      "coverage) work better for --language %s\n",
+                      opt.language.c_str(), opt.language.c_str());
+      }
+    }
+    if (vocoder == "formant") {
       sample_rate_ = 16000;
       vocoder_.reset(new FormantVocoder(sample_rate_));
-    } else if (opt.vocoder == "diphone") {
+    } else if (vocoder == "diphone") {
       // DiphoneWAVDictionary.h only defines the raw DIPHONES/NUM_DIPHONES
       // SoundEntry array (unlike ArpabetWAVDictionary.h, which also
       // builds a ready-made AudioDictionary global) -- wrap it here, same
@@ -356,7 +443,7 @@ class DesktopMain {
       diphone_dict_.reset(new AudioDictionary(DIPHONES, NUM_DIPHONES, 8000, PhonemeType::ARPAbet, 1, 16));
       sample_rate_ = diphone_dict_->sampleRate();
       vocoder_.reset(new DiphoneVocoder(*diphone_dict_));
-    } else if (opt.vocoder == "psola") {
+    } else if (vocoder == "psola") {
       sample_rate_ = ArpabetWAVDictionary.sampleRate();
       vocoder_.reset(new PSOLAVocoder(ArpabetWAVDictionary));
     } else {
@@ -400,7 +487,13 @@ class DesktopMain {
     f.flush();
   }
 
-  G2PDictionaryAndRulesModel g2p_;
+  G2PDictionaryModel g2pDictionaryModel_;
+  G2PRuleBasedModelEN g2pRulesEN_;
+  G2PRuleBasedModelDE g2pRulesDE_;
+  G2PRuleBasedModelFR g2pRulesFR_;
+  G2PRuleBasedModelES g2pRulesES_;
+  G2PHybridModel g2p_;                             ///< dictionary + language-specific rules,
+                                                    ///< wired up by buildG2P()
   std::unique_ptr<AudioDictionary> diphone_dict_;  // must outlive vocoder_
   std::unique_ptr<VocoderBase> vocoder_;
   int sample_rate_ = 8000;

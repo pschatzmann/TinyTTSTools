@@ -30,7 +30,7 @@
  * being trusted (see TinyTTS's research/g2p_reference_numpy.py,
  * docs/research.md).
  *
- * Unlike G2PRuleBasedModel (letter-to-sound rules, ~17% exact-match
+ * Unlike G2PRuleBasedModelEN (letter-to-sound rules, ~17% exact-match
  * ceiling -- English spelling can't be resolved from rules alone without a
  * stress/pronunciation model) or a static exception dictionary (only
  * covers words someone thought to list), this generalizes: it produces a
@@ -40,7 +40,7 @@
  * after real dictionary lookups.
  *
  * Weights (~970KB) come from an in-memory buffer (a flash-embedded const
- * array -- see Data/neural/G2PNeuralWeights_data.h -- or one read from
+ * array -- see Data/neural/G2PNeuralWeightsEN_data.h -- or one read from
  * LittleFS/SD at startup) passed to begin(); the caller keeps it alive for
  * as long as this object is used (no copy, same convention as the compact
  * dictionaries).
@@ -64,7 +64,7 @@
  */
 class G2PNeuralModel : public G2PModelBase {
  public:
-  /// Parses `buf` (the binary format G2PNeuralWeights_data.h embeds)
+  /// Parses `buf` (the binary format G2PNeuralWeightsEN_data.h embeds)
   /// without copying -- `buf` must outlive this object. Returns false on a
   /// malformed/truncated buffer.
   bool begin(const uint8_t* buf, size_t len) {
@@ -253,7 +253,7 @@ class G2PNeuralModel : public G2PModelBase {
   /// TinyTTSTools has no distinct reduced-vowel phoneme for the other
   /// vowels, so their digit-0 case maps to the plain symbol). This table
   /// is fixed metadata of the specific shipped model
-  /// (G2PNeuralWeights_data.h): it was read directly off that binary's own
+  /// (G2PNeuralWeightsEN_data.h): it was read directly off that binary's own
   /// embedded (symbol, tone) pairs, cross-referenced against TinyTTS's
   /// multi-lingual symbol table, not computed generically -- a
   /// differently-trained model would need a different table here.

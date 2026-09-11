@@ -10,7 +10,7 @@ order of preference.
   list (the default curated dictionary has ~534 words; you can point it at
   the full 123k-word CMU dictionary instead via
   `g2p.getDictionaryModel().useCompactDictionary(COMPACT_CMUDICT_EN)`).
-- **Letter-to-sound rules** (`G2PRuleBasedModel`) are a last resort with
+- **Letter-to-sound rules** (`G2PRuleBasedModelEN`) are a last resort with
   only a ~17% exact-match ceiling -- English spelling is fundamentally
   ambiguous (vowel reduction, stress) and can't be resolved from rules
   alone.
@@ -33,10 +33,10 @@ even if you never load its weights, so there's no cost unless you use it.
 
 ```cpp
 #include "TinyTTSTools/G2P/G2PDictionaryNeuralAndRulesModel.h"
-#include "TinyTTSTools/Data/neural/G2PNeuralWeights_data.h"
+#include "TinyTTSTools/Data/neural/G2PNeuralWeightsEN_data.h"
 
 G2PDictionaryNeuralAndRulesModel g2p;
-g2p.getNeuralModel().begin(G2P_NEURAL_MODEL_WEIGHTS, G2P_NEURAL_MODEL_WEIGHTS_LEN);
+g2p.getNeuralModel().begin(G2P_NEURAL_MODEL_WEIGHTS_EN, G2P_NEURAL_MODEL_WEIGHTS_EN_LEN);
 
 std::string phonemes = g2p.wordToPhonemes("zephyrion");  // a plausible guess, not silence
 ```
@@ -74,7 +74,7 @@ Novel words (no dictionary could ever contain these):
 
 ## Memory
 
-- Weights: ~970KB flash (`Data/neural/G2PNeuralWeights_data.h`)
+- Weights: ~970KB flash (`Data/neural/G2PNeuralWeightsEN_data.h`)
 - No extra RAM beyond the GRU's hidden state (256 floats) and per-call
   scratch buffers -- no tensor arena, no TensorFlow Lite runtime.
 
@@ -84,10 +84,14 @@ The architecture is parametric -- hidden size, vocabulary sizes, and the
 entire output phoneme table are read from the weight file, not hardcoded.
 The only English-specific code is `graphemeIndex()` (a plain a-z lookup)
 and the output-index-to-ARPAbet table (metadata of this specific trained
-model). A different language would need its own weights (retraining via
-TinyTTS's `research/export_dictionary_model.py` pipeline against that
-language's grapheme-phoneme data) and its own `graphemeIndex()`/output
-table -- not new engine code.
+model). A different language needs its own weights and its own
+`graphemeIndex()`/output table -- not new engine code. This is already
+underway: `setup/neural-de/fr/es/` run the same training pipeline
+for German/French/Spanish (built from the OLaPh corpus); French (94.8%
+validation exact-match), Spanish (98.7%) and German (71.2%) are all
+trained but not yet wired into `G2PNeuralModel.h`'s output table. See
+[`docs/ADDING_A_LANGUAGE.md`](../../docs/ADDING_A_LANGUAGE.md) for the
+full picture.
 
 ## Related examples
 

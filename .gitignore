@@ -15,8 +15,21 @@ html/
 # setup/ scripts -- not needed as source (see docs/SETUP.md).
 __pycache__/
 *.pyc
-setup/neural/train.tsv
-setup/neural/val.tsv
-setup/neural/g2p_model.bin
-setup/dictionary/cmudict_dump.txt
-setup/dictionary/failures.txt
+setup/neural-en/train.tsv
+setup/neural-en/val.tsv
+setup/neural-en/g2p_model.pt
+setup/neural-en/g2p_model.bin
+setup/neural-de/train.tsv
+setup/neural-de/val.tsv
+setup/neural-de/g2p_model.pt
+setup/neural-de/g2p_model.bin
+setup/neural-fr/train.tsv
+setup/neural-fr/val.tsv
+setup/neural-fr/g2p_model.pt
+setup/neural-fr/g2p_model.bin
+setup/neural-es/train.tsv
+setup/neural-es/val.tsv
+setup/neural-es/g2p_model.pt
+setup/neural-es/g2p_model.bin
+setup/dictionary-en/cmudict_dump.txt
+setup/dictionary-en/failures.txt

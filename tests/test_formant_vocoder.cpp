@@ -192,13 +192,11 @@ static void testVoicingParam() {
 static void testPhoneEnumOverload() {
   // VocoderBase::sayPhoneme(Phone, ...) should select the same phoneme (and
   // therefore the same duration/sample count) as the equivalent string
-  // call, for both a plain phoneme and a stress-authoring variant
-  // (Phonemes::toArpabetString() resolves Phone::IH1 -> "IH1"). Sample
-  // *content* isn't compared: FormantVocoder seeds its noise/jitter from
-  // each instance's own address, so two distinct instances never produce
-  // byte-identical output for the same phoneme by design (see
-  // testInstancesAreIndependent above) -- sample count is the fair,
-  // deterministic check here.
+  // call. Sample *content* isn't compared: FormantVocoder seeds its
+  // noise/jitter from each instance's own address, so two distinct
+  // instances never produce byte-identical output for the same phoneme by
+  // design (see testInstancesAreIndependent above) -- sample count is the
+  // fair, deterministic check here.
   FormantVocoder synthEnum(16000);
   FormantVocoder synthString(16000);
   CapturePrint outEnum, outString;
@@ -209,8 +207,12 @@ static void testPhoneEnumOverload() {
   CHECK(okString);
   CHECK_EQ(outEnum.samples.size(), outString.samples.size());
 
+  // Phone carries no stress information -- a stress-suffixed phoneme is
+  // only reachable through the string path (stripStressMarker() strips the
+  // digit before lookup), not through this enum overload.
   CapturePrint outStressed;
-  bool okStressed = synthEnum.sayPhoneme(Phone::IH1, outStressed);
+  bool okStressed =
+      synthString.sayPhoneme(PhonemeType::ARPAbet, "IH1", outStressed);
   CHECK(okStressed);
   CHECK(!outStressed.samples.empty());
 }

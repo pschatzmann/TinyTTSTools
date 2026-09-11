@@ -10,9 +10,22 @@ loading any of it into PSRAM on ESP32 instead of internal RAM.
 ## Layout
 
 ```
-data/audio/arpabet/<PHONEME>.wav    -- 41 files, PCM8 unsigned, 8000Hz, mono
-data/audio/diphones/<PH1_PH2>.wav   -- 1600 files, IMA-ADPCM, 8000Hz, mono
-data/dictionary/cmudict.bin         -- full 123k-word CMU word->phoneme dictionary
+data/audio/arpabet/<PHONEME>.wav    -- 65 files, PCM8 unsigned, 8000Hz, mono
+                                     -- (41 English ARPAbet + 23 international
+                                     -- German/French/Spanish need + 1 modifier-
+                                     -- tagged German long-a; a tagged phoneme's
+                                     -- filename uses "-" where its tag has ":",
+                                     -- e.g. "AF-.wav" -- see PHONEMES.md)
+data/audio/diphones/<PH1_PH2>.wav   -- 1600 files, IMA-ADPCM, 8000Hz, mono (English only)
+data/dictionary/cmudict.bin         -- full 123k-word English CMU word->phoneme dictionary
+data/dictionary/olaph_{de,fr,es}.bin -- OLaPh word->phoneme dictionaries,
+                                     -- filtered to each language's top 100k
+                                     -- most frequent words (see FrequencyWords
+                                     -- in SETUP.md) to fit ESP32 PSRAM
+                                     -- (German 93k words/1.6MB, Spanish 62k/1.0MB,
+                                     -- French 60k/0.9MB)
+data/neural/g2p_model_{en,fr,es,de}.bin -- trained neural G2P weights (English ~970KB,
+                                     -- French ~917KB, Spanish ~958KB, German ~1.1MB)
 ```
 
 Each audio file is named exactly as the audio dictionary classes expect
@@ -47,7 +60,7 @@ AudioEncodedDictionarySD<> diphoneDict(decoder, "/audio/diphones/", ".wav");
 diphoneDict.begin(/* SD chip-select pin */ 10);
 ```
 
-## Usage: word->phoneme dictionary
+## Usage: word->phoneme dictionary (English)
 
 ```cpp
 #include "TinyTTSTools/PhonemeDictionary/CompressedPhonemeDictionarySD.h"
@@ -64,6 +77,47 @@ g2p.getDictionaryModel().useCompactDictionary(cmuDict);
 `cmuDict` must outlive `g2p` (`useCompactDictionary()` stores a reference,
 same convention as pointing it at a PROGMEM dictionary).
 
+## Usage: word->phoneme dictionary (German/French/Spanish)
+
+`olaph_{de,fr,es}.bin` use the widened (`uint16_t`) packed symbol (see
+[PHONEMES.md](../docs/PHONEMES.md)) -- a different loader class,
+`CompressedPhonemeDictionaryWideSD`, and unlike `CompressedPhonemeDictionarySD`
+it needs that language's Huffman code table passed in explicitly (small
+enough to stay a compiled-in flash table -- corpus-specific, so it isn't
+part of the loaded file itself; see `CompressedPhonemeDictionaryWideSD.h`'s
+own doc):
+
+```cpp
+#include "TinyTTSTools/PhonemeDictionary/CompressedPhonemeDictionaryWideSD.h"
+#include "TinyTTSTools/PhonemeDictionary/PhonemeHuffmanCodesWideDE.h"
+#include "TinyTTSTools/Memory/PsramAllocator.h"  // optional, see below
+
+CompressedPhonemeDictionaryWideSD<PsramAllocator<uint8_t>> deDict;
+deDict.begin("/dictionary/olaph_de.bin",
+             PHONEME_HUFFMAN_CODES_WIDE_DE, PHONEME_HUFFMAN_CODE_WIDE_DE_COUNT);
+// ~1.6MB (German) -- PSRAM recommended over internal RAM at this size
+
+g2p.getDictionaryModel().useCompactDictionary(deDict);
+```
+
+## Usage: neural G2P
+
+```cpp
+#include "TinyTTSTools/G2P/G2PNeuralModelSD.h"
+#include "TinyTTSTools/Memory/PsramAllocator.h"  // optional, see below
+
+G2PNeuralModelSD<PsramAllocator<uint8_t>> neural;
+neural.begin("/neural/g2p_model_en.bin");  // ~970KB
+```
+
+Only English (`g2p_model_en.bin`) has a matching `arpabetForIndex()`/output
+table compiled into `G2PNeuralModel.h` right now -- `g2p_model_fr.bin`
+(94.8% validation exact-match), `g2p_model_es.bin` (98.7%) and
+`g2p_model_de.bin` (71.2%) all exist and are trained/validated, but none
+is wired into any output table yet, so loading one wouldn't decode to
+anything meaningful until that
+table exists (see [ADDING_A_LANGUAGE.md](../docs/ADDING_A_LANGUAGE.md)).
+
 ## Placing the files
 
 Copy `data/` onto the SD card's root (or wherever your `basePath`/file path
@@ -73,8 +127,9 @@ uploader tools expect a `data/` folder at the sketch root by convention --
 adjust paths to match wherever you actually place it).
 
 Every class here (`AudioDictionarySD`, `AudioEncodedDictionarySD`,
-`CompressedPhonemeDictionarySD`) takes an `Allocator` template parameter
-(default `std::allocator<uint8_t>`) for the buffer it loads into. Pass
+`CompressedPhonemeDictionarySD`, `CompressedPhonemeDictionaryWideSD`,
+`G2PNeuralModelSD`) takes an `Allocator` template parameter (default
+`std::allocator<uint8_t>`) for the buffer it loads into. Pass
 `PsramAllocator<uint8_t>` (`src/TinyTTSTools/Memory/PsramAllocator.h`) to
 load into PSRAM on ESP32 instead of internal RAM -- see
 [MEMORY.md](../docs/MEMORY.md#loading-runtime-data-into-psram-esp32).
@@ -94,12 +149,22 @@ pipeline; in short:
   regenerates `ArpabetWAVDictionary.h`/`DiphoneWAVDictionary.h` also
   updates these.
 - `dictionary/cmudict.bin` is produced by
-  `setup/dictionary/export_dynamic_cmudict.py`, which packs the same
+  `setup/dictionary-en/export_dynamic_cmudict.py`, which packs the same
   entries and Huffman codes `regen_cmudict.py` uses for
   `CompactCmuDictionaryEN_data.h` into a runtime-loadable binary file
   instead of a compiled-in C header (see
-  `setup/dictionary/pack_compressed.py`'s `emit_binary_file()` for the
+  `setup/dictionary-en/pack_compressed.py`'s `emit_binary_file()` for the
   exact format `CompressedPhonemeDictionarySD` reads). This one is a
   separate script, not folded into `regen_cmudict.py` itself, so
   regenerating the PROGMEM CMU dictionary doesn't force a `data/` rewrite
   on every run -- run it explicitly when you want `cmudict.bin` refreshed.
+- `dictionary/olaph_{de,fr,es}.bin` are produced automatically by
+  `setup/dictionary-common/olaph_pack_compressed.py --lang {de,fr,es}` --
+  every run of that script (which also regenerates
+  `CompactOlaph{DE,FR,ES}_data.h`) writes both forms, using the same
+  `emit_binary_file()` as English's (the binary layout is symbol-width-
+  agnostic -- see `CompressedPhonemeDictionaryWideSD.h`'s own doc).
+- `neural/g2p_model_{en,de,fr,es}.bin` are produced automatically by each
+  `setup/neural-{lang}/export_g2p_model.py` -- every run (after
+  `train_g2p_model.py`) writes both the flash header and this binary,
+  identical payload bytes either way.

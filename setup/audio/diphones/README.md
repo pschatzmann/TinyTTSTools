@@ -131,10 +131,14 @@ every phoneme-pair transition needed by the full 123k-word CMU dictionary
 ### 5. Full completeness pass
 Sections 1-4 above were a hand-picked "linguistically relevant" subset, not
 the full consonant×consonant (24×24) or vowel×vowel (15×15) cross product.
-An audit against the full CMU dictionary (`setup/dictionary/`'s
+An audit against the full CMU dictionary (`setup/dictionary-en/`'s
 `COMPACT_CMUDICT_EN`, 123,463 words) found this left 4.7% of all diphone
 instances needed (480 distinct names -- e.g. `M_B`, `R_K`, `ER_IH`, `IY_OW`)
-missing, affecting 31% of words. Fixed by generating every remaining
+missing, affecting 31% of words (names shown here in the historical
+underscore form the audit used; the shipped dictionary keys diphones with
+a space delimiter instead -- e.g. `"M B"`, not `"M_B"` -- to avoid
+colliding with `PhonemeModifier`'s underscore-prefixed X-SAMPA tags, see
+`docs/PHONEMES.md`). Fixed by generating every remaining
 consonant-consonant and vowel-vowel pair (`generate_relevant_diphones.sh`'s
 sections 7-8); `generate_diphone()`'s skip-if-exists logic means this only
 adds what sections 1-4 didn't already cover.

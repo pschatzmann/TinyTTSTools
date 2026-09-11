@@ -14,7 +14,7 @@
 #include "G2PHybridModel.h"
 #include "G2PDictionaryModel.h"
 #include "G2PNeuralModel.h"
-#include "G2PRuleBasedModel.h"
+#include "G2PRuleBasedModelEN.h"
 
 /**
  * @brief G2P model chaining dictionary lookup, a neural fallback and rules
@@ -36,10 +36,10 @@
  * never call begin() on it, so the cost is opt-in:
  * @code
  * #include "TinyTTSTools/G2P/G2PDictionaryNeuralAndRulesModel.h"
- * #include "TinyTTSTools/Data/neural/G2PNeuralWeights_data.h"
+ * #include "TinyTTSTools/Data/neural/G2PNeuralWeightsEN_data.h"
  *
  * G2PDictionaryNeuralAndRulesModel g2p;
- * g2p.getNeuralModel().begin(G2P_NEURAL_MODEL_WEIGHTS, G2P_NEURAL_MODEL_WEIGHTS_LEN);
+ * g2p.getNeuralModel().begin(G2P_NEURAL_MODEL_WEIGHTS_EN, G2P_NEURAL_MODEL_WEIGHTS_EN_LEN);
  * @endcode
  * @note Memory footprint: ~10KB flash (dictionary + rules) if begin() is
  * never called; +~970KB once the neural fallback's weights are loaded. See
@@ -59,7 +59,7 @@ class G2PDictionaryNeuralAndRulesModel : public G2PHybridModel {
 
   G2PNeuralModel& getNeuralModel() { return g2pNeuralModel_; }
 
-  G2PRuleBasedModel& getRuleBasedModel() { return g2pRuleBasedModel_; }
+  G2PRuleBasedModelEN& getRuleBasedModel() { return g2pRuleBasedModel_; }
 
   /**
    * @brief Convert word to phonemes using dictionary, neural model and rules
@@ -73,5 +73,5 @@ class G2PDictionaryNeuralAndRulesModel : public G2PHybridModel {
  protected:
   G2PDictionaryModel g2pDictionaryModel_;  ///< Dictionary-based model
   G2PNeuralModel g2pNeuralModel_;          ///< Neural GRU fallback (weights opt-in via begin())
-  G2PRuleBasedModel g2pRuleBasedModel_;    ///< Rule-based model
+  G2PRuleBasedModelEN g2pRuleBasedModel_;    ///< Rule-based model
 };

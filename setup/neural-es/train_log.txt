@@ -1,0 +1,28 @@
+Device: cpu
+Train: 582205, Val: 18006
+Model params: 832,065
+Epoch  1/15  loss=0.2377  val_exact_match=96.3%  (1432s)
+  -> saved best checkpoint to /home/pschatzmann/Development/Arduino/libraries/TinyTTSTools/setup/neural-es/g2p_model.pt (96.3%)
+Epoch  2/15  loss=0.0177  val_exact_match=96.6%  (1428s)
+  -> saved best checkpoint to /home/pschatzmann/Development/Arduino/libraries/TinyTTSTools/setup/neural-es/g2p_model.pt (96.6%)
+Epoch  3/15  loss=0.0126  val_exact_match=96.6%  (1619s)
+  -> saved best checkpoint to /home/pschatzmann/Development/Arduino/libraries/TinyTTSTools/setup/neural-es/g2p_model.pt (96.6%)
+Epoch  4/15  loss=0.0102  val_exact_match=97.9%  (2592s)
+  -> saved best checkpoint to /home/pschatzmann/Development/Arduino/libraries/TinyTTSTools/setup/neural-es/g2p_model.pt (97.9%)
+Epoch  5/15  loss=0.0085  val_exact_match=97.7%  (2226s)
+Epoch  6/15  loss=0.0078  val_exact_match=98.2%  (1446s)
+  -> saved best checkpoint to /home/pschatzmann/Development/Arduino/libraries/TinyTTSTools/setup/neural-es/g2p_model.pt (98.2%)
+Epoch  7/15  loss=0.0068  val_exact_match=98.4%  (1005s)
+  -> saved best checkpoint to /home/pschatzmann/Development/Arduino/libraries/TinyTTSTools/setup/neural-es/g2p_model.pt (98.4%)
+Epoch  8/15  loss=0.0061  val_exact_match=98.1%  (1005s)
+Epoch  9/15  loss=0.0056  val_exact_match=98.0%  (1087s)
+Epoch 10/15  loss=0.0053  val_exact_match=98.6%  (1091s)
+  -> saved best checkpoint to /home/pschatzmann/Development/Arduino/libraries/TinyTTSTools/setup/neural-es/g2p_model.pt (98.6%)
+Epoch 11/15  loss=0.0049  val_exact_match=98.5%  (1179s)
+Epoch 12/15  loss=0.0048  val_exact_match=98.7%  (1003s)
+  -> saved best checkpoint to /home/pschatzmann/Development/Arduino/libraries/TinyTTSTools/setup/neural-es/g2p_model.pt (98.7%)
+Epoch 13/15  loss=0.0044  val_exact_match=98.7%  (1031s)
+Epoch 14/15  loss=0.0042  val_exact_match=98.5%  (1019s)
+Epoch 15/15  loss=0.0041  val_exact_match=98.7%  (1055s)
+
+Best validation exact-match: 98.7%

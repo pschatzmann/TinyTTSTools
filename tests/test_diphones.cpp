@@ -69,13 +69,13 @@ static void testDataCompleteness() {
   CHECK_EQ(NUM_DIPHONES, static_cast<size_t>(1600));
   // The 4 clusters that used to fail outright (bug 3).
   AudioDictionary dict(DIPHONES, NUM_DIPHONES, 8000, PhonemeType::ARPAbet, 1, 16);
-  CHECK(dict.getSoundEntry("S_K") != nullptr);
-  CHECK(dict.getSoundEntry("K_R") != nullptr);
-  CHECK(dict.getSoundEntry("S_P") != nullptr);
-  CHECK(dict.getSoundEntry("P_L") != nullptr);
-  CHECK(dict.getSoundEntry("P_R") != nullptr);
-  CHECK(dict.getSoundEntry("S_T") != nullptr);
-  CHECK(dict.getSoundEntry("T_R") != nullptr);
+  CHECK(dict.getSoundEntry("S K") != nullptr);
+  CHECK(dict.getSoundEntry("K R") != nullptr);
+  CHECK(dict.getSoundEntry("S P") != nullptr);
+  CHECK(dict.getSoundEntry("P L") != nullptr);
+  CHECK(dict.getSoundEntry("P R") != nullptr);
+  CHECK(dict.getSoundEntry("S T") != nullptr);
+  CHECK(dict.getSoundEntry("T R") != nullptr);
 
   // Diphones are now roughly half+half (~120ms), not full+full (~240ms) --
   // AA_B previously had ~4400 16-bit samples at 22050Hz original quality;
@@ -83,7 +83,7 @@ static void testDataCompleteness() {
   // byte size instead (compact and format-independent): a full+full
   // diphone at 8kHz/4-bit was ~960+ data bytes; half+half should be
   // roughly half of that.
-  SoundEntry* aaB = dict.getSoundEntry("AA_B");
+  SoundEntry* aaB = dict.getSoundEntry("AA B");
   CHECK(aaB != nullptr);
   if (aaB) CHECK(aaB->size < 700);  // generous margin above the ~500-byte expectation
 
@@ -91,12 +91,12 @@ static void testDataCompleteness() {
   // missing before the consonant-consonant/vowel-vowel completeness pass
   // (2025-09): K_S/P_S (from "fox"/"jumps"), plus the highest-frequency
   // consonant-consonant and vowel-vowel gaps found by the audit.
-  CHECK(dict.getSoundEntry("K_S") != nullptr);
-  CHECK(dict.getSoundEntry("P_S") != nullptr);
-  CHECK(dict.getSoundEntry("M_B") != nullptr);
-  CHECK(dict.getSoundEntry("R_K") != nullptr);
-  CHECK(dict.getSoundEntry("ER_IH") != nullptr);
-  CHECK(dict.getSoundEntry("IY_OW") != nullptr);
+  CHECK(dict.getSoundEntry("K S") != nullptr);
+  CHECK(dict.getSoundEntry("P S") != nullptr);
+  CHECK(dict.getSoundEntry("M B") != nullptr);
+  CHECK(dict.getSoundEntry("R K") != nullptr);
+  CHECK(dict.getSoundEntry("ER IH") != nullptr);
+  CHECK(dict.getSoundEntry("IY OW") != nullptr);
 }
 
 static void testTraversalCoversEveryTransition() {
@@ -111,9 +111,9 @@ static void testTraversalCoversEveryTransition() {
 
   bool sawHH_EH = false, sawEH_L = false, sawL_OW = false;
   for (auto& r : dict.requested) {
-    if (r == "HH_EH") sawHH_EH = true;
-    if (r == "EH_L") sawEH_L = true;
-    if (r == "L_OW") sawL_OW = true;
+    if (r == "HH EH") sawHH_EH = true;
+    if (r == "EH L") sawEH_L = true;
+    if (r == "L OW") sawL_OW = true;
   }
   CHECK(sawHH_EH);
   CHECK(sawEH_L);  // the transition the bug used to skip entirely
@@ -121,7 +121,7 @@ static void testTraversalCoversEveryTransition() {
 }
 
 static void testWordBracketedWithSilence() {
-  // Regression test (2025-09): a diphone "X_Y" only ever supplies the
+  // Regression test (2025-09): a diphone "X Y" only ever supplies the
   // SECOND half of X and the FIRST half of Y (see
   // setup/audio/diphones/generate_relevant_diphones.sh). The traversal used
   // to slide over adjacent phoneme pairs within a word only, so the first
@@ -140,8 +140,8 @@ static void testWordBracketedWithSilence() {
 
   bool sawLeadingSIL = false, sawTrailingSIL = false;
   for (auto& r : dict.requested) {
-    if (r == "SIL_HH") sawLeadingSIL = true;
-    if (r == "OW_SIL") sawTrailingSIL = true;
+    if (r == "SIL HH") sawLeadingSIL = true;
+    if (r == "OW SIL") sawTrailingSIL = true;
   }
   CHECK(sawLeadingSIL);
   CHECK(sawTrailingSIL);
@@ -152,8 +152,8 @@ static void testWordBracketedWithSilence() {
   v.sayPhoneme(PhonemeType::ARPAbet, "AH", out);
   bool sawSIL_AH = false, sawAH_SIL = false;
   for (auto& r : dict.requested) {
-    if (r == "SIL_AH") sawSIL_AH = true;
-    if (r == "AH_SIL") sawAH_SIL = true;
+    if (r == "SIL AH") sawSIL_AH = true;
+    if (r == "AH SIL") sawAH_SIL = true;
   }
   CHECK(sawSIL_AH);
   CHECK(sawAH_SIL);
@@ -173,8 +173,8 @@ static void testStressDigitsStripped() {
 
   bool sawW_IH = false, sawIH_K = false, sawStrayDigitName = false;
   for (auto& r : dict.requested) {
-    if (r == "W_IH") sawW_IH = true;
-    if (r == "IH_K") sawIH_K = true;
+    if (r == "W IH") sawW_IH = true;
+    if (r == "IH K") sawIH_K = true;
     if (r.find('1') != std::string::npos || r.find('2') != std::string::npos) sawStrayDigitName = true;
   }
   CHECK(sawW_IH);
@@ -201,13 +201,13 @@ static void testMultiWordSequenceSegmentsAtSilence() {
   bool sawBothWordsBracketed = false;
   bool sawSIL_HH = false, sawOW_SIL = false, sawSIL_W = false, sawD_SIL = false;
   for (auto& r : dict.requested) {
-    if (r == "EH_L") sawInteriorTransition = true;  // interior of "hello"
-    if (r == "ER_L") sawInteriorTransition = true;  // interior of "world"
+    if (r == "EH L") sawInteriorTransition = true;  // interior of "hello"
+    if (r == "ER L") sawInteriorTransition = true;  // interior of "world"
     if (r.find("SP") != std::string::npos) sawSpanningSP = true;
-    if (r == "SIL_HH") sawSIL_HH = true;
-    if (r == "OW_SIL") sawOW_SIL = true;
-    if (r == "SIL_W") sawSIL_W = true;
-    if (r == "D_SIL") sawD_SIL = true;
+    if (r == "SIL HH") sawSIL_HH = true;
+    if (r == "OW SIL") sawOW_SIL = true;
+    if (r == "SIL W") sawSIL_W = true;
+    if (r == "D SIL") sawD_SIL = true;
   }
   sawBothWordsBracketed = sawSIL_HH && sawOW_SIL && sawSIL_W && sawD_SIL;
   CHECK(sawInteriorTransition);
@@ -236,8 +236,8 @@ static void testReducedVowelsFallBackToFullVowelDiphones() {
 
   bool sawP_ER = false, sawER_Z = false, sawReducedVowelName = false;
   for (auto& r : dict.requested) {
-    if (r == "P_ER") sawP_ER = true;
-    if (r == "ER_Z") sawER_Z = true;
+    if (r == "P ER") sawP_ER = true;
+    if (r == "ER Z") sawER_Z = true;
     if (r.find("ER0") != std::string::npos || r.find("AH0") != std::string::npos) {
       sawReducedVowelName = true;
     }

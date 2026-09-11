@@ -153,9 +153,15 @@ synth.sayPhoneme(Phone::AA, out, params);
 `PhonemeVocoder`/`DiphoneVocoder` play back fixed recordings and can only
 truncate, never stretch or re-pitch them.
 
-`Phone` is a type-safe enum alternative to raw ARPAbet strings (`Phone::AA`
-instead of `"AA"`), covering every phoneme plus the stress-marked variants
-(`Phone::IH1`, `Phone::AA2`, ...) used internally by the dictionaries.
+`Phone` is a type-safe enum alternative to raw phoneme strings (`Phone::AA`
+instead of `"AA"`), covering ARPAbet (0-42) plus an international/IPA
+extension (43-120, for German/French/Spanish and beyond -- see
+[PHONEMES.md](PHONEMES.md)). Stress and other diacritics (length,
+nasalization, palatalization, ...) aren't separate `Phone` ids -- they're
+carried alongside a base id via `Seg(Phone::AA, PhonemeModifier::MOD_STRESS_PRIMARY)`
+when authoring a compile-time dictionary table, or as an X-SAMPA tag in a
+plain phoneme string (`"AA1"` or `"\"AA"`) -- see PHONEMES.md's
+"Modifiers" section for the full tag table.
 
 ### Per-phoneme overrides within one call
 
@@ -182,7 +188,7 @@ pairing/lookahead context they depend on.
 | Model | Coverage | Exact-match accuracy | Flash cost |
 |---|---|---|---|
 | `G2PDictionaryModel` (default 534-word dictionary) | Common/curated words only | 100% for words it contains, 0% otherwise | Small |
-| + `G2PRuleBasedModel` fallback (`G2PDictionaryAndRulesModel`) | Any word | ~17% for words outside the dictionary (English spelling is fundamentally ambiguous without a stress model) | Small |
+| + `G2PRuleBasedModelEN` fallback (`G2PDictionaryAndRulesModel`) | Any word | ~17% for words outside the dictionary (English spelling is fundamentally ambiguous without a stress model) | Small |
 | + `G2PNeuralModel` fallback (`G2PDictionaryNeuralAndRulesModel`) | Any word, including genuinely novel ones (proper nouns, made-up words) | ~74% for words outside the dictionary | +~970KB |
 | Full CMU dictionary (`COMPACT_CMUDICT_EN`, 123k words) | Nearly all real English words | ~100% for words it contains | +~1.74MB |
 
@@ -205,10 +211,10 @@ numbers measured against the real CMU dictionary:
 
 ```cpp
 #include "TinyTTSTools/G2P/G2PDictionaryNeuralAndRulesModel.h"
-#include "TinyTTSTools/Data/neural/G2PNeuralWeights_data.h"
+#include "TinyTTSTools/Data/neural/G2PNeuralWeightsEN_data.h"
 
 G2PDictionaryNeuralAndRulesModel g2p;
-g2p.getNeuralModel().begin(G2P_NEURAL_MODEL_WEIGHTS, G2P_NEURAL_MODEL_WEIGHTS_LEN);
+g2p.getNeuralModel().begin(G2P_NEURAL_MODEL_WEIGHTS_EN, G2P_NEURAL_MODEL_WEIGHTS_EN_LEN);
 ```
 
 This is a from-scratch, dependency-free GRU model (no TensorFlow Lite) --
@@ -228,6 +234,42 @@ need to add or correct pronunciations at runtime instead -- learned from
 user input, a config file, or growing incrementally -- use
 `DynamicPhonemeDictionary` (`PhonemeDictionary/DynamicPhonemeDictionary.h`) via
 `useCompactDictionary()`, and call `add()`/`remove()` any time after.
+
+## Choosing a language
+
+German, French, and Spanish each have the same small built-in dictionary +
+rule-based fallback pattern as English:
+
+```cpp
+#include "TinyTTSTools/PhonemeDictionary/PhonemeDictionaryDE.h"
+#include "TinyTTSTools/G2P/G2PRuleBasedModelDE.h"
+#include "TinyTTSTools/G2P/G2PDictionaryModel.h"
+#include "TinyTTSTools/G2P/G2PHybridModel.h"
+
+G2PDictionaryModel dict;
+dict.useCompactDictionary(COMPACT_PHONEME_DICTIONARY_DE);
+G2PRuleBasedModelDE rules;
+G2PHybridModel g2p(dict, rules);   // dictionary first, rules fallback
+```
+
+`FormantVocoder` is the only vocoder with full coverage of the
+international phonemes these languages need -- `PhonemeVocoder`/
+`PSOLAVocoder` have real recordings for the ~23 international phonemes the
+bundled dictionaries/rules actually use (some approximated, see
+[PHONEMES.md](PHONEMES.md)), and `DiphoneVocoder` has none. The desktop
+CLI (`desktop/tinyttstools --language de|fr|es`) demonstrates this
+composition end-to-end, including the vocoder-compatibility fallback.
+
+For full-vocabulary coverage (not just the small built-in dictionary),
+`COMPACT_OLAPH_DE/FR/ES` (from `setup/dictionary-common`'s OLaPh pipeline)
+are drop-in replacements for `COMPACT_PHONEME_DICTIONARY_DE` above, the
+same way `COMPACT_CMUDICT_EN` is for English's small default -- see
+[MEMORY.md](MEMORY.md) for their size (desktop/SD-card/PSRAM tier, not
+flash-resident).
+
+See [Adding a Language](ADDING_A_LANGUAGE.md) for what it'd take to add a
+fifth language, and exactly what each of German/French/Spanish already
+has versus what's still missing (e.g. a trained neural fallback).
 
 ## Multi-word text and pauses
 
@@ -267,5 +309,6 @@ task).
 
 - [BUILDING.md](BUILDING.md) -- build and test everything on desktop, no board required
 - `examples/` -- one complete, runnable sketch per vocoder and G2P combination
-- [PHONEMES.md](PHONEMES.md) -- the ARPAbet phoneme set this library uses throughout
+- [PHONEMES.md](PHONEMES.md) -- the phoneme set (ARPAbet + international extension) and modifier/diacritic system this library uses throughout
+- [ADDING_A_LANGUAGE.md](ADDING_A_LANGUAGE.md) -- what German/French/Spanish already have, and how to add another language
 - [../README.md](../README.md) -- architecture overview and installation

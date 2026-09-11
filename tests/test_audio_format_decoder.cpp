@@ -41,7 +41,7 @@ static void testPcm16Decoder() {
 static void testAdpcmDecoderAgainstSoxReference() {
   const SoundEntry* e = nullptr;
   for (size_t i = 0; i < NUM_DIPHONES; i++) {
-    if (strcmp(DIPHONES[i].name, "AA_B") == 0) {
+    if (strcmp(DIPHONES[i].name, "AA B") == 0) {
       e = &DIPHONES[i];
       break;
     }
@@ -80,7 +80,7 @@ static void testAdpcmDecoderAgainstSoxReference() {
 // diphone-generation design) -- purely a regression-test vehicle wearing
 // production clothes. This inlined version keeps the exact same coverage
 // (a manually bits=4-tagged SoundEntry over the same underlying bytes,
-// checked against DIPHONES["AA_SIL"]) without shipping a public class
+// checked against DIPHONES["AA SIL"]) without shipping a public class
 // whose only real purpose was to be wrong on purpose in a controlled way.
 static void testManualBitsFourMatchesDiphoneSource() {
   SoundEntry manual("AA", sound_data_AA_SIL_size, sound_data_AA_SIL, 4);
@@ -88,7 +88,7 @@ static void testManualBitsFourMatchesDiphoneSource() {
 
   const SoundEntry* src = nullptr;
   for (size_t i = 0; i < NUM_DIPHONES; i++) {
-    if (strcmp(DIPHONES[i].name, "AA_SIL") == 0) {
+    if (strcmp(DIPHONES[i].name, "AA SIL") == 0) {
       src = &DIPHONES[i];
       break;
     }

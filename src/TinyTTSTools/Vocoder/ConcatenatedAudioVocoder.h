@@ -17,6 +17,7 @@
 #include <vector>
 
 #include "VocoderBase.h"
+#include "../Basic/PhonemeModifiers.h"
 #include "../Basic/Phonemes.h"
 #include "../Basic/StringUtils.h"
 #include "../Basic/TTSLogger.h"
@@ -551,9 +552,27 @@ class ConcatenatedAudioVocoder : public VocoderBase {
     // marker, but a G2P source using the full CMU dictionary
     // (COMPACT_CMUDICT_EN) emits stress-marked phonemes -- without this,
     // every stressed vowel would silently fail every dictionary lookup.
+    // Any X-SAMPA modifier tag (e.g. "AA:", "P_h") is deliberately left in
+    // place here -- getAudioEntry()/getNextAudioEntry() resolve down to
+    // AudioDictionary::getSoundEntry(), which tries the modifier-tagged
+    // name first and falls back to the bare symbol itself.
     for (std::string& unit : units) {
       int stress;
       unit = stripStressMarker(unit, stress);
+    }
+
+    // Fully bare (stress- and modifier-stripped) names for the
+    // Phonemes::isSilence()/getPhonemeDuration() lookups below: that
+    // table is keyed on bare phoneme symbols and treats any unrecognized
+    // symbol as silence, so a modifier-tagged unit like "AA:" or "P_h"
+    // must not be checked with its tag still attached or it would
+    // silently be misrouted to outputSilence() instead of being
+    // synthesized (see PSOLAVocoder::synthesizePhoneme() for the same
+    // fix applied there).
+    std::vector<std::string> bareUnits(units.size());
+    for (size_t i = 0; i < units.size(); i++) {
+      PhonemeModifier unusedMod = PhonemeModifier::MOD_NONE;
+      bareUnits[i] = parsePhonemeModifiers(units[i], unusedMod);
     }
 
     bool success = true;
@@ -561,11 +580,12 @@ class ConcatenatedAudioVocoder : public VocoderBase {
     // Process each unit with context from the next unit
     for (size_t i = 0; i < units.size(); i++) {
       const std::string& currentUnit = units[i];
+      const std::string& currentBare = bareUnits[i];
 
       // Check for silence
-      if (phonemes_.isSilence(getDefaultPhonemeType(), currentUnit.c_str())) {
+      if (phonemes_.isSilence(getDefaultPhonemeType(), currentBare.c_str())) {
         uint16_t duration = resolveDuration(
-            phonemes_.getPhonemeDuration(getDefaultPhonemeType(), currentUnit), params);
+            phonemes_.getPhonemeDuration(getDefaultPhonemeType(), currentBare), params);
         outputSilence(sampleRate(), duration, out);
         continue;
       }
@@ -583,14 +603,14 @@ class ConcatenatedAudioVocoder : public VocoderBase {
       const SoundEntry* nextEntry = nullptr;
       if (i + 1 < units.size()) {
         const std::string& nextUnit = units[i + 1];
-        if (!phonemes_.isSilence(getDefaultPhonemeType(), nextUnit.c_str())) {
+        if (!phonemes_.isSilence(getDefaultPhonemeType(), bareUnits[i + 1].c_str())) {
           nextEntry = getNextAudioEntry(currentUnit, nextUnit);
         }
       }
 
       // Get duration and process with enhanced combination
       uint16_t duration = resolveDuration(
-          phonemes_.getPhonemeDuration(getDefaultPhonemeType(), currentUnit), params);
+          phonemes_.getPhonemeDuration(getDefaultPhonemeType(), currentBare), params);
       processAudioUnit(currentEntry, nextEntry, duration, out, params);
     }
 

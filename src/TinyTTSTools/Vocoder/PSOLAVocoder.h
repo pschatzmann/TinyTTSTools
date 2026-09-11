@@ -16,6 +16,7 @@
 #include <vector>
 
 #include "VocoderBase.h"
+#include "../Basic/PhonemeModifiers.h"
 #include "../SoundDictionary/AudioDictionary.h"
 
 #ifndef M_PI
@@ -70,6 +71,47 @@
  * has, which still gives PSOLA a reasonable, consistent window size to
  * work with for duration changes, even though pitch-shifting a genuinely
  * unvoiced sound has no real perceptual meaning.
+ *
+ * ## PhonemeModifier support (see PhonemeModifiers.h)
+ * A token's modifier tag (e.g. "T_j", stripped via parsePhonemeModifiers())
+ * is combined with any caller-set PhonemeSynthesisParams via
+ * deriveModifierEffect(), the same shared mapping FormantVocoder uses --
+ * so a given modifier means the same thing regardless of which vocoder
+ * renders it. What PSOLA can and can't honor differs fundamentally from a
+ * procedural vocoder, though, since it resynthesizes a single fixed
+ * recording rather than generating a source from scratch:
+ *  - Duration (MOD_LONG/HALF_LONG/STRESS_PRIMARY/SECONDARY, TONE_CHECKED,
+ *    and MOD_ASPIRATED/MOD_SYLLABIC's fixed +45ms/+40ms extension): fully
+ *    supported -- this is exactly what PSOLA's own time-stretch mechanism
+ *    already does.
+ *  - Pitch contour (TONE_* values' f0StartRatio/MidRatio/EndRatio, or a
+ *    caller's own): fully supported, and arguably a more natural fit here
+ *    than in a procedural vocoder -- PSOLA already places one synthesis
+ *    mark per pitch period, so each mark's target period is simply
+ *    computed from the contour ratio at its own position instead of one
+ *    fixed target pitch for the whole phoneme.
+ *  - Voicing (MOD_DEVOICED/MOD_BREATHY, and the pre-existing but
+ *    previously-unused PhonemeSynthesisParams::voicing): the ONE
+ *    direction this can meaningfully realize -- blending the
+ *    PSOLA-reconstructed signal with generated broadband noise scaled to
+ *    the same RMS, post-reconstruction. Not a true voiced/unvoiced source
+ *    switch (there's no separate unvoiced recording to blend from), but
+ *    directionally correct and audible. MOD_VOICED is honestly a no-op
+ *    here beyond restoring full voicing if something else had lowered
+ *    it: there's no way to inject periodicity INTO an inherently noisy
+ *    recording the way FormantVocoder can switch its procedural source
+ *    from noise to a glottal pulse -- the recording's own natural
+ *    voicing quality plays back unchanged either way.
+ *  - Secondary articulation/place-shifting modifiers (MOD_NASALIZED,
+ *    MOD_PALATALIZED, MOD_LABIALIZED, MOD_VELARIZED, MOD_PHARYNGEALIZED,
+ *    MOD_RHOTACIZED, MOD_UNRELEASED): NOT implemented here. These need a
+ *    formant/spectral-domain shift (an EQ or filter stage) that's
+ *    orthogonal to PSOLA's own purely time-domain pitch/duration
+ *    mechanism -- adding one is a separate, real DSP task, not a natural
+ *    extension of this class's existing algorithm. A token carrying one
+ *    of these still resynthesizes correctly (via
+ *    AudioDictionary::getSoundEntry()'s modifier-stripping fallback), it
+ *    just sounds identical to the unmodified base phoneme.
  */
 class PSOLAVocoder : public VocoderBase {
  public:
@@ -77,7 +119,9 @@ class PSOLAVocoder : public VocoderBase {
   /// (e.g. ArpabetWAVDictionary) -- same convention as PhonemeVocoder.
   /// @param defaultPitchHz Fallback pitch when params.pitchHz isn't set.
   explicit PSOLAVocoder(AudioDictionary& dictionary, float defaultPitchHz = 120.0f)
-      : dictionary_(dictionary), defaultPitchHz_(defaultPitchHz) {}
+      : dictionary_(dictionary),
+        defaultPitchHz_(defaultPitchHz),
+        noiseSeed_(nextInstanceSeed()) {}
 
   std::string getType() const override { return "PSOLAVocoder"; }
   bool isReady() const override { return true; }
@@ -96,17 +140,21 @@ class PSOLAVocoder : public VocoderBase {
 
     bool success = true;
     for (const std::string& token : tokens) {
-      // Check silence against the bare (stress-stripped) name: audio
-      // dictionaries and Phonemes::isSilence() both key on bare phoneme
-      // names, and isSilence() treats any unrecognized symbol as silence
-      // -- without stripping first, every stressed vowel (e.g. "IH1")
+      // Check silence against the bare (stress- and modifier-stripped)
+      // name: audio dictionaries and Phonemes::isSilence() both key on
+      // bare phoneme names, and isSilence() treats any unrecognized
+      // symbol as silence -- without stripping first, every stressed
+      // vowel (e.g. "IH1") or modifier-tagged token (e.g. "AA:", "P_h")
       // would silently turn to silence (see
       // ConcatenatedAudioVocoder::processSequenceWithLookahead's own copy
       // of this fix for the same reason). synthesizeOnePhoneme() does its
       // own stripping internally too -- it still needs the original,
-      // stress-marked token to apply the stress-duration boost.
+      // stress/modifier-marked token to apply the stress-duration boost
+      // and modifier effects.
       int stress;
       std::string bare = stripStressMarker(token, stress);
+      PhonemeModifier unusedMod = PhonemeModifier::MOD_NONE;
+      bare = parsePhonemeModifiers(bare, unusedMod);
       if (translator_.isSilence(defaultPhonemeType, bare.c_str())) {
         uint16_t durationMs = resolveDuration(
             translator_.getPhonemeDuration(defaultPhonemeType, bare), params);
@@ -121,6 +169,21 @@ class PSOLAVocoder : public VocoderBase {
  private:
   AudioDictionary& dictionary_;
   float defaultPitchHz_;
+  uint32_t noiseSeed_;  // per-instance PRNG state, for the voicing blend
+
+  /// Deterministic, still-distinct-per-instance seed -- see
+  /// FormantVocoder.h's own copy of this helper for why it's a counter
+  /// (reproducible run-to-run), not derived from `this` (ASLR-dependent).
+  static uint32_t nextInstanceSeed() {
+    static uint32_t counter = 0;
+    ++counter;
+    return 1u + (counter * 2654435761u);
+  }
+
+  float generateNoiseSource() {
+    noiseSeed_ = noiseSeed_ * 1103515245u + 12345u;
+    return ((float)(noiseSeed_ >> 16) / 32768.0f) - 1.0f;
+  }
 
   bool synthesizeOnePhoneme(const std::string& phoneme, ::Print& out,
                             const PhonemeSynthesisParams& params) {
@@ -129,6 +192,25 @@ class PSOLAVocoder : public VocoderBase {
     // in synthesizePhoneme() above.
     int stress;
     std::string bare = stripStressMarker(phoneme, stress);
+
+    // Modifier tag (e.g. "T_j"), if the token carries one, on top of the
+    // digit-stress convention above -- a PREFIX stress tag folds into the
+    // same `stress` int (so it drives getPhonemeWithStressDuration() the
+    // same way a digit-suffixed "IH1" would), everything else becomes the
+    // modifier this phoneme applies. Token-level wins over a caller-set
+    // params.modifier, matching FormantVocoder's own precedence.
+    PhonemeModifier tagMod = PhonemeModifier::MOD_NONE;
+    bare = parsePhonemeModifiers(bare, tagMod);
+    if (tagMod == PhonemeModifier::MOD_STRESS_PRIMARY) {
+      stress = 1;
+      tagMod = PhonemeModifier::MOD_NONE;
+    } else if (tagMod == PhonemeModifier::MOD_STRESS_SECONDARY) {
+      stress = 2;
+      tagMod = PhonemeModifier::MOD_NONE;
+    }
+    PhonemeModifier modifier =
+        tagMod != PhonemeModifier::MOD_NONE ? tagMod : params.modifier;
+    ModifierEffect modEffect = deriveModifierEffect(modifier);
 
     const SoundEntry* entry = dictionary_.getSoundEntry(bare.c_str());
     if (!entry) return false;
@@ -139,15 +221,26 @@ class PSOLAVocoder : public VocoderBase {
     std::vector<float> src(n);
     for (size_t i = 0; i < n; i++) src[i] = static_cast<float>((*entry)[i]);
 
+    // MOD_ASPIRATED/MOD_SYLLABIC add a fixed extra chunk of time to the
+    // phoneme's own natural duration -- same amounts and rationale as
+    // FormantVocoder::preparePhonemeSynthesis() (a VOT gap / absorbed
+    // syllable-nucleus time), additive rather than a speed multiplier.
     uint16_t defaultDurationMs = getPhonemeWithStressDuration(bare, stress);
-    uint16_t targetDurationMs = resolveDuration(defaultDurationMs, params);
+    if (modifier == PhonemeModifier::MOD_ASPIRATED) {
+      defaultDurationMs += 45;
+    } else if (modifier == PhonemeModifier::MOD_SYLLABIC) {
+      defaultDurationMs += 40;
+    }
+    // MOD_LONG/MOD_HALF_LONG/TONE_CHECKED (via modEffect.speedMul) stretch
+    // or shorten the syllable the same way a caller's own params.speed
+    // would -- composed multiplicatively with it, not overriding it.
+    PhonemeSynthesisParams effectiveParams = params;
+    effectiveParams.speed *= modEffect.speedMul;
+    uint16_t targetDurationMs = resolveDuration(defaultDurationMs, effectiveParams);
     size_t targetSamples = (static_cast<size_t>(targetDurationMs) * sampleRate()) / 1000;
     if (targetSamples == 0) targetSamples = n;
 
     float targetHz = params.pitchHz > 0.0f ? params.pitchHz : defaultPitchHz_;
-    int synthPeriod = static_cast<int>(sampleRate() / targetHz);
-    if (synthPeriod < kMinPeriodSamples) synthPeriod = kMinPeriodSamples;
-
     int sourcePeriod = estimatePitchPeriod(src, sampleRate());
 
     std::vector<float> outBuf(targetSamples, 0.0f);
@@ -156,8 +249,29 @@ class PSOLAVocoder : public VocoderBase {
     double srcScale = static_cast<double>(n) / static_cast<double>(targetSamples);
     int64_t windowLen = 2 * static_cast<int64_t>(sourcePeriod);
 
-    for (int64_t synthMark = 0; synthMark < static_cast<int64_t>(targetSamples);
-         synthMark += synthPeriod) {
+    // Pitch contour (see PhonemeSynthesisParams::f0StartRatio/MidRatio/
+    // EndRatio, and PhonemeModifier's TONE_* values via modEffect):
+    // composed multiplicatively the same way FormantVocoder does. Unlike
+    // a procedural vocoder, PSOLA already places one synthesis mark per
+    // pitch period, so the contour is realized by computing each mark's
+    // OWN target period from its position-derived ratio, rather than one
+    // fixed synthPeriod for the whole phoneme.
+    float f0StartRatio = params.f0StartRatio * modEffect.f0StartRatio;
+    float f0MidRatio = params.f0MidRatio * modEffect.f0MidRatio;
+    float f0EndRatio = params.f0EndRatio * modEffect.f0EndRatio;
+
+    for (int64_t synthMark = 0; synthMark < static_cast<int64_t>(targetSamples);) {
+      float progress = targetSamples > 1
+                            ? static_cast<float>(synthMark) /
+                                  static_cast<float>(targetSamples - 1)
+                            : 0.0f;
+      float contourRatio =
+          progress < 0.5f
+              ? f0StartRatio + (f0MidRatio - f0StartRatio) * (progress * 2.0f)
+              : f0MidRatio + (f0EndRatio - f0MidRatio) * ((progress - 0.5f) * 2.0f);
+      int synthPeriod = static_cast<int>(sampleRate() / (targetHz * contourRatio));
+      if (synthPeriod < kMinPeriodSamples) synthPeriod = kMinPeriodSamples;
+
       int64_t rawCenter = static_cast<int64_t>(synthMark * srcScale + 0.5);
       // Snap the extracted content to the nearest real source pitch-period
       // boundary, reusing or skipping source periods as needed, instead of
@@ -185,6 +299,34 @@ class PSOLAVocoder : public VocoderBase {
         float hann = 0.5f - 0.5f * cosf(2.0f * M_PI * k / static_cast<float>(windowLen - 1));
         outBuf[outIdx] += src[srcIdx] * hann;
         weight[outIdx] += hann;
+      }
+      synthMark += synthPeriod;
+    }
+
+    // Voicing (MOD_DEVOICED/MOD_BREATHY, and the pre-existing
+    // params.voicing this class didn't honor before): blend the
+    // PSOLA-reconstructed signal with generated broadband noise scaled to
+    // the same RMS, post-reconstruction -- see this class's own doc for
+    // why this is an approximation (and why MOD_VOICED is a no-op here).
+    float composedVoicing = params.voicing * modEffect.voicingMul;
+    if (modEffect.voicingIsAbsolute) composedVoicing = modEffect.voicingAbsolute;
+    if (composedVoicing < 0.0f) composedVoicing = 0.0f;
+    if (composedVoicing > 1.0f) composedVoicing = 1.0f;
+    if (composedVoicing < 0.999f) {
+      double sumSq = 0.0;
+      for (size_t i = 0; i < targetSamples; i++) {
+        float v = weight[i] > 1e-6f ? outBuf[i] / weight[i] : 0.0f;
+        sumSq += static_cast<double>(v) * v;
+      }
+      float rms = targetSamples > 0
+                      ? sqrtf(static_cast<float>(sumSq / targetSamples))
+                      : 0.0f;
+      for (size_t i = 0; i < targetSamples; i++) {
+        float v = weight[i] > 1e-6f ? outBuf[i] / weight[i] : 0.0f;
+        float noise = generateNoiseSource() * rms;
+        v = v * composedVoicing + noise * (1.0f - composedVoicing);
+        outBuf[i] = v;
+        weight[i] = 1.0f;  // already blended -- normalize step below is a no-op
       }
     }
 

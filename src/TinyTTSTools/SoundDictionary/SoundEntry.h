@@ -49,8 +49,12 @@ struct SoundEntry {
    * @brief Name identifier for the sound entry
    *
    * A null-terminated string that uniquely identifies this sound entry.
-   * For diphones, this typically follows the format "PHONEME1_PHONEME2"
-   * (e.g., "AA_B", "SIL_T").
+   * For diphones, this follows the format "PHONEME1 PHONEME2" (a space
+   * between the two symbols, e.g. "AA B", "SIL T") -- a space, not an
+   * underscore, specifically so a diphone key can never collide with a
+   * PhonemeModifiers.h modifier tag (they're all `_`/`:`/`~`/etc. prefixed
+   * or suffixed, never a bare space); see AudioDictionary::getSoundEntry()
+   * for the modifier-stripping fallback this keeps unambiguous.
    */
   const char* name;
 

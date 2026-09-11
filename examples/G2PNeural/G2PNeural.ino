@@ -23,7 +23,7 @@
 // via AudioTools' Arduino-compatibility emulation layer.
 #include "AudioTools.h"
 #include "TinyTTSTools/G2P/G2PDictionaryNeuralAndRulesModel.h"
-#include "TinyTTSTools/Data/neural/G2PNeuralWeights_data.h"
+#include "TinyTTSTools/Data/neural/G2PNeuralWeightsEN_data.h"
 #include "TinyTTSTools/Basic/TTSExampleUtils.h"
 
 G2PDictionaryNeuralAndRulesModel g2p;
@@ -57,7 +57,7 @@ void setup() {
                     novelWords, 5);
 
   Serial.println("Loading neural G2P weights (~970KB)...");
-  if (!g2p.getNeuralModel().begin(G2P_NEURAL_MODEL_WEIGHTS, G2P_NEURAL_MODEL_WEIGHTS_LEN)) {
+  if (!g2p.getNeuralModel().begin(G2P_NEURAL_MODEL_WEIGHTS_EN, G2P_NEURAL_MODEL_WEIGHTS_EN_LEN)) {
     Serial.println("Failed to load neural G2P weights!");
     return;
   }

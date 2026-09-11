@@ -25,10 +25,10 @@
  * order word also fails the build (binary search requires sorted entries).
  *
  * @note Entries must stay sorted alphabetically by word (binary search).
- * @note Stress is part of the `Phone` value itself (e.g. `Phone::AW1`);
- * only AH and ER have dedicated unstressed (`Phone::AH0`/`Phone::ER0`)
- * members -- other vowels use the bare name (`Phone::IY`, no digit) for
- * the unstressed case.
+ * @note `Phone` carries no stress information -- every phoneme here packs
+ * as stress 0. `Phone::AH0`/`Phone::ER0` are NOT stress markers; they're
+ * genuinely different reduced-vowel qualities (schwa / rhotic schwa) with
+ * their own dedicated entries, distinct from plain `Phone::AH`/`Phone::ER`.
  */
 static constexpr PhonemeWordSource PHONEME_DICTIONARY_EN[] = {
     PH_WORD("a", Phone::AH),

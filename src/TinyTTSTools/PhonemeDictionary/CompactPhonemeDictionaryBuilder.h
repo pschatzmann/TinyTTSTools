@@ -15,6 +15,7 @@
 #include <array>
 #include <cstddef>
 #include <cstdint>
+#include "../Basic/PhonemeModifiers.h"
 #include "CompactPhonemeDictionary.h"
 
 /**
@@ -25,7 +26,7 @@
  */
 struct PhonemeWordSource {
   const char* word;
-  const uint8_t* phonemeData;
+  const uint16_t* phonemeData;
   size_t phonemeCount;
 };
 
@@ -48,23 +49,15 @@ constexpr bool cxWordLess(const char* a, const char* b) {
   return a[i] == '\0' && b[i] != '\0';
 }
 
-/// phoneme_map/getPhonemeById() ids (see Phonemes.h) for the 15 vowels that
-/// have `Phone::X1`/`Phone::X2` stressed-variant enum members, in the same
-/// order those variants are declared (Phone::AA1 first, Phone::UW2 last) --
-/// index i corresponds to enum values (43 + 2*i) and (43 + 2*i + 1).
-constexpr uint8_t kStressedVowelBaseIds[15] = {2, 3, 4, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18};
-
-/// Packs one `Phone` value into a single dictionary byte: (base_id << 2) |
-/// stress. Plain `Phone` members (0-42) already are phoneme_map/
-/// getPhonemeById() ids and always mean stress 0; the stressed-variant
-/// members (43+, e.g. Phone::AH1) decode via kStressedVowelBaseIds.
-constexpr uint8_t cxPackPhone(Phone p) {
-  uint8_t v = static_cast<uint8_t>(p);
-  if (v <= 42) return static_cast<uint8_t>(v << 2);
-  uint8_t idx = static_cast<uint8_t>(v - 43);
-  uint8_t baseId = kStressedVowelBaseIds[idx / 2];
-  uint8_t stress = static_cast<uint8_t>((idx % 2) + 1);
-  return static_cast<uint8_t>((baseId << 2) | stress);
+/// Packs one `Phone` value into the low bits of a dictionary symbol:
+/// `base_id << 2`. `Phone` itself carries no stress information (see
+/// Phonemes.h) -- Seg() below ORs the stress bits in separately. Every
+/// `Phone` id (0-120, ARPAbet and the international/IPA extension alike)
+/// is valid here: the packed symbol is a plain `uint16_t` with 7 bits of
+/// id, so nothing overflows the way the old 1-byte `(id << 2) | stress`
+/// format would have past id 63.
+constexpr uint16_t cxPackPhone(Phone p) {
+  return static_cast<uint16_t>(static_cast<uint16_t>(p) << 2);
 }
 
 template <size_t N>
@@ -81,31 +74,74 @@ constexpr size_t cxTotalPhonemeCount(const PhonemeWordSource (&table)[N]) {
   return total;
 }
 
+/// Normalizes one PH_WORD() argument to a packed symbol: a bare `Phone`
+/// (e.g. `Phone::AA`, no stress/modifier -- the plain-list authoring
+/// style) packs via cxPackPhone() directly; an already-packed `uint16_t`
+/// (a Seg() result, carrying stress and/or a modifier) passes through
+/// unchanged. Overload resolution picks the right one per-argument, so a
+/// single PH_WORD() call can freely mix both styles (see Seg()'s own doc).
+constexpr uint16_t cxNormalizeSymbol(Phone p) { return cxPackPhone(p); }
+constexpr uint16_t cxNormalizeSymbol(uint16_t s) { return s; }
+
 /**
  * @brief Backing storage for one word's packed phoneme sequence
- * @details One instantiation per unique `<Ps...>` combination (so
+ * @details One instantiation per unique `<Symbols...>` combination (so
  * identical pronunciations, e.g. true homophones, automatically share
- * storage).
+ * storage). `Symbols` is `auto...` (not `uint16_t...`) so each argument can
+ * be either a bare `Phone` (plain-list style, no stress/modifier) or an
+ * already-packed `uint16_t` from Seg() (stress and/or a modifier) --
+ * cxNormalizeSymbol() converts whichever was given to the stored
+ * `uint16_t` form.
  */
-template <Phone... Ps>
+template <auto... Symbols>
 struct PhonemeSeqHolder {
-  static constexpr uint8_t values[sizeof...(Ps)] = {cxPackPhone(Ps)...};
+  static constexpr uint16_t values[sizeof...(Symbols)] = {cxNormalizeSymbol(Symbols)...};
 };
-template <Phone... Ps>
-constexpr uint8_t PhonemeSeqHolder<Ps...>::values[sizeof...(Ps)];
+template <auto... Symbols>
+constexpr uint16_t PhonemeSeqHolder<Symbols...>::values[sizeof...(Symbols)];
 
-template <Phone... Ps>
+template <auto... Symbols>
 constexpr PhonemeWordSource makeWord(const char* word) {
-  return PhonemeWordSource{word, PhonemeSeqHolder<Ps...>::values, sizeof...(Ps)};
+  return PhonemeWordSource{word, PhonemeSeqHolder<Symbols...>::values, sizeof...(Symbols)};
 }
 
 }  // namespace tts_compact_dict_detail
 
-/// Builds one dictionary table row: `PH_WORD("able", Phone::EY, Phone::B,
-/// Phone::AH, Phone::L)`. Each argument after the word must be a `Phone`
-/// enum value (see Phonemes.h) -- an unrecognized ARPABET name is simply a
-/// compiler error (no name of that kind exists), so there's no separate
-/// "unknown token" check to run at dictionary-build time.
+/**
+ * @brief Pack one PH_WORD() segment: a `Phone` plus an optional modifier.
+ * @details `Seg(Phone::AA)` (bare, no second argument) packs identically to
+ * the pre-Seg() `cxPackPhone(Phone::AA)`. `MOD_STRESS_PRIMARY`/
+ * `MOD_STRESS_SECONDARY` (see PhonemeModifiers.h) fold into the packed
+ * symbol's dedicated 2-bit stress field, exactly as before; every other
+ * modifier now has its own 5-bit field in the widened symbol (bits 9-13,
+ * above the 7-bit id field in bits 2-8), so e.g. `Seg(Phone::UF,
+ * PhonemeModifier::MOD_LONG)` (German long "über")
+ * or `Seg(Phone::T, PhonemeModifier::MOD_PALATALIZED)` are both fully
+ * captured -- no modifier is silently dropped here anymore.
+ * `Phone::AA1`/`AA2`-style stress-variant enum members no longer exist;
+ * write `Seg(Phone::AA, PhonemeModifier::MOD_STRESS_PRIMARY)` where those
+ * used to be spelled `Phone::AA1`.
+ */
+constexpr uint16_t Seg(Phone base,
+                        PhonemeModifier modifier = PhonemeModifier::MOD_NONE) {
+  return static_cast<uint16_t>(
+      tts_compact_dict_detail::cxPackPhone(base) |
+      (modifier == PhonemeModifier::MOD_STRESS_PRIMARY
+           ? 1
+           : modifier == PhonemeModifier::MOD_STRESS_SECONDARY
+                 ? 2
+                 : (static_cast<uint16_t>(modifier) << 9)));
+}
+
+/// Builds one dictionary table row. Each argument after the word is either
+/// a bare `Phone` (plain-list style, no stress/modifier -- e.g. `PH_WORD
+/// ("able", Phone::EY, Phone::B, Phone::AH, Phone::L)`) or a `Seg(...)`
+/// call for a segment that needs stress and/or a modifier -- the two styles
+/// freely mix in one call, e.g. `PH_WORD("stressed", Seg(Phone::AA,
+/// PhonemeModifier::MOD_STRESS_PRIMARY), Phone::T)`. An unrecognized
+/// phoneme name is simply a compiler error (no `Phone` enumerator of that
+/// kind exists), so there's no separate "unknown token" check to run at
+/// dictionary-build time.
 #define PH_WORD(word, ...) tts_compact_dict_detail::makeWord<__VA_ARGS__>(word)
 
 /**
@@ -131,7 +167,7 @@ struct CompactPhonemeDictionaryData {
   std::array<uint32_t, N + 1> wordOffsets{};
   std::array<char, WordBytes> wordsBlob{};
   std::array<uint32_t, N + 1> phonemeOffsets{};
-  std::array<uint8_t, PhonemeCount> phonemeData{};
+  std::array<uint16_t, PhonemeCount> phonemeData{};
 
   constexpr CompactPhonemeDictionaryData(const PhonemeWordSource (&table)[N]) {
     using namespace tts_compact_dict_detail;

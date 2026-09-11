@@ -49,7 +49,7 @@
  *   half when it's the first half of the pair, and its first half when it's
  *   the second half of the pair, so without this the segment's very first
  *   and very last phonemes would never be heard in full
- * - Converts each adjacent phoneme pair to a diphone identifier (e.g., "AA_EH")
+ * - Converts each adjacent phoneme pair to a diphone identifier (e.g., "AA EH")
  * - Applies advanced concatenation between adjacent diphones
  * - Uses roughly half of each constituent phoneme's natural duration,
  *   matching how the diphone audio itself is generated (half-of-phone1 +
@@ -152,7 +152,7 @@ class DiphoneVocoder : public ConcatenatedAudioVocoder {
     // vowel phonemes in Phonemes.h's phoneme_map). But the diphone corpus
     // (generate_relevant_diphones.sh) was only ever generated for the 15
     // main vowels -- it has no AH0/ER0 diphone data at all (e.g. no
-    // "P_ER0"), so any word using them (e.g. "whispers" -> "... P ER0 Z")
+    // "P ER0"), so any word using them (e.g. "whispers" -> "... P ER0 Z")
     // silently failed every diphone lookup touching that vowel, dropping
     // that part of the word. Fall back to the closest available full-vowel
     // unit rather than dropping audio.
@@ -164,7 +164,7 @@ class DiphoneVocoder : public ConcatenatedAudioVocoder {
     // A whole utterance arrives as ONE sequence with silence-class tokens
     // (SIL/SP, inserted by TinyTTSTools::toPhonemes() between words) mixed
     // in. Those aren't phonemes with their own diphone entries -- attempting
-    // e.g. "N_SP" or "SP_F" as a diphone name always fails -- so split the
+    // e.g. "N SP" or "SP F" as a diphone name always fails -- so split the
     // sequence into silence-free segments (typically one word each),
     // synthesize each as its own SIL-bracketed diphone chain, and render
     // each silence-class token as real silence of its own duration in
@@ -203,15 +203,16 @@ class DiphoneVocoder : public ConcatenatedAudioVocoder {
    */
   bool synthesizeSegment(std::vector<std::string> phonemes, ::Print& out,
                         const PhonemeSynthesisParams& params, PhonemeType phonemeType) {
-    // A diphone "X_Y" audio unit only ever supplies the SECOND half of X
-    // and the FIRST half of Y (see generate_relevant_diphones.sh). Sliding
-    // over adjacent pairs within a segment therefore never renders the very
-    // first phoneme's own onset (its first half, from silence) or the very
-    // last phoneme's own release (its second half, into silence) -- the
-    // segment would start mid-attack and end mid-release. Bracket it with
-    // SIL on both ends so the leading SIL_<first> and trailing <last>_SIL
-    // diphones (both present in the corpus -- see Data/wav/diphones/) get
-    // generated too.
+    // A diphone audio unit (source file "X_Y.wav", looked up as "X Y" --
+    // see SoundEntry.h on why the lookup key uses a space) only ever
+    // supplies the SECOND half of X and the FIRST half of Y (see
+    // generate_relevant_diphones.sh). Sliding over adjacent pairs within a
+    // segment therefore never renders the very first phoneme's own onset
+    // (its first half, from silence) or the very last phoneme's own
+    // release (its second half, into silence) -- the segment would start
+    // mid-attack and end mid-release. Bracket it with SIL on both ends so
+    // the leading "SIL <first>" and trailing "<last> SIL" diphones (both
+    // present in the corpus -- see Data/wav/diphones/) get generated too.
     if (phonemes.front() != "SIL") phonemes.insert(phonemes.begin(), "SIL");
     if (phonemes.back() != "SIL") phonemes.push_back("SIL");
 
@@ -229,7 +230,7 @@ class DiphoneVocoder : public ConcatenatedAudioVocoder {
     // consecutive diphones back-to-back reconstructs each shared phoneme's
     // duration once, not twice.
     for (size_t i = 0; i + 1 < phonemes.size(); i++) {
-      std::string diphoneName = phonemes[i] + "_" + phonemes[i + 1];
+      std::string diphoneName = phonemes[i] + " " + phonemes[i + 1];
 
       // Calculate duration for the diphone: each side contributes roughly
       // half its natural phoneme duration, matching how the audio itself
@@ -249,7 +250,7 @@ class DiphoneVocoder : public ConcatenatedAudioVocoder {
       // Get next diphone entry for enhanced concatenation
       const SoundEntry* nextEntry = nullptr;
       if (i + 2 < phonemes.size()) {
-        std::string nextDiphoneName = phonemes[i + 1] + "_" + phonemes[i + 2];
+        std::string nextDiphoneName = phonemes[i + 1] + " " + phonemes[i + 2];
         nextEntry = getNextAudioEntry(diphoneName, nextDiphoneName);
       }
 
@@ -287,7 +288,7 @@ class DiphoneVocoder : public ConcatenatedAudioVocoder {
 
   /**
    * @brief Get audio entry by diphone identifier (implements ConcatenatedAudioVocoder interface)
-   * @param identifier Diphone identifier (e.g., "AA_EH")
+   * @param identifier Diphone identifier (e.g., "AA EH")
    * @return Pointer to SoundEntry or nullptr if not found
    */
   const SoundEntry* getAudioEntry(const std::string& identifier) override {

@@ -15,6 +15,7 @@
 #include <cstdint>
 #include "../Basic/TTSAudioOutput.h"
 #include "../Basic/Phonemes.h"
+#include "../Basic/PhonemeModifiers.h"
 #include "../Basic/TTSTypes.h"
 #include "../Basic/StringUtils.h"
 
@@ -47,6 +48,68 @@ struct PhonemeSynthesisParams {
                             ///< only ever truncates, same as any other duration request --
                             ///< only PSOLAVocoder (TD-PSOLA) or FormantVocoder (procedural)
                             ///< can genuinely stretch audio to fill a longer duration.
+  float f0StartRatio = 1.0f;  ///< Pitch contour: F0 multiplier at this phoneme's
+  float f0MidRatio = 1.0f;    ///< onset/midpoint/offset, relative to whatever f0
+  float f0EndRatio = 1.0f;    ///< it would otherwise use (pitchHz override or the
+                              ///< vocoder's own default). All 1.0 = flat, no
+                              ///< contour. Set directly for a manual contour (e.g.
+                              ///< a rising question intonation), or via a
+                              ///< PhonemeModifier TONE_* value (see
+                              ///< PhonemeModifiers.h and deriveModifierEffect() --
+                              ///< the two compose multiplicatively). Only
+                              ///< FormantVocoder currently interpolates between
+                              ///< them (see its synthesizeSamples()). No tone/
+                              ///< pitch-accent G2P produces TONE_* modifiers yet.
+  PhonemeModifier modifier = PhonemeModifier::MOD_NONE;
+      ///< The (single) modifier this phoneme carries -- see
+      ///< PhonemeModifiers.h. Populate via parsePhonemeModifiers() and
+      ///< setPhonemeModifier(), or set directly.
+
+  /**
+   * @brief Replace modifier (e.g. with parsePhonemeModifiers()'s
+   * output) and derive volume/speed/voicing from it via
+   * deriveModifierEffect() (see PhonemeModifiers.h) -- the same mapping a
+   * vocoder applies for a per-token modifier tag, so caller-level and
+   * token-level modifiers behave identically.
+   * @details Recomputed from this struct's own 1.0/1.0/1.0 baselines every
+   * call, not multiplied onto whatever was already there -- so call this
+   * BEFORE setting any other manual override on the same params object,
+   * or a later manual assignment; calling it a second time with a
+   * different modifier is idempotent rather than compounding.
+   *
+   * durationMs and pitchHz are deliberately left untouched: both are
+   * absolute-value-or-"use default" fields (0 = default), while a
+   * modifier's effect is inherently relative ("20% longer", "somewhat
+   * higher pitch") -- expressing that correctly needs the vocoder's own
+   * base duration/pitch, which isn't known at this layer. speed already
+   * exists as a pure multiplier for exactly this reason (see its own doc
+   * above), so duration-affecting modifiers go through it instead of
+   * durationMs. f0StartRatio/MidRatio/EndRatio (above) are the
+   * pure-multiplier pitch mechanism -- no single modifier maps onto them
+   * automatically today (stress's pitch correlate is handled separately,
+   * via FormantVocoder's existing computeStressPitchRise()), but a future
+   * tone-affecting modifier could set them directly.
+   *
+   * See deriveModifierEffect()'s switch for the exact per-modifier
+   * mapping (stress/long/half-long scale speed+volume, breathy/devoiced/
+   * voiced scale or override voicing). MOD_CREAKY is deliberately NOT
+   * mapped onto voicing: its documented effect is glottal-pulse
+   * irregularity, not a voicing *amount* change, so forcing it onto this
+   * scalar would misrepresent it -- it stays a FormantVocoder
+   * source-model concern (see PhonemeModifier' @note). Every other
+   * modifier (nasalization, secondary articulation, aspiration,
+   * unreleased, syllabic, rhotacized) has no corresponding field on this
+   * struct at all -- their effects are formant/timing changes a vocoder
+   * would need to apply directly from modifier, not something
+   * expressible as a volume/speed/voicing/pitch/duration override.
+   */
+  void setPhonemeModifier(PhonemeModifier bit) {
+    modifier = bit;
+    ModifierEffect e = deriveModifierEffect(bit);
+    volume = e.volumeMul;
+    speed = e.speedMul;
+    voicing = e.voicingIsAbsolute ? e.voicingAbsolute : e.voicingMul;
+  }
 };
 
 /**
@@ -98,7 +161,8 @@ class VocoderBase {
 
   /**
    * @brief Say/synthesize audio for a phoneme given as a Phone enum value
-   * @param phone Phoneme, e.g. Phone::AA or a stressed variant like Phone::IH1
+   * @param phone Phoneme, e.g. Phone::AA (stress isn't representable via
+   *        Phone -- use sayPhoneme(PhonemeType::ARPAbet, "IH1", ...) instead)
    * @param out Output stream for audio data
    * @param params Optional volume/duration/pitch overrides
    * @return true if synthesis successful, false otherwise
@@ -115,7 +179,8 @@ class VocoderBase {
 
   /**
    * @brief Say/synthesize audio for a phoneme given as a Phone enum value
-   * @param phone Phoneme, e.g. Phone::AA or a stressed variant like Phone::IH1
+   * @param phone Phoneme, e.g. Phone::AA (stress isn't representable via
+   *        Phone -- use sayPhoneme(PhonemeType::ARPAbet, "IH1", ...) instead)
    * @param out Output stream for audio data
    * @return true if synthesis successful, false otherwise
    */

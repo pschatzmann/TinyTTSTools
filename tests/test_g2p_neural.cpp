@@ -1,6 +1,6 @@
 // Tests for G2PNeuralModel.h: a GRU-based neural grapheme-to-phoneme
 // fallback ported from the sibling TinyTTS project's DictionaryModel.h.
-// Unlike G2PRuleBasedModel (letter-to-sound rules, ~17% exact-match
+// Unlike G2PRuleBasedModelEN (letter-to-sound rules, ~17% exact-match
 // ceiling) or a static dictionary (however large, only covers words
 // someone thought to list), this generalizes to genuinely novel words --
 // proper nouns, made-up words -- via a learned phonetic guess.
@@ -9,11 +9,11 @@
 #include "TestUtils.h"
 #include "TinyTTSTools/G2P/G2PNeuralModel.h"
 #include "TinyTTSTools/G2P/G2PDictionaryNeuralAndRulesModel.h"
-#include "TinyTTSTools/Data/neural/G2PNeuralWeights_data.h"
+#include "TinyTTSTools/Data/neural/G2PNeuralWeightsEN_data.h"
 
 static void testBeginSucceedsAndProducesKnownPronunciations() {
   G2PNeuralModel model;
-  CHECK(model.begin(G2P_NEURAL_MODEL_WEIGHTS, G2P_NEURAL_MODEL_WEIGHTS_LEN));
+  CHECK(model.begin(G2P_NEURAL_MODEL_WEIGHTS_EN, G2P_NEURAL_MODEL_WEIGHTS_EN_LEN));
 
   // These match the real CMU Pronouncing Dictionary exactly, even though
   // this model never memorized a dictionary -- it predicts from spelling
@@ -46,7 +46,7 @@ static void testNovelWordsGetPlausibleDistinctGuesses() {
   // what pure letter-to-sound rules alone would produce for the same
   // input -- proving the neural model, not some fallback, actually ran.
   G2PNeuralModel model;
-  CHECK(model.begin(G2P_NEURAL_MODEL_WEIGHTS, G2P_NEURAL_MODEL_WEIGHTS_LEN));
+  CHECK(model.begin(G2P_NEURAL_MODEL_WEIGHTS_EN, G2P_NEURAL_MODEL_WEIGHTS_EN_LEN));
 
   std::string result = model.wordToPhonemes("zephyrion");
   CHECK(!result.empty());
@@ -61,7 +61,7 @@ static void testComposedModelPrefersDictionaryThenNeuralThenRules() {
   std::string beforeBegin = g2p.wordToPhonemes("zephyrion");
   CHECK(!beforeBegin.empty());
 
-  CHECK(g2p.getNeuralModel().begin(G2P_NEURAL_MODEL_WEIGHTS, G2P_NEURAL_MODEL_WEIGHTS_LEN));
+  CHECK(g2p.getNeuralModel().begin(G2P_NEURAL_MODEL_WEIGHTS_EN, G2P_NEURAL_MODEL_WEIGHTS_EN_LEN));
 
   // A word actually curated in the dictionary must still win over the
   // neural guess (dictionary entries are exact; the neural model is only

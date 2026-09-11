@@ -23,14 +23,30 @@ All implementations are based on the common [`G2PModelBase`](https://pschatzmann
 ### Available Models
 
 - **[`G2PDictionaryModel`](https://pschatzmann.github.io/TinyTTSTools/classG2PDictionaryModel.html)** - The simplest method using a dictionary lookup to translate words to phonemes
-- **[`G2PRuleBasedModel`](https://pschatzmann.github.io/TinyTTSTools/classG2PRuleBasedModel.html)** - Rule-based implementation for English phoneme conversion
-- **[`G2PNeuralModel`](https://pschatzmann.github.io/TinyTTSTools/classG2PNeuralModel.html)** - Dependency-free (no TensorFlow Lite) GRU neural network fallback for out-of-dictionary words, ported from the sibling TinyTTS project
+- **`G2PRuleBasedModelEN`/`DE`/`FR`/`ES`** - Rule-based letter-to-sound fallback, one per supported language, sharing the longest-match scaffolding in `G2PRuleBasedModelBase`
+- **[`G2PNeuralModel`](https://pschatzmann.github.io/TinyTTSTools/classG2PNeuralModel.html)** - Dependency-free (no TensorFlow Lite) GRU neural network fallback for out-of-dictionary words (English weights shipped, ported from the sibling TinyTTS project; French -- 94.8% validation exact-match --, Spanish -- 98.7% -- and German -- 71.2% -- are all trained too, but not yet wired into `G2PNeuralModel.h`'s output table -- see [Adding a Language](docs/ADDING_A_LANGUAGE.md))
 
 ### Hybrid Approaches
 
 Models can be combined using the [`G2PHybridModel`](https://pschatzmann.github.io/TinyTTSTools/classG2PHybridModel.html) class for improved accuracy:
-- **[`G2PDictionaryAndRulesModel`](https://pschatzmann.github.io/TinyTTSTools/classG2PDictionaryAndRulesModel.html)** - Predefined combination of dictionary and rule-based models
+- **[`G2PDictionaryAndRulesModel`](https://pschatzmann.github.io/TinyTTSTools/classG2PDictionaryAndRulesModel.html)** - Predefined combination of dictionary and rule-based models (English only; build the same combination for another language with `G2PHybridModel` + `G2PDictionaryModel` + that language's rule model)
 - **[`G2PDictionaryNeuralAndRulesModel`](https://pschatzmann.github.io/TinyTTSTools/classG2PDictionaryNeuralAndRulesModel.html)** - Predefined combination of dictionary, neural fallback and rule-based models (see `examples/G2PNeural`)
+
+### International Languages
+
+Beyond English, small built-in dictionaries and rule-based fallbacks ship
+for German, French, and Spanish (`PhonemeDictionaryDE/FR/ES.h`,
+`G2PRuleBasedModelDE/FR/ES.h`), plus larger compressed dictionaries
+(60k-93k words each, built from the [OLaPh](https://huggingface.co/datasets/cstr/g2p-dicts)
+pronunciation corpus, filtered to each language's top-100k most frequent
+words per [FrequencyWords](https://github.com/hermitdave/FrequencyWords) so
+they fit ESP32 PSRAM -- under 1MB-1.6MB each) for a desktop/SD-card/PSRAM
+tier. The desktop CLI
+(`desktop/tinyttstools`) demonstrates all four with `--language en|de|fr|es`.
+See [Adding a Language](docs/ADDING_A_LANGUAGE.md) for the full picture --
+what's already there for German/French/Spanish, and the steps to add a new
+one, including the `PhonemeModifier` system (`ˈ`stress, `ː`length, nasalization,
+palatalization, ...) that carries diacritics alongside the base `Phone` id.
 
 ## Phoneme to Audio
 
@@ -73,8 +89,9 @@ Alternatively you can also use the [TTSAudioOutputCallback](https://pschatzmann.
 - [Tutorial](docs/TUTORIAL.md) - Full walkthrough: choosing a vocoder and G2P model, tuning synthesis, audio output
 - [Building on Desktop](docs/BUILDING.md) - CMake build instructions, including how to build and run the test suite
 - [Setup Tools](docs/SETUP.md) - Regenerating the audio/dictionary data files (`setup/`), including the neural G2P training pipeline
+- [Adding a Language](docs/ADDING_A_LANGUAGE.md) - Step-by-step: what German/French/Spanish already have, and how to add another language (phonemes, dictionary, rule-based G2P, audio, neural)
 - [Loadable Data](data/README.md) - The same audio data as real `.wav` files, for `AudioDictionarySD`/`AudioEncodedDictionarySD` (SD card/LittleFS) instead of PROGMEM
-- [Phonemes](docs/PHONEMES.md) - The ARPAbet phoneme set used throughout the library
+- [Phonemes](docs/PHONEMES.md) - The phoneme set (ARPAbet + international/IPA extension) and `PhonemeModifier` diacritic system used throughout the library
 - [Memory Usage](docs/MEMORY.md) - Flash/RAM cost of each vocoder, G2P model and dictionary format
 - [Class Documentation](https://pschatzmann.github.io/TinyTTSTools/annotated.html)
 

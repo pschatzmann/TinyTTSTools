@@ -45,7 +45,10 @@ class FormantVocoder : public VocoderBase {
   /// 32767) for typical speech, so there's ample headroom. 1.7 was chosen
   /// empirically as the highest factor that produced zero clipped samples
   /// across a long, varied test phrase (stressed vowels, sibilants) --
-  /// 2.0 measured occasional clipping on peaks.
+  /// 2.0 measured occasional clipping on peaks. That "zero clipped
+  /// samples" margin is thin enough that noiseSeed_ (below) needs to be
+  /// reproducible run-to-run for the margin to mean anything -- see its
+  /// own doc for why it isn't derived from `this` anymore.
   FormantVocoder(uint32_t sampleRate, float volumeFactor = 1.7f,
                  const PhonemeRule* rules = kRules,
                  size_t ruleCount = kRuleCount)
@@ -65,8 +68,7 @@ class FormantVocoder : public VocoderBase {
         spectralTiltState_(0.0f),
         f0Current_(voiceF0_),
         jitterCounter_(0),
-        noiseSeed_(1u + static_cast<uint32_t>(
-                            reinterpret_cast<uintptr_t>(this) & 0xffffu)) {
+        noiseSeed_(nextInstanceSeed()) {
     cfg_.baseF0 = voiceF0_;
     // Pre-allocate buffer for max expected phoneme duration (0.3s)
     maxSamples_ = static_cast<size_t>(0.3f * sampleRate_);
@@ -127,6 +129,31 @@ class FormantVocoder : public VocoderBase {
   float nasalLP_ = 0.0f;       // low-pass state for nasal coloration
   uint32_t noiseSeed_;         // per-instance PRNG state for generateNoiseSource()
 
+  /**
+   * @brief Deterministic, still-distinct-per-instance seed for noiseSeed_.
+   * @details Used to be `1u + (reinterpret_cast<uintptr_t>(this) &
+   * 0xffffu)` -- distinct per instance, but tied to the object's actual
+   * memory address, which ASLR (and, more subtly, any unrelated change to
+   * struct sizes elsewhere in the binary that shifts stack/heap layout)
+   * makes non-reproducible run to run. That's fine for normal use, but it
+   * quietly broke `testDefaultVolumeLouderButNotClipping()`'s "zero
+   * clipped samples" regression check: a build with a "bad" seed can fail
+   * a check that a build with a "good" seed passes, for no change in
+   * synthesis logic at all -- confirmed by feeding the *original*
+   * pre-modifier FormantVocoder.h this exact same bad seed value and
+   * seeing it fail identically. A plain incrementing counter would make
+   * consecutive instances' early noise samples nearly identical (still
+   * technically "different" but not usefully so, since
+   * testInstancesAreIndependent() checks exactly that) -- multiplying by
+   * a fixed odd constant (Knuth's multiplicative hash) spreads consecutive
+   * instances' low bits apart instead.
+   */
+  static uint32_t nextInstanceSeed() {
+    static uint32_t counter = 0;
+    ++counter;
+    return 1u + (counter * 2654435761u);
+  }
+
   FormantVoiceConfig cfg_;
 
   // 4th optional formant
@@ -180,6 +207,16 @@ class FormantVocoder : public VocoderBase {
     // speech sound like separately-glued blobs.
     float entryF1 = 0.0f, entryF2 = 0.0f, entryF3 = 0.0f;
     size_t attackSamples = 0;
+
+    // Modifier support (see PhonemeModifiers.h): the token's own
+    // "T_j"-style tag (stripped by preparePhonemeSynthesis via
+    // parsePhonemeModifiers) if it has one, else whatever the caller set
+    // directly on PhonemeSynthesisParams::modifier.
+    PhonemeModifier modifier = PhonemeModifier::MOD_NONE;
+    // Pitch contour (see PhonemeSynthesisParams::f0StartRatio/MidRatio/
+    // EndRatio) -- copied straight from params, interpolated across this
+    // phoneme's duration in synthesizeSamples().
+    float f0StartRatio = 1.0f, f0MidRatio = 1.0f, f0EndRatio = 1.0f;
   };
 
   FormantFilter f1Filter_, f2Filter_, f3Filter_;
@@ -512,6 +549,18 @@ class FormantVocoder : public VocoderBase {
       float source = 0.0f;
       if (ctx.flags.voiced) {
         float f0Adj = ctx.f0;
+        // Pitch contour (see PhonemeSynthesisParams::f0StartRatio/
+        // MidRatio/EndRatio, settable directly or via a PhonemeModifier
+        // TONE_* value): piecewise-linear interpolation across the
+        // phoneme's own duration, all-1.0 (the default) leaving f0Adj
+        // unchanged.
+        float contourRatio =
+            progress < 0.5f
+                ? ctx.f0StartRatio +
+                      (ctx.f0MidRatio - ctx.f0StartRatio) * (progress * 2.0f)
+                : ctx.f0MidRatio + (ctx.f0EndRatio - ctx.f0MidRatio) *
+                                       ((progress - 0.5f) * 2.0f);
+        f0Adj *= contourRatio;
         if (ctx.stressPitchRise > 0.0f) {
           float sd = progress / (cfg_.stressDecayPortion <= 0.01f
                                      ? 0.01f
@@ -761,13 +810,46 @@ class FormantVocoder : public VocoderBase {
                                PhonemeSynthesisContext& ctx,
                                const PhonemeSynthesisParams& params) {
     ctx.phonStr = stripStress(phoneme, ctx.stress);
+
+    // Modifier tags (see PhonemeModifiers.h): a token's own "T_j"-style tag
+    // takes priority over whatever the caller set on params.modifier for
+    // the whole call. A stress tag folds into ctx.stress (the existing
+    // mechanism -- computeStressPitchRise()/applyStressEnergyBoost()
+    // already handle it more precisely than deriveModifierEffect() would)
+    // instead of staying in ctx.modifier, so it's never double-applied.
+    PhonemeModifier tokenMod = PhonemeModifier::MOD_NONE;
+    ctx.phonStr = parsePhonemeModifiers(ctx.phonStr, tokenMod);
+    if (tokenMod == PhonemeModifier::MOD_STRESS_PRIMARY) {
+      ctx.stress = 1;
+      tokenMod = PhonemeModifier::MOD_NONE;
+    } else if (tokenMod == PhonemeModifier::MOD_STRESS_SECONDARY) {
+      ctx.stress = 2;
+      tokenMod = PhonemeModifier::MOD_NONE;
+    }
+    ctx.modifier =
+        tokenMod != PhonemeModifier::MOD_NONE ? tokenMod : params.modifier;
+
     uint16_t defaultDurationMs =
         static_cast<uint16_t>(getPhoneDuration(ctx.phonStr) * 1000.0f + 0.5f);
+    // MOD_ASPIRATED/MOD_SYLLABIC extend the phoneme's own natural duration
+    // directly (a VOT gap before the next phoneme's voicing onset, or
+    // syllable-nucleus time absorbed into a syllabic consonant) --
+    // additive, not a speed multiplier, since both are a fixed extra
+    // chunk of time rather than a proportional stretch.
+    if (ctx.modifier == PhonemeModifier::MOD_ASPIRATED) {
+      defaultDurationMs += 45;
+    } else if (ctx.modifier == PhonemeModifier::MOD_SYLLABIC) {
+      defaultDurationMs += 40;
+    }
     // cfg_.speedScale is this voice's own default rate; a caller's own
     // params.speed still composes with (multiplies) it rather than being
-    // overridden by it.
+    // overridden by it. MOD_LONG/MOD_HALF_LONG apply the same way, via
+    // deriveModifierEffect()'s speedMul (see PhonemeModifiers.h) -- shared
+    // with PhonemeSynthesisParams::setPhonemeModifier() so a caller-level
+    // and a token-level modifier stretch a phoneme by the same amount.
+    ModifierEffect modEffect = deriveModifierEffect(ctx.modifier);
     PhonemeSynthesisParams effectiveParams = params;
-    effectiveParams.speed *= cfg_.speedScale;
+    effectiveParams.speed *= cfg_.speedScale * modEffect.speedMul;
     ctx.duration = resolveDuration(defaultDurationMs, effectiveParams) / 1000.0f;
     ctx.numSamples = (size_t)(ctx.duration * sampleRate_);
     if (ctx.numSamples > audioBuffer_.size())
@@ -778,6 +860,11 @@ class FormantVocoder : public VocoderBase {
     // values (see FormantVoiceConfig::mouthScale/throatScale doc).
     ctx.params.f1 *= cfg_.mouthScale;
     ctx.params.f2 *= cfg_.throatScale;
+    // Secondary-articulation/place-shifting modifiers (see
+    // applyModifierFormantShift()'s own doc for the per-modifier amounts)
+    // -- applied before the diphthong target copy below so a shifted
+    // vowel's diphthong glide target shifts consistently with it.
+    applyModifierFormantShift(ctx.params, ctx.modifier);
     ctx.target2 = ctx.params;
     ctx.dynamic = false;
     setupDiphthongTargets(ctx.phonStr, ctx.target2, ctx.dynamic);
@@ -802,11 +889,77 @@ class FormantVocoder : public VocoderBase {
     ctx.attackSamples = (size_t)(attackSec * sampleRate_);
     if (ctx.attackSamples < 1) ctx.attackSamples = 1;
     ctx.flags = classifyPhoneme(ctx.phonStr);
+    // MOD_NASALIZED/MOD_DEVOICED/MOD_VOICED override the base rule's own
+    // classification -- e.g. a normally-oral vowel tagged "~" gets nasal
+    // coupling, a normally-voiceless stop tagged "_v" gets sourced from
+    // the voiced glottal pulse instead of noise.
+    if (ctx.modifier == PhonemeModifier::MOD_NASALIZED) {
+      ctx.flags.nasal = true;
+      ctx.params.a1 *= 0.85f;  // damp F1 amplitude, matches nasal vowels'
+                               // own FormantRules.h entries
+    } else if (ctx.modifier == PhonemeModifier::MOD_DEVOICED) {
+      ctx.flags.voiced = false;
+    } else if (ctx.modifier == PhonemeModifier::MOD_VOICED) {
+      ctx.flags.voiced = true;
+    }
     ctx.f0 = params.pitchHz > 0.0f ? params.pitchHz : voiceF0_;
     if (ctx.params.f1 < 350.0f)
       ctx.f0 *= 1.05f;  // slight boost for closed vowels
+    if (ctx.modifier == PhonemeModifier::MOD_CREAKY) {
+      // Creaky voice's real signature is glottal-pulse irregularity, which
+      // this vocoder has no per-phoneme source-model hook for (see
+      // PhonemeModifierBits' own @note) -- lowering F0 is the one part of
+      // the effect a simple multiply can approximate honestly.
+      ctx.f0 *= 0.75f;
+    }
     ctx.stressPitchRise = computeStressPitchRise(ctx.stress);
-    ctx.voicing = params.voicing;
+    ctx.voicing = params.voicing * modEffect.voicingMul;
+    if (modEffect.voicingIsAbsolute) ctx.voicing = modEffect.voicingAbsolute;
+    // Compose the caller's own contour (params, default flat 1.0/1.0/1.0)
+    // with a TONE_* modifier's contour (modEffect, likewise default flat)
+    // multiplicatively -- when only one side is non-flat (the normal
+    // case), this reduces to using that side's ratios untouched.
+    ctx.f0StartRatio = params.f0StartRatio * modEffect.f0StartRatio;
+    ctx.f0MidRatio = params.f0MidRatio * modEffect.f0MidRatio;
+    ctx.f0EndRatio = params.f0EndRatio * modEffect.f0EndRatio;
+  }
+
+  /**
+   * @brief Shift a phoneme's formant targets for secondary-articulation
+   * modifiers, per the amounts documented on PhonemeModifierBits itself.
+   * @details Place-of-articulation shifts (F2) plus pharyngealization's
+   * "darkening" (F1 up, F2 down) and rhotacization's F3 blend toward ER's
+   * own F3 (~1650 Hz). MOD_UNRELEASED softens the burst instead of
+   * shifting formants -- a stop with no audible release is quieter, not
+   * differently pitched.
+   */
+  void applyModifierFormantShift(FormantParams& p, PhonemeModifier modifier) {
+    switch (modifier) {
+      case PhonemeModifier::MOD_PALATALIZED:
+        p.f2 += 400.0f;
+        break;
+      case PhonemeModifier::MOD_LABIALIZED:
+        p.f2 -= 400.0f;
+        break;
+      case PhonemeModifier::MOD_VELARIZED:
+        p.f2 -= 200.0f;
+        break;
+      case PhonemeModifier::MOD_PHARYNGEALIZED:
+        p.f1 *= 1.15f;
+        p.f2 *= 0.85f;
+        break;
+      case PhonemeModifier::MOD_RHOTACIZED:
+        p.f3 = p.f3 * 0.4f + 1650.0f * 0.6f;
+        break;
+      case PhonemeModifier::MOD_UNRELEASED:
+        p.a1 *= 0.3f;
+        p.a2 *= 0.3f;
+        p.a3 *= 0.3f;
+        break;
+      default:
+        break;
+    }
+    if (p.f2 < 200.0f) p.f2 = 200.0f;  // guard against an absurd shift
   }
 
   /// Prepare silence buffer and write it out if context indicates silence

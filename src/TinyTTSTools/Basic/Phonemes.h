@@ -76,27 +76,147 @@ enum class Phone : uint8_t {
   N = 41,
   NG = 42,
 
-  // Stressed vowel variants (primary/secondary), for dictionary authoring
-  // (see PH_WORD() in CompactPhonemeDictionaryBuilder.h) -- these are NOT
-  // phoneme_map/getPhonemeById() indices like the values above. Only AH and
-  // ER don't need their own "0" member here: that slot is already the
-  // dedicated AH0/ER0 id above (a genuinely different, reduced-vowel
-  // timbre, not just "AH/ER with no stress").
-  AA1 = 43, AA2 = 44,
-  AE1 = 45, AE2 = 46,
-  AH1 = 47, AH2 = 48,
-  AO1 = 49, AO2 = 50,
-  AW1 = 51, AW2 = 52,
-  AY1 = 53, AY2 = 54,
-  EH1 = 55, EH2 = 56,
-  ER1 = 57, ER2 = 58,
-  EY1 = 59, EY2 = 60,
-  IH1 = 61, IH2 = 62,
-  IY1 = 63, IY2 = 64,
-  OW1 = 65, OW2 = 66,
-  OY1 = 67, OY2 = 68,
-  UH1 = 69, UH2 = 70,
-  UW1 = 71, UW2 = 72,
+  // ==================== International / IPA extension (43-120) ====================
+  // Everything ARPAbet has no symbol for, covering German/French/Spanish
+  // plus the rest of the IPA pulmonic/non-pulmonic consonant charts and
+  // vowel quadrilateral -- formerly a separate `PhoneIntl` enum, merged
+  // here so there is only ever one phoneme id space. These ARE valid
+  // PH_WORD()/CompactPhonemeDictionary phonemes (see
+  // CompactPhonemeDictionaryBuilder.h's Seg()/cxPackPhone() -- the packed
+  // symbol was widened to a uint16_t specifically to fit this id range
+  // plus a modifier; see PhonemeDictionaryDE.h/FR.h/ES.h for real
+  // examples). They are NOT valid for the separate, Huffman-compressed
+  // CompressedPhonemeDictionary pipeline (CompressedPhonemeDictionary.h +
+  // PhonemeHuffmanCodes.h) that backs the bundled ~123k-word English CMU
+  // dictionary -- that Huffman table is derived from a real English corpus
+  // and has no codeword for anything past NG.
+
+  // -- Front rounded vowels (German ü/ö, French u/eu) ----------------------
+  UF = 43,   // /y/  - German "über", French "tu"      (long/tense)
+  UF0 = 44,  // /ʏ/  - German "hübsch"                 (short/lax variant of UF)
+  OF = 45,   // /ø/  - German "schön", French "deux"   (long/tense)
+  OE = 46,   // /œ/  - German "können", French "sœur"  (short/lax, open-mid)
+
+  // -- French nasal vowels ---------------------------------------------------
+  AN = 47,  // /ɑ̃/ - French "dans", "temps"
+  EN = 48,  // /ɛ̃/ - French "vin", "pain"
+  ON = 49,  // /ɔ̃/ - French "bon", "nom"
+  UN = 50,  // /œ̃/ - French "un" (merging with EN in most modern dialects)
+
+  // -- German dorsal fricatives -----------------------------------------------
+  C = 51,  // /ç/  - German ich-Laut ("ich", "München")
+  X = 52,  // /x/  - German ach-Laut ("Bach") AND Spanish jota ("jota", "rojo")
+
+  // -- German affricates (beyond ARPAbet's CH=/tʃ/, JH=/dʒ/) -----------------
+  TS = 53,  // /ts/ - German "z" ("Zeit"), "tz"
+  PF = 54,  // /pf/ - German "pf" ("Pferd", "Apfel")
+
+  // -- Spanish rhotics (ARPAbet's R is an American retroflex approximant,
+  //    acoustically wrong for either Spanish rhotic) --------------------------
+  RT = 55,  // /ɾ/  - Spanish tap  ("pero", "cara")
+  RR = 56,  // /r/  - Spanish trill ("perro", word-initial "rosa")
+
+  // -- Spanish palatals --------------------------------------------------------
+  NY = 57,  // /ɲ/  - Spanish "ñ" ("año")
+  LY = 58,  // /ʎ/  - traditional Spanish "ll" ("calle"); most dialects have
+            //        merged this into /ʝ/ -- reuse Phone::Y where that's
+            //        the target accent instead of this symbol
+
+  // -- Pulmonic consonants: bilabial ------------------------------------------
+  PHI = 59,   // /ɸ/  voiceless bilabial fricative (Japanese "fu")
+  BETA = 60,  // /β/  voiced bilabial fricative (Spanish intervocalic "b/v")
+  BR = 61,    // /ʙ/  bilabial trill
+
+  // Labiodental
+  MV = 62,  // /ɱ/  labiodental nasal (allophone, e.g. "symphony")
+  VV = 63,  // /ʋ/  labiodental approximant (Dutch/Hindi "w")
+
+  // Alveolar / lateral
+  LH = 64,  // /ɬ/  voiceless lateral fricative (Welsh "ll")
+  LZ = 65,  // /ɮ/  voiced lateral fricative
+  LF = 66,  // /ɺ/  lateral flap
+
+  // Retroflex (Hindi, Dravidian languages, Mandarin zh/ch/sh/r)
+  TR = 67,  // /ʈ/  voiceless retroflex stop
+  DR = 68,  // /ɖ/  voiced retroflex stop
+  NR = 69,  // /ɳ/  retroflex nasal
+  SR = 70,  // /ʂ/  voiceless retroflex fricative
+  ZR = 71,  // /ʐ/  voiced retroflex fricative
+  RA = 72,  // /ɻ/  retroflex approximant
+  LR = 73,  // /ɭ/  retroflex lateral approximant
+  RF = 74,  // /ɽ/  retroflex flap
+
+  // Palatal
+  CJ = 75,  // /c/  voiceless palatal stop
+  JJ = 76,  // /ɟ/  voiced palatal stop
+  JZ = 77,  // /ʝ/  voiced palatal fricative
+
+  // Velar
+  GH = 78,  // /ɣ/  voiced velar fricative
+  WV = 79,  // /ɰ/  velar approximant
+  LL = 80,  // /ʟ/  velar lateral approximant
+
+  // Uvular
+  QQ = 81,   // /q/  voiceless uvular stop
+  GU = 82,   // /ɢ/  voiced uvular stop
+  NU = 83,   // /ɴ/  uvular nasal
+  CU = 84,   // /χ/  voiceless uvular fricative
+  RU = 85,   // /ʁ/  voiced uvular fricative (French/German "r")
+  RT2 = 86,  // /ʀ/  uvular trill
+
+  // Pharyngeal / glottal
+  HP = 87,  // /ħ/  voiceless pharyngeal fricative (Arabic ح)
+  AP = 88,  // /ʕ/  voiced pharyngeal fricative/approximant (Arabic ع)
+  GS = 89,  // /ʔ/  glottal stop (Arabic ء, Hawaiian ʻokina, German
+            //      vowel-initial onset)
+  HV = 90,  // /ɦ/  voiced glottal fricative (Hindi/Czech "h")
+
+  // Co-articulated approximants
+  WH = 91,  // /ʍ/  voiceless labial-velar approximant ("wh" in some
+            //      English dialects)
+  HU = 92,  // /ɥ/  labial-palatal approximant (French "huit")
+
+  // -- Non-pulmonic consonants -------------------------------------------------
+  // Clicks (Zulu, Xhosa, Khoisan languages)
+  CLB = 93,  // /ʘ/  bilabial click
+  CLD = 94,  // /ǀ/  dental click
+  CLA = 95,  // /ǃ/  (post)alveolar click
+  CLP = 96,  // /ǂ/  palatoalveolar click
+  CLL = 97,  // /ǁ/  lateral click
+
+  // Implosives (Sindhi, Vietnamese, Swahili, Hausa)
+  IMB = 98,   // /ɓ/  bilabial implosive
+  IMD = 99,   // /ɗ/  dental/alveolar implosive
+  IMJ = 100,  // /ʄ/  palatal implosive
+  IMG = 101,  // /ɠ/  velar implosive
+  IMQ = 102,  // /ʛ/  uvular implosive
+
+  // Ejectives (Amharic, Georgian, Quechua, Hausa) -- glottalized
+  // counterparts of existing stops/fricatives
+  EJP = 103,  // /pʼ/ ejective bilabial stop
+  EJT = 104,  // /tʼ/ ejective alveolar stop
+  EJK = 105,  // /kʼ/ ejective velar stop
+  EJS = 106,  // /sʼ/ ejective alveolar fricative
+  EJC = 107,  // /tʃʼ/ ejective postalveolar affricate
+
+  // -- Vowels (IPA vowel quadrilateral) -----------------------------------------
+  IB = 108,   // /ɨ/  close central unrounded (Polish "y", Welsh "u")
+  UB = 109,   // /ʉ/  close central rounded (Swedish "u")
+  UM = 110,   // /ɯ/  close back unrounded (Japanese "u", Korean "eu")
+  EP = 111,   // /e/  close-mid front unrounded, pure monophthong (Spanish/
+              //      Italian/Japanese "e", vs. English's diphthongal EY)
+  OP = 112,   // /o/  close-mid back rounded, pure monophthong (Spanish/
+              //      Italian/Japanese "o", vs. English's diphthongal OW)
+  EB = 113,   // /ɘ/  close-mid central unrounded
+  OB = 114,   // /ɵ/  close-mid central rounded
+  OM = 115,   // /ɤ/  close-mid back unrounded (Vietnamese "ơ")
+  EC = 116,   // /ɜ/  open-mid central unrounded, non-rhotic (British "bird",
+              //      vs. American English's rhotacized ER)
+  AC = 117,   // /ɐ/  near-open central
+  AF = 118,   // /a/  open front unrounded (French/Spanish/Italian/German
+              //      "a", vs. ARPAbet AA which is open BACK /ɑ/)
+  OER = 119,  // /ɶ/  open front rounded (rare: Swedish dialects)
+  OB2 = 120,  // /ɒ/  open back rounded (British English "lot")
 };
 
 /**
@@ -321,7 +441,8 @@ class Phonemes {
 
   /**
    * @brief Get the complete PhonemeInfo entry by sequential ID
-   * @param id The sequential ID of the phoneme (0-42)
+   * @param id The sequential ID of the phoneme (0-42 ARPAbet, 43-120
+   *        international/IPA extension -- see Phone's declaration)
    * @return Pointer to PhonemeInfo entry, or nullptr if ID is out of range
    *
    * @example
@@ -335,59 +456,46 @@ class Phonemes {
    * }
    */
   const PhonemeInfo* getPhonemeById(uint16_t id) const {
-    if (id >= 43) {
-      return nullptr;  // ID out of range -- table has 43 entries (0-42, NG last)
+    if (id >= 121) {
+      return nullptr;  // ID out of range -- table has 121 entries (0-120)
     }
     return &phoneme_map[id];
   }
 
   /**
    * @brief Convert a Phone enum value to its ARPAbet string form
-   * @param phone Phoneme enum value, e.g. Phone::AA or a stressed authoring
-   *        variant like Phone::IH1 (see Phone's declaration)
-   * @return ARPAbet symbol (e.g. "AA", "IH1"), or empty string if invalid
-   * @details Ids 0-42 map 1:1 to phoneme_map via getPhonemeById(). Ids
-   *          43-72 are stress-authoring variants (Phone::AA1, Phone::AA2,
-   *          ...) with no phoneme_map entry of their own -- they resolve to
-   *          the base vowel's ARPAbet symbol with the stress digit appended
-   *          (e.g. Phone::IH1 -> "IH1"), matching the stress-suffix
-   *          convention stripStressMarker() parses elsewhere.
+   * @param phone Phoneme enum value, e.g. Phone::AA
+   * @return ARPAbet symbol (e.g. "AA"), or empty string if invalid
+   * @details Every Phone id maps 1:1 to phoneme_map via getPhonemeById().
+   *          Stress is not part of Phone -- author it as a stress-suffixed
+   *          ARPAbet string (e.g. "IH1") instead, using the same
+   *          stress-suffix convention stripStressMarker() parses elsewhere.
    */
   std::string toArpabetString(Phone phone) const {
-    uint8_t id = static_cast<uint8_t>(phone);
-    if (id < 43) {
-      const PhonemeInfo* info = getPhonemeById(id);
-      return info ? std::string(info->arpabet) : std::string();
-    }
-    if (id > 72) return std::string();
-    // Stress-variant ids: 15 vowels x 2 (primary/secondary), in the same
-    // order as declared in Phone (43=AA1, 44=AA2, 45=AE1, ..., 72=UW2).
-    static const char* const kStressVowels[15] = {
-        "AA", "AE", "AH", "AO", "AW", "AY", "EH", "ER",
-        "EY", "IH", "IY", "OW", "OY", "UH", "UW"};
-    size_t offset = id - 43;
-    size_t vowelIndex = offset / 2;
-    int stress = static_cast<int>(offset % 2) + 1;  // 1 or 2
-    return std::string(kStressVowels[vowelIndex]) + static_cast<char>('0' + stress);
+    const PhonemeInfo* info = getPhonemeById(static_cast<uint8_t>(phone));
+    return info ? std::string(info->arpabet) : std::string();
   }
 
  protected:
   /**
    * @brief Static mapping table for phoneme representations
-   * @details Contains 43 entries (41 common English phonemes plus SIL/SP
-   *          silence markers) with their equivalents across ARPAbet, IPA,
-   *          and X-SAMPA formats, plus default durations and sequential
-   *          IDs for indexing.
+   * @details Contains 121 entries: ids 0-42 are the 41 common English
+   *          (ARPAbet) phonemes plus SIL/SP silence markers; ids 43-120
+   *          are the international/IPA extension (German/French/Spanish
+   *          plus the rest of the IPA charts -- see Phone's declaration).
+   *          Each entry gives equivalents across ARPAbet, IPA, and X-SAMPA
+   *          formats, plus a default duration and sequential id for
+   *          indexing.
    *
-   * @note This table covers the most common English phonemes used in
-   *       speech synthesis. Additional phonemes can be added as needed.
+   * @note Ids 43-120 are NOT valid PH_WORD()/compact-dictionary phonemes
+   *       -- see CompactPhonemeDictionaryBuilder.h's cxPackPhone().
    *
    * Format examples:
    * - ARPAbet: Two-letter codes like "AA", "B", "CH"
    * - IPA: Unicode phonetic symbols like "ɑ", "b", "tʃ"
    * - X-SAMPA: ASCII approximations like "A", "b", "tS"
    * - Duration: Typical phoneme length in milliseconds for natural speech
-   * - ID: Sequential identifier from 0-42 for direct array access
+   * - ID: Sequential identifier from 0-120 for direct array access
    *
    * Duration guidelines:
    * - Silence: 400ms full pause (SIL), 30ms short pause (SP, between words)
@@ -397,7 +505,7 @@ class Phonemes {
    * - Nasals/Liquids: 90-120ms (resonant sounds)
    * - Unstressed vowels: 80-90ms (reduced duration)
    */
-  const PhonemeInfo phoneme_map[43] = {
+  const PhonemeInfo phoneme_map[121] = {
       // Silence/Pause
       {"SIL", "∅", "_", 400, PhonemeClass::Silence, 0},  // silence, pause
       {"SP", "∅", "_", 30, PhonemeClass::Silence, 1},    // short pause
@@ -454,5 +562,134 @@ class Phonemes {
       {"M", "m", "m", 100, PhonemeClass::Phoneme, 40},  // man, home
       {"N", "n", "n", 90, PhonemeClass::Phoneme, 41},   // no, pen
       {"NG", "ŋ", "N", 110, PhonemeClass::Phoneme, 42}, // sing, ring
+
+      // ============ International / IPA extension (43-120) ============
+      // See the Phone enum's own comment above this range for scope and
+      // the PH_WORD()/compact-dictionary caveat. Formant frequencies for
+      // the vowels/nasals here are literature-informed male-voice starting
+      // points (Peterson & Barney-style charts for German/French/Spanish,
+      // nearest-ARPAbet-analogue estimates otherwise) meant to be tuned by
+      // ear once rendered, not calibrated data. Durations are coarse
+      // defaults by manner class (stops/clicks/ejectives short,
+      // fricatives/vowels longer).
+
+      // Front rounded vowels (140-160ms, matching ARPAbet's long-vowel range)
+      {"UF", "y", "y", 150, PhonemeClass::Phoneme, 43},
+      {"UF0", "ʏ", "Y", 110, PhonemeClass::Phoneme, 44},
+      {"OF", "ø", "2", 150, PhonemeClass::Phoneme, 45},
+      {"OE", "œ", "9", 140, PhonemeClass::Phoneme, 46},
+
+      // French nasal vowels (170ms -- nasalization runs slightly longer than
+      // the oral vowels it's derived from)
+      {"AN", "ɑ̃", "A~", 170, PhonemeClass::Phoneme, 47},
+      {"EN", "ɛ̃", "E~", 170, PhonemeClass::Phoneme, 48},
+      {"ON", "ɔ̃", "O~", 170, PhonemeClass::Phoneme, 49},
+      {"UN", "œ̃", "9~", 170, PhonemeClass::Phoneme, 50},
+
+      // German dorsal fricatives (100-110ms, matching ARPAbet's fricative range)
+      {"C", "ç", "C", 100, PhonemeClass::Phoneme, 51},
+      {"X", "x", "x", 110, PhonemeClass::Phoneme, 52},
+
+      // Affricates (90ms -- shorter than CH/JH since these are single onset
+      // bursts rather than a full stop+frication sequence)
+      {"TS", "ts", "ts", 90, PhonemeClass::Phoneme, 53},
+      {"PF", "pf", "pf", 90, PhonemeClass::Phoneme, 54},
+
+      // Spanish rhotics: a tap is brief (single contact), a trill is longer
+      // (multiple contacts) -- durations reflect that directly
+      {"RT", "ɾ", "4", 40, PhonemeClass::Phoneme, 55},
+      {"RR", "r", "r", 150, PhonemeClass::Phoneme, 56},
+
+      // Spanish palatals (matching ARPAbet's N/L duration range)
+      {"NY", "ɲ", "J", 120, PhonemeClass::Phoneme, 57},
+      {"LY", "ʎ", "L", 110, PhonemeClass::Phoneme, 58},
+
+      // Bilabial
+      {"PHI", "ɸ", "p\\", 100, PhonemeClass::Phoneme, 59},
+      {"BETA", "β", "B", 100, PhonemeClass::Phoneme, 60},
+      {"BR", "ʙ", "b\\", 120, PhonemeClass::Phoneme, 61},
+
+      // Labiodental
+      {"MV", "ɱ", "F", 100, PhonemeClass::Phoneme, 62},
+      {"VV", "ʋ", "P", 90, PhonemeClass::Phoneme, 63},
+
+      // Alveolar lateral
+      {"LH", "ɬ", "K", 110, PhonemeClass::Phoneme, 64},
+      {"LZ", "ɮ", "K\\", 110, PhonemeClass::Phoneme, 65},
+      {"LF", "ɺ", "l\\", 60, PhonemeClass::Phoneme, 66},
+
+      // Retroflex
+      {"TR", "ʈ", "t`", 80, PhonemeClass::Phoneme, 67},
+      {"DR", "ɖ", "d`", 70, PhonemeClass::Phoneme, 68},
+      {"NR", "ɳ", "n`", 120, PhonemeClass::Phoneme, 69},
+      {"SR", "ʂ", "s`", 120, PhonemeClass::Phoneme, 70},
+      {"ZR", "ʐ", "z`", 110, PhonemeClass::Phoneme, 71},
+      {"RA", "ɻ", "r`", 90, PhonemeClass::Phoneme, 72},
+      {"LR", "ɭ", "l`", 100, PhonemeClass::Phoneme, 73},
+      {"RF", "ɽ", "r`", 50, PhonemeClass::Phoneme, 74},
+
+      // Palatal
+      {"CJ", "c", "c", 80, PhonemeClass::Phoneme, 75},
+      {"JJ", "ɟ", "J\\", 70, PhonemeClass::Phoneme, 76},
+      {"JZ", "ʝ", "j\\", 100, PhonemeClass::Phoneme, 77},
+
+      // Velar
+      {"GH", "ɣ", "G", 100, PhonemeClass::Phoneme, 78},
+      {"WV", "ɰ", "M\\", 90, PhonemeClass::Phoneme, 79},
+      {"LL", "ʟ", "L\\", 100, PhonemeClass::Phoneme, 80},
+
+      // Uvular
+      {"QQ", "q", "q", 80, PhonemeClass::Phoneme, 81},
+      {"GU", "ɢ", "G\\", 70, PhonemeClass::Phoneme, 82},
+      {"NU", "ɴ", "N\\", 120, PhonemeClass::Phoneme, 83},
+      {"CU", "χ", "X", 110, PhonemeClass::Phoneme, 84},
+      {"RU", "ʁ", "R", 100, PhonemeClass::Phoneme, 85},
+      {"RT2", "ʀ", "R\\", 150, PhonemeClass::Phoneme, 86},
+
+      // Pharyngeal / glottal
+      {"HP", "ħ", "X\\", 110, PhonemeClass::Phoneme, 87},
+      {"AP", "ʕ", "?\\", 100, PhonemeClass::Phoneme, 88},
+      {"GS", "ʔ", "?", 50, PhonemeClass::Phoneme, 89},
+      {"HV", "ɦ", "h\\", 90, PhonemeClass::Phoneme, 90},
+
+      // Co-articulated approximants
+      {"WH", "ʍ", "W", 80, PhonemeClass::Phoneme, 91},
+      {"HU", "ɥ", "H", 80, PhonemeClass::Phoneme, 92},
+
+      // Clicks
+      {"CLB", "ʘ", "O\\", 60, PhonemeClass::Phoneme, 93},
+      {"CLD", "ǀ", "|\\", 60, PhonemeClass::Phoneme, 94},
+      {"CLA", "ǃ", "!\\", 60, PhonemeClass::Phoneme, 95},
+      {"CLP", "ǂ", "=\\", 60, PhonemeClass::Phoneme, 96},
+      {"CLL", "ǁ", "|\\|\\", 60, PhonemeClass::Phoneme, 97},
+
+      // Implosives
+      {"IMB", "ɓ", "b_<", 80, PhonemeClass::Phoneme, 98},
+      {"IMD", "ɗ", "d_<", 80, PhonemeClass::Phoneme, 99},
+      {"IMJ", "ʄ", "J\\_<", 80, PhonemeClass::Phoneme, 100},
+      {"IMG", "ɠ", "g_<", 80, PhonemeClass::Phoneme, 101},
+      {"IMQ", "ʛ", "G\\_<", 80, PhonemeClass::Phoneme, 102},
+
+      // Ejectives
+      {"EJP", "pʼ", "p_>", 80, PhonemeClass::Phoneme, 103},
+      {"EJT", "tʼ", "t_>", 80, PhonemeClass::Phoneme, 104},
+      {"EJK", "kʼ", "k_>", 80, PhonemeClass::Phoneme, 105},
+      {"EJS", "sʼ", "s_>", 100, PhonemeClass::Phoneme, 106},
+      {"EJC", "tʃʼ", "tS_>", 100, PhonemeClass::Phoneme, 107},
+
+      // Vowels
+      {"IB", "ɨ", "1", 130, PhonemeClass::Phoneme, 108},
+      {"UB", "ʉ", "}", 130, PhonemeClass::Phoneme, 109},
+      {"UM", "ɯ", "M", 130, PhonemeClass::Phoneme, 110},
+      {"EP", "e", "e", 130, PhonemeClass::Phoneme, 111},
+      {"OP", "o", "o", 130, PhonemeClass::Phoneme, 112},
+      {"EB", "ɘ", "@\\", 120, PhonemeClass::Phoneme, 113},
+      {"OB", "ɵ", "8", 120, PhonemeClass::Phoneme, 114},
+      {"OM", "ɤ", "7", 130, PhonemeClass::Phoneme, 115},
+      {"EC", "ɜ", "3", 130, PhonemeClass::Phoneme, 116},
+      {"AC", "ɐ", "6", 110, PhonemeClass::Phoneme, 117},
+      {"AF", "a", "a", 140, PhonemeClass::Phoneme, 118},
+      {"OER", "ɶ", "&", 140, PhonemeClass::Phoneme, 119},
+      {"OB2", "ɒ", "Q", 140, PhonemeClass::Phoneme, 120},
   };
 };

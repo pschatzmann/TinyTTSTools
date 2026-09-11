@@ -1,4 +1,4 @@
-// Exception dictionary for G2PRuleBasedModel: every word (out of the full CMU dictionary, see CompactCmuDictionaryEN_data.h) where the letter-to-sound rules produce the wrong pronunciation (101318 words). Checked before falling back to rules -- see G2PDictionaryAndRulesModel.getDictionaryModel().useCompactDictionary(). Blocked offset index + Huffman-coded phonemes -- see CompressedPhonemeDictionary.h and PhonemeHuffmanCodes.h.
+// Exception dictionary for G2PRuleBasedModelEN: every word (out of the full CMU dictionary, see CompactCmuDictionaryEN_data.h) where the letter-to-sound rules produce the wrong pronunciation (101318 words). Checked before falling back to rules -- see G2PDictionaryAndRulesModel.getDictionaryModel().useCompactDictionary(). Blocked offset index + Huffman-coded phonemes -- see CompressedPhonemeDictionary.h and PhonemeHuffmanCodes.h.
 // Auto-generated -- do not edit by hand.
 #pragma once
 #include <cstdint>

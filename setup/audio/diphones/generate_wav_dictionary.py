@@ -178,8 +178,16 @@ def generate_cpp_headers(input_dir, output_dir):
         # bits=4: this data is IMA-ADPCM (see AudioFormatDecoder.h), not
         # PCM16 -- omitting it used to silently default to 16 (raw PCM16),
         # which reinterpreted the compressed ADPCM bytes as noise.
+        # The SoundEntry lookup key uses a space between the two phonemes
+        # ("AA AA", not "AA_AA") even though the filename/array name still
+        # use underscore -- a space can never collide with a
+        # PhonemeModifiers.h modifier tag (they're all `_`/`:`/`~`/etc.
+        # prefixed or suffixed, never a bare space), which lets
+        # AudioDictionary::getSoundEntry()'s modifier-stripping fallback
+        # apply safely to diphone keys too. See SoundEntry.h's own doc.
+        lookup_name = entry["name"].replace("_", " ")
         main_header_content.append(
-            f'    SoundEntry("{entry["name"]}", {entry["array_name"]}_size, {entry["array_name"]}, 4){comma}')
+            f'    SoundEntry("{lookup_name}", {entry["array_name"]}_size, {entry["array_name"]}, 4){comma}')
 
     main_header_content.append('};')
     main_header_content.append('')
