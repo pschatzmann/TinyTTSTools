@@ -21,7 +21,7 @@ var searchData=
   ['setconfig_18',['setConfig',['../classTinyTTSTools.html#ae5eaaaf90e5d36a0d80d4f1849558886',1,'TinyTTSTools']]],
   ['setcrossfade_19',['setCrossFade',['../classConcatenatedAudioVocoder.html#acccaf1f157c624cc620bbc210e22fd3a',1,'ConcatenatedAudioVocoder']]],
   ['setcrossfadeduration_20',['setCrossFadeDuration',['../classConcatenatedAudioVocoder.html#aed1cec141312d555baceb1c27137b03d',1,'ConcatenatedAudioVocoder']]],
-  ['setdefaultphonemetype_21',['setDefaultPhonemeType',['../classVocoderBase.html#a4e26ece49481c3d92065277a7c87975c',1,'VocoderBase::setDefaultPhonemeType()'],['../classG2PModelBase.html#a88c6d3ced6aa6c9b041d6f48cc5d40b3',1,'G2PModelBase::setDefaultPhonemeType()']]],
+  ['setdefaultphonemetype_21',['setDefaultPhonemeType',['../classG2PModelBase.html#a88c6d3ced6aa6c9b041d6f48cc5d40b3',1,'G2PModelBase::setDefaultPhonemeType()'],['../classVocoderBase.html#a4e26ece49481c3d92065277a7c87975c',1,'VocoderBase::setDefaultPhonemeType()']]],
   ['setfadeoutduration_22',['setFadeOutDuration',['../classConcatenatedAudioVocoder.html#ab96b6dae7c6422df442505acd41d359a',1,'ConcatenatedAudioVocoder']]],
   ['setoutput_23',['setOutput',['../classTinyTTSTools.html#ab7235f64e3f1b6bff2a0c41e6830875a',1,'TinyTTSTools']]],
   ['setphonemedictionary_24',['setPhonemeDictionary',['../classG2PDictionaryModel.html#ada0ebf27dcb98f4226d97a8f63ebe0d1',1,'G2PDictionaryModel']]],
@@ -58,9 +58,10 @@ var searchData=
   ['stringutils_2eh_55',['StringUtils.h',['../StringUtils_8h.html',1,'']]],
   ['stripstress_56',['stripStress',['../classFormantVocoder.html#ae415d5d28f3c4da10b26f6d938ff64e2',1,'FormantVocoder']]],
   ['stripstressmarker_57',['stripStressMarker',['../classVocoderBase.html#a6db3ab81addb2a6c2d01e9f50ec91b99',1,'VocoderBase']]],
-  ['synth_5f_58',['synth_',['../classTinyTTSTools.html#ab42b3811b35108a4a8c14a03f286edff',1,'TinyTTSTools']]],
-  ['synthesizephoneme_59',['synthesizePhoneme',['../classConcatenatedAudioVocoder.html#ad7f436eb78506cee636654fb17131bbc',1,'ConcatenatedAudioVocoder::synthesizePhoneme()'],['../classDiphoneVocoder.html#a11d761bfd264153c7394069ea6cfb716',1,'DiphoneVocoder::synthesizePhoneme()'],['../classFormantVocoder.html#a70a16569ad4e57dee077440bce8c97a8',1,'FormantVocoder::synthesizePhoneme()'],['../classPSOLAVocoder.html#ad77627cfd6654b9bf6943544637882af',1,'PSOLAVocoder::synthesizePhoneme()'],['../classVocoderBase.html#afb193b97921c30ca4e7f6f023fb584c3',1,'VocoderBase::synthesizePhoneme()']]],
-  ['synthesizesamples_60',['synthesizeSamples',['../classFormantVocoder.html#aed85bfdcf22d39e3bf44235392d7d7ff',1,'FormantVocoder']]],
-  ['synthesizesegment_61',['synthesizeSegment',['../classDiphoneVocoder.html#afb20541d6bb84c3d493208c1ea758480',1,'DiphoneVocoder']]],
-  ['synthesizesingletoken_62',['synthesizeSingleToken',['../classFormantVocoder.html#af23e9ef5e9db9e0387ee7ef644167542',1,'FormantVocoder']]]
+  ['symbolforindex_58',['symbolForIndex',['../classG2PNeuralModel.html#a161d5221fab049294aea2d1aea065b7c',1,'G2PNeuralModel']]],
+  ['synth_5f_59',['synth_',['../classTinyTTSTools.html#ab42b3811b35108a4a8c14a03f286edff',1,'TinyTTSTools']]],
+  ['synthesizephoneme_60',['synthesizePhoneme',['../classConcatenatedAudioVocoder.html#ad7f436eb78506cee636654fb17131bbc',1,'ConcatenatedAudioVocoder::synthesizePhoneme()'],['../classDiphoneVocoder.html#a11d761bfd264153c7394069ea6cfb716',1,'DiphoneVocoder::synthesizePhoneme()'],['../classFormantVocoder.html#a70a16569ad4e57dee077440bce8c97a8',1,'FormantVocoder::synthesizePhoneme()'],['../classPSOLAVocoder.html#ad77627cfd6654b9bf6943544637882af',1,'PSOLAVocoder::synthesizePhoneme()'],['../classVocoderBase.html#afb193b97921c30ca4e7f6f023fb584c3',1,'VocoderBase::synthesizePhoneme()']]],
+  ['synthesizesamples_61',['synthesizeSamples',['../classFormantVocoder.html#aed85bfdcf22d39e3bf44235392d7d7ff',1,'FormantVocoder']]],
+  ['synthesizesegment_62',['synthesizeSegment',['../classDiphoneVocoder.html#afb20541d6bb84c3d493208c1ea758480',1,'DiphoneVocoder']]],
+  ['synthesizesingletoken_63',['synthesizeSingleToken',['../classFormantVocoder.html#af23e9ef5e9db9e0387ee7ef644167542',1,'FormantVocoder']]]
 ];

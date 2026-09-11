@@ -112,8 +112,8 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:acfaa1915630da71b463f6796e2d37127"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classG2PNeuralModel.html#acfaa1915630da71b463f6796e2d37127">begin</a> (const uint8_t *buf, size_t len)</td></tr>
-<tr class="separator:acfaa1915630da71b463f6796e2d37127"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a338f937bed02bbc342934ef5ec91a3be"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classG2PNeuralModel.html#a338f937bed02bbc342934ef5ec91a3be">begin</a> (const uint8_t *buf, size_t len, <a class="el" href="G2PNeuralModel_8h.html#ae1288e008f3b7876de625b503610be60">G2PNeuralLanguage</a> language=G2PNeuralLanguage::EN)</td></tr>
+<tr class="separator:a338f937bed02bbc342934ef5ec91a3be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58770d630388d3296dcd60248bd71f9c"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classG2PNeuralModel.html#a58770d630388d3296dcd60248bd71f9c">wordToPhonemes</a> (const std::string &amp;word) override</td></tr>
 <tr class="separator:a58770d630388d3296dcd60248bd71f9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classG2PModelBase"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classG2PModelBase')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classG2PModelBase.html">G2PModelBase</a></td></tr>
@@ -162,11 +162,12 @@ Static Protected Member Functions</h2></td></tr>
 <tr class="memitem:a78095f3aebfe8cd0a9f2ec126923c308"><td class="memItemLeft" align="right" valign="top"><a id="a78095f3aebfe8cd0a9f2ec126923c308" name="a78095f3aebfe8cd0a9f2ec126923c308"></a>
 static const float *&#160;</td><td class="memItemRight" valign="bottom"><b>readFloats</b> (const uint8_t *buf, size_t len, size_t &amp;pos, size_t count)</td></tr>
 <tr class="separator:a78095f3aebfe8cd0a9f2ec126923c308"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50d797b429f2b93266e896fe49f048f4"><td class="memItemLeft" align="right" valign="top"><a id="a50d797b429f2b93266e896fe49f048f4" name="a50d797b429f2b93266e896fe49f048f4"></a>
-static int&#160;</td><td class="memItemRight" valign="bottom"><b>graphemeIndex</b> (char c)</td></tr>
-<tr class="separator:a50d797b429f2b93266e896fe49f048f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2baf63ef5ba97c391df8a2f54fb2201"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classG2PNeuralModel.html#ab2baf63ef5ba97c391df8a2f54fb2201">arpabetForIndex</a> (int idx)</td></tr>
-<tr class="separator:ab2baf63ef5ba97c391df8a2f54fb2201"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a568157bfcb70cee1045768b6fe47fc04"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classG2PNeuralModel.html#a568157bfcb70cee1045768b6fe47fc04">decodeUtf8</a> (const std::string &amp;s)</td></tr>
+<tr class="separator:a568157bfcb70cee1045768b6fe47fc04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a734533b0053e232c128c516234a0716a"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classG2PNeuralModel.html#a734533b0053e232c128c516234a0716a">graphemeIndexFor</a> (<a class="el" href="G2PNeuralModel_8h.html#ae1288e008f3b7876de625b503610be60">G2PNeuralLanguage</a> lang, uint32_t cp)</td></tr>
+<tr class="separator:a734533b0053e232c128c516234a0716a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a161d5221fab049294aea2d1aea065b7c"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classG2PNeuralModel.html#a161d5221fab049294aea2d1aea065b7c">symbolForIndex</a> (<a class="el" href="G2PNeuralModel_8h.html#ae1288e008f3b7876de625b503610be60">G2PNeuralLanguage</a> lang, int idx)</td></tr>
+<tr class="separator:a161d5221fab049294aea2d1aea065b7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -218,6 +219,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>num_dec_symbols_</b> =
 <tr class="memitem:ae5934bfe1d7300985f432268ef1c17f3"><td class="memItemLeft" align="right" valign="top"><a id="ae5934bfe1d7300985f432268ef1c17f3" name="ae5934bfe1d7300985f432268ef1c17f3"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>num_phonemes_</b> = 0</td></tr>
 <tr class="separator:ae5934bfe1d7300985f432268ef1c17f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd5f5322dfe6fd0ed96c3be49fb3c737"><td class="memItemLeft" align="right" valign="top"><a id="afd5f5322dfe6fd0ed96c3be49fb3c737" name="afd5f5322dfe6fd0ed96c3be49fb3c737"></a>
+<a class="el" href="G2PNeuralModel_8h.html#ae1288e008f3b7876de625b503610be60">G2PNeuralLanguage</a>&#160;</td><td class="memItemRight" valign="bottom"><b>language_</b> = G2PNeuralLanguage::EN</td></tr>
+<tr class="separator:afd5f5322dfe6fd0ed96c3be49fb3c737"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classG2PModelBase"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classG2PModelBase')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classG2PModelBase.html">G2PModelBase</a></td></tr>
 <tr class="memitem:a61cc76d3621fb1dbeca65856950aae4d inherit pro_attribs_classG2PModelBase"><td class="memItemLeft" align="right" valign="top"><a id="a61cc76d3621fb1dbeca65856950aae4d" name="a61cc76d3621fb1dbeca65856950aae4d"></a>
 <a class="el" href="TTSTypes_8h.html#a8304a010942f858a2d6f0d670a00a469">PhonemeType</a>&#160;</td><td class="memItemRight" valign="bottom"><b>defaultPhonemeType</b> = PhonemeType::ARPAbet</td></tr>
@@ -242,39 +246,12 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>initialized_</b> = fa
 <div class="textblock"><p>Neural grapheme-to-phoneme fallback for out-of-dictionary words. </p>
 <p>A small (~833K-param) single-layer GRU encoder-decoder, greedy-decoded. Ported from the sibling TinyTTS project's DictionaryModel.h &ndash; a from-scratch, dependency-free reimplementation of that project's own g2p_predict.js (itself a port of the Python <code>g2p_en</code> package's <code>G2p.predict()</code>), verified bit-exact against both there before being trusted (see TinyTTS's research/g2p_reference_numpy.py, docs/research.md).</p>
 <p>Unlike <a class="el" href="classG2PRuleBasedModelEN.html" title="Rule-based G2P model with enhanced linguistic rules.">G2PRuleBasedModelEN</a> (letter-to-sound rules, ~17% exact-match ceiling &ndash; English spelling can't be resolved from rules alone without a stress/pronunciation model) or a static exception dictionary (only covers words someone thought to list), this generalizes: it produces a plausible phonetic guess for genuinely novel words &ndash; proper nouns, made up words, technical terms &ndash; that no dictionary, however large, will ever contain. Use it as the last fallback in a <a class="el" href="classG2PHybridModel.html" title="Hybrid G2P model combining multiple approaches.">G2PHybridModel</a> chain, after real dictionary lookups.</p>
-<p>Weights (~970KB) come from an in-memory buffer (a flash-embedded const array &ndash; see <a class="el" href="G2PNeuralWeightsEN__data_8h_source.html">Data/neural/G2PNeuralWeightsEN_data.h</a> &ndash; or one read from LittleFS/SD at startup) passed to <a class="el" href="classG2PNeuralModel.html#acfaa1915630da71b463f6796e2d37127">begin()</a>; the caller keeps it alive for as long as this object is used (no copy, same convention as the compact dictionaries).</p>
+<p>Weights (~970KB) come from an in-memory buffer (a flash-embedded const array &ndash; see <a class="el" href="G2PNeuralWeightsEN__data_8h_source.html">Data/neural/G2PNeuralWeightsEN_data.h</a> &ndash; or one read from LittleFS/SD at startup) passed to <a class="el" href="classG2PNeuralModel.html#a338f937bed02bbc342934ef5ec91a3be">begin()</a>; the caller keeps it alive for as long as this object is used (no copy, same convention as the compact dictionaries).</p>
 <p>The four GRU weight matrices (enc_w_ih/enc_w_hh/dec_w_ih/dec_w_hh, ~94% of the model's params) are INT8-quantized (symmetric, per output row); everything else (the two small embedding tables, biases, the output projection) stays float32. Plain hand-written dequantize-on-the-fly arithmetic &ndash; no TensorFlow Lite dependency.</p>
-<p>The input grapheme vocabulary ('&lt;pad&gt;','&lt;unk&gt;','','a'..'z') and output phoneme vocabulary (see kArpabetTable) are both fixed properties of this specific English model file &ndash; a differently-trained model (another language, or a retrained English one) would need its own graphemeIndex() and output table, not just a different weights blob. </p><dl class="section note"><dt>Note</dt><dd>Memory footprint: ~970KB flash for the shipped weights (measured: 992,716 bytes), no RAM overhead beyond a small decode buffer (no tensor arena, no runtime library). See <a href="https://github.com/pschatzmann/TinyTTSTools/blob/main/docs/MEMORY.md">https://github.com/pschatzmann/TinyTTSTools/blob/main/docs/MEMORY.md</a> for a comparison table across all vocoders and G2P models. </dd></dl>
+<p>The input grapheme vocabulary ('&lt;pad&gt;','&lt;unk&gt;','', plus that language's letters) and output phoneme vocabulary are both fixed properties of the specific trained model file (see setup/neural-{en,de,fr,es}/vocab.py) &ndash; pass the matching G2PNeuralLanguage to <a class="el" href="classG2PNeuralModel.html#a338f937bed02bbc342934ef5ec91a3be">begin()</a> alongside its weights so this class decodes with the right tables (<a class="el" href="classG2PNeuralModel.html#a734533b0053e232c128c516234a0716a">graphemeIndexFor()</a>/arpabetForIndexFor()). </p><dl class="section note"><dt>Note</dt><dd>Memory footprint: ~970KB flash for the shipped weights (measured: 992,716 bytes), no RAM overhead beyond a small decode buffer (no tensor arena, no runtime library). See <a href="https://github.com/pschatzmann/TinyTTSTools/blob/main/docs/MEMORY.md">https://github.com/pschatzmann/TinyTTSTools/blob/main/docs/MEMORY.md</a> for a comparison table across all vocoders and G2P models. </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ab2baf63ef5ba97c391df8a2f54fb2201" name="ab2baf63ef5ba97c391df8a2f54fb2201"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab2baf63ef5ba97c391df8a2f54fb2201">&#9670;&#160;</a></span>arpabetForIndex()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static const char * G2PNeuralModel::arpabetForIndex </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>idx</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Maps a decoder output-class index directly to its ARPAbet symbol, including the stress digit <a class="el" href="classTinyTTSTools.html" title="Main Text-to-Speech engine class.">TinyTTSTools</a> uses (a trailing '1'/'2' for primary/secondary stress, or the dedicated AH0/ER0 reduced-vowel phonemes for CMU's digit-0/"unstressed" AH and ER specifically &ndash; <a class="el" href="classTinyTTSTools.html" title="Main Text-to-Speech engine class.">TinyTTSTools</a> has no distinct reduced-vowel phoneme for the other vowels, so their digit-0 case maps to the plain symbol). This table is fixed metadata of the specific shipped model (<a class="el" href="G2PNeuralWeightsEN__data_8h_source.html">G2PNeuralWeightsEN_data.h</a>): it was read directly off that binary's own embedded (symbol, tone) pairs, cross-referenced against TinyTTS's multi-lingual symbol table, not computed generically &ndash; a differently-trained model would need a different table here. </p>
-
-</div>
-</div>
-<a id="acfaa1915630da71b463f6796e2d37127" name="acfaa1915630da71b463f6796e2d37127"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acfaa1915630da71b463f6796e2d37127">&#9670;&#160;</a></span>begin()</h2>
+<a id="a338f937bed02bbc342934ef5ec91a3be" name="a338f937bed02bbc342934ef5ec91a3be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a338f937bed02bbc342934ef5ec91a3be">&#9670;&#160;</a></span>begin()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -292,7 +269,13 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>initialized_</b> = fa
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>len</em>&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="G2PNeuralModel_8h.html#ae1288e008f3b7876de625b503610be60">G2PNeuralLanguage</a>&#160;</td>
+          <td class="paramname"><em>language</em> = <code>G2PNeuralLanguage::EN</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -306,7 +289,71 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>initialized_</b> = fa
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Parses <code>buf</code> (the binary format <a class="el" href="G2PNeuralWeightsEN__data_8h_source.html">G2PNeuralWeightsEN_data.h</a> embeds) without copying &ndash; <code>buf</code> must outlive this object. Returns false on a malformed/truncated buffer. </p>
+<p>Parses <code>buf</code> (the binary format G2PNeuralWeights{EN,DE,FR,ES}_data.h embed) without copying &ndash; <code>buf</code> must outlive this object. <code>language</code> selects which grapheme/phoneme vocabulary to decode with and MUST match the weights file being passed (e.g. G2PNeuralLanguage::DE with G2P_NEURAL_MODEL_WEIGHTS_DE) &ndash; mismatching the two silently produces garbage output, since the weights carry no self-describing language tag. Returns false on a malformed/truncated buffer. </p>
+
+</div>
+</div>
+<a id="a568157bfcb70cee1045768b6fe47fc04" name="a568157bfcb70cee1045768b6fe47fc04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a568157bfcb70cee1045768b6fe47fc04">&#9670;&#160;</a></span>decodeUtf8()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::vector&lt; uint32_t &gt; G2PNeuralModel::decodeUtf8 </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Decodes a UTF-8 byte string into Unicode codepoints &ndash; needed since DE/FR/ES grapheme sets include accented letters (2-byte UTF-8 sequences), unlike EN's plain a-z. An invalid/truncated multi-byte sequence decodes to U+FFFD (falls through to &lt;unk&gt; in <a class="el" href="classG2PNeuralModel.html#a734533b0053e232c128c516234a0716a">graphemeIndexFor()</a>) rather than desyncing the byte stream. </p>
+
+</div>
+</div>
+<a id="a734533b0053e232c128c516234a0716a" name="a734533b0053e232c128c516234a0716a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a734533b0053e232c128c516234a0716a">&#9670;&#160;</a></span>graphemeIndexFor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int G2PNeuralModel::graphemeIndexFor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="G2PNeuralModel_8h.html#ae1288e008f3b7876de625b503610be60">G2PNeuralLanguage</a>&#160;</td>
+          <td class="paramname"><em>lang</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>cp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Maps a Unicode codepoint to its grapheme-vocab index for <code>lang</code>, matching that language's vocab.py GRAPHEMES list index-for-index (['&lt;pad&gt;','&lt;unk&gt;',''] then 'a'..'z' then the language's own accented letters, in the exact order vocab.py lists them &ndash; order matters, it's what the model was trained against). Falls back to &lt;unk&gt; (index 1) for anything outside that set. </p>
 
 </div>
 </div>
@@ -337,6 +384,43 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>initialized_</b> = fa
 
 </div>
 </div>
+<a id="a161d5221fab049294aea2d1aea065b7c" name="a161d5221fab049294aea2d1aea065b7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a161d5221fab049294aea2d1aea065b7c">&#9670;&#160;</a></span>symbolForIndex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static const char * G2PNeuralModel::symbolForIndex </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="G2PNeuralModel_8h.html#ae1288e008f3b7876de625b503610be60">G2PNeuralLanguage</a>&#160;</td>
+          <td class="paramname"><em>lang</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>idx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Maps a decoder output-class index directly to its phoneme symbol for <code>lang</code>, including the stress digit <a class="el" href="classTinyTTSTools.html" title="Main Text-to-Speech engine class.">TinyTTSTools</a> uses (a trailing '1'/'2' for primary/secondary stress, or the dedicated AH0/ER0 reduced-vowel phonemes for CMU's digit-0/"unstressed" AH and ER specifically &ndash; <a class="el" href="classTinyTTSTools.html" title="Main Text-to-Speech engine class.">TinyTTSTools</a> has no distinct reduced-vowel phoneme for the other vowels, so their digit-0 case maps to the plain symbol). Each table is fixed metadata of that language's specific shipped model (Data/neural/G2PNeuralWeights{EN,DE,FR,ES}_data.h), read off setup/neural-{en,de,fr,es}/vocab.py's PHONEME_TABLE index-for-index, matching <a class="el" href="classTinyTTSTools.html" title="Main Text-to-Speech engine class.">TinyTTSTools</a>'s own multi-lingual symbol table (see PhonemeDictionaryDE/FR/ES.h) &ndash; not computed generically. </p>
+
+</div>
+</div>
 <a id="a58770d630388d3296dcd60248bd71f9c" name="a58770d630388d3296dcd60248bd71f9c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a58770d630388d3296dcd60248bd71f9c">&#9670;&#160;</a></span>wordToPhonemes()</h2>
 
@@ -362,11 +446,11 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>initialized_</b> = fa
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">word</td><td>Input word (converted to lowercase; non a-z characters fall through to &lt;unk&gt; handling in graphemeIndex()) </td></tr>
+    <tr><td class="paramname">word</td><td>Input word (converted to lowercase; characters outside the selected language's grapheme set fall through to &lt;unk&gt; handling) </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Space-separated ARPAbet phoneme string, or "" if not initialized or decoding produced nothing </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Space-separated phoneme string, or "" if not initialized or decoding produced nothing </dd></dl>
 
 <p>Implements <a class="el" href="classG2PModelBase.html#a8e34b6e1b0af417606b225b292f6070b">G2PModelBase</a>.</p>
 

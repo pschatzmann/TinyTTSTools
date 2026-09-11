@@ -30,8 +30,9 @@ var searchData=
   ['storeunittailforcrossfade_27',['storeUnitTailForCrossFade',['../classConcatenatedAudioVocoder.html#aca9fcf291f37345a187eedaa8c07f907',1,'ConcatenatedAudioVocoder']]],
   ['stripstress_28',['stripStress',['../classFormantVocoder.html#ae415d5d28f3c4da10b26f6d938ff64e2',1,'FormantVocoder']]],
   ['stripstressmarker_29',['stripStressMarker',['../classVocoderBase.html#a6db3ab81addb2a6c2d01e9f50ec91b99',1,'VocoderBase']]],
-  ['synthesizephoneme_30',['synthesizePhoneme',['../classConcatenatedAudioVocoder.html#ad7f436eb78506cee636654fb17131bbc',1,'ConcatenatedAudioVocoder::synthesizePhoneme()'],['../classDiphoneVocoder.html#a11d761bfd264153c7394069ea6cfb716',1,'DiphoneVocoder::synthesizePhoneme()'],['../classFormantVocoder.html#a70a16569ad4e57dee077440bce8c97a8',1,'FormantVocoder::synthesizePhoneme()'],['../classPSOLAVocoder.html#ad77627cfd6654b9bf6943544637882af',1,'PSOLAVocoder::synthesizePhoneme()'],['../classVocoderBase.html#afb193b97921c30ca4e7f6f023fb584c3',1,'VocoderBase::synthesizePhoneme()']]],
-  ['synthesizesamples_31',['synthesizeSamples',['../classFormantVocoder.html#aed85bfdcf22d39e3bf44235392d7d7ff',1,'FormantVocoder']]],
-  ['synthesizesegment_32',['synthesizeSegment',['../classDiphoneVocoder.html#afb20541d6bb84c3d493208c1ea758480',1,'DiphoneVocoder']]],
-  ['synthesizesingletoken_33',['synthesizeSingleToken',['../classFormantVocoder.html#af23e9ef5e9db9e0387ee7ef644167542',1,'FormantVocoder']]]
+  ['symbolforindex_30',['symbolForIndex',['../classG2PNeuralModel.html#a161d5221fab049294aea2d1aea065b7c',1,'G2PNeuralModel']]],
+  ['synthesizephoneme_31',['synthesizePhoneme',['../classConcatenatedAudioVocoder.html#ad7f436eb78506cee636654fb17131bbc',1,'ConcatenatedAudioVocoder::synthesizePhoneme()'],['../classDiphoneVocoder.html#a11d761bfd264153c7394069ea6cfb716',1,'DiphoneVocoder::synthesizePhoneme()'],['../classFormantVocoder.html#a70a16569ad4e57dee077440bce8c97a8',1,'FormantVocoder::synthesizePhoneme()'],['../classPSOLAVocoder.html#ad77627cfd6654b9bf6943544637882af',1,'PSOLAVocoder::synthesizePhoneme()'],['../classVocoderBase.html#afb193b97921c30ca4e7f6f023fb584c3',1,'VocoderBase::synthesizePhoneme()']]],
+  ['synthesizesamples_32',['synthesizeSamples',['../classFormantVocoder.html#aed85bfdcf22d39e3bf44235392d7d7ff',1,'FormantVocoder']]],
+  ['synthesizesegment_33',['synthesizeSegment',['../classDiphoneVocoder.html#afb20541d6bb84c3d493208c1ea758480',1,'DiphoneVocoder']]],
+  ['synthesizesingletoken_34',['synthesizeSingleToken',['../classFormantVocoder.html#af23e9ef5e9db9e0387ee7ef644167542',1,'FormantVocoder']]]
 ];

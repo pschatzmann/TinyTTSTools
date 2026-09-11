@@ -101,9 +101,9 @@ Collaboration diagram for G2PNeuralModelSD&lt; Allocator &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af485d136c8da068f2b7dfd473658b12f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classG2PNeuralModelSD.html#af485d136c8da068f2b7dfd473658b12f">begin</a> (const char *filePath)</td></tr>
-<tr class="memdesc:af485d136c8da068f2b7dfd473658b12f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load the model's weights from <code>filePath</code>  <br /></td></tr>
-<tr class="separator:af485d136c8da068f2b7dfd473658b12f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c7e28f767a63754d578bb106ead40f1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classG2PNeuralModelSD.html#a5c7e28f767a63754d578bb106ead40f1">begin</a> (const char *filePath, <a class="el" href="G2PNeuralModel_8h.html#ae1288e008f3b7876de625b503610be60">G2PNeuralLanguage</a> language=G2PNeuralLanguage::EN)</td></tr>
+<tr class="memdesc:a5c7e28f767a63754d578bb106ead40f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load the model's weights from <code>filePath</code>  <br /></td></tr>
+<tr class="separator:a5c7e28f767a63754d578bb106ead40f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86a5453067019dd92a27c04761d4dc6d"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classG2PNeuralModelSD.html#a86a5453067019dd92a27c04761d4dc6d">wordToPhonemes</a> (const std::string &amp;word) override</td></tr>
 <tr class="memdesc:a86a5453067019dd92a27c04761d4dc6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert word to phonemes.  <br /></td></tr>
 <tr class="separator:a86a5453067019dd92a27c04761d4dc6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -156,16 +156,16 @@ class G2PNeuralModelSD&lt; Allocator &gt;</div><p>Loads a <code><a class="el" hr
   </table>
   </dd>
 </dl>
-<p>The file is exactly <code>export_g2p_model.py</code>'s <code>--output-bin</code> output (<code>g2p_model.bin</code>) &ndash; the same raw binary <code>G2PNeuralModel::begin(buf, len)</code> already parses, just read from a file instead of a compiled-in array. This class owns the loaded buffer and points an internal <code><a class="el" href="classG2PNeuralModel.html" title="Neural grapheme-to-phoneme fallback for out-of-dictionary words.">G2PNeuralModel</a></code> at it (no further copy), so the buffer and the model share one lifetime &ndash; same zero-copy convention <code><a class="el" href="classG2PNeuralModel.html#acfaa1915630da71b463f6796e2d37127">G2PNeuralModel::begin()</a></code> itself already documents.</p>
-<p>Whichever weights file you load must already have a matching <code>arpabetForIndex()</code>/output table compiled into <code><a class="el" href="G2PNeuralModel_8h.html" title="Neural (GRU) grapheme-to-phoneme fallback model for TinyTTSTools.">G2PNeuralModel.h</a></code> &ndash; that table is fixed metadata of one specific trained model, not something a weights file carries or this class infers (see <code><a class="el" href="classG2PNeuralModel.html" title="Neural grapheme-to-phoneme fallback for out-of-dictionary words.">G2PNeuralModel</a></code>'s own class doc, and docs/ADDING_A_LANGUAGE.md for a non-English model needing its own table).</p>
+<p>The file is exactly <code>export_g2p_model.py</code>'s <code>--output-bin</code> output (<code>g2p_model.bin</code>) &ndash; the same raw binary <code>G2PNeuralModel::begin(buf, len)</code> already parses, just read from a file instead of a compiled-in array. This class owns the loaded buffer and points an internal <code><a class="el" href="classG2PNeuralModel.html" title="Neural grapheme-to-phoneme fallback for out-of-dictionary words.">G2PNeuralModel</a></code> at it (no further copy), so the buffer and the model share one lifetime &ndash; same zero-copy convention <code><a class="el" href="classG2PNeuralModel.html#a338f937bed02bbc342934ef5ec91a3be">G2PNeuralModel::begin()</a></code> itself already documents.</p>
+<p>Whichever weights file you load must be paired with the matching <code>G2PNeuralLanguage</code> (default EN) &ndash; each language has its own grapheme/phoneme vocabulary compiled into <code><a class="el" href="G2PNeuralModel_8h.html" title="Neural (GRU) grapheme-to-phoneme fallback model for TinyTTSTools.">G2PNeuralModel.h</a></code> (<code>graphemeIndexFor()</code>/<code>symbolForIndex()</code>); mismatching the file and the language argument silently produces garbage output, since the weights carry no self-describing language tag (see <code><a class="el" href="classG2PNeuralModel.html" title="Neural grapheme-to-phoneme fallback for out-of-dictionary words.">G2PNeuralModel</a></code>'s own class doc, and docs/ADDING_A_LANGUAGE.md).</p>
 <div class="fragment"><div class="line"><a class="code hl_class" href="classG2PNeuralModelSD.html">G2PNeuralModelSD&lt;PsramAllocator&lt;uint8_t&gt;</a>&gt; neural;</div>
-<div class="line">neural.<a class="code hl_function" href="classG2PNeuralModelSD.html#af485d136c8da068f2b7dfd473658b12f">begin</a>(<span class="stringliteral">&quot;/neural/g2p_model_en.bin&quot;</span>);</div>
+<div class="line">neural.<a class="code hl_function" href="classG2PNeuralModelSD.html#a5c7e28f767a63754d578bb106ead40f1">begin</a>(<span class="stringliteral">&quot;/neural/g2p_model_en.bin&quot;</span>);  <span class="comment">// or _de/_fr/_es.bin with the matching language</span></div>
 <div class="line">g2p.getNeuralModel(); <span class="comment">// or use `neural` directly as a G2PModelBase</span></div>
-<div class="ttc" id="aclassG2PNeuralModelSD_html"><div class="ttname"><a href="classG2PNeuralModelSD.html">G2PNeuralModelSD</a></div><div class="ttdoc">Loads a G2PNeuralModel's weights from a single binary file (SD card, LittleFS, SPIFFS – anything the ...</div><div class="ttdef"><b>Definition:</b> G2PNeuralModelSD.h:56</div></div>
-<div class="ttc" id="aclassG2PNeuralModelSD_html_af485d136c8da068f2b7dfd473658b12f"><div class="ttname"><a href="classG2PNeuralModelSD.html#af485d136c8da068f2b7dfd473658b12f">G2PNeuralModelSD::begin</a></div><div class="ttdeci">bool begin(const char *filePath)</div><div class="ttdoc">Load the model's weights from filePath</div><div class="ttdef"><b>Definition:</b> G2PNeuralModelSD.h:67</div></div>
+<div class="ttc" id="aclassG2PNeuralModelSD_html"><div class="ttname"><a href="classG2PNeuralModelSD.html">G2PNeuralModelSD</a></div><div class="ttdoc">Loads a G2PNeuralModel's weights from a single binary file (SD card, LittleFS, SPIFFS – anything the ...</div><div class="ttdef"><b>Definition:</b> G2PNeuralModelSD.h:57</div></div>
+<div class="ttc" id="aclassG2PNeuralModelSD_html_a5c7e28f767a63754d578bb106ead40f1"><div class="ttname"><a href="classG2PNeuralModelSD.html#a5c7e28f767a63754d578bb106ead40f1">G2PNeuralModelSD::begin</a></div><div class="ttdeci">bool begin(const char *filePath, G2PNeuralLanguage language=G2PNeuralLanguage::EN)</div><div class="ttdoc">Load the model's weights from filePath</div><div class="ttdef"><b>Definition:</b> G2PNeuralModelSD.h:70</div></div>
 </div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="af485d136c8da068f2b7dfd473658b12f" name="af485d136c8da068f2b7dfd473658b12f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af485d136c8da068f2b7dfd473658b12f">&#9670;&#160;</a></span>begin()</h2>
+<a id="a5c7e28f767a63754d578bb106ead40f1" name="a5c7e28f767a63754d578bb106ead40f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c7e28f767a63754d578bb106ead40f1">&#9670;&#160;</a></span>begin()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -179,8 +179,18 @@ template&lt;typename Allocator  = std::allocator&lt;uint8_t&gt;&gt; </div>
           <td class="memname">bool <a class="el" href="classG2PNeuralModelSD.html">G2PNeuralModelSD</a>&lt; Allocator &gt;::begin </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>filePath</em></td><td>)</td>
+          <td class="paramname"><em>filePath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="G2PNeuralModel_8h.html#ae1288e008f3b7876de625b503610be60">G2PNeuralLanguage</a>&#160;</td>
+          <td class="paramname"><em>language</em> = <code>G2PNeuralLanguage::EN</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -194,10 +204,11 @@ template&lt;typename Allocator  = std::allocator&lt;uint8_t&gt;&gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">filePath</td><td>Path to a file written by <code>export_g2p_model.py</code>'s <code>--output-bin</code> (default <code>g2p_model.bin</code>) </td></tr>
+    <tr><td class="paramname">language</td><td>Which grapheme/phoneme vocabulary <code>filePath</code>'s weights were trained with &ndash; must match (see class doc above) </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the file was read and its header is valid; false on a missing/short/truncated file or a malformed header (in which case this model behaves as uninitialized &ndash; <code><a class="el" href="classG2PNeuralModelSD.html#a86a5453067019dd92a27c04761d4dc6d" title="Convert word to phonemes.">wordToPhonemes()</a></code> always returns "", matching a never-<code><a class="el" href="classG2PNeuralModelSD.html#af485d136c8da068f2b7dfd473658b12f" title="Load the model&#39;s weights from filePath">begin()</a></code>'d <code><a class="el" href="classG2PNeuralModel.html" title="Neural grapheme-to-phoneme fallback for out-of-dictionary words.">G2PNeuralModel</a></code>) </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the file was read and its header is valid; false on a missing/short/truncated file or a malformed header (in which case this model behaves as uninitialized &ndash; <code><a class="el" href="classG2PNeuralModelSD.html#a86a5453067019dd92a27c04761d4dc6d" title="Convert word to phonemes.">wordToPhonemes()</a></code> always returns "", matching a never-<code><a class="el" href="classG2PNeuralModelSD.html#a5c7e28f767a63754d578bb106ead40f1" title="Load the model&#39;s weights from filePath">begin()</a></code>'d <code><a class="el" href="classG2PNeuralModel.html" title="Neural grapheme-to-phoneme fallback for out-of-dictionary words.">G2PNeuralModel</a></code>) </dd></dl>
 
 </div>
 </div>
