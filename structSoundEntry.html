@@ -298,7 +298,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Name identifier for the sound entry. </p>
-<p>A null-terminated string that uniquely identifies this sound entry. For diphones, this typically follows the format "PHONEME1_PHONEME2" (e.g., "AA_B", "SIL_T"). </p>
+<p>A null-terminated string that uniquely identifies this sound entry. For diphones, this follows the format "PHONEME1 PHONEME2" (a space between the two symbols, e.g. "AA B", "SIL T") &ndash; a space, not an underscore, specifically so a diphone key can never collide with a <a class="el" href="PhonemeModifiers_8h.html" title="Draft diacritic/modifier layer for Phone segments.">PhonemeModifiers.h</a> modifier tag (they're all <code>_</code>/<code>:</code>/<code>~</code>/etc. prefixed or suffixed, never a bare space); see <a class="el" href="classAudioDictionary.html#a8e03e08e135e2ba2c024fef7e048cce3" title="Get the SoundEntry for a phoneme, falling back to its base (modifier-stripped) symbol if a recording ...">AudioDictionary::getSoundEntry()</a> for the modifier-stripping fallback this keeps unambiguous. </p>
 
 </div>
 </div>

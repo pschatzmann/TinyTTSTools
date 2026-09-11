@@ -8,6 +8,7 @@ var searchData=
   ['configureformantfilter_5',['configureFormantFilter',['../classFormantVocoder.html#a93f8712649bf79c5bbc15bc341bcc1b2',1,'FormantVocoder']]],
   ['configureinitialfilters_6',['configureInitialFilters',['../classFormantVocoder.html#aac061993d145e794747ee1cc852c359c',1,'FormantVocoder']]],
   ['customdictionarylookup_7',['customDictionaryLookup',['../classG2PDictionaryModel.html#aee8be60d4f9b91db8b58c6baa13c41c0',1,'G2PDictionaryModel']]],
-  ['cxpackphone_8',['cxPackPhone',['../CompactPhonemeDictionaryBuilder_8h.html#a7e98728dc9e71a8e0d8da7102d45d5fa',1,'tts_compact_dict_detail']]],
-  ['cxwordless_9',['cxWordLess',['../CompactPhonemeDictionaryBuilder_8h.html#ab394a5dc30d6148ddc2d5686a5e56ea2',1,'tts_compact_dict_detail']]]
+  ['cxnormalizesymbol_8',['cxNormalizeSymbol',['../CompactPhonemeDictionaryBuilder_8h.html#a4c82a9576511759f5dcf4c5ad6e0dc2a',1,'tts_compact_dict_detail']]],
+  ['cxpackphone_9',['cxPackPhone',['../CompactPhonemeDictionaryBuilder_8h.html#a46a2d2e3becfbf7cfabb82f0e7f9e82d',1,'tts_compact_dict_detail']]],
+  ['cxwordless_10',['cxWordLess',['../CompactPhonemeDictionaryBuilder_8h.html#ab394a5dc30d6148ddc2d5686a5e56ea2',1,'tts_compact_dict_detail']]]
 ];

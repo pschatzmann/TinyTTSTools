@@ -1,0 +1,4 @@
+<map id="FallbackPhonemeDictionary" name="FallbackPhonemeDictionary">
+<area shape="rect" id="node1" title="Composes two PhonemeDictionaryBase&#45;implementing dictionaries into one: lookup() tries primary first,..." alt="" coords="5,79,208,104"/>
+<area shape="rect" id="node2" href="$classPhonemeDictionaryBase.html" title="Common interface implemented by CompactPhonemeDictionary and CompressedPhonemeDictionary,..." alt="" coords="15,5,198,31"/>
+</map>

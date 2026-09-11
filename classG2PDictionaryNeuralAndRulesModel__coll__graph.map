@@ -1,11 +1,12 @@
 <map id="G2PDictionaryNeuralAndRulesModel" name="G2PDictionaryNeuralAndRulesModel">
-<area shape="rect" id="node1" title="G2P model chaining dictionary lookup, a neural fallback and rules." alt="" coords="215,240,433,280"/>
-<area shape="rect" id="node2" href="$classG2PHybridModel.html" title="Hybrid G2P model combining multiple approaches." alt="" coords="5,152,136,177"/>
-<area shape="rect" id="node3" href="$classG2PModelBase.html" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="164,13,284,38"/>
-<area shape="rect" id="node4" href="$classG2PDictionaryModel.html" title="Dictionary&#45;based G2P model (fastest, smallest memory)" alt="" coords="535,152,689,177"/>
-<area shape="rect" id="node7" href="$classG2PNeuralModel.html" title="Neural grapheme&#45;to&#45;phoneme fallback for out&#45;of&#45;dictionary words." alt="" coords="345,152,476,177"/>
-<area shape="rect" id="node9" href="$classG2PRuleBasedModel.html" title="Rule&#45;based G2P model with enhanced linguistic rules." alt="" coords="160,152,317,177"/>
-<area shape="rect" id="node5" href="$classPhonemeDictionaryBase.html" title="Common interface implemented by CompactPhonemeDictionary and CompressedPhonemeDictionary,..." alt="" coords="538,13,721,38"/>
-<area shape="rect" id="node6" href="$structPhonemeEntry.html" title="Phoneme Dictionary Entry (stored in PROGMEM)" alt="" coords="745,13,863,38"/>
-<area shape="rect" id="node8" href="$structG2PNeuralModel_1_1QuantizedWeight.html" title="One [rows, hidden_dim_] weight matrix, symmetric per&#45;row INT8." alt="" coords="308,5,513,45"/>
+<area shape="rect" id="node1" title="G2P model chaining dictionary lookup, a neural fallback and rules." alt="" coords="1127,131,1345,171"/>
+<area shape="rect" id="node2" href="$classG2PHybridModel.html" title="Hybrid G2P model combining multiple approaches." alt="" coords="604,162,735,187"/>
+<area shape="rect" id="node3" href="$classG2PModelBase.html" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="48,146,168,171"/>
+<area shape="rect" id="node4" href="$classG2PDictionaryModel.html" title="Dictionary&#45;based G2P model (fastest, smallest memory)" alt="" coords="408,223,563,249"/>
+<area shape="rect" id="node7" href="$classG2PNeuralModel.html" title="Neural grapheme&#45;to&#45;phoneme fallback for out&#45;of&#45;dictionary words." alt="" coords="420,51,551,77"/>
+<area shape="rect" id="node10" href="$classG2PRuleBasedModelBase.html" title="Abstract base for G2PRuleBasedModelEN/DE/FR/ES – the longest&#45; match rule&#45;engine scaffolding every one..." alt="" coords="391,111,580,137"/>
+<area shape="rect" id="node5" href="$classPhonemeDictionaryBase.html" title="Common interface implemented by CompactPhonemeDictionary and CompressedPhonemeDictionary,..." alt="" coords="17,230,199,255"/>
+<area shape="rect" id="node6" href="$structPhonemeEntry.html" title="Phoneme Dictionary Entry (stored in PROGMEM)" alt="" coords="49,279,167,305"/>
+<area shape="rect" id="node8" href="$structG2PNeuralModel_1_1QuantizedWeight.html" title="One [rows, hidden_dim_] weight matrix, symmetric per&#45;row INT8." alt="" coords="5,44,211,84"/>
+<area shape="rect" id="node9" href="$classG2PRuleBasedModelEN.html" title="Rule&#45;based G2P model with enhanced linguistic rules." alt="" coords="759,113,933,138"/>
 </map>

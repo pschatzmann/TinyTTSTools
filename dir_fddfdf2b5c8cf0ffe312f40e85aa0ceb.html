@@ -84,8 +84,8 @@ Directory dependency graph for PhonemeDictionary:</div>
 <area shape="rect" href="dir_3a2362a580eacc7739d58bd894f88a40.html" title="Memory" alt="" coords="27,125,103,151"/>
 <area shape="rect" href="dir_81f9579c4f42549f42a1846b8b515e4b.html" title="Basic" alt="" coords="127,125,185,151"/>
 <area shape="rect" href="dir_fddfdf2b5c8cf0ffe312f40e85aa0ceb.html" title="PhonemeDictionary" alt="" coords="30,52,181,77"/>
-<area shape="rect" href="dir_000008_000006.html" title="1" alt="" coords="83,106,93,121"/>
-<area shape="rect" href="dir_000008_000001.html" title="3" alt="" coords="139,98,149,113"/>
+<area shape="rect" href="dir_000008_000006.html" title="2" alt="" coords="83,106,93,121"/>
+<area shape="rect" href="dir_000008_000001.html" title="8" alt="" coords="139,98,149,113"/>
 <area shape="rect" href="dir_3e9a9f6af4a83b5efb1cd988a5cd1443.html" title="TinyTTSTools" alt="" coords="16,16,196,161"/>
 </map>
 </div>
@@ -104,19 +104,49 @@ Files</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CompressedPhonemeDictionarySD_8h.html">CompressedPhonemeDictionarySD.h</a> <a href="CompressedPhonemeDictionarySD_8h_source.html">[code]</a></td></tr>
 <tr class="memdesc:CompressedPhonemeDictionarySD_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runtime-loadable (SD card / LittleFS) word-&gt;phoneme dictionary. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CompressedPhonemeDictionaryWide_8h.html">CompressedPhonemeDictionaryWide.h</a> <a href="CompressedPhonemeDictionaryWide_8h_source.html">[code]</a></td></tr>
+<tr class="memdesc:CompressedPhonemeDictionaryWide_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compressed word-&gt;phoneme dictionary for the widened (uint16_t, international-id + modifier capable) packed symbol &ndash; a sibling to <a class="el" href="CompressedPhonemeDictionary_8h.html" title="Further-compressed word-&gt;phoneme dictionary: blocked offset index.">CompressedPhonemeDictionary.h</a>, not a replacement. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CompressedPhonemeDictionaryWideSD_8h.html">CompressedPhonemeDictionaryWideSD.h</a> <a href="CompressedPhonemeDictionaryWideSD_8h_source.html">[code]</a></td></tr>
+<tr class="memdesc:CompressedPhonemeDictionaryWideSD_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runtime-loadable (SD card / LittleFS) word-&gt;phoneme dictionary, widened (uint16_t) packed symbol &ndash; a sibling to <a class="el" href="CompressedPhonemeDictionarySD_8h.html" title="Runtime-loadable (SD card / LittleFS) word-&gt;phoneme dictionary.">CompressedPhonemeDictionarySD.h</a>, not a replacement. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="DynamicPhonemeDictionary_8h.html">DynamicPhonemeDictionary.h</a> <a href="DynamicPhonemeDictionary_8h_source.html">[code]</a></td></tr>
 <tr class="memdesc:DynamicPhonemeDictionary_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runtime-mutable word-&gt;phoneme dictionary. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FallbackPhonemeDictionary_8h.html">FallbackPhonemeDictionary.h</a> <a href="FallbackPhonemeDictionary_8h_source.html">[code]</a></td></tr>
+<tr class="memdesc:FallbackPhonemeDictionary_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries one <a class="el" href="classPhonemeDictionaryBase.html" title="Common interface implemented by CompactPhonemeDictionary and CompressedPhonemeDictionary,...">PhonemeDictionaryBase</a>, then a second on miss. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="PhonemeDictionaryBase_8h.html">PhonemeDictionaryBase.h</a> <a href="PhonemeDictionaryBase_8h_source.html">[code]</a></td></tr>
 <tr class="memdesc:PhonemeDictionaryBase_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Common interface for word-&gt;phoneme lookup dictionaries. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="PhonemeDictionaryDE_8h.html">PhonemeDictionaryDE.h</a> <a href="PhonemeDictionaryDE_8h_source.html">[code]</a></td></tr>
+<tr class="memdesc:PhonemeDictionaryDE_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Human-readable source for a small built-in German phoneme dictionary. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="PhonemeDictionaryEN_8h.html">PhonemeDictionaryEN.h</a> <a href="PhonemeDictionaryEN_8h_source.html">[code]</a></td></tr>
 <tr class="memdesc:PhonemeDictionaryEN_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Human-readable source for the built-in English phoneme dictionary. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="PhonemeDictionaryES_8h.html">PhonemeDictionaryES.h</a> <a href="PhonemeDictionaryES_8h_source.html">[code]</a></td></tr>
+<tr class="memdesc:PhonemeDictionaryES_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Human-readable source for a small built-in Spanish phoneme dictionary. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="PhonemeDictionaryFR_8h.html">PhonemeDictionaryFR.h</a> <a href="PhonemeDictionaryFR_8h_source.html">[code]</a></td></tr>
+<tr class="memdesc:PhonemeDictionaryFR_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Human-readable source for a small built-in French phoneme dictionary. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><b>PhonemeExceptionDictionaryEN_data.h</b> <a href="PhonemeExceptionDictionaryEN__data_8h_source.html">[code]</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="PhonemeHuffmanCodes_8h.html">PhonemeHuffmanCodes.h</a> <a href="PhonemeHuffmanCodes_8h_source.html">[code]</a></td></tr>
 <tr class="memdesc:PhonemeHuffmanCodes_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Canonical Huffman codes for packed phoneme bytes. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="PhonemeHuffmanCodesWideDE_8h.html">PhonemeHuffmanCodesWideDE.h</a> <a href="PhonemeHuffmanCodesWideDE_8h_source.html">[code]</a></td></tr>
+<tr class="memdesc:PhonemeHuffmanCodesWideDE_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Canonical Huffman codes for DE's widened packed phoneme symbols, derived from the OLaPh DE corpus. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="PhonemeHuffmanCodesWideES_8h.html">PhonemeHuffmanCodesWideES.h</a> <a href="PhonemeHuffmanCodesWideES_8h_source.html">[code]</a></td></tr>
+<tr class="memdesc:PhonemeHuffmanCodesWideES_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Canonical Huffman codes for ES's widened packed phoneme symbols, derived from the OLaPh ES corpus. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="PhonemeHuffmanCodesWideFR_8h.html">PhonemeHuffmanCodesWideFR.h</a> <a href="PhonemeHuffmanCodesWideFR_8h_source.html">[code]</a></td></tr>
+<tr class="memdesc:PhonemeHuffmanCodesWideFR_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Canonical Huffman codes for FR's widened packed phoneme symbols, derived from the OLaPh FR corpus. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="RuntimePhonemeDictionary_8h.html">RuntimePhonemeDictionary.h</a> <a href="RuntimePhonemeDictionary_8h_source.html">[code]</a></td></tr>
+<tr class="memdesc:RuntimePhonemeDictionary_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Small runtime word-&gt;phoneme dictionary for the extended (X-SAMPA modifier-tag) phoneme-string authoring syntax. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->

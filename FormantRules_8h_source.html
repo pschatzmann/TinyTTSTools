@@ -149,9 +149,264 @@ $(function() {
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  {<span class="stringliteral">&quot;M&quot;</span>, (uint16_t)(PF_VOICED|PF_NASAL), 120, <span class="keyword">false</span>, 0,0,0, {250,1000,2200,0.8f,0.3f,0.2f,80,120,150}},</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  {<span class="stringliteral">&quot;N&quot;</span>, (uint16_t)(PF_VOICED|PF_NASAL), 120, <span class="keyword">false</span>, 0,0,0, {250,1500,2500,0.8f,0.3f,0.2f,80,120,150}},</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  {<span class="stringliteral">&quot;NG&quot;</span>, (uint16_t)(PF_VOICED|PF_NASAL), 120, <span class="keyword">false</span>, 0,0,0, {250,2000,2500,0.8f,0.3f,0.2f,80,120,150}},</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>};</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> kRuleCount = <span class="keyword">sizeof</span>(kRules)/<span class="keyword">sizeof</span>(kRules[0]);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  <span class="comment">// ==================== International / IPA extension (Phone ids 43-120) ====================</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  <span class="comment">//</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  <span class="comment">// Formant frequencies (F1-F3, male voice) are literature-informed</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  <span class="comment">// starting points, not measured/calibrated data:</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  <span class="comment">//  - German vowels: Sendlmeier &amp; Seebold-style average male formant charts.</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  <span class="comment">//  - French vowels/nasals: Delattre/Fant-style average male formant charts.</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  <span class="comment">//  - Everything else: approximated from the closest ARPAbet</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  <span class="comment">//    consonant/vowel by place of articulation (each entry says which,</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  <span class="comment">//    &quot;cf. X&quot;) and adjusted per known acoustic tendencies (retroflexion</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <span class="comment">//    lowers F3, backing lowers F2, rounding lowers F2, pharyngealization</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  <span class="comment">//    raises F1, etc.) -- dedicated formant tables for most of these</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  <span class="comment">//    segments are sparse or don&#39;t exist at all in the literature.</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  <span class="comment">// Per the project&#39;s own listening-test standard, treat every value here</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  <span class="comment">// as a first draft to be verified against real rendered audio and</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  <span class="comment">// retuned by ear -- do not assume correctness from the numbers alone.</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  <span class="comment">//</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  <span class="comment">// Clicks, implosives and ejectives (the CL-, IM- and EJ-prefixed entries</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  <span class="comment">// below) are a different case from everything else here: they change</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  <span class="comment">// the *source* mechanism (a separate velaric airstream for clicks, a</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  <span class="comment">// glottalic one for ejectives/implosives), not just the filter, so no</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  <span class="comment">// amount of 3-formant tuning makes them accurate the way it does for an</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  <span class="comment">// unusual place-of-articulation consonant or vowel. Those entries are</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  <span class="comment">// best-effort approximations (short broadband bursts for clicks, stops</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  <span class="comment">// with adjusted burst amplitude/voicing for ejectives/implosives) good</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  <span class="comment">// enough to be distinguishable from silence and from each other, not</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  <span class="comment">// intended as faithful synthesis -- a real source model (or a</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  <span class="comment">// recording, per PhonemeModifiers.h&#39;s @note on when recordings are</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  <span class="comment">// actually needed) would be required for that.</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>  <span class="comment">// -- German/French/Spanish (43-58) --------------------------------------</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  <span class="comment">// Front rounded vowels: same shape as their unrounded ARPAbet cousins</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  <span class="comment">// (IY/EY/EH) but with F2 pulled down toward the rounded (back-vowel-like)</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  <span class="comment">// range -- rounding lowers F2 without moving F1 much.</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>  {<span class="stringliteral">&quot;UF&quot;</span>, PF_VOICED, 150, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>   {270, 1850, 2200, 1.0f, 0.9f, 0.6f, 50, 100, 140}},  <span class="comment">// /y/, cf. IY</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  {<span class="stringliteral">&quot;UF0&quot;</span>, PF_VOICED, 110, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>   {390, 1550, 2100, 1.0f, 0.8f, 0.6f, 60, 90, 120}},  <span class="comment">// /ʏ/, cf. IH</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  {<span class="stringliteral">&quot;OF&quot;</span>, PF_VOICED, 150, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>   {390, 1600, 2100, 1.0f, 0.8f, 0.6f, 70, 90, 120}},  <span class="comment">// /ø/, cf. EY</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  {<span class="stringliteral">&quot;OE&quot;</span>, PF_VOICED, 140, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>   {550, 1650, 2100, 1.0f, 0.8f, 0.6f, 80, 90, 120}},  <span class="comment">// /œ/, cf. EH</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  <span class="comment">// French nasal vowels: oral targets nasalized -- lower/damped F2 relative</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  <span class="comment">// to the corresponding oral vowel (AA/EH/AO/ER-ish), plus the NASAL flag</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>  <span class="comment">// so the vocoder adds nasal-murmur coupling.</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  {<span class="stringliteral">&quot;AN&quot;</span>, (uint16_t)(PF_VOICED | PF_NASAL), 170, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>   {800, 1000, 2500, 1.0f, 0.6f, 0.4f, 90, 110, 150}},  <span class="comment">// /ɑ̃/, cf. AA</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  {<span class="stringliteral">&quot;EN&quot;</span>, (uint16_t)(PF_VOICED | PF_NASAL), 170, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>   {500, 1650, 2400, 1.0f, 0.7f, 0.4f, 90, 110, 150}},  <span class="comment">// /ɛ̃/, cf. EH</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  {<span class="stringliteral">&quot;ON&quot;</span>, (uint16_t)(PF_VOICED | PF_NASAL), 170, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>   {450, 800, 2400, 1.0f, 0.6f, 0.4f, 90, 110, 150}},  <span class="comment">// /ɔ̃/, cf. AO</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  {<span class="stringliteral">&quot;UN&quot;</span>, (uint16_t)(PF_VOICED | PF_NASAL), 170, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>   {500, 1350, 2300, 1.0f, 0.6f, 0.4f, 90, 110, 150}},  <span class="comment">// /œ̃/, cf. ER</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>  <span class="comment">// German dorsal fricatives: unvoiced, no strong sibilant energy (unlike</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  <span class="comment">// S/SH) -- broader, weaker turbulence noise. C (ich-Laut) is</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>  <span class="comment">// higher/palatal, X (ach-Laut/jota) is lower/velar-uvular.</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>  {<span class="stringliteral">&quot;C&quot;</span>, PF_UNVOICED, 100, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>   {250, 2700, 3700, 0.1f, 0.3f, 0.3f, 200, 300, 400}},  <span class="comment">// /ç/</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>  {<span class="stringliteral">&quot;X&quot;</span>, PF_UNVOICED, 110, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>   {400, 1400, 2500, 0.1f, 0.3f, 0.2f, 250, 300, 350}},  <span class="comment">// /x/</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>  <span class="comment">// Affricates: brief stop-like onset then frication, spectrally close to</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>  <span class="comment">// the fricative half (S / F) but shorter and unvoiced throughout.</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>  {<span class="stringliteral">&quot;TS&quot;</span>, (uint16_t)(PF_UNVOICED | PF_STRONG_SIBILANT), 90, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>   {200, 3000, 7000, 0.1f, 0.3f, 0.5f, 150, 250, 400}},  <span class="comment">// /ts/, cf. S</span></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>  {<span class="stringliteral">&quot;PF&quot;</span>, PF_UNVOICED, 90, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>   {200, 1000, 3000, 0.1f, 0.1f, 0.3f, 150, 200, 250}},  <span class="comment">// /pf/, cf. F</span></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  <span class="comment">// Spanish rhotics: a tap is essentially a very short voiced stop</span></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>  <span class="comment">// (closest to D); the trill reuses R&#39;s approximant formants but held</span></div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>  <span class="comment">// longer to stand in for repeated contacts (no per-contact modeling).</span></div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>  {<span class="stringliteral">&quot;RT&quot;</span>, PF_VOICED, 40, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>   {300, 1300, 1700, 0.3f, 0.2f, 0.1f, 90, 130, 160}},  <span class="comment">// /ɾ/, cf. D</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>  {<span class="stringliteral">&quot;RR&quot;</span>, PF_VOICED, 150, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>   {350, 1200, 1600, 0.7f, 0.6f, 0.5f, 80, 120, 150}},  <span class="comment">// /r/, cf. R</span></div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>  <span class="comment">// Spanish palatals: N/L with F2 raised toward the palatal region.</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>  {<span class="stringliteral">&quot;NY&quot;</span>, (uint16_t)(PF_VOICED | PF_NASAL), 120, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>   {280, 2300, 2700, 0.8f, 0.3f, 0.2f, 80, 120, 150}},  <span class="comment">// /ɲ/, cf. N</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  {<span class="stringliteral">&quot;LY&quot;</span>, PF_VOICED, 110, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>   {300, 2200, 2700, 0.7f, 0.5f, 0.3f, 80, 120, 150}},  <span class="comment">// /ʎ/, cf. L</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>  <span class="comment">// -- Rest of the IPA charts (59-120) -------------------------------------</span></div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  <span class="comment">// Bilabial fricatives/trill: like F/V but lower place resonance (no</span></div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>  <span class="comment">// labiodental cavity), and a trill held long enough to suggest repeated</span></div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>  <span class="comment">// lip contact.</span></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>  {<span class="stringliteral">&quot;PHI&quot;</span>, PF_UNVOICED, 100, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>   {200, 800, 2500, 0.1f, 0.1f, 0.2f, 200, 250, 300}},  <span class="comment">// /ɸ/, cf. F</span></div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>  {<span class="stringliteral">&quot;BETA&quot;</span>, PF_VOICED, 100, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>   {200, 800, 2500, 0.15f, 0.15f, 0.25f, 150, 200, 250}},  <span class="comment">// /β/, cf. V</span></div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>  {<span class="stringliteral">&quot;BR&quot;</span>, PF_VOICED, 140, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>   {200, 900, 2400, 0.3f, 0.2f, 0.1f, 90, 140, 180}},  <span class="comment">// /ʙ/, cf. B</span></div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>  <span class="comment">// Labiodental nasal/approximant: cf. M/V.</span></div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>  {<span class="stringliteral">&quot;MV&quot;</span>, (uint16_t)(PF_VOICED | PF_NASAL), 100, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>   {220, 1100, 2300, 0.8f, 0.3f, 0.2f, 80, 120, 150}},  <span class="comment">// /ɱ/, cf. M</span></div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>  {<span class="stringliteral">&quot;VV&quot;</span>, PF_VOICED, 90, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>   {250, 1000, 2300, 0.6f, 0.4f, 0.3f, 100, 130, 160}},  <span class="comment">// /ʋ/, cf. V/W</span></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>  <span class="comment">// Alveolar laterals: L&#39;s formant shape carrying fricative/flap energy</span></div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>  <span class="comment">// instead of a clean approximant.</span></div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>  {<span class="stringliteral">&quot;LH&quot;</span>, PF_UNVOICED, 110, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>   {350, 1700, 2600, 0.1f, 0.3f, 0.3f, 150, 200, 250}},  <span class="comment">// /ɬ/, cf. L</span></div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>  {<span class="stringliteral">&quot;LZ&quot;</span>, PF_VOICED, 110, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>   {350, 1700, 2600, 0.5f, 0.4f, 0.3f, 120, 160, 200}},  <span class="comment">// /ɮ/, cf. L</span></div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>  {<span class="stringliteral">&quot;LF&quot;</span>, PF_VOICED, 40, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>   {350, 1300, 2600, 0.5f, 0.4f, 0.2f, 80, 120, 150}},  <span class="comment">// /ɺ/, cf. RT</span></div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>  <span class="comment">// Retroflex series: cf. the matching ARPAbet consonant with F3 pulled</span></div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>  <span class="comment">// down (retroflexion&#39;s signature acoustic effect).</span></div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>  {<span class="stringliteral">&quot;TR&quot;</span>, PF_UNVOICED, 80, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>   {250, 1300, 2200, 0.3f, 0.2f, 0.1f, 100, 150, 200}},  <span class="comment">// /ʈ/, cf. T</span></div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>  {<span class="stringliteral">&quot;DR&quot;</span>, PF_VOICED, 70, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>   {250, 1300, 2200, 0.3f, 0.2f, 0.1f, 100, 150, 200}},  <span class="comment">// /ɖ/, cf. D</span></div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>  {<span class="stringliteral">&quot;NR&quot;</span>, (uint16_t)(PF_VOICED | PF_NASAL), 120, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>   {250, 1300, 2000, 0.8f, 0.3f, 0.2f, 80, 120, 150}},  <span class="comment">// /ɳ/, cf. N</span></div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>  {<span class="stringliteral">&quot;SR&quot;</span>, (uint16_t)(PF_UNVOICED | PF_POSTALVEOLAR), 120, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>   {250, 1800, 3200, 0.1f, 0.3f, 0.4f, 200, 250, 350}},  <span class="comment">// /ʂ/, cf. SH</span></div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>  {<span class="stringliteral">&quot;ZR&quot;</span>, (uint16_t)(PF_VOICED | PF_POSTALVEOLAR), 110, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>   {250, 1800, 3200, 0.2f, 0.3f, 0.4f, 150, 200, 300}},  <span class="comment">// /ʐ/, cf. ZH</span></div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>  {<span class="stringliteral">&quot;RA&quot;</span>, PF_VOICED, 90, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>   {350, 1100, 1500, 0.7f, 0.6f, 0.5f, 80, 120, 150}},  <span class="comment">// /ɻ/, cf. R</span></div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>  {<span class="stringliteral">&quot;LR&quot;</span>, PF_VOICED, 100, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>   {350, 1200, 2100, 0.7f, 0.5f, 0.3f, 80, 120, 150}},  <span class="comment">// /ɭ/, cf. L</span></div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>  {<span class="stringliteral">&quot;RF&quot;</span>, PF_VOICED, 40, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>   {300, 1300, 2000, 0.3f, 0.2f, 0.1f, 90, 130, 160}},  <span class="comment">// /ɽ/, cf. D/RT</span></div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>  <span class="comment">// Palatal stops/fricative: cf. K/G/C(ich-Laut) with F2 raised toward the</span></div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>  <span class="comment">// palatal region.</span></div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>  {<span class="stringliteral">&quot;CJ&quot;</span>, PF_UNVOICED, 70, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>   {250, 2400, 3000, 0.3f, 0.2f, 0.1f, 100, 150, 200}},  <span class="comment">// /c/, cf. K</span></div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  {<span class="stringliteral">&quot;JJ&quot;</span>, PF_VOICED, 60, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>   {250, 2400, 3000, 0.3f, 0.2f, 0.1f, 100, 150, 200}},  <span class="comment">// /ɟ/, cf. G</span></div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>  {<span class="stringliteral">&quot;JZ&quot;</span>, PF_VOICED, 100, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>   {250, 2700, 3700, 0.2f, 0.35f, 0.35f, 180, 250, 350}},  <span class="comment">// /ʝ/, cf. C</span></div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span> </div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>  <span class="comment">// Velar fricative/approximants: cf. X(ach-Laut)/W/L with the velar</span></div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>  <span class="comment">// place&#39;s characteristic F2.</span></div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>  {<span class="stringliteral">&quot;GH&quot;</span>, PF_VOICED, 100, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>   {350, 1600, 2600, 0.15f, 0.3f, 0.2f, 200, 250, 300}},  <span class="comment">// /ɣ/, cf. X</span></div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>  {<span class="stringliteral">&quot;WV&quot;</span>, PF_VOICED, 90, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>   {300, 1300, 2400, 0.7f, 0.6f, 0.4f, 70, 90, 120}},  <span class="comment">// /ɰ/, cf. W</span></div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>  {<span class="stringliteral">&quot;LL&quot;</span>, PF_VOICED, 100, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>   {350, 900, 2200, 0.7f, 0.4f, 0.2f, 80, 120, 150}},  <span class="comment">// /ʟ/, cf. L</span></div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span> </div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>  <span class="comment">// Uvular series: cf. the velar/nasal/fricative analogue with F2/F3</span></div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>  <span class="comment">// pulled further back than velar.</span></div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>  {<span class="stringliteral">&quot;QQ&quot;</span>, PF_UNVOICED, 80, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>   {250, 1200, 2000, 0.3f, 0.2f, 0.1f, 100, 150, 200}},  <span class="comment">// /q/, cf. K</span></div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>  {<span class="stringliteral">&quot;GU&quot;</span>, PF_VOICED, 70, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>   {250, 1200, 2000, 0.3f, 0.2f, 0.1f, 100, 150, 200}},  <span class="comment">// /ɢ/, cf. G</span></div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>  {<span class="stringliteral">&quot;NU&quot;</span>, (uint16_t)(PF_VOICED | PF_NASAL), 120, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>   {250, 1200, 1900, 0.8f, 0.3f, 0.2f, 80, 120, 150}},  <span class="comment">// /ɴ/, cf. N</span></div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>  {<span class="stringliteral">&quot;CU&quot;</span>, PF_UNVOICED, 110, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>   {380, 1200, 2300, 0.1f, 0.3f, 0.2f, 250, 300, 350}},  <span class="comment">// /χ/, cf. X</span></div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>  {<span class="stringliteral">&quot;RU&quot;</span>, PF_VOICED, 100, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>   {380, 1200, 2300, 0.2f, 0.3f, 0.2f, 180, 220, 280}},  <span class="comment">// /ʁ/, cf. CU</span></div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>  {<span class="stringliteral">&quot;RT2&quot;</span>, PF_VOICED, 150, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>   {380, 1100, 2200, 0.6f, 0.5f, 0.4f, 120, 160, 200}},  <span class="comment">// /ʀ/, cf. RU/RR</span></div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span> </div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>  <span class="comment">// Pharyngeal/glottal: pharyngeals raise F1 and lower F2 (the</span></div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>  <span class="comment">// &quot;darkening&quot; effect); GS (glottal stop) is a brief near-total energy</span></div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>  <span class="comment">// drop, distinct from SIL/SP (which mark word/phrase pauses, not an</span></div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>  <span class="comment">// in-word segment) so it gets its own low-amplitude entry rather than</span></div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>  <span class="comment">// reusing PF_SILENCE.</span></div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>  {<span class="stringliteral">&quot;HP&quot;</span>, PF_UNVOICED, 110, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>   {500, 1000, 2400, 0.15f, 0.2f, 0.15f, 250, 300, 350}},  <span class="comment">// /ħ/, cf. HH</span></div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>  {<span class="stringliteral">&quot;AP&quot;</span>, PF_VOICED, 100, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>   {600, 1100, 2400, 0.4f, 0.3f, 0.2f, 150, 200, 250}},  <span class="comment">// /ʕ/, cf. AP~AA</span></div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>  {<span class="stringliteral">&quot;GS&quot;</span>, PF_UNVOICED, 50, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>   {0, 0, 0, 0.05f, 0.05f, 0.05f, 50, 50, 50}},  <span class="comment">// /ʔ/ -- brief closure</span></div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>  {<span class="stringliteral">&quot;HV&quot;</span>, PF_VOICED, 90, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>   {500, 1500, 2500, 0.15f, 0.15f, 0.15f, 200, 250, 300}},  <span class="comment">// /ɦ/, cf. HH</span></div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span> </div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>  <span class="comment">// Co-articulated approximants: cf. W/Y-UF blend.</span></div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>  {<span class="stringliteral">&quot;WH&quot;</span>, PF_UNVOICED, 80, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>   {300, 870, 2240, 0.15f, 0.15f, 0.1f, 150, 180, 220}},  <span class="comment">// /ʍ/, cf. W</span></div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>  {<span class="stringliteral">&quot;HU&quot;</span>, PF_VOICED, 80, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>   {270, 1850, 2200, 0.8f, 0.8f, 0.5f, 60, 90, 120}},  <span class="comment">// /ɥ/, cf. UF/Y</span></div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span> </div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>  <span class="comment">// Clicks: best-effort broadband bursts only -- see the @note above. Not</span></div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>  <span class="comment">// a real velaric-airstream model.</span></div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>  {<span class="stringliteral">&quot;CLB&quot;</span>, PF_UNVOICED, 50, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>   {400, 1500, 3000, 0.3f, 0.3f, 0.3f, 400, 400, 400}},  <span class="comment">// /ʘ/</span></div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>  {<span class="stringliteral">&quot;CLD&quot;</span>, PF_UNVOICED, 40, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>   {500, 2500, 4000, 0.2f, 0.3f, 0.3f, 400, 400, 400}},  <span class="comment">// /ǀ/</span></div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>  {<span class="stringliteral">&quot;CLA&quot;</span>, PF_UNVOICED, 45, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>   {450, 2000, 3500, 0.3f, 0.35f, 0.3f, 400, 400, 400}},  <span class="comment">// /ǃ/</span></div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>  {<span class="stringliteral">&quot;CLP&quot;</span>, PF_UNVOICED, 45, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>   {450, 2200, 3800, 0.25f, 0.3f, 0.3f, 400, 400, 400}},  <span class="comment">// /ǂ/</span></div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>  {<span class="stringliteral">&quot;CLL&quot;</span>, PF_UNVOICED, 50, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>   {400, 1800, 3200, 0.25f, 0.3f, 0.3f, 400, 400, 400}},  <span class="comment">// /ǁ/</span></div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span> </div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>  <span class="comment">// Implosives: voiced stops with a weaker, lower-amplitude burst (real</span></div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>  <span class="comment">// implosives have a distinctive lowered-F0/breathy release this doesn&#39;t</span></div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>  <span class="comment">// capture) -- see the @note above.</span></div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>  {<span class="stringliteral">&quot;IMB&quot;</span>, PF_VOICED, 80, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>   {180, 900, 2400, 0.25f, 0.15f, 0.08f, 90, 140, 180}},  <span class="comment">// /ɓ/, cf. B</span></div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>  {<span class="stringliteral">&quot;IMD&quot;</span>, PF_VOICED, 80, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>   {230, 1400, 2700, 0.25f, 0.15f, 0.08f, 90, 140, 180}},  <span class="comment">// /ɗ/, cf. D</span></div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>  {<span class="stringliteral">&quot;IMJ&quot;</span>, PF_VOICED, 80, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>   {230, 2300, 2900, 0.25f, 0.15f, 0.08f, 90, 140, 180}},  <span class="comment">// /ʄ/, cf. JJ</span></div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>  {<span class="stringliteral">&quot;IMG&quot;</span>, PF_VOICED, 80, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>   {230, 1900, 2400, 0.25f, 0.15f, 0.08f, 90, 140, 180}},  <span class="comment">// /ɠ/, cf. G</span></div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>  {<span class="stringliteral">&quot;IMQ&quot;</span>, PF_VOICED, 80, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>   {230, 1200, 1900, 0.25f, 0.15f, 0.08f, 90, 140, 180}},  <span class="comment">// /ʛ/, cf. GU</span></div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span> </div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>  <span class="comment">// Ejectives: unvoiced stops/fricatives with a sharper, louder burst</span></div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>  <span class="comment">// (real ejectives have a distinctive glottalic release this doesn&#39;t</span></div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>  <span class="comment">// capture) -- see the @note above.</span></div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>  {<span class="stringliteral">&quot;EJP&quot;</span>, PF_UNVOICED, 80, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>   {200, 1000, 2500, 0.4f, 0.3f, 0.15f, 90, 140, 180}},  <span class="comment">// /pʼ/, cf. P</span></div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>  {<span class="stringliteral">&quot;EJT&quot;</span>, PF_UNVOICED, 80, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>   {250, 1500, 2800, 0.4f, 0.3f, 0.15f, 90, 140, 180}},  <span class="comment">// /tʼ/, cf. T</span></div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>  {<span class="stringliteral">&quot;EJK&quot;</span>, PF_UNVOICED, 80, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>   {250, 2000, 2500, 0.4f, 0.3f, 0.15f, 90, 140, 180}},  <span class="comment">// /kʼ/, cf. K</span></div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>  {<span class="stringliteral">&quot;EJS&quot;</span>, (uint16_t)(PF_UNVOICED | PF_STRONG_SIBILANT), 100, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>   {200, 3000, 7000, 0.15f, 0.35f, 0.55f, 180, 280, 450}},  <span class="comment">// /sʼ/, cf. S</span></div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>  {<span class="stringliteral">&quot;EJC&quot;</span>, PF_UNVOICED, 90, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>   {200, 2000, 3500, 0.25f, 0.35f, 0.45f, 110, 170, 240}},  <span class="comment">// /tʃʼ/, cf. CH</span></div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span> </div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>  <span class="comment">// Vowels: central vowels sit between the front/back ARPAbet targets</span></div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>  <span class="comment">// they&#39;re named relative to; EP/OP are the pure monophthong</span></div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>  <span class="comment">// counterparts of English&#39;s diphthongal EY/OW; AF is front /a/ vs.</span></div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>  <span class="comment">// ARPAbet AA&#39;s back /ɑ/.</span></div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>  {<span class="stringliteral">&quot;IB&quot;</span>, PF_VOICED, 130, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>   {300, 1500, 2400, 1.0f, 0.85f, 0.6f, 55, 95, 130}},  <span class="comment">// /ɨ/, cf. IY/UW</span></div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>  {<span class="stringliteral">&quot;UB&quot;</span>, PF_VOICED, 130, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>   {300, 1300, 2000, 1.0f, 0.75f, 0.55f, 55, 90, 120}},  <span class="comment">// /ʉ/, cf. UW</span></div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>  {<span class="stringliteral">&quot;UM&quot;</span>, PF_VOICED, 130, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>   {300, 1200, 2300, 1.0f, 0.75f, 0.55f, 55, 85, 115}},  <span class="comment">// /ɯ/, cf. UW</span></div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>  {<span class="stringliteral">&quot;EP&quot;</span>, PF_VOICED, 130, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>   {390, 2000, 2550, 1.0f, 0.9f, 0.6f, 65, 90, 120}},  <span class="comment">// /e/, cf. EY (no glide)</span></div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>  {<span class="stringliteral">&quot;OP&quot;</span>, PF_VOICED, 130, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>   {400, 900, 2300, 1.0f, 0.8f, 0.55f, 75, 90, 120}},  <span class="comment">// /o/, cf. OW (no glide)</span></div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>  {<span class="stringliteral">&quot;EB&quot;</span>, PF_VOICED, 120, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>   {420, 1400, 2400, 0.95f, 0.65f, 0.5f, 65, 85, 115}},  <span class="comment">// /ɘ/, cf. AH0</span></div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>  {<span class="stringliteral">&quot;OB&quot;</span>, PF_VOICED, 120, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>   {420, 1200, 2100, 0.95f, 0.6f, 0.5f, 65, 85, 115}},  <span class="comment">// /ɵ/, cf. EB</span></div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>  {<span class="stringliteral">&quot;OM&quot;</span>, PF_VOICED, 130, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>   {400, 1300, 2400, 1.0f, 0.75f, 0.55f, 70, 90, 120}},  <span class="comment">// /ɤ/, cf. OP</span></div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>  {<span class="stringliteral">&quot;EC&quot;</span>, PF_VOICED, 130, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>   {500, 1400, 2200, 1.0f, 0.75f, 0.6f, 75, 90, 110}},  <span class="comment">// /ɜ/, cf. ER (no rhotic F3 dip)</span></div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>  {<span class="stringliteral">&quot;AC&quot;</span>, PF_VOICED, 110, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>   {620, 1400, 2450, 1.0f, 0.85f, 0.6f, 75, 90, 115}},  <span class="comment">// /ɐ/, cf. AH/AE</span></div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>  {<span class="stringliteral">&quot;AF&quot;</span>, PF_VOICED, 140, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>   {750, 1650, 2500, 1.0f, 0.9f, 0.6f, 85, 90, 120}},  <span class="comment">// /a/, cf. AA (front, not back)</span></div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>  {<span class="stringliteral">&quot;OER&quot;</span>, PF_VOICED, 140, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>   {720, 1400, 2350, 1.0f, 0.85f, 0.6f, 85, 90, 120}},  <span class="comment">// /ɶ/, cf. AF (rounded)</span></div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>  {<span class="stringliteral">&quot;OB2&quot;</span>, PF_VOICED, 140, <span class="keyword">false</span>, 0, 0, 0,</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>   {700, 950, 2400, 1.0f, 0.8f, 0.6f, 85, 90, 120}},  <span class="comment">// /ɒ/, cf. AA</span></div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>};</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span> </div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span><span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> kRuleCount = <span class="keyword">sizeof</span>(kRules)/<span class="keyword">sizeof</span>(kRules[0]);</div>
 <div class="ttc" id="astructFormantParams_html"><div class="ttname"><a href="structFormantParams.html">FormantParams</a></div><div class="ttdoc">Static formant frequency, amplitude and bandwidth specification.</div><div class="ttdef"><b>Definition:</b> FormantRules.h:17</div></div>
 <div class="ttc" id="astructFormantParams_html_a0eddcd61b079eb7bfdf0acfea0ae1a39"><div class="ttname"><a href="structFormantParams.html#a0eddcd61b079eb7bfdf0acfea0ae1a39">FormantParams::a3</a></div><div class="ttdeci">float a3</div><div class="ttdoc">Formant amplitudes (0-1)</div><div class="ttdef"><b>Definition:</b> FormantRules.h:19</div></div>
 <div class="ttc" id="astructFormantParams_html_a6d9e5906afaca861ac3adea2045f71cf"><div class="ttname"><a href="structFormantParams.html#a6d9e5906afaca861ac3adea2045f71cf">FormantParams::f3</a></div><div class="ttdeci">float f3</div><div class="ttdoc">Formant frequencies (Hz)</div><div class="ttdef"><b>Definition:</b> FormantRules.h:18</div></div>

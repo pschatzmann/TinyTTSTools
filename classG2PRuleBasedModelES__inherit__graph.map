@@ -1,0 +1,5 @@
+<map id="G2PRuleBasedModelES" name="G2PRuleBasedModelES">
+<area shape="rect" id="node1" title="Rule&#45;based G2P model for Spanish." alt="" coords="13,152,187,177"/>
+<area shape="rect" id="node2" href="$classG2PRuleBasedModelBase.html" title="Abstract base for G2PRuleBasedModelEN/DE/FR/ES – the longest&#45; match rule&#45;engine scaffolding every one..." alt="" coords="5,79,195,104"/>
+<area shape="rect" id="node3" href="$classG2PModelBase.html" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="40,5,160,31"/>
+</map>

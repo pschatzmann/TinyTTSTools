@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['notchfilter_0',['NotchFilter',['../structFormantVocoder_1_1NotchFilter.html',1,'FormantVocoder']]]
+  ['modifiereffect_0',['ModifierEffect',['../structModifierEffect.html',1,'']]],
+  ['modifiertag_1',['ModifierTag',['../structModifierTag.html',1,'']]]
 ];

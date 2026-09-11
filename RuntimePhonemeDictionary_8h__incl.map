@@ -1,0 +1,8 @@
+<map id="src/TinyTTSTools/PhonemeDictionary/RuntimePhonemeDictionary.h" name="src/TinyTTSTools/PhonemeDictionary/RuntimePhonemeDictionary.h">
+<area shape="rect" id="node1" title="Small runtime word&#45;&gt;phoneme dictionary for the extended (X&#45;SAMPA modifier&#45;tag) phoneme&#45;string authori..." alt="" coords="119,5,406,45"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,93,91,119"/>
+<area shape="rect" id="node3" title=" " alt="" coords="171,167,242,192"/>
+<area shape="rect" id="node4" title=" " alt="" coords="289,167,348,192"/>
+<area shape="rect" id="node5" title=" " alt="" coords="385,93,447,119"/>
+<area shape="rect" id="node6" href="$PhonemeDictionaryBase_8h.html" title="Common interface for word&#45;&gt;phoneme lookup dictionaries." alt="" coords="165,93,360,119"/>
+</map>

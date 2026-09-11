@@ -1,0 +1,4 @@
+<map id="RuntimePhonemeDictionary" name="RuntimePhonemeDictionary">
+<area shape="rect" id="node1" title="Small runtime&#45;built word&#45;&gt;phoneme dictionary for words authored via the extended phoneme&#45;string synta..." alt="" coords="5,79,211,104"/>
+<area shape="rect" id="node2" href="$classPhonemeDictionaryBase.html" title="Common interface implemented by CompactPhonemeDictionary and CompressedPhonemeDictionary,..." alt="" coords="17,5,199,31"/>
+</map>

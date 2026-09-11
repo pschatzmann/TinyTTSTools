@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classTokenizer.html" title="Text preprocessing class." alt="" coords="5,5,88,31"/>
+<area shape="rect" id="node1" href="$classPrint.html" title="Mock Print class for non&#45;Arduino environments." alt="" coords="5,5,57,31"/>
+<area shape="rect" id="node2" href="$classTTSAudioOutputCallback.html" title="TTS audio output using callback function." alt="" coords="105,5,289,31"/>
 </map>

@@ -143,34 +143,154 @@ $(function() {
 <div class="line">  N = 41,</div>
 <div class="line">  NG = 42,</div>
 <div class="line"> </div>
-<div class="line">  <span class="comment">// Stressed vowel variants (primary/secondary), for dictionary authoring</span></div>
-<div class="line">  <span class="comment">// (see PH_WORD() in CompactPhonemeDictionaryBuilder.h) -- these are NOT</span></div>
-<div class="line">  <span class="comment">// phoneme_map/getPhonemeById() indices like the values above. Only AH and</span></div>
-<div class="line">  <span class="comment">// ER don&#39;t need their own &quot;0&quot; member here: that slot is already the</span></div>
-<div class="line">  <span class="comment">// dedicated AH0/ER0 id above (a genuinely different, reduced-vowel</span></div>
-<div class="line">  <span class="comment">// timbre, not just &quot;AH/ER with no stress&quot;).</span></div>
-<div class="line">  AA1 = 43, AA2 = 44,</div>
-<div class="line">  AE1 = 45, AE2 = 46,</div>
-<div class="line">  AH1 = 47, AH2 = 48,</div>
-<div class="line">  AO1 = 49, AO2 = 50,</div>
-<div class="line">  AW1 = 51, AW2 = 52,</div>
-<div class="line">  AY1 = 53, AY2 = 54,</div>
-<div class="line">  EH1 = 55, EH2 = 56,</div>
-<div class="line">  ER1 = 57, ER2 = 58,</div>
-<div class="line">  EY1 = 59, EY2 = 60,</div>
-<div class="line">  IH1 = 61, IH2 = 62,</div>
-<div class="line">  IY1 = 63, IY2 = 64,</div>
-<div class="line">  OW1 = 65, OW2 = 66,</div>
-<div class="line">  OY1 = 67, OY2 = 68,</div>
-<div class="line">  UH1 = 69, UH2 = 70,</div>
-<div class="line">  UW1 = 71, UW2 = 72,</div>
+<div class="line">  <span class="comment">// ==================== International / IPA extension (43-120) ====================</span></div>
+<div class="line">  <span class="comment">// Everything ARPAbet has no symbol for, covering German/French/Spanish</span></div>
+<div class="line">  <span class="comment">// plus the rest of the IPA pulmonic/non-pulmonic consonant charts and</span></div>
+<div class="line">  <span class="comment">// vowel quadrilateral -- formerly a separate `PhoneIntl` enum, merged</span></div>
+<div class="line">  <span class="comment">// here so there is only ever one phoneme id space. These ARE valid</span></div>
+<div class="line">  <span class="comment">// PH_WORD()/CompactPhonemeDictionary phonemes (see</span></div>
+<div class="line">  <span class="comment">// CompactPhonemeDictionaryBuilder.h&#39;s Seg()/cxPackPhone() -- the packed</span></div>
+<div class="line">  <span class="comment">// symbol was widened to a uint16_t specifically to fit this id range</span></div>
+<div class="line">  <span class="comment">// plus a modifier; see PhonemeDictionaryDE.h/FR.h/ES.h for real</span></div>
+<div class="line">  <span class="comment">// examples). They are NOT valid for the separate, Huffman-compressed</span></div>
+<div class="line">  <span class="comment">// CompressedPhonemeDictionary pipeline (CompressedPhonemeDictionary.h +</span></div>
+<div class="line">  <span class="comment">// PhonemeHuffmanCodes.h) that backs the bundled ~123k-word English CMU</span></div>
+<div class="line">  <span class="comment">// dictionary -- that Huffman table is derived from a real English corpus</span></div>
+<div class="line">  <span class="comment">// and has no codeword for anything past NG.</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// -- Front rounded vowels (German ü/ö, French u/eu) ----------------------</span></div>
+<div class="line">  UF = 43,   <span class="comment">// /y/  - German &quot;über&quot;, French &quot;tu&quot;      (long/tense)</span></div>
+<div class="line">  UF0 = 44,  <span class="comment">// /ʏ/  - German &quot;hübsch&quot;                 (short/lax variant of UF)</span></div>
+<div class="line">  OF = 45,   <span class="comment">// /ø/  - German &quot;schön&quot;, French &quot;deux&quot;   (long/tense)</span></div>
+<div class="line">  OE = 46,   <span class="comment">// /œ/  - German &quot;können&quot;, French &quot;sœur&quot;  (short/lax, open-mid)</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// -- French nasal vowels ---------------------------------------------------</span></div>
+<div class="line">  AN = 47,  <span class="comment">// /ɑ̃/ - French &quot;dans&quot;, &quot;temps&quot;</span></div>
+<div class="line">  EN = 48,  <span class="comment">// /ɛ̃/ - French &quot;vin&quot;, &quot;pain&quot;</span></div>
+<div class="line">  ON = 49,  <span class="comment">// /ɔ̃/ - French &quot;bon&quot;, &quot;nom&quot;</span></div>
+<div class="line">  UN = 50,  <span class="comment">// /œ̃/ - French &quot;un&quot; (merging with EN in most modern dialects)</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// -- German dorsal fricatives -----------------------------------------------</span></div>
+<div class="line">  C = 51,  <span class="comment">// /ç/  - German ich-Laut (&quot;ich&quot;, &quot;München&quot;)</span></div>
+<div class="line">  X = 52,  <span class="comment">// /x/  - German ach-Laut (&quot;Bach&quot;) AND Spanish jota (&quot;jota&quot;, &quot;rojo&quot;)</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// -- German affricates (beyond ARPAbet&#39;s CH=/tʃ/, JH=/dʒ/) -----------------</span></div>
+<div class="line">  TS = 53,  <span class="comment">// /ts/ - German &quot;z&quot; (&quot;Zeit&quot;), &quot;tz&quot;</span></div>
+<div class="line">  PF = 54,  <span class="comment">// /pf/ - German &quot;pf&quot; (&quot;Pferd&quot;, &quot;Apfel&quot;)</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// -- Spanish rhotics (ARPAbet&#39;s R is an American retroflex approximant,</span></div>
+<div class="line">  <span class="comment">//    acoustically wrong for either Spanish rhotic) --------------------------</span></div>
+<div class="line">  RT = 55,  <span class="comment">// /ɾ/  - Spanish tap  (&quot;pero&quot;, &quot;cara&quot;)</span></div>
+<div class="line">  RR = 56,  <span class="comment">// /r/  - Spanish trill (&quot;perro&quot;, word-initial &quot;rosa&quot;)</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// -- Spanish palatals --------------------------------------------------------</span></div>
+<div class="line">  NY = 57,  <span class="comment">// /ɲ/  - Spanish &quot;ñ&quot; (&quot;año&quot;)</span></div>
+<div class="line">  LY = 58,  <span class="comment">// /ʎ/  - traditional Spanish &quot;ll&quot; (&quot;calle&quot;); most dialects have</span></div>
+<div class="line">            <span class="comment">//        merged this into /ʝ/ -- reuse Phone::Y where that&#39;s</span></div>
+<div class="line">            <span class="comment">//        the target accent instead of this symbol</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// -- Pulmonic consonants: bilabial ------------------------------------------</span></div>
+<div class="line">  PHI = 59,   <span class="comment">// /ɸ/  voiceless bilabial fricative (Japanese &quot;fu&quot;)</span></div>
+<div class="line">  BETA = 60,  <span class="comment">// /β/  voiced bilabial fricative (Spanish intervocalic &quot;b/v&quot;)</span></div>
+<div class="line">  BR = 61,    <span class="comment">// /ʙ/  bilabial trill</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Labiodental</span></div>
+<div class="line">  MV = 62,  <span class="comment">// /ɱ/  labiodental nasal (allophone, e.g. &quot;symphony&quot;)</span></div>
+<div class="line">  VV = 63,  <span class="comment">// /ʋ/  labiodental approximant (Dutch/Hindi &quot;w&quot;)</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Alveolar / lateral</span></div>
+<div class="line">  LH = 64,  <span class="comment">// /ɬ/  voiceless lateral fricative (Welsh &quot;ll&quot;)</span></div>
+<div class="line">  LZ = 65,  <span class="comment">// /ɮ/  voiced lateral fricative</span></div>
+<div class="line">  LF = 66,  <span class="comment">// /ɺ/  lateral flap</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Retroflex (Hindi, Dravidian languages, Mandarin zh/ch/sh/r)</span></div>
+<div class="line">  TR = 67,  <span class="comment">// /ʈ/  voiceless retroflex stop</span></div>
+<div class="line">  DR = 68,  <span class="comment">// /ɖ/  voiced retroflex stop</span></div>
+<div class="line">  NR = 69,  <span class="comment">// /ɳ/  retroflex nasal</span></div>
+<div class="line">  SR = 70,  <span class="comment">// /ʂ/  voiceless retroflex fricative</span></div>
+<div class="line">  ZR = 71,  <span class="comment">// /ʐ/  voiced retroflex fricative</span></div>
+<div class="line">  RA = 72,  <span class="comment">// /ɻ/  retroflex approximant</span></div>
+<div class="line">  LR = 73,  <span class="comment">// /ɭ/  retroflex lateral approximant</span></div>
+<div class="line">  RF = 74,  <span class="comment">// /ɽ/  retroflex flap</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Palatal</span></div>
+<div class="line">  CJ = 75,  <span class="comment">// /c/  voiceless palatal stop</span></div>
+<div class="line">  JJ = 76,  <span class="comment">// /ɟ/  voiced palatal stop</span></div>
+<div class="line">  JZ = 77,  <span class="comment">// /ʝ/  voiced palatal fricative</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Velar</span></div>
+<div class="line">  GH = 78,  <span class="comment">// /ɣ/  voiced velar fricative</span></div>
+<div class="line">  WV = 79,  <span class="comment">// /ɰ/  velar approximant</span></div>
+<div class="line">  LL = 80,  <span class="comment">// /ʟ/  velar lateral approximant</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Uvular</span></div>
+<div class="line">  QQ = 81,   <span class="comment">// /q/  voiceless uvular stop</span></div>
+<div class="line">  GU = 82,   <span class="comment">// /ɢ/  voiced uvular stop</span></div>
+<div class="line">  NU = 83,   <span class="comment">// /ɴ/  uvular nasal</span></div>
+<div class="line">  CU = 84,   <span class="comment">// /χ/  voiceless uvular fricative</span></div>
+<div class="line">  RU = 85,   <span class="comment">// /ʁ/  voiced uvular fricative (French/German &quot;r&quot;)</span></div>
+<div class="line">  RT2 = 86,  <span class="comment">// /ʀ/  uvular trill</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Pharyngeal / glottal</span></div>
+<div class="line">  HP = 87,  <span class="comment">// /ħ/  voiceless pharyngeal fricative (Arabic ح)</span></div>
+<div class="line">  AP = 88,  <span class="comment">// /ʕ/  voiced pharyngeal fricative/approximant (Arabic ع)</span></div>
+<div class="line">  GS = 89,  <span class="comment">// /ʔ/  glottal stop (Arabic ء, Hawaiian ʻokina, German</span></div>
+<div class="line">            <span class="comment">//      vowel-initial onset)</span></div>
+<div class="line">  HV = 90,  <span class="comment">// /ɦ/  voiced glottal fricative (Hindi/Czech &quot;h&quot;)</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Co-articulated approximants</span></div>
+<div class="line">  WH = 91,  <span class="comment">// /ʍ/  voiceless labial-velar approximant (&quot;wh&quot; in some</span></div>
+<div class="line">            <span class="comment">//      English dialects)</span></div>
+<div class="line">  HU = 92,  <span class="comment">// /ɥ/  labial-palatal approximant (French &quot;huit&quot;)</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// -- Non-pulmonic consonants -------------------------------------------------</span></div>
+<div class="line">  <span class="comment">// Clicks (Zulu, Xhosa, Khoisan languages)</span></div>
+<div class="line">  CLB = 93,  <span class="comment">// /ʘ/  bilabial click</span></div>
+<div class="line">  CLD = 94,  <span class="comment">// /ǀ/  dental click</span></div>
+<div class="line">  CLA = 95,  <span class="comment">// /ǃ/  (post)alveolar click</span></div>
+<div class="line">  CLP = 96,  <span class="comment">// /ǂ/  palatoalveolar click</span></div>
+<div class="line">  CLL = 97,  <span class="comment">// /ǁ/  lateral click</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Implosives (Sindhi, Vietnamese, Swahili, Hausa)</span></div>
+<div class="line">  IMB = 98,   <span class="comment">// /ɓ/  bilabial implosive</span></div>
+<div class="line">  IMD = 99,   <span class="comment">// /ɗ/  dental/alveolar implosive</span></div>
+<div class="line">  IMJ = 100,  <span class="comment">// /ʄ/  palatal implosive</span></div>
+<div class="line">  IMG = 101,  <span class="comment">// /ɠ/  velar implosive</span></div>
+<div class="line">  IMQ = 102,  <span class="comment">// /ʛ/  uvular implosive</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Ejectives (Amharic, Georgian, Quechua, Hausa) -- glottalized</span></div>
+<div class="line">  <span class="comment">// counterparts of existing stops/fricatives</span></div>
+<div class="line">  EJP = 103,  <span class="comment">// /pʼ/ ejective bilabial stop</span></div>
+<div class="line">  EJT = 104,  <span class="comment">// /tʼ/ ejective alveolar stop</span></div>
+<div class="line">  EJK = 105,  <span class="comment">// /kʼ/ ejective velar stop</span></div>
+<div class="line">  EJS = 106,  <span class="comment">// /sʼ/ ejective alveolar fricative</span></div>
+<div class="line">  EJC = 107,  <span class="comment">// /tʃʼ/ ejective postalveolar affricate</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// -- Vowels (IPA vowel quadrilateral) -----------------------------------------</span></div>
+<div class="line">  IB = 108,   <span class="comment">// /ɨ/  close central unrounded (Polish &quot;y&quot;, Welsh &quot;u&quot;)</span></div>
+<div class="line">  UB = 109,   <span class="comment">// /ʉ/  close central rounded (Swedish &quot;u&quot;)</span></div>
+<div class="line">  UM = 110,   <span class="comment">// /ɯ/  close back unrounded (Japanese &quot;u&quot;, Korean &quot;eu&quot;)</span></div>
+<div class="line">  EP = 111,   <span class="comment">// /e/  close-mid front unrounded, pure monophthong (Spanish/</span></div>
+<div class="line">              <span class="comment">//      Italian/Japanese &quot;e&quot;, vs. English&#39;s diphthongal EY)</span></div>
+<div class="line">  OP = 112,   <span class="comment">// /o/  close-mid back rounded, pure monophthong (Spanish/</span></div>
+<div class="line">              <span class="comment">//      Italian/Japanese &quot;o&quot;, vs. English&#39;s diphthongal OW)</span></div>
+<div class="line">  EB = 113,   <span class="comment">// /ɘ/  close-mid central unrounded</span></div>
+<div class="line">  OB = 114,   <span class="comment">// /ɵ/  close-mid central rounded</span></div>
+<div class="line">  OM = 115,   <span class="comment">// /ɤ/  close-mid back unrounded (Vietnamese &quot;ơ&quot;)</span></div>
+<div class="line">  EC = 116,   <span class="comment">// /ɜ/  open-mid central unrounded, non-rhotic (British &quot;bird&quot;,</span></div>
+<div class="line">              <span class="comment">//      vs. American English&#39;s rhotacized ER)</span></div>
+<div class="line">  AC = 117,   <span class="comment">// /ɐ/  near-open central</span></div>
+<div class="line">  AF = 118,   <span class="comment">// /a/  open front unrounded (French/Spanish/Italian/German</span></div>
+<div class="line">              <span class="comment">//      &quot;a&quot;, vs. ARPAbet AA which is open BACK /ɑ/)</span></div>
+<div class="line">  OER = 119,  <span class="comment">// /ɶ/  open front rounded (rare: Swedish dialects)</span></div>
+<div class="line">  OB2 = 120,  <span class="comment">// /ɒ/  open back rounded (British English &quot;lot&quot;)</span></div>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">class </span><a id="_a1" name="_a1"></a><a class="code hl_class" href="classPhonemes.html">Phonemes</a> {</div>
 <div class="line"> <span class="keyword">public</span>:</div>
 <div class="line">  <span class="keyword">const</span> <a id="_a2" name="_a2"></a><a class="code hl_struct" href="structPhonemeInfo.html">PhonemeInfo</a>* getPhoneme(<a class="code hl_enumeration" href="TTSTypes_8h.html#a8304a010942f858a2d6f0d670a00a469">PhonemeType</a> phonemeType,</div>
 <div class="line">                                <span class="keyword">const</span> std::string&amp; phoneme)<span class="keyword"> const </span>{</div>
-<div class="line">    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; entry : <a id="a3" name="a3"></a><a class="code hl_variable" href="classPhonemes.html#acf106c5784f0b490b42f3b5f07c066c1">phoneme_map</a>) {</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; entry : <a id="a3" name="a3"></a><a class="code hl_variable" href="classPhonemes.html#a466482be13f4896485e4e55ba7708d26">phoneme_map</a>) {</div>
 <div class="line">      <span class="keyword">const</span> <span class="keywordtype">char</span>* targetPhoneme = <span class="keyword">nullptr</span>;</div>
 <div class="line"> </div>
 <div class="line">      <span class="comment">// Get the phoneme representation from the mapping entry</span></div>
@@ -258,7 +378,7 @@ $(function() {
 <div class="line"> </div>
 <div class="line">  std::vector&lt;const char*&gt; getPhonemes(<a class="code hl_enumeration" href="TTSTypes_8h.html#a8304a010942f858a2d6f0d670a00a469">PhonemeType</a> type)<span class="keyword"> const </span>{</div>
 <div class="line">    std::vector&lt;const char*&gt; phonemes;</div>
-<div class="line">    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; entry : <a class="code hl_variable" href="classPhonemes.html#acf106c5784f0b490b42f3b5f07c066c1">phoneme_map</a>) {</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; entry : <a class="code hl_variable" href="classPhonemes.html#a466482be13f4896485e4e55ba7708d26">phoneme_map</a>) {</div>
 <div class="line">      <span class="keywordflow">switch</span> (type) {</div>
 <div class="line">        <span class="keywordflow">case</span> PhonemeType::ARPAbet:</div>
 <div class="line">          phonemes.push_back(entry.<a class="code hl_variable" href="structPhonemeInfo.html#a8a9d0f21bfc6e355a61aef44be4e6c4b">arpabet</a>);</div>
@@ -288,32 +408,19 @@ $(function() {
 <div class="line">  }</div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <a class="code hl_struct" href="structPhonemeInfo.html">PhonemeInfo</a>* getPhonemeById(uint16_t <span class="keywordtype">id</span>)<span class="keyword"> const </span>{</div>
-<div class="line">    <span class="keywordflow">if</span> (<span class="keywordtype">id</span> &gt;= 43) {</div>
-<div class="line">      <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;  <span class="comment">// ID out of range -- table has 43 entries (0-42, NG last)</span></div>
+<div class="line">    <span class="keywordflow">if</span> (<span class="keywordtype">id</span> &gt;= 121) {</div>
+<div class="line">      <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;  <span class="comment">// ID out of range -- table has 121 entries (0-120)</span></div>
 <div class="line">    }</div>
-<div class="line">    <span class="keywordflow">return</span> &amp;<a class="code hl_variable" href="classPhonemes.html#acf106c5784f0b490b42f3b5f07c066c1">phoneme_map</a>[id];</div>
+<div class="line">    <span class="keywordflow">return</span> &amp;<a class="code hl_variable" href="classPhonemes.html#a466482be13f4896485e4e55ba7708d26">phoneme_map</a>[id];</div>
 <div class="line">  }</div>
 <div class="line"> </div>
 <div class="line">  std::string <a id="a12" name="a12"></a><a class="code hl_function" href="classPhonemes.html#a445887caf2b2084e574f513b64df3636">toArpabetString</a>(<a class="code hl_enumeration" href="Phonemes_8h.html#aeeab8f4174cf26a2e3436da4790f6063">Phone</a> phone)<span class="keyword"> const </span>{</div>
-<div class="line">    uint8_t <span class="keywordtype">id</span> = <span class="keyword">static_cast&lt;</span>uint8_t<span class="keyword">&gt;</span>(phone);</div>
-<div class="line">    <span class="keywordflow">if</span> (<span class="keywordtype">id</span> &lt; 43) {</div>
-<div class="line">      <span class="keyword">const</span> <a class="code hl_struct" href="structPhonemeInfo.html">PhonemeInfo</a>* info = getPhonemeById(<span class="keywordtype">id</span>);</div>
-<div class="line">      <span class="keywordflow">return</span> info ? std::string(info-&gt;<a class="code hl_variable" href="structPhonemeInfo.html#a8a9d0f21bfc6e355a61aef44be4e6c4b">arpabet</a>) : std::string();</div>
-<div class="line">    }</div>
-<div class="line">    <span class="keywordflow">if</span> (<span class="keywordtype">id</span> &gt; 72) <span class="keywordflow">return</span> std::string();</div>
-<div class="line">    <span class="comment">// Stress-variant ids: 15 vowels x 2 (primary/secondary), in the same</span></div>
-<div class="line">    <span class="comment">// order as declared in Phone (43=AA1, 44=AA2, 45=AE1, ..., 72=UW2).</span></div>
-<div class="line">    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keyword">const</span> kStressVowels[15] = {</div>
-<div class="line">        <span class="stringliteral">&quot;AA&quot;</span>, <span class="stringliteral">&quot;AE&quot;</span>, <span class="stringliteral">&quot;AH&quot;</span>, <span class="stringliteral">&quot;AO&quot;</span>, <span class="stringliteral">&quot;AW&quot;</span>, <span class="stringliteral">&quot;AY&quot;</span>, <span class="stringliteral">&quot;EH&quot;</span>, <span class="stringliteral">&quot;ER&quot;</span>,</div>
-<div class="line">        <span class="stringliteral">&quot;EY&quot;</span>, <span class="stringliteral">&quot;IH&quot;</span>, <span class="stringliteral">&quot;IY&quot;</span>, <span class="stringliteral">&quot;OW&quot;</span>, <span class="stringliteral">&quot;OY&quot;</span>, <span class="stringliteral">&quot;UH&quot;</span>, <span class="stringliteral">&quot;UW&quot;</span>};</div>
-<div class="line">    <span class="keywordtype">size_t</span> offset = <span class="keywordtype">id</span> - 43;</div>
-<div class="line">    <span class="keywordtype">size_t</span> vowelIndex = offset / 2;</div>
-<div class="line">    <span class="keywordtype">int</span> stress = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(offset % 2) + 1;  <span class="comment">// 1 or 2</span></div>
-<div class="line">    <span class="keywordflow">return</span> std::string(kStressVowels[vowelIndex]) + <span class="keyword">static_cast&lt;</span><span class="keywordtype">char</span><span class="keyword">&gt;</span>(<span class="charliteral">&#39;0&#39;</span> + stress);</div>
+<div class="line">    <span class="keyword">const</span> <a class="code hl_struct" href="structPhonemeInfo.html">PhonemeInfo</a>* info = getPhonemeById(<span class="keyword">static_cast&lt;</span>uint8_t<span class="keyword">&gt;</span>(phone));</div>
+<div class="line">    <span class="keywordflow">return</span> info ? std::string(info-&gt;<a class="code hl_variable" href="structPhonemeInfo.html#a8a9d0f21bfc6e355a61aef44be4e6c4b">arpabet</a>) : std::string();</div>
 <div class="line">  }</div>
 <div class="line"> </div>
 <div class="line"> <span class="keyword">protected</span>:</div>
-<div class="line">  <span class="keyword">const</span> <a class="code hl_struct" href="structPhonemeInfo.html">PhonemeInfo</a> <a class="code hl_variable" href="classPhonemes.html#acf106c5784f0b490b42f3b5f07c066c1">phoneme_map</a>[43] = {</div>
+<div class="line">  <span class="keyword">const</span> <a class="code hl_struct" href="structPhonemeInfo.html">PhonemeInfo</a> <a class="code hl_variable" href="classPhonemes.html#a466482be13f4896485e4e55ba7708d26">phoneme_map</a>[121] = {</div>
 <div class="line">      <span class="comment">// Silence/Pause</span></div>
 <div class="line">      {<span class="stringliteral">&quot;SIL&quot;</span>, <span class="stringliteral">&quot;∅&quot;</span>, <span class="stringliteral">&quot;_&quot;</span>, 400, PhonemeClass::Silence, 0},  <span class="comment">// silence, pause</span></div>
 <div class="line">      {<span class="stringliteral">&quot;SP&quot;</span>, <span class="stringliteral">&quot;∅&quot;</span>, <span class="stringliteral">&quot;_&quot;</span>, 30, PhonemeClass::Silence, 1},    <span class="comment">// short pause</span></div>
@@ -370,16 +477,145 @@ $(function() {
 <div class="line">      {<span class="stringliteral">&quot;M&quot;</span>, <span class="stringliteral">&quot;m&quot;</span>, <span class="stringliteral">&quot;m&quot;</span>, 100, PhonemeClass::Phoneme, 40},  <span class="comment">// man, home</span></div>
 <div class="line">      {<span class="stringliteral">&quot;N&quot;</span>, <span class="stringliteral">&quot;n&quot;</span>, <span class="stringliteral">&quot;n&quot;</span>, 90, PhonemeClass::Phoneme, 41},   <span class="comment">// no, pen</span></div>
 <div class="line">      {<span class="stringliteral">&quot;NG&quot;</span>, <span class="stringliteral">&quot;ŋ&quot;</span>, <span class="stringliteral">&quot;N&quot;</span>, 110, PhonemeClass::Phoneme, 42}, <span class="comment">// sing, ring</span></div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// ============ International / IPA extension (43-120) ============</span></div>
+<div class="line">      <span class="comment">// See the Phone enum&#39;s own comment above this range for scope and</span></div>
+<div class="line">      <span class="comment">// the PH_WORD()/compact-dictionary caveat. Formant frequencies for</span></div>
+<div class="line">      <span class="comment">// the vowels/nasals here are literature-informed male-voice starting</span></div>
+<div class="line">      <span class="comment">// points (Peterson &amp; Barney-style charts for German/French/Spanish,</span></div>
+<div class="line">      <span class="comment">// nearest-ARPAbet-analogue estimates otherwise) meant to be tuned by</span></div>
+<div class="line">      <span class="comment">// ear once rendered, not calibrated data. Durations are coarse</span></div>
+<div class="line">      <span class="comment">// defaults by manner class (stops/clicks/ejectives short,</span></div>
+<div class="line">      <span class="comment">// fricatives/vowels longer).</span></div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Front rounded vowels (140-160ms, matching ARPAbet&#39;s long-vowel range)</span></div>
+<div class="line">      {<span class="stringliteral">&quot;UF&quot;</span>, <span class="stringliteral">&quot;y&quot;</span>, <span class="stringliteral">&quot;y&quot;</span>, 150, PhonemeClass::Phoneme, 43},</div>
+<div class="line">      {<span class="stringliteral">&quot;UF0&quot;</span>, <span class="stringliteral">&quot;ʏ&quot;</span>, <span class="stringliteral">&quot;Y&quot;</span>, 110, PhonemeClass::Phoneme, 44},</div>
+<div class="line">      {<span class="stringliteral">&quot;OF&quot;</span>, <span class="stringliteral">&quot;ø&quot;</span>, <span class="stringliteral">&quot;2&quot;</span>, 150, PhonemeClass::Phoneme, 45},</div>
+<div class="line">      {<span class="stringliteral">&quot;OE&quot;</span>, <span class="stringliteral">&quot;œ&quot;</span>, <span class="stringliteral">&quot;9&quot;</span>, 140, PhonemeClass::Phoneme, 46},</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// French nasal vowels (170ms -- nasalization runs slightly longer than</span></div>
+<div class="line">      <span class="comment">// the oral vowels it&#39;s derived from)</span></div>
+<div class="line">      {<span class="stringliteral">&quot;AN&quot;</span>, <span class="stringliteral">&quot;ɑ̃&quot;</span>, <span class="stringliteral">&quot;A~&quot;</span>, 170, PhonemeClass::Phoneme, 47},</div>
+<div class="line">      {<span class="stringliteral">&quot;EN&quot;</span>, <span class="stringliteral">&quot;ɛ̃&quot;</span>, <span class="stringliteral">&quot;E~&quot;</span>, 170, PhonemeClass::Phoneme, 48},</div>
+<div class="line">      {<span class="stringliteral">&quot;ON&quot;</span>, <span class="stringliteral">&quot;ɔ̃&quot;</span>, <span class="stringliteral">&quot;O~&quot;</span>, 170, PhonemeClass::Phoneme, 49},</div>
+<div class="line">      {<span class="stringliteral">&quot;UN&quot;</span>, <span class="stringliteral">&quot;œ̃&quot;</span>, <span class="stringliteral">&quot;9~&quot;</span>, 170, PhonemeClass::Phoneme, 50},</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// German dorsal fricatives (100-110ms, matching ARPAbet&#39;s fricative range)</span></div>
+<div class="line">      {<span class="stringliteral">&quot;C&quot;</span>, <span class="stringliteral">&quot;ç&quot;</span>, <span class="stringliteral">&quot;C&quot;</span>, 100, PhonemeClass::Phoneme, 51},</div>
+<div class="line">      {<span class="stringliteral">&quot;X&quot;</span>, <span class="stringliteral">&quot;x&quot;</span>, <span class="stringliteral">&quot;x&quot;</span>, 110, PhonemeClass::Phoneme, 52},</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Affricates (90ms -- shorter than CH/JH since these are single onset</span></div>
+<div class="line">      <span class="comment">// bursts rather than a full stop+frication sequence)</span></div>
+<div class="line">      {<span class="stringliteral">&quot;TS&quot;</span>, <span class="stringliteral">&quot;ts&quot;</span>, <span class="stringliteral">&quot;ts&quot;</span>, 90, PhonemeClass::Phoneme, 53},</div>
+<div class="line">      {<span class="stringliteral">&quot;PF&quot;</span>, <span class="stringliteral">&quot;pf&quot;</span>, <span class="stringliteral">&quot;pf&quot;</span>, 90, PhonemeClass::Phoneme, 54},</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Spanish rhotics: a tap is brief (single contact), a trill is longer</span></div>
+<div class="line">      <span class="comment">// (multiple contacts) -- durations reflect that directly</span></div>
+<div class="line">      {<span class="stringliteral">&quot;RT&quot;</span>, <span class="stringliteral">&quot;ɾ&quot;</span>, <span class="stringliteral">&quot;4&quot;</span>, 40, PhonemeClass::Phoneme, 55},</div>
+<div class="line">      {<span class="stringliteral">&quot;RR&quot;</span>, <span class="stringliteral">&quot;r&quot;</span>, <span class="stringliteral">&quot;r&quot;</span>, 150, PhonemeClass::Phoneme, 56},</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Spanish palatals (matching ARPAbet&#39;s N/L duration range)</span></div>
+<div class="line">      {<span class="stringliteral">&quot;NY&quot;</span>, <span class="stringliteral">&quot;ɲ&quot;</span>, <span class="stringliteral">&quot;J&quot;</span>, 120, PhonemeClass::Phoneme, 57},</div>
+<div class="line">      {<span class="stringliteral">&quot;LY&quot;</span>, <span class="stringliteral">&quot;ʎ&quot;</span>, <span class="stringliteral">&quot;L&quot;</span>, 110, PhonemeClass::Phoneme, 58},</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Bilabial</span></div>
+<div class="line">      {<span class="stringliteral">&quot;PHI&quot;</span>, <span class="stringliteral">&quot;ɸ&quot;</span>, <span class="stringliteral">&quot;p\\&quot;</span>, 100, PhonemeClass::Phoneme, 59},</div>
+<div class="line">      {<span class="stringliteral">&quot;BETA&quot;</span>, <span class="stringliteral">&quot;β&quot;</span>, <span class="stringliteral">&quot;B&quot;</span>, 100, PhonemeClass::Phoneme, 60},</div>
+<div class="line">      {<span class="stringliteral">&quot;BR&quot;</span>, <span class="stringliteral">&quot;ʙ&quot;</span>, <span class="stringliteral">&quot;b\\&quot;</span>, 120, PhonemeClass::Phoneme, 61},</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Labiodental</span></div>
+<div class="line">      {<span class="stringliteral">&quot;MV&quot;</span>, <span class="stringliteral">&quot;ɱ&quot;</span>, <span class="stringliteral">&quot;F&quot;</span>, 100, PhonemeClass::Phoneme, 62},</div>
+<div class="line">      {<span class="stringliteral">&quot;VV&quot;</span>, <span class="stringliteral">&quot;ʋ&quot;</span>, <span class="stringliteral">&quot;P&quot;</span>, 90, PhonemeClass::Phoneme, 63},</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Alveolar lateral</span></div>
+<div class="line">      {<span class="stringliteral">&quot;LH&quot;</span>, <span class="stringliteral">&quot;ɬ&quot;</span>, <span class="stringliteral">&quot;K&quot;</span>, 110, PhonemeClass::Phoneme, 64},</div>
+<div class="line">      {<span class="stringliteral">&quot;LZ&quot;</span>, <span class="stringliteral">&quot;ɮ&quot;</span>, <span class="stringliteral">&quot;K\\&quot;</span>, 110, PhonemeClass::Phoneme, 65},</div>
+<div class="line">      {<span class="stringliteral">&quot;LF&quot;</span>, <span class="stringliteral">&quot;ɺ&quot;</span>, <span class="stringliteral">&quot;l\\&quot;</span>, 60, PhonemeClass::Phoneme, 66},</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Retroflex</span></div>
+<div class="line">      {<span class="stringliteral">&quot;TR&quot;</span>, <span class="stringliteral">&quot;ʈ&quot;</span>, <span class="stringliteral">&quot;t`&quot;</span>, 80, PhonemeClass::Phoneme, 67},</div>
+<div class="line">      {<span class="stringliteral">&quot;DR&quot;</span>, <span class="stringliteral">&quot;ɖ&quot;</span>, <span class="stringliteral">&quot;d`&quot;</span>, 70, PhonemeClass::Phoneme, 68},</div>
+<div class="line">      {<span class="stringliteral">&quot;NR&quot;</span>, <span class="stringliteral">&quot;ɳ&quot;</span>, <span class="stringliteral">&quot;n`&quot;</span>, 120, PhonemeClass::Phoneme, 69},</div>
+<div class="line">      {<span class="stringliteral">&quot;SR&quot;</span>, <span class="stringliteral">&quot;ʂ&quot;</span>, <span class="stringliteral">&quot;s`&quot;</span>, 120, PhonemeClass::Phoneme, 70},</div>
+<div class="line">      {<span class="stringliteral">&quot;ZR&quot;</span>, <span class="stringliteral">&quot;ʐ&quot;</span>, <span class="stringliteral">&quot;z`&quot;</span>, 110, PhonemeClass::Phoneme, 71},</div>
+<div class="line">      {<span class="stringliteral">&quot;RA&quot;</span>, <span class="stringliteral">&quot;ɻ&quot;</span>, <span class="stringliteral">&quot;r`&quot;</span>, 90, PhonemeClass::Phoneme, 72},</div>
+<div class="line">      {<span class="stringliteral">&quot;LR&quot;</span>, <span class="stringliteral">&quot;ɭ&quot;</span>, <span class="stringliteral">&quot;l`&quot;</span>, 100, PhonemeClass::Phoneme, 73},</div>
+<div class="line">      {<span class="stringliteral">&quot;RF&quot;</span>, <span class="stringliteral">&quot;ɽ&quot;</span>, <span class="stringliteral">&quot;r`&quot;</span>, 50, PhonemeClass::Phoneme, 74},</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Palatal</span></div>
+<div class="line">      {<span class="stringliteral">&quot;CJ&quot;</span>, <span class="stringliteral">&quot;c&quot;</span>, <span class="stringliteral">&quot;c&quot;</span>, 80, PhonemeClass::Phoneme, 75},</div>
+<div class="line">      {<span class="stringliteral">&quot;JJ&quot;</span>, <span class="stringliteral">&quot;ɟ&quot;</span>, <span class="stringliteral">&quot;J\\&quot;</span>, 70, PhonemeClass::Phoneme, 76},</div>
+<div class="line">      {<span class="stringliteral">&quot;JZ&quot;</span>, <span class="stringliteral">&quot;ʝ&quot;</span>, <span class="stringliteral">&quot;j\\&quot;</span>, 100, PhonemeClass::Phoneme, 77},</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Velar</span></div>
+<div class="line">      {<span class="stringliteral">&quot;GH&quot;</span>, <span class="stringliteral">&quot;ɣ&quot;</span>, <span class="stringliteral">&quot;G&quot;</span>, 100, PhonemeClass::Phoneme, 78},</div>
+<div class="line">      {<span class="stringliteral">&quot;WV&quot;</span>, <span class="stringliteral">&quot;ɰ&quot;</span>, <span class="stringliteral">&quot;M\\&quot;</span>, 90, PhonemeClass::Phoneme, 79},</div>
+<div class="line">      {<span class="stringliteral">&quot;LL&quot;</span>, <span class="stringliteral">&quot;ʟ&quot;</span>, <span class="stringliteral">&quot;L\\&quot;</span>, 100, PhonemeClass::Phoneme, 80},</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Uvular</span></div>
+<div class="line">      {<span class="stringliteral">&quot;QQ&quot;</span>, <span class="stringliteral">&quot;q&quot;</span>, <span class="stringliteral">&quot;q&quot;</span>, 80, PhonemeClass::Phoneme, 81},</div>
+<div class="line">      {<span class="stringliteral">&quot;GU&quot;</span>, <span class="stringliteral">&quot;ɢ&quot;</span>, <span class="stringliteral">&quot;G\\&quot;</span>, 70, PhonemeClass::Phoneme, 82},</div>
+<div class="line">      {<span class="stringliteral">&quot;NU&quot;</span>, <span class="stringliteral">&quot;ɴ&quot;</span>, <span class="stringliteral">&quot;N\\&quot;</span>, 120, PhonemeClass::Phoneme, 83},</div>
+<div class="line">      {<span class="stringliteral">&quot;CU&quot;</span>, <span class="stringliteral">&quot;χ&quot;</span>, <span class="stringliteral">&quot;X&quot;</span>, 110, PhonemeClass::Phoneme, 84},</div>
+<div class="line">      {<span class="stringliteral">&quot;RU&quot;</span>, <span class="stringliteral">&quot;ʁ&quot;</span>, <span class="stringliteral">&quot;R&quot;</span>, 100, PhonemeClass::Phoneme, 85},</div>
+<div class="line">      {<span class="stringliteral">&quot;RT2&quot;</span>, <span class="stringliteral">&quot;ʀ&quot;</span>, <span class="stringliteral">&quot;R\\&quot;</span>, 150, PhonemeClass::Phoneme, 86},</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Pharyngeal / glottal</span></div>
+<div class="line">      {<span class="stringliteral">&quot;HP&quot;</span>, <span class="stringliteral">&quot;ħ&quot;</span>, <span class="stringliteral">&quot;X\\&quot;</span>, 110, PhonemeClass::Phoneme, 87},</div>
+<div class="line">      {<span class="stringliteral">&quot;AP&quot;</span>, <span class="stringliteral">&quot;ʕ&quot;</span>, <span class="stringliteral">&quot;?\\&quot;</span>, 100, PhonemeClass::Phoneme, 88},</div>
+<div class="line">      {<span class="stringliteral">&quot;GS&quot;</span>, <span class="stringliteral">&quot;ʔ&quot;</span>, <span class="stringliteral">&quot;?&quot;</span>, 50, PhonemeClass::Phoneme, 89},</div>
+<div class="line">      {<span class="stringliteral">&quot;HV&quot;</span>, <span class="stringliteral">&quot;ɦ&quot;</span>, <span class="stringliteral">&quot;h\\&quot;</span>, 90, PhonemeClass::Phoneme, 90},</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Co-articulated approximants</span></div>
+<div class="line">      {<span class="stringliteral">&quot;WH&quot;</span>, <span class="stringliteral">&quot;ʍ&quot;</span>, <span class="stringliteral">&quot;W&quot;</span>, 80, PhonemeClass::Phoneme, 91},</div>
+<div class="line">      {<span class="stringliteral">&quot;HU&quot;</span>, <span class="stringliteral">&quot;ɥ&quot;</span>, <span class="stringliteral">&quot;H&quot;</span>, 80, PhonemeClass::Phoneme, 92},</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Clicks</span></div>
+<div class="line">      {<span class="stringliteral">&quot;CLB&quot;</span>, <span class="stringliteral">&quot;ʘ&quot;</span>, <span class="stringliteral">&quot;O\\&quot;</span>, 60, PhonemeClass::Phoneme, 93},</div>
+<div class="line">      {<span class="stringliteral">&quot;CLD&quot;</span>, <span class="stringliteral">&quot;ǀ&quot;</span>, <span class="stringliteral">&quot;|\\&quot;</span>, 60, PhonemeClass::Phoneme, 94},</div>
+<div class="line">      {<span class="stringliteral">&quot;CLA&quot;</span>, <span class="stringliteral">&quot;ǃ&quot;</span>, <span class="stringliteral">&quot;!\\&quot;</span>, 60, PhonemeClass::Phoneme, 95},</div>
+<div class="line">      {<span class="stringliteral">&quot;CLP&quot;</span>, <span class="stringliteral">&quot;ǂ&quot;</span>, <span class="stringliteral">&quot;=\\&quot;</span>, 60, PhonemeClass::Phoneme, 96},</div>
+<div class="line">      {<span class="stringliteral">&quot;CLL&quot;</span>, <span class="stringliteral">&quot;ǁ&quot;</span>, <span class="stringliteral">&quot;|\\|\\&quot;</span>, 60, PhonemeClass::Phoneme, 97},</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Implosives</span></div>
+<div class="line">      {<span class="stringliteral">&quot;IMB&quot;</span>, <span class="stringliteral">&quot;ɓ&quot;</span>, <span class="stringliteral">&quot;b_&lt;&quot;</span>, 80, PhonemeClass::Phoneme, 98},</div>
+<div class="line">      {<span class="stringliteral">&quot;IMD&quot;</span>, <span class="stringliteral">&quot;ɗ&quot;</span>, <span class="stringliteral">&quot;d_&lt;&quot;</span>, 80, PhonemeClass::Phoneme, 99},</div>
+<div class="line">      {<span class="stringliteral">&quot;IMJ&quot;</span>, <span class="stringliteral">&quot;ʄ&quot;</span>, <span class="stringliteral">&quot;J\\_&lt;&quot;</span>, 80, PhonemeClass::Phoneme, 100},</div>
+<div class="line">      {<span class="stringliteral">&quot;IMG&quot;</span>, <span class="stringliteral">&quot;ɠ&quot;</span>, <span class="stringliteral">&quot;g_&lt;&quot;</span>, 80, PhonemeClass::Phoneme, 101},</div>
+<div class="line">      {<span class="stringliteral">&quot;IMQ&quot;</span>, <span class="stringliteral">&quot;ʛ&quot;</span>, <span class="stringliteral">&quot;G\\_&lt;&quot;</span>, 80, PhonemeClass::Phoneme, 102},</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Ejectives</span></div>
+<div class="line">      {<span class="stringliteral">&quot;EJP&quot;</span>, <span class="stringliteral">&quot;pʼ&quot;</span>, <span class="stringliteral">&quot;p_&gt;&quot;</span>, 80, PhonemeClass::Phoneme, 103},</div>
+<div class="line">      {<span class="stringliteral">&quot;EJT&quot;</span>, <span class="stringliteral">&quot;tʼ&quot;</span>, <span class="stringliteral">&quot;t_&gt;&quot;</span>, 80, PhonemeClass::Phoneme, 104},</div>
+<div class="line">      {<span class="stringliteral">&quot;EJK&quot;</span>, <span class="stringliteral">&quot;kʼ&quot;</span>, <span class="stringliteral">&quot;k_&gt;&quot;</span>, 80, PhonemeClass::Phoneme, 105},</div>
+<div class="line">      {<span class="stringliteral">&quot;EJS&quot;</span>, <span class="stringliteral">&quot;sʼ&quot;</span>, <span class="stringliteral">&quot;s_&gt;&quot;</span>, 100, PhonemeClass::Phoneme, 106},</div>
+<div class="line">      {<span class="stringliteral">&quot;EJC&quot;</span>, <span class="stringliteral">&quot;tʃʼ&quot;</span>, <span class="stringliteral">&quot;tS_&gt;&quot;</span>, 100, PhonemeClass::Phoneme, 107},</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Vowels</span></div>
+<div class="line">      {<span class="stringliteral">&quot;IB&quot;</span>, <span class="stringliteral">&quot;ɨ&quot;</span>, <span class="stringliteral">&quot;1&quot;</span>, 130, PhonemeClass::Phoneme, 108},</div>
+<div class="line">      {<span class="stringliteral">&quot;UB&quot;</span>, <span class="stringliteral">&quot;ʉ&quot;</span>, <span class="stringliteral">&quot;}&quot;</span>, 130, PhonemeClass::Phoneme, 109},</div>
+<div class="line">      {<span class="stringliteral">&quot;UM&quot;</span>, <span class="stringliteral">&quot;ɯ&quot;</span>, <span class="stringliteral">&quot;M&quot;</span>, 130, PhonemeClass::Phoneme, 110},</div>
+<div class="line">      {<span class="stringliteral">&quot;EP&quot;</span>, <span class="stringliteral">&quot;e&quot;</span>, <span class="stringliteral">&quot;e&quot;</span>, 130, PhonemeClass::Phoneme, 111},</div>
+<div class="line">      {<span class="stringliteral">&quot;OP&quot;</span>, <span class="stringliteral">&quot;o&quot;</span>, <span class="stringliteral">&quot;o&quot;</span>, 130, PhonemeClass::Phoneme, 112},</div>
+<div class="line">      {<span class="stringliteral">&quot;EB&quot;</span>, <span class="stringliteral">&quot;ɘ&quot;</span>, <span class="stringliteral">&quot;@\\&quot;</span>, 120, PhonemeClass::Phoneme, 113},</div>
+<div class="line">      {<span class="stringliteral">&quot;OB&quot;</span>, <span class="stringliteral">&quot;ɵ&quot;</span>, <span class="stringliteral">&quot;8&quot;</span>, 120, PhonemeClass::Phoneme, 114},</div>
+<div class="line">      {<span class="stringliteral">&quot;OM&quot;</span>, <span class="stringliteral">&quot;ɤ&quot;</span>, <span class="stringliteral">&quot;7&quot;</span>, 130, PhonemeClass::Phoneme, 115},</div>
+<div class="line">      {<span class="stringliteral">&quot;EC&quot;</span>, <span class="stringliteral">&quot;ɜ&quot;</span>, <span class="stringliteral">&quot;3&quot;</span>, 130, PhonemeClass::Phoneme, 116},</div>
+<div class="line">      {<span class="stringliteral">&quot;AC&quot;</span>, <span class="stringliteral">&quot;ɐ&quot;</span>, <span class="stringliteral">&quot;6&quot;</span>, 110, PhonemeClass::Phoneme, 117},</div>
+<div class="line">      {<span class="stringliteral">&quot;AF&quot;</span>, <span class="stringliteral">&quot;a&quot;</span>, <span class="stringliteral">&quot;a&quot;</span>, 140, PhonemeClass::Phoneme, 118},</div>
+<div class="line">      {<span class="stringliteral">&quot;OER&quot;</span>, <span class="stringliteral">&quot;ɶ&quot;</span>, <span class="stringliteral">&quot;&amp;&quot;</span>, 140, PhonemeClass::Phoneme, 119},</div>
+<div class="line">      {<span class="stringliteral">&quot;OB2&quot;</span>, <span class="stringliteral">&quot;ɒ&quot;</span>, <span class="stringliteral">&quot;Q&quot;</span>, 140, PhonemeClass::Phoneme, 120},</div>
 <div class="line">  };</div>
 <div class="line">};</div>
 <div class="ttc" id="aPhonemes_8h_html_aeeab8f4174cf26a2e3436da4790f6063"><div class="ttname"><a href="Phonemes_8h.html#aeeab8f4174cf26a2e3436da4790f6063">Phone</a></div><div class="ttdeci">Phone</div><div class="ttdoc">Sequential ARPAbet phoneme ids as a byte-sized enum.</div><div class="ttdef"><b>Definition:</b> Phonemes.h:28</div></div>
 <div class="ttc" id="aTTSTypes_8h_html"><div class="ttname"><a href="TTSTypes_8h.html">TTSTypes.h</a></div><div class="ttdoc">Core types and structures for TinyTTSTools.</div></div>
 <div class="ttc" id="aTTSTypes_8h_html_a8304a010942f858a2d6f0d670a00a469"><div class="ttname"><a href="TTSTypes_8h.html#a8304a010942f858a2d6f0d670a00a469">PhonemeType</a></div><div class="ttdeci">PhonemeType</div><div class="ttdoc">Supported phoneme representation types.</div><div class="ttdef"><b>Definition:</b> TTSTypes.h:21</div></div>
-<div class="ttc" id="aclassPhonemes_html"><div class="ttname"><a href="classPhonemes.html">Phonemes</a></div><div class="ttdoc">Phoneme representation translator and timing information.</div><div class="ttdef"><b>Definition:</b> Phonemes.h:113</div></div>
-<div class="ttc" id="aclassPhonemes_html_a445887caf2b2084e574f513b64df3636"><div class="ttname"><a href="classPhonemes.html#a445887caf2b2084e574f513b64df3636">Phonemes::toArpabetString</a></div><div class="ttdeci">std::string toArpabetString(Phone phone) const</div><div class="ttdoc">Convert a Phone enum value to its ARPAbet string form.</div><div class="ttdef"><b>Definition:</b> Phonemes.h:356</div></div>
-<div class="ttc" id="aclassPhonemes_html_a877c8245c9bdc4755602e3bceb809735"><div class="ttname"><a href="classPhonemes.html#a877c8245c9bdc4755602e3bceb809735">Phonemes::isSilence</a></div><div class="ttdeci">bool isSilence(PhonemeType phonemeType, const char *phoneme) const</div><div class="ttdoc">True if the given phoneme is a silence/pause.</div><div class="ttdef"><b>Definition:</b> Phonemes.h:162</div></div>
-<div class="ttc" id="aclassPhonemes_html_a8bd372e79cb0f003c885e847642cad0d"><div class="ttname"><a href="classPhonemes.html#a8bd372e79cb0f003c885e847642cad0d">Phonemes::getPhonemeID</a></div><div class="ttdeci">const uint16_t getPhonemeID(PhonemeType phonemeType, const std::string &amp;phoneme) const</div><div class="ttdoc">Get the phoneme id for a phoneme.</div><div class="ttdef"><b>Definition:</b> Phonemes.h:316</div></div>
-<div class="ttc" id="aclassPhonemes_html_acf106c5784f0b490b42f3b5f07c066c1"><div class="ttname"><a href="classPhonemes.html#acf106c5784f0b490b42f3b5f07c066c1">Phonemes::phoneme_map</a></div><div class="ttdeci">const PhonemeInfo phoneme_map[43]</div><div class="ttdoc">Static mapping table for phoneme representations.</div><div class="ttdef"><b>Definition:</b> Phonemes.h:400</div></div>
+<div class="ttc" id="aclassPhonemes_html"><div class="ttname"><a href="classPhonemes.html">Phonemes</a></div><div class="ttdoc">Phoneme representation translator and timing information.</div><div class="ttdef"><b>Definition:</b> Phonemes.h:233</div></div>
+<div class="ttc" id="aclassPhonemes_html_a445887caf2b2084e574f513b64df3636"><div class="ttname"><a href="classPhonemes.html#a445887caf2b2084e574f513b64df3636">Phonemes::toArpabetString</a></div><div class="ttdeci">std::string toArpabetString(Phone phone) const</div><div class="ttdoc">Convert a Phone enum value to its ARPAbet string form.</div><div class="ttdef"><b>Definition:</b> Phonemes.h:474</div></div>
+<div class="ttc" id="aclassPhonemes_html_a466482be13f4896485e4e55ba7708d26"><div class="ttname"><a href="classPhonemes.html#a466482be13f4896485e4e55ba7708d26">Phonemes::phoneme_map</a></div><div class="ttdeci">const PhonemeInfo phoneme_map[121]</div><div class="ttdoc">Static mapping table for phoneme representations.</div><div class="ttdef"><b>Definition:</b> Phonemes.h:508</div></div>
+<div class="ttc" id="aclassPhonemes_html_a877c8245c9bdc4755602e3bceb809735"><div class="ttname"><a href="classPhonemes.html#a877c8245c9bdc4755602e3bceb809735">Phonemes::isSilence</a></div><div class="ttdeci">bool isSilence(PhonemeType phonemeType, const char *phoneme) const</div><div class="ttdoc">True if the given phoneme is a silence/pause.</div><div class="ttdef"><b>Definition:</b> Phonemes.h:282</div></div>
+<div class="ttc" id="aclassPhonemes_html_a8bd372e79cb0f003c885e847642cad0d"><div class="ttname"><a href="classPhonemes.html#a8bd372e79cb0f003c885e847642cad0d">Phonemes::getPhonemeID</a></div><div class="ttdeci">const uint16_t getPhonemeID(PhonemeType phonemeType, const std::string &amp;phoneme) const</div><div class="ttdoc">Get the phoneme id for a phoneme.</div><div class="ttdef"><b>Definition:</b> Phonemes.h:436</div></div>
 <div class="ttc" id="astructPhonemeInfo_html"><div class="ttname"><a href="structPhonemeInfo.html">PhonemeInfo</a></div><div class="ttdoc">Structure for phoneme representation mapping.</div><div class="ttdef"><b>Definition:</b> TTSTypes.h:82</div></div>
 <div class="ttc" id="astructPhonemeInfo_html_a1515174e803f5ed66314841569464f7f"><div class="ttname"><a href="structPhonemeInfo.html#a1515174e803f5ed66314841569464f7f">PhonemeInfo::duration_ms</a></div><div class="ttdeci">uint16_t duration_ms</div><div class="ttdoc">Default rendering time in milliseconds.</div><div class="ttdef"><b>Definition:</b> TTSTypes.h:86</div></div>
 <div class="ttc" id="astructPhonemeInfo_html_a166ffda07d7dec228196a3a028b4334e"><div class="ttname"><a href="structPhonemeInfo.html#a166ffda07d7dec228196a3a028b4334e">PhonemeInfo::xsampa</a></div><div class="ttdeci">const char * xsampa</div><div class="ttdoc">X-SAMPA representation (ASCII-based IPA approximation)</div><div class="ttdef"><b>Definition:</b> TTSTypes.h:85</div></div>

@@ -1,14 +1,21 @@
 <map id="src/TinyTTSTools/PhonemeDictionary/PhonemeDictionaryEN.h" name="src/TinyTTSTools/PhonemeDictionary/PhonemeDictionaryEN.h">
-<area shape="rect" id="node1" title="Human&#45;readable source for the built&#45;in English phoneme dictionary." alt="" coords="108,5,359,45"/>
-<area shape="rect" id="node2" href="$CompactPhonemeDictionaryBuilder_8h.html" title="Compile&#45;time builder that packs a readable, enum&#45;typed {&quot;word&quot;, Phone::X, Phone::Y,..." alt="" coords="129,93,337,133"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,181,61,207"/>
-<area shape="rect" id="node4" title=" " alt="" coords="94,328,165,353"/>
-<area shape="rect" id="node5" title=" " alt="" coords="629,401,696,427"/>
-<area shape="rect" id="node6" href="$CompactPhonemeDictionary_8h.html" title="Minimum&#45;memory binary word&#45;&gt;phoneme dictionary for TinyTTSTools." alt="" coords="328,181,547,207"/>
-<area shape="rect" id="node7" title=" " alt="" coords="629,328,696,353"/>
-<area shape="rect" id="node8" title=" " alt="" coords="280,401,339,427"/>
-<area shape="rect" id="node9" href="$Phonemes_8h.html" title="Phoneme information for TinyTTSTools." alt="" coords="418,255,571,280"/>
-<area shape="rect" id="node12" href="$PhonemeDictionaryBase_8h.html" title="Common interface for word&#45;&gt;phoneme lookup dictionaries." alt="" coords="136,255,331,280"/>
-<area shape="rect" id="node10" title=" " alt="" coords="373,328,435,353"/>
-<area shape="rect" id="node11" href="$TTSTypes_8h.html" title="Core types and structures for TinyTTSTools." alt="" coords="459,328,554,353"/>
+<area shape="rect" id="node1" title="Human&#45;readable source for the built&#45;in English phoneme dictionary." alt="" coords="214,5,465,45"/>
+<area shape="rect" id="node2" href="$CompactPhonemeDictionaryBuilder_8h.html" title="Compile&#45;time builder that packs a readable, enum&#45;typed {&quot;word&quot;, Phone::X, Phone::Y,..." alt="" coords="235,93,443,133"/>
+<area shape="rect" id="node3" title=" " alt="" coords="195,181,251,207"/>
+<area shape="rect" id="node4" title=" " alt="" coords="328,328,399,353"/>
+<area shape="rect" id="node5" title=" " alt="" coords="726,548,793,573"/>
+<area shape="rect" id="node6" href="$PhonemeModifiers_8h.html" title="Draft diacritic/modifier layer for Phone segments." alt="" coords="95,255,301,280"/>
+<area shape="rect" id="node15" href="$CompactPhonemeDictionary_8h.html" title="Minimum&#45;memory binary word&#45;&gt;phoneme dictionary for TinyTTSTools." alt="" coords="499,181,718,207"/>
+<area shape="rect" id="node7" title=" " alt="" coords="433,548,491,573"/>
+<area shape="rect" id="node8" href="$TTSLogger_8h.html" title="Unified logging class for TinyTTSTools library." alt="" coords="147,328,249,353"/>
+<area shape="rect" id="node9" title=" " alt="" coords="27,401,97,427"/>
+<area shape="rect" id="node10" title=" " alt="" coords="122,401,183,427"/>
+<area shape="rect" id="node11" href="$TTSAudioOutput_8h_source.html" title=" " alt="" coords="208,401,348,427"/>
+<area shape="rect" id="node12" title=" " alt="" coords="257,475,331,500"/>
+<area shape="rect" id="node13" title=" " alt="" coords="161,475,232,500"/>
+<area shape="rect" id="node14" href="$TTSTypes_8h.html" title="Core types and structures for TinyTTSTools." alt="" coords="525,475,620,500"/>
+<area shape="rect" id="node16" title=" " alt="" coords="885,475,951,500"/>
+<area shape="rect" id="node17" href="$Phonemes_8h.html" title="Phoneme information for TinyTTSTools." alt="" coords="657,401,811,427"/>
+<area shape="rect" id="node19" href="$PhonemeDictionaryBase_8h.html" title="Common interface for word&#45;&gt;phoneme lookup dictionaries." alt="" coords="377,255,571,280"/>
+<area shape="rect" id="node18" title=" " alt="" coords="797,475,860,500"/>
 </map>

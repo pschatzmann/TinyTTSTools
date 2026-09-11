@@ -1,20 +1,4 @@
 var searchData=
 [
-  ['pcm16decoder_0',['Pcm16Decoder',['../classPcm16Decoder.html',1,'']]],
-  ['pcm8decoder_1',['Pcm8Decoder',['../classPcm8Decoder.html',1,'']]],
-  ['phonemedictionarybase_2',['PhonemeDictionaryBase',['../classPhonemeDictionaryBase.html',1,'']]],
-  ['phonemeentry_3',['PhonemeEntry',['../structPhonemeEntry.html',1,'']]],
-  ['phonemeflags_4',['PhonemeFlags',['../structFormantVocoder_1_1PhonemeFlags.html',1,'FormantVocoder']]],
-  ['phonemehuffmancode_5',['PhonemeHuffmanCode',['../structPhonemeHuffmanCode.html',1,'']]],
-  ['phonemeinfo_6',['PhonemeInfo',['../structPhonemeInfo.html',1,'']]],
-  ['phonemerule_7',['PhonemeRule',['../structPhonemeRule.html',1,'']]],
-  ['phonemes_8',['Phonemes',['../classPhonemes.html',1,'']]],
-  ['phonemeseqholder_9',['PhonemeSeqHolder',['../structtts__compact__dict__detail_1_1PhonemeSeqHolder.html',1,'tts_compact_dict_detail']]],
-  ['phonemesynthesiscontext_10',['PhonemeSynthesisContext',['../structFormantVocoder_1_1PhonemeSynthesisContext.html',1,'FormantVocoder']]],
-  ['phonemesynthesisparams_11',['PhonemeSynthesisParams',['../structPhonemeSynthesisParams.html',1,'']]],
-  ['phonemevocoder_12',['PhonemeVocoder',['../classPhonemeVocoder.html',1,'']]],
-  ['phonemewordsource_13',['PhonemeWordSource',['../structPhonemeWordSource.html',1,'']]],
-  ['print_14',['Print',['../classPrint.html',1,'']]],
-  ['psolavocoder_15',['PSOLAVocoder',['../classPSOLAVocoder.html',1,'']]],
-  ['psramallocator_16',['PsramAllocator',['../structPsramAllocator.html',1,'']]]
+  ['notchfilter_0',['NotchFilter',['../structFormantVocoder_1_1NotchFilter.html',1,'FormantVocoder']]]
 ];

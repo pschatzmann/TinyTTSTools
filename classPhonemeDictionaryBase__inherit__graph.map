@@ -1,7 +1,11 @@
 <map id="PhonemeDictionaryBase" name="PhonemeDictionaryBase">
-<area shape="rect" id="node1" title="Common interface implemented by CompactPhonemeDictionary and CompressedPhonemeDictionary,..." alt="" coords="5,84,188,109"/>
-<area shape="rect" id="node2" href="$classCompactPhonemeDictionary.html" title="Binary&#45;search word&#45;&gt;phoneme dictionary backed by four flat, flash&#45;resident arrays." alt="" coords="247,5,455,31"/>
-<area shape="rect" id="node3" href="$classCompressedPhonemeDictionary.html" title="Same word&#45;&gt;phoneme lookup as CompactPhonemeDictionary, but smaller on flash for large (&gt;10k word) dat..." alt="" coords="236,55,467,80"/>
-<area shape="rect" id="node4" href="$classCompressedPhonemeDictionarySD.html" title="Loads a CompressedPhonemeDictionary&#39;s six backing arrays from a single binary file (SD card,..." alt="" coords="236,105,467,145"/>
-<area shape="rect" id="node5" href="$classDynamicPhonemeDictionary.html" title="A word&#45;&gt;phoneme dictionary you can add() to at runtime, one entry at a time." alt="" coords="247,169,455,209"/>
+<area shape="rect" id="node1" title="Common interface implemented by CompactPhonemeDictionary and CompressedPhonemeDictionary,..." alt="" coords="5,199,188,224"/>
+<area shape="rect" id="node2" href="$classCompactPhonemeDictionary.html" title="Binary&#45;search word&#45;&gt;phoneme dictionary backed by four flat, flash&#45;resident arrays." alt="" coords="264,5,472,31"/>
+<area shape="rect" id="node3" href="$classCompressedPhonemeDictionary.html" title="Same word&#45;&gt;phoneme lookup as CompactPhonemeDictionary, but smaller on flash for large (&gt;10k word) dat..." alt="" coords="253,55,483,80"/>
+<area shape="rect" id="node4" href="$classCompressedPhonemeDictionarySD.html" title="Loads a CompressedPhonemeDictionary&#39;s six backing arrays from a single binary file (SD card,..." alt="" coords="253,105,483,145"/>
+<area shape="rect" id="node5" href="$classCompressedPhonemeDictionaryWide.html" title="Same blocked&#45;offset&#45;index + Huffman&#45;coded&#45;phonemes design as CompressedPhonemeDictionary (see that fi..." alt="" coords="236,169,500,195"/>
+<area shape="rect" id="node6" href="$classCompressedPhonemeDictionaryWideSD.html" title="Loads a CompressedPhonemeDictionaryWide&#39;s six backing arrays from a single binary file (SD card,..." alt="" coords="253,219,483,259"/>
+<area shape="rect" id="node7" href="$classDynamicPhonemeDictionary.html" title="A word&#45;&gt;phoneme dictionary you can add() to at runtime, one entry at a time." alt="" coords="264,283,472,323"/>
+<area shape="rect" id="node8" href="$classFallbackPhonemeDictionary.html" title="Composes two PhonemeDictionaryBase&#45;implementing dictionaries into one: lookup() tries primary first,..." alt="" coords="267,348,469,373"/>
+<area shape="rect" id="node9" href="$classRuntimePhonemeDictionary.html" title="Small runtime&#45;built word&#45;&gt;phoneme dictionary for words authored via the extended phoneme&#45;string synta..." alt="" coords="265,397,471,423"/>
 </map>

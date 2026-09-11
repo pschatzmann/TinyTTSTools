@@ -592,7 +592,7 @@ Protected Attributes</h2></td></tr>
 <p>Say/synthesize audio for a phoneme given as a Phone enum value. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">phone</td><td>Phoneme, e.g. Phone::AA or a stressed variant like Phone::IH1 </td></tr>
+    <tr><td class="paramname">phone</td><td>Phoneme, e.g. Phone::AA (stress isn't representable via Phone &ndash; use sayPhoneme(PhonemeType::ARPAbet, "IH1", ...) instead) </td></tr>
     <tr><td class="paramname">out</td><td>Output stream for audio data </td></tr>
   </table>
   </dd>
@@ -644,7 +644,7 @@ Protected Attributes</h2></td></tr>
 <p>Say/synthesize audio for a phoneme given as a Phone enum value. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">phone</td><td>Phoneme, e.g. Phone::AA or a stressed variant like Phone::IH1 </td></tr>
+    <tr><td class="paramname">phone</td><td>Phoneme, e.g. Phone::AA (stress isn't representable via Phone &ndash; use sayPhoneme(PhonemeType::ARPAbet, "IH1", ...) instead) </td></tr>
     <tr><td class="paramname">out</td><td>Output stream for audio data </td></tr>
     <tr><td class="paramname">params</td><td>Optional volume/duration/pitch overrides </td></tr>
   </table>

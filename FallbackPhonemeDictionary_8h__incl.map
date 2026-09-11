@@ -1,0 +1,6 @@
+<map id="src/TinyTTSTools/PhonemeDictionary/FallbackPhonemeDictionary.h" name="src/TinyTTSTools/PhonemeDictionary/FallbackPhonemeDictionary.h">
+<area shape="rect" id="node1" title="Tries one PhonemeDictionaryBase, then a second on miss." alt="" coords="5,5,289,45"/>
+<area shape="rect" id="node2" title=" " alt="" coords="56,167,127,192"/>
+<area shape="rect" id="node3" title=" " alt="" coords="174,167,233,192"/>
+<area shape="rect" id="node4" href="$PhonemeDictionaryBase_8h.html" title="Common interface for word&#45;&gt;phoneme lookup dictionaries." alt="" coords="50,93,245,119"/>
+</map>

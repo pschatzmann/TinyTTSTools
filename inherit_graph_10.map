@@ -1,9 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classG2PModelBase.html" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="5,80,125,105"/>
-<area shape="rect" id="node2" href="$classG2PDictionaryModel.html" title="Dictionary&#45;based G2P model (fastest, smallest memory)" alt="" coords="175,5,329,31"/>
-<area shape="rect" id="node3" href="$classG2PHybridModel.html" title="Hybrid G2P model combining multiple approaches." alt="" coords="187,55,317,80"/>
-<area shape="rect" id="node6" href="$classG2PNeuralModel.html" title="Neural grapheme&#45;to&#45;phoneme fallback for out&#45;of&#45;dictionary words." alt="" coords="187,104,317,129"/>
-<area shape="rect" id="node7" href="$classG2PRuleBasedModel.html" title="Rule&#45;based G2P model with enhanced linguistic rules." alt="" coords="173,153,331,179"/>
-<area shape="rect" id="node4" href="$classG2PDictionaryAndRulesModel.html" title="Default G2P model using basic lookup and rule&#45;based methods." alt="" coords="380,27,596,52"/>
-<area shape="rect" id="node5" href="$classG2PDictionaryNeuralAndRulesModel.html" title="G2P model chaining dictionary lookup, a neural fallback and rules." alt="" coords="379,77,597,117"/>
+<area shape="rect" id="node1" href="$structFormantVoiceConfig.html" title="Voice configuration parameters for tuning timbre &amp; prosody." alt="" coords="5,5,157,31"/>
 </map>

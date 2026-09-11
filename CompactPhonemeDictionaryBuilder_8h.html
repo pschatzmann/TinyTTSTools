@@ -76,8 +76,7 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">CompactPhonemeDictionaryBuilder.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -87,23 +86,31 @@ $(function() {
 <div class="textblock"><code>#include &lt;array&gt;</code><br />
 <code>#include &lt;cstddef&gt;</code><br />
 <code>#include &lt;cstdint&gt;</code><br />
+<code>#include &quot;<a class="el" href="PhonemeModifiers_8h_source.html">../Basic/PhonemeModifiers.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="CompactPhonemeDictionary_8h_source.html">CompactPhonemeDictionary.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for CompactPhonemeDictionaryBuilder.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="CompactPhonemeDictionaryBuilder_8h__incl.png" border="0" usemap="#asrc_2TinyTTSTools_2PhonemeDictionary_2CompactPhonemeDictionaryBuilder_8h" alt=""/></div>
 <map name="asrc_2TinyTTSTools_2PhonemeDictionary_2CompactPhonemeDictionaryBuilder_8h" id="asrc_2TinyTTSTools_2PhonemeDictionary_2CompactPhonemeDictionaryBuilder_8h">
-<area shape="rect" title="Compile&#45;time builder that packs a readable, enum&#45;typed {&quot;word&quot;, Phone::X, Phone::Y,..." alt="" coords="94,5,373,60"/>
-<area shape="rect" title=" " alt="" coords="5,108,61,133"/>
-<area shape="rect" title=" " alt="" coords="94,255,165,280"/>
-<area shape="rect" title=" " alt="" coords="629,328,696,353"/>
-<area shape="rect" href="CompactPhonemeDictionary_8h.html" title="Minimum&#45;memory binary word&#45;&gt;phoneme dictionary for TinyTTSTools." alt="" coords="328,108,547,133"/>
-<area shape="rect" title=" " alt="" coords="629,255,696,280"/>
-<area shape="rect" title=" " alt="" coords="280,328,339,353"/>
-<area shape="rect" href="Phonemes_8h.html" title="Phoneme information for TinyTTSTools." alt="" coords="418,181,571,207"/>
-<area shape="rect" href="PhonemeDictionaryBase_8h.html" title="Common interface for word&#45;&gt;phoneme lookup dictionaries." alt="" coords="136,181,331,207"/>
-<area shape="rect" title=" " alt="" coords="373,255,435,280"/>
-<area shape="rect" href="TTSTypes_8h.html" title="Core types and structures for TinyTTSTools." alt="" coords="459,255,554,280"/>
+<area shape="rect" title="Compile&#45;time builder that packs a readable, enum&#45;typed {&quot;word&quot;, Phone::X, Phone::Y,..." alt="" coords="200,5,479,60"/>
+<area shape="rect" title=" " alt="" coords="195,108,251,133"/>
+<area shape="rect" title=" " alt="" coords="328,255,399,280"/>
+<area shape="rect" title=" " alt="" coords="726,475,793,500"/>
+<area shape="rect" href="PhonemeModifiers_8h.html" title="Draft diacritic/modifier layer for Phone segments." alt="" coords="95,181,301,207"/>
+<area shape="rect" href="CompactPhonemeDictionary_8h.html" title="Minimum&#45;memory binary word&#45;&gt;phoneme dictionary for TinyTTSTools." alt="" coords="499,108,718,133"/>
+<area shape="rect" title=" " alt="" coords="433,475,491,500"/>
+<area shape="rect" href="TTSLogger_8h.html" title="Unified logging class for TinyTTSTools library." alt="" coords="147,255,249,280"/>
+<area shape="rect" title=" " alt="" coords="27,328,97,353"/>
+<area shape="rect" title=" " alt="" coords="122,328,183,353"/>
+<area shape="rect" href="TTSAudioOutput_8h_source.html" title=" " alt="" coords="208,328,348,353"/>
+<area shape="rect" title=" " alt="" coords="257,401,331,427"/>
+<area shape="rect" title=" " alt="" coords="161,401,232,427"/>
+<area shape="rect" href="TTSTypes_8h.html" title="Core types and structures for TinyTTSTools." alt="" coords="525,401,620,427"/>
+<area shape="rect" title=" " alt="" coords="885,401,951,427"/>
+<area shape="rect" href="Phonemes_8h.html" title="Phoneme information for TinyTTSTools." alt="" coords="657,328,811,353"/>
+<area shape="rect" href="PhonemeDictionaryBase_8h.html" title="Common interface for word&#45;&gt;phoneme lookup dictionaries." alt="" coords="377,181,571,207"/>
+<area shape="rect" title=" " alt="" coords="797,401,860,427"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -111,12 +118,15 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="CompactPhonemeDictionaryBuilder_8h__dep__incl.png" border="0" usemap="#asrc_2TinyTTSTools_2PhonemeDictionary_2CompactPhonemeDictionaryBuilder_8hdep" alt=""/></div>
 <map name="asrc_2TinyTTSTools_2PhonemeDictionary_2CompactPhonemeDictionaryBuilder_8hdep" id="asrc_2TinyTTSTools_2PhonemeDictionary_2CompactPhonemeDictionaryBuilder_8hdep">
-<area shape="rect" title="Compile&#45;time builder that packs a readable, enum&#45;typed {&quot;word&quot;, Phone::X, Phone::Y,..." alt="" coords="15,5,293,60"/>
-<area shape="rect" href="PhonemeDictionaryEN_8h.html" title="Human&#45;readable source for the built&#45;in English phoneme dictionary." alt="" coords="29,108,279,148"/>
-<area shape="rect" href="G2PDictionaryModel_8h.html" title="Dictionary&#45;based G2P model for TinyTTSTools." alt="" coords="69,196,239,236"/>
-<area shape="rect" href="TinyTTSTools_8h.html" title="Main Text&#45;to&#45;Speech engine class for TinyTTSTools." alt="" coords="5,387,148,412"/>
-<area shape="rect" href="G2PDictionaryAndRulesModel_8h.html" title="Combined dictionary and rules&#45;based G2P model for TinyTTSTools." alt="" coords="38,291,270,331"/>
-<area shape="rect" href="G2PDictionaryNeuralAndRulesModel_8h.html" title="Combined dictionary, neural and rules&#45;based G2P model for TinyTTSTools." alt="" coords="295,284,517,339"/>
+<area shape="rect" title="Compile&#45;time builder that packs a readable, enum&#45;typed {&quot;word&quot;, Phone::X, Phone::Y,..." alt="" coords="403,5,682,60"/>
+<area shape="rect" href="PhonemeDictionaryDE_8h.html" title="Human&#45;readable source for a small built&#45;in German phoneme dictionary." alt="" coords="5,108,256,148"/>
+<area shape="rect" href="PhonemeDictionaryEN_8h.html" title="Human&#45;readable source for the built&#45;in English phoneme dictionary." alt="" coords="280,108,531,148"/>
+<area shape="rect" href="PhonemeDictionaryES_8h.html" title="Human&#45;readable source for a small built&#45;in Spanish phoneme dictionary." alt="" coords="555,108,805,148"/>
+<area shape="rect" href="PhonemeDictionaryFR_8h.html" title="Human&#45;readable source for a small built&#45;in French phoneme dictionary." alt="" coords="829,108,1080,148"/>
+<area shape="rect" href="G2PDictionaryModel_8h.html" title="Dictionary&#45;based G2P model for TinyTTSTools." alt="" coords="320,196,491,236"/>
+<area shape="rect" href="TinyTTSTools_8h.html" title="Main Text&#45;to&#45;Speech engine class for TinyTTSTools." alt="" coords="257,387,399,412"/>
+<area shape="rect" href="G2PDictionaryAndRulesModel_8h.html" title="Combined dictionary and rules&#45;based G2P model for TinyTTSTools." alt="" coords="289,291,521,331"/>
+<area shape="rect" href="G2PDictionaryNeuralAndRulesModel_8h.html" title="Combined dictionary, neural and rules&#45;based G2P model for TinyTTSTools." alt="" coords="546,284,769,339"/>
 </map>
 </div>
 </div>
@@ -127,7 +137,7 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPhonemeWordSource.html">PhonemeWordSource</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">One human-readable dictionary source entry.  <a href="structPhonemeWordSource.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtts__compact__dict__detail_1_1PhonemeSeqHolder.html">tts_compact_dict_detail::PhonemeSeqHolder&lt; Ps &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtts__compact__dict__detail_1_1PhonemeSeqHolder.html">tts_compact_dict_detail::PhonemeSeqHolder&lt; Symbols &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Backing storage for one word's packed phoneme sequence.  <a href="structtts__compact__dict__detail_1_1PhonemeSeqHolder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCompactPhonemeDictionaryData.html">CompactPhonemeDictionaryData&lt; N, WordBytes, PhonemeCount &gt;</a></td></tr>
@@ -148,8 +158,8 @@ constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><b>tts_compa
 <tr class="separator:a1606e70db1240904635eed3016d94d93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab394a5dc30d6148ddc2d5686a5e56ea2"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CompactPhonemeDictionaryBuilder_8h.html#ab394a5dc30d6148ddc2d5686a5e56ea2">tts_compact_dict_detail::cxWordLess</a> (const char *a, const char *b)</td></tr>
 <tr class="separator:ab394a5dc30d6148ddc2d5686a5e56ea2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e98728dc9e71a8e0d8da7102d45d5fa"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CompactPhonemeDictionaryBuilder_8h.html#a7e98728dc9e71a8e0d8da7102d45d5fa">tts_compact_dict_detail::cxPackPhone</a> (<a class="el" href="Phonemes_8h.html#aeeab8f4174cf26a2e3436da4790f6063">Phone</a> p)</td></tr>
-<tr class="separator:a7e98728dc9e71a8e0d8da7102d45d5fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46a2d2e3becfbf7cfabb82f0e7f9e82d"><td class="memItemLeft" align="right" valign="top">constexpr uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CompactPhonemeDictionaryBuilder_8h.html#a46a2d2e3becfbf7cfabb82f0e7f9e82d">tts_compact_dict_detail::cxPackPhone</a> (<a class="el" href="Phonemes_8h.html#aeeab8f4174cf26a2e3436da4790f6063">Phone</a> p)</td></tr>
+<tr class="separator:a46a2d2e3becfbf7cfabb82f0e7f9e82d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a715c92f7731378402adc06f434c97606"><td class="memTemplParams" colspan="2"><a id="a715c92f7731378402adc06f434c97606" name="a715c92f7731378402adc06f434c97606"></a>
 template&lt;size_t N&gt; </td></tr>
 <tr class="memitem:a715c92f7731378402adc06f434c97606"><td class="memTemplItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><b>tts_compact_dict_detail::cxTotalWordBytes</b> (const <a class="el" href="structPhonemeWordSource.html">PhonemeWordSource</a>(&amp;table)[N])</td></tr>
@@ -158,15 +168,18 @@ template&lt;size_t N&gt; </td></tr>
 template&lt;size_t N&gt; </td></tr>
 <tr class="memitem:a524c51751c08048f2eda3ff5481b3230"><td class="memTemplItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><b>tts_compact_dict_detail::cxTotalPhonemeCount</b> (const <a class="el" href="structPhonemeWordSource.html">PhonemeWordSource</a>(&amp;table)[N])</td></tr>
 <tr class="separator:a524c51751c08048f2eda3ff5481b3230"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c82a9576511759f5dcf4c5ad6e0dc2a"><td class="memItemLeft" align="right" valign="top">constexpr uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CompactPhonemeDictionaryBuilder_8h.html#a4c82a9576511759f5dcf4c5ad6e0dc2a">tts_compact_dict_detail::cxNormalizeSymbol</a> (<a class="el" href="Phonemes_8h.html#aeeab8f4174cf26a2e3436da4790f6063">Phone</a> p)</td></tr>
+<tr class="separator:a4c82a9576511759f5dcf4c5ad6e0dc2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20b888723253f359dd281635a4e3853b"><td class="memItemLeft" align="right" valign="top"><a id="a20b888723253f359dd281635a4e3853b" name="a20b888723253f359dd281635a4e3853b"></a>
+constexpr uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>tts_compact_dict_detail::cxNormalizeSymbol</b> (uint16_t s)</td></tr>
+<tr class="separator:a20b888723253f359dd281635a4e3853b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7181cf34ea3348ef1afc88d116a9ba3e"><td class="memTemplParams" colspan="2"><a id="a7181cf34ea3348ef1afc88d116a9ba3e" name="a7181cf34ea3348ef1afc88d116a9ba3e"></a>
-template&lt;Phone... Ps&gt; </td></tr>
+template&lt;auto... Symbols&gt; </td></tr>
 <tr class="memitem:a7181cf34ea3348ef1afc88d116a9ba3e"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="structPhonemeWordSource.html">PhonemeWordSource</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><b>tts_compact_dict_detail::makeWord</b> (const char *word)</td></tr>
 <tr class="separator:a7181cf34ea3348ef1afc88d116a9ba3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a1d483cd2b928fb902e8ca328793b5ecc"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CompactPhonemeDictionaryBuilder_8h.html#a1d483cd2b928fb902e8ca328793b5ecc">tts_compact_dict_detail::kStressedVowelBaseIds</a> [15] = {2, 3, 4, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18}</td></tr>
-<tr class="separator:a1d483cd2b928fb902e8ca328793b5ecc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78f826029d80680e2b1fd27abd9c04eb"><td class="memItemLeft" align="right" valign="top">constexpr uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CompactPhonemeDictionaryBuilder_8h.html#a78f826029d80680e2b1fd27abd9c04eb">Seg</a> (<a class="el" href="Phonemes_8h.html#aeeab8f4174cf26a2e3436da4790f6063">Phone</a> base, <a class="el" href="PhonemeModifiers_8h.html#a78d62fbcc5c40658778fa21e258260db">PhonemeModifier</a> modifier=PhonemeModifier::MOD_NONE)</td></tr>
+<tr class="memdesc:a78f826029d80680e2b1fd27abd9c04eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pack one <a class="el" href="CompactPhonemeDictionaryBuilder_8h.html#a91c0742e6f4b25da7bf904fae7e5e3c5">PH_WORD()</a> segment: a <code>Phone</code> plus an optional modifier.  <br /></td></tr>
+<tr class="separator:a78f826029d80680e2b1fd27abd9c04eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Compile-time builder that packs a readable, enum-typed {"word", Phone::X, Phone::Y, ...} table into the flat arrays <a class="el" href="classCompactPhonemeDictionary.html" title="Binary-search word-&gt;phoneme dictionary backed by four flat, flash-resident arrays.">CompactPhonemeDictionary</a> reads. </p>
@@ -200,7 +213,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Builds one dictionary table row: <code>PH_WORD("able", Phone::EY, Phone::B, Phone::AH, Phone::L)</code>. Each argument after the word must be a <code>Phone</code> enum value (see <a class="el" href="Phonemes_8h.html" title="Phoneme information for TinyTTSTools.">Phonemes.h</a>) &ndash; an unrecognized ARPABET name is simply a compiler error (no name of that kind exists), so there's no separate "unknown token" check to run at dictionary-build time. </p>
+<p>Builds one dictionary table row. Each argument after the word is either a bare <code>Phone</code> (plain-list style, no stress/modifier &ndash; e.g. <code>PH_WORD ("able", Phone::EY, Phone::B, Phone::AH, Phone::L)</code>) or a <code>Seg(...)</code> call for a segment that needs stress and/or a modifier &ndash; the two styles freely mix in one call, e.g. <code>PH_WORD("stressed", Seg(Phone::AA,
+PhonemeModifier::MOD_STRESS_PRIMARY), Phone::T)</code>. An unrecognized phoneme name is simply a compiler error (no <code>Phone</code> enumerator of that kind exists), so there's no separate "unknown token" check to run at dictionary-build time. </p>
 
 </div>
 </div>
@@ -238,15 +252,15 @@ Variables</h2></td></tr>
 <div class="line">      name##Data.wordOffsets.data(), name##Data.wordsBlob.data(),                  \</div>
 <div class="line">      name##Data.phonemeOffsets.data(), name##Data.phonemeData.data(),             \</div>
 <div class="line">      <span class="keyword">sizeof</span>(table) / <span class="keyword">sizeof</span>((table)[0]))</div>
-<div class="ttc" id="aclassCompactPhonemeDictionary_html"><div class="ttname"><a href="classCompactPhonemeDictionary.html">CompactPhonemeDictionary</a></div><div class="ttdoc">Binary-search word-&gt;phoneme dictionary backed by four flat, flash-resident arrays.</div><div class="ttdef"><b>Definition:</b> CompactPhonemeDictionary.h:56</div></div>
-<div class="ttc" id="astructCompactPhonemeDictionaryData_html"><div class="ttname"><a href="structCompactPhonemeDictionaryData.html">CompactPhonemeDictionaryData</a></div><div class="ttdoc">Compile-time-computed compact dictionary data for a readable, PH_WORD()-built PhonemeWordSource table...</div><div class="ttdef"><b>Definition:</b> CompactPhonemeDictionaryBuilder.h:130</div></div>
+<div class="ttc" id="aclassCompactPhonemeDictionary_html"><div class="ttname"><a href="classCompactPhonemeDictionary.html">CompactPhonemeDictionary</a></div><div class="ttdoc">Binary-search word-&gt;phoneme dictionary backed by four flat, flash-resident arrays.</div><div class="ttdef"><b>Definition:</b> CompactPhonemeDictionary.h:63</div></div>
+<div class="ttc" id="astructCompactPhonemeDictionaryData_html"><div class="ttname"><a href="structCompactPhonemeDictionaryData.html">CompactPhonemeDictionaryData</a></div><div class="ttdoc">Compile-time-computed compact dictionary data for a readable, PH_WORD()-built PhonemeWordSource table...</div><div class="ttdef"><b>Definition:</b> CompactPhonemeDictionaryBuilder.h:166</div></div>
 </div><!-- fragment --><p>Declares <code>name##Data</code> (the compile-time-packed storage) and <code>name</code> (a ready-to-use <a class="el" href="classCompactPhonemeDictionary.html" title="Binary-search word-&gt;phoneme dictionary backed by four flat, flash-resident arrays.">CompactPhonemeDictionary</a> bound to it) from a <code>static constexpr <a class="el" href="structPhonemeWordSource.html" title="One human-readable dictionary source entry.">PhonemeWordSource</a> table[] = { <a class="el" href="CompactPhonemeDictionaryBuilder_8h.html#a91c0742e6f4b25da7bf904fae7e5e3c5">PH_WORD(...)</a>, ... };</code>. </p>
 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a7e98728dc9e71a8e0d8da7102d45d5fa" name="a7e98728dc9e71a8e0d8da7102d45d5fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e98728dc9e71a8e0d8da7102d45d5fa">&#9670;&#160;</a></span>cxPackPhone()</h2>
+<a id="a4c82a9576511759f5dcf4c5ad6e0dc2a" name="a4c82a9576511759f5dcf4c5ad6e0dc2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c82a9576511759f5dcf4c5ad6e0dc2a">&#9670;&#160;</a></span>cxNormalizeSymbol()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -255,7 +269,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr uint8_t tts_compact_dict_detail::cxPackPhone </td>
+          <td class="memname">constexpr uint16_t tts_compact_dict_detail::cxNormalizeSymbol </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="Phonemes_8h.html#aeeab8f4174cf26a2e3436da4790f6063">Phone</a>&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
@@ -268,7 +282,34 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Packs one <code>Phone</code> value into a single dictionary byte: (base_id &lt;&lt; 2) | stress. Plain <code>Phone</code> members (0-42) already are phoneme_map/ getPhonemeById() ids and always mean stress 0; the stressed-variant members (43+, e.g. Phone::AH1) decode via kStressedVowelBaseIds. </p>
+<p>Normalizes one <a class="el" href="CompactPhonemeDictionaryBuilder_8h.html#a91c0742e6f4b25da7bf904fae7e5e3c5">PH_WORD()</a> argument to a packed symbol: a bare <code>Phone</code> (e.g. <code>Phone::AA</code>, no stress/modifier &ndash; the plain-list authoring style) packs via cxPackPhone() directly; an already-packed <code>uint16_t</code> (a <a class="el" href="CompactPhonemeDictionaryBuilder_8h.html#a78f826029d80680e2b1fd27abd9c04eb" title="Pack one PH_WORD() segment: a Phone plus an optional modifier.">Seg()</a> result, carrying stress and/or a modifier) passes through unchanged. Overload resolution picks the right one per-argument, so a single <a class="el" href="CompactPhonemeDictionaryBuilder_8h.html#a91c0742e6f4b25da7bf904fae7e5e3c5">PH_WORD()</a> call can freely mix both styles (see <a class="el" href="CompactPhonemeDictionaryBuilder_8h.html#a78f826029d80680e2b1fd27abd9c04eb" title="Pack one PH_WORD() segment: a Phone plus an optional modifier.">Seg()</a>'s own doc). </p>
+
+</div>
+</div>
+<a id="a46a2d2e3becfbf7cfabb82f0e7f9e82d" name="a46a2d2e3becfbf7cfabb82f0e7f9e82d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46a2d2e3becfbf7cfabb82f0e7f9e82d">&#9670;&#160;</a></span>cxPackPhone()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint16_t tts_compact_dict_detail::cxPackPhone </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="Phonemes_8h.html#aeeab8f4174cf26a2e3436da4790f6063">Phone</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Packs one <code>Phone</code> value into the low bits of a dictionary symbol: <code>base_id &lt;&lt; 2</code>. <code>Phone</code> itself carries no stress information (see <a class="el" href="Phonemes_8h.html" title="Phoneme information for TinyTTSTools.">Phonemes.h</a>) &ndash; <a class="el" href="CompactPhonemeDictionaryBuilder_8h.html#a78f826029d80680e2b1fd27abd9c04eb" title="Pack one PH_WORD() segment: a Phone plus an optional modifier.">Seg()</a> below ORs the stress bits in separately. Every <code>Phone</code> id (0-120, ARPAbet and the international/IPA extension alike) is valid here: the packed symbol is a plain <code>uint16_t</code> with 7 bits of id, so nothing overflows the way the old 1-byte <code>(id &lt;&lt; 2) | stress</code> format would have past id 63. </p>
 
 </div>
 </div>
@@ -309,9 +350,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a1d483cd2b928fb902e8ca328793b5ecc" name="a1d483cd2b928fb902e8ca328793b5ecc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1d483cd2b928fb902e8ca328793b5ecc">&#9670;&#160;</a></span>kStressedVowelBaseIds</h2>
+<a id="a78f826029d80680e2b1fd27abd9c04eb" name="a78f826029d80680e2b1fd27abd9c04eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78f826029d80680e2b1fd27abd9c04eb">&#9670;&#160;</a></span>Seg()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -320,7 +360,21 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr uint8_t tts_compact_dict_detail::kStressedVowelBaseIds[15] = {2, 3, 4, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18}</td>
+          <td class="memname">constexpr uint16_t Seg </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="Phonemes_8h.html#aeeab8f4174cf26a2e3436da4790f6063">Phone</a>&#160;</td>
+          <td class="paramname"><em>base</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="PhonemeModifiers_8h.html#a78d62fbcc5c40658778fa21e258260db">PhonemeModifier</a>&#160;</td>
+          <td class="paramname"><em>modifier</em> = <code>PhonemeModifier::MOD_NONE</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -329,7 +383,10 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>phoneme_map/getPhonemeById() ids (see <a class="el" href="Phonemes_8h.html" title="Phoneme information for TinyTTSTools.">Phonemes.h</a>) for the 15 vowels that have <code>Phone::X1</code>/<code>Phone::X2</code> stressed-variant enum members, in the same order those variants are declared (Phone::AA1 first, Phone::UW2 last) &ndash; index i corresponds to enum values (43 + 2*i) and (43 + 2*i + 1). </p>
+
+<p>Pack one <a class="el" href="CompactPhonemeDictionaryBuilder_8h.html#a91c0742e6f4b25da7bf904fae7e5e3c5">PH_WORD()</a> segment: a <code>Phone</code> plus an optional modifier. </p>
+<p><code>Seg(Phone::AA)</code> (bare, no second argument) packs identically to the pre-Seg() <code>cxPackPhone(Phone::AA)</code>. <code>MOD_STRESS_PRIMARY</code>/ <code>MOD_STRESS_SECONDARY</code> (see <a class="el" href="PhonemeModifiers_8h.html" title="Draft diacritic/modifier layer for Phone segments.">PhonemeModifiers.h</a>) fold into the packed symbol's dedicated 2-bit stress field, exactly as before; every other modifier now has its own 5-bit field in the widened symbol (bits 9-13, above the 7-bit id field in bits 2-8), so e.g. <code>Seg(Phone::UF,
+PhonemeModifier::MOD_LONG)</code> (German long "über") or <code>Seg(Phone::T, PhonemeModifier::MOD_PALATALIZED)</code> are both fully captured &ndash; no modifier is silently dropped here anymore. <code>Phone::AA1</code>/<code>AA2</code>-style stress-variant enum members no longer exist; write <code>Seg(Phone::AA, PhonemeModifier::MOD_STRESS_PRIMARY)</code> where those used to be spelled <code>Phone::AA1</code>. </p>
 
 </div>
 </div>

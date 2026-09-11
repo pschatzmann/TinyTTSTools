@@ -1,0 +1,4 @@
+<map id="G2PNeuralModelSD&lt; Allocator &gt;" name="G2PNeuralModelSD&lt; Allocator &gt;">
+<area shape="rect" id="node1" title="Loads a G2PNeuralModel&#39;s weights from a single binary file (SD card, LittleFS, SPIFFS – anything the ..." alt="" coords="5,79,243,104"/>
+<area shape="rect" id="node2" href="$classG2PModelBase.html" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="64,5,184,31"/>
+</map>

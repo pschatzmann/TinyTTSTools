@@ -73,6 +73,7 @@ $(function() {
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classFormantVocoder-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">FormantVocoder Class Reference</div></div>
@@ -272,6 +273,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>applyStressEnergyBoos
 void&#160;</td><td class="memItemRight" valign="bottom"><b>preparePhonemeSynthesis</b> (const std::string &amp;phoneme, <a class="el" href="structFormantVocoder_1_1PhonemeSynthesisContext.html">PhonemeSynthesisContext</a> &amp;ctx, const <a class="el" href="structPhonemeSynthesisParams.html">PhonemeSynthesisParams</a> &amp;params)</td></tr>
 <tr class="memdesc:a7348a5e966e4f520612518448794c818"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populate synthesis context (rules lookup, envelopes, flags, targets) <br /></td></tr>
 <tr class="separator:a7348a5e966e4f520612518448794c818"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a941f680b308adae7ee41b2858d548ee4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFormantVocoder.html#a941f680b308adae7ee41b2858d548ee4">applyModifierFormantShift</a> (<a class="el" href="structFormantParams.html">FormantParams</a> &amp;p, <a class="el" href="PhonemeModifiers_8h.html#a78d62fbcc5c40658778fa21e258260db">PhonemeModifier</a> modifier)</td></tr>
+<tr class="memdesc:a941f680b308adae7ee41b2858d548ee4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shift a phoneme's formant targets for secondary-articulation modifiers, per the amounts documented on PhonemeModifierBits itself.  <br /></td></tr>
+<tr class="separator:a941f680b308adae7ee41b2858d548ee4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7494b9b0985263c42f5317d298e5d63"><td class="memItemLeft" align="right" valign="top"><a id="ab7494b9b0985263c42f5317d298e5d63" name="ab7494b9b0985263c42f5317d298e5d63"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>handleSilenceSetup</b> (<a class="el" href="structFormantVocoder_1_1PhonemeSynthesisContext.html">PhonemeSynthesisContext</a> &amp;ctx, <a class="el" href="classPrint.html">::Print</a> &amp;out)</td></tr>
 <tr class="memdesc:ab7494b9b0985263c42f5317d298e5d63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prepare silence buffer and write it out if context indicates silence. <br /></td></tr>
@@ -312,6 +316,16 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>getPhoneDuration</b>
 <tr class="memitem:ace8c5d0839d30b5e47cda8f18c82fdfe inherit pro_methods_classVocoderBase"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVocoderBase.html#ace8c5d0839d30b5e47cda8f18c82fdfe">getPhonemeWithStressDuration</a> (const std::string &amp;phoneme, int stress=0)</td></tr>
 <tr class="memdesc:ace8c5d0839d30b5e47cda8f18c82fdfe inherit pro_methods_classVocoderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get phoneme duration with optional stress adjustment.  <br /></td></tr>
 <tr class="separator:ace8c5d0839d30b5e47cda8f18c82fdfe inherit pro_methods_classVocoderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:ac99c6c15229c344e925a3339d1cd7cb8"><td class="memItemLeft" align="right" valign="top">static uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFormantVocoder.html#ac99c6c15229c344e925a3339d1cd7cb8">nextInstanceSeed</a> ()</td></tr>
+<tr class="memdesc:ac99c6c15229c344e925a3339d1cd7cb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deterministic, still-distinct-per-instance seed for noiseSeed_.  <br /></td></tr>
+<tr class="separator:ac99c6c15229c344e925a3339d1cd7cb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_static_methods_classVocoderBase"><td colspan="2" onclick="javascript:toggleInherit('pro_static_methods_classVocoderBase')"><img src="closed.png" alt="-"/>&#160;Static Protected Member Functions inherited from <a class="el" href="classVocoderBase.html">VocoderBase</a></td></tr>
+<tr class="memitem:adbe1ea23f5b4862ee7f94d75d5bd023a inherit pro_static_methods_classVocoderBase"><td class="memItemLeft" align="right" valign="top">static uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVocoderBase.html#adbe1ea23f5b4862ee7f94d75d5bd023a">resolveDuration</a> (uint16_t defaultDurationMs, const <a class="el" href="structPhonemeSynthesisParams.html">PhonemeSynthesisParams</a> &amp;params)</td></tr>
+<tr class="memdesc:adbe1ea23f5b4862ee7f94d75d5bd023a inherit pro_static_methods_classVocoderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolve an explicit duration override, falling back to a computed default.  <br /></td></tr>
+<tr class="separator:adbe1ea23f5b4862ee7f94d75d5bd023a inherit pro_static_methods_classVocoderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -426,13 +440,6 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>previousOverlap_</b
 <a class="el" href="classPhonemes.html">Phonemes</a>&#160;</td><td class="memItemRight" valign="bottom"><b>translator_</b></td></tr>
 <tr class="memdesc:a4935eea882eab989b99134fe8bc1ef70 inherit pro_attribs_classVocoderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Phoneme translator for converting between representation types. <br /></td></tr>
 <tr class="separator:a4935eea882eab989b99134fe8bc1ef70 inherit pro_attribs_classVocoderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pro_static_methods_classVocoderBase"><td colspan="2" onclick="javascript:toggleInherit('pro_static_methods_classVocoderBase')"><img src="closed.png" alt="-"/>&#160;Static Protected Member Functions inherited from <a class="el" href="classVocoderBase.html">VocoderBase</a></td></tr>
-<tr class="memitem:adbe1ea23f5b4862ee7f94d75d5bd023a inherit pro_static_methods_classVocoderBase"><td class="memItemLeft" align="right" valign="top">static uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVocoderBase.html#adbe1ea23f5b4862ee7f94d75d5bd023a">resolveDuration</a> (uint16_t defaultDurationMs, const <a class="el" href="structPhonemeSynthesisParams.html">PhonemeSynthesisParams</a> &amp;params)</td></tr>
-<tr class="memdesc:adbe1ea23f5b4862ee7f94d75d5bd023a inherit pro_static_methods_classVocoderBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolve an explicit duration override, falling back to a computed default.  <br /></td></tr>
-<tr class="separator:adbe1ea23f5b4862ee7f94d75d5bd023a inherit pro_static_methods_classVocoderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Compact real-time formant (parallel resonator) speech synthesizer. </p>
@@ -484,11 +491,51 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Construct vocoder with sampleRate (Hz), optional volumeFactor and optional injected rule table</p>
-<p>Default volumeFactor is 1.7, not 1.0: measured output after RMS normalization alone peaks at only ~44% of full scale (~14500 of 32767) for typical speech, so there's ample headroom. 1.7 was chosen empirically as the highest factor that produced zero clipped samples across a long, varied test phrase (stressed vowels, sibilants) &ndash; 2.0 measured occasional clipping on peaks. </p>
+<p>Default volumeFactor is 1.7, not 1.0: measured output after RMS normalization alone peaks at only ~44% of full scale (~14500 of 32767) for typical speech, so there's ample headroom. 1.7 was chosen empirically as the highest factor that produced zero clipped samples across a long, varied test phrase (stressed vowels, sibilants) &ndash; 2.0 measured occasional clipping on peaks. That "zero clipped
+samples" margin is thin enough that noiseSeed_ (below) needs to be reproducible run-to-run for the margin to mean anything &ndash; see its own doc for why it isn't derived from <code>this</code> anymore. </p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a941f680b308adae7ee41b2858d548ee4" name="a941f680b308adae7ee41b2858d548ee4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a941f680b308adae7ee41b2858d548ee4">&#9670;&#160;</a></span>applyModifierFormantShift()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FormantVocoder::applyModifierFormantShift </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structFormantParams.html">FormantParams</a> &amp;&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="PhonemeModifiers_8h.html#a78d62fbcc5c40658778fa21e258260db">PhonemeModifier</a>&#160;</td>
+          <td class="paramname"><em>modifier</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Shift a phoneme's formant targets for secondary-articulation modifiers, per the amounts documented on PhonemeModifierBits itself. </p>
+<p>Place-of-articulation shifts (F2) plus pharyngealization's "darkening" (F1 up, F2 down) and rhotacization's F3 blend toward ER's own F3 (~1650 Hz). MOD_UNRELEASED softens the burst instead of shifting formants &ndash; a stop with no audible release is quieter, not differently pitched. </p>
+
+</div>
+</div>
 <a id="a3c9e02c3bd8bedbaf892d2bbde2c3382" name="a3c9e02c3bd8bedbaf892d2bbde2c3382"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3c9e02c3bd8bedbaf892d2bbde2c3382">&#9670;&#160;</a></span>applyVolumeFactor()</h2>
 
@@ -589,6 +636,35 @@ Additional Inherited Members</h2></td></tr>
 <p>Return vocoder type string ("FormantVocoder") </p>
 
 <p>Implements <a class="el" href="classVocoderBase.html#a3851d4eb6c02d2cad7193bf0db7710e1">VocoderBase</a>.</p>
+
+</div>
+</div>
+<a id="ac99c6c15229c344e925a3339d1cd7cb8" name="ac99c6c15229c344e925a3339d1cd7cb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac99c6c15229c344e925a3339d1cd7cb8">&#9670;&#160;</a></span>nextInstanceSeed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static uint32_t FormantVocoder::nextInstanceSeed </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Deterministic, still-distinct-per-instance seed for noiseSeed_. </p>
+<p>Used to be <code>1u + (reinterpret_cast&lt;uintptr_t&gt;(this) &amp; 0xffffu)</code> &ndash; distinct per instance, but tied to the object's actual memory address, which ASLR (and, more subtly, any unrelated change to struct sizes elsewhere in the binary that shifts stack/heap layout) makes non-reproducible run to run. That's fine for normal use, but it quietly broke <code>testDefaultVolumeLouderButNotClipping()</code>'s "zero
+clipped samples" regression check: a build with a "bad" seed can fail a check that a build with a "good" seed passes, for no change in synthesis logic at all &ndash; confirmed by feeding the <em>original</em> pre-modifier <a class="el" href="FormantVocoder_8h.html" title="Formant-based speech synthesizer for TinyTTSTools.">FormantVocoder.h</a> this exact same bad seed value and seeing it fail identically. A plain incrementing counter would make consecutive instances' early noise samples nearly identical (still technically "different" but not usefully so, since testInstancesAreIndependent() checks exactly that) &ndash; multiplying by a fixed odd constant (Knuth's multiplicative hash) spreads consecutive instances' low bits apart instead. </p>
 
 </div>
 </div>

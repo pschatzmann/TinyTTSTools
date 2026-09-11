@@ -103,11 +103,11 @@ Collaboration diagram for CompactPhonemeDictionary:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6b02d56511e0a708fef16cc1f6536613"><td class="memItemLeft" align="right" valign="top"><a id="a6b02d56511e0a708fef16cc1f6536613" name="a6b02d56511e0a708fef16cc1f6536613"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>CompactPhonemeDictionary</b> (const uint32_t *wordOffsets, const char *wordsBlob, const uint32_t *phonemeOffsets, const uint8_t *phonemeData, size_t count)</td></tr>
-<tr class="separator:a6b02d56511e0a708fef16cc1f6536613"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18ed2aeb0e0f3ef6a6e87172b376752d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCompactPhonemeDictionary.html#a18ed2aeb0e0f3ef6a6e87172b376752d">begin</a> (const uint32_t *wordOffsets, const char *wordsBlob, const uint32_t *phonemeOffsets, const uint8_t *phonemeData, size_t count)</td></tr>
-<tr class="separator:a18ed2aeb0e0f3ef6a6e87172b376752d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23ce04c0611c4bc95c56d4a03954a9a5"><td class="memItemLeft" align="right" valign="top"><a id="a23ce04c0611c4bc95c56d4a03954a9a5" name="a23ce04c0611c4bc95c56d4a03954a9a5"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CompactPhonemeDictionary</b> (const uint32_t *wordOffsets, const char *wordsBlob, const uint32_t *phonemeOffsets, const uint16_t *phonemeData, size_t count)</td></tr>
+<tr class="separator:a23ce04c0611c4bc95c56d4a03954a9a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aded23aa77fcf1ce0bd8f3949d72badb0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCompactPhonemeDictionary.html#aded23aa77fcf1ce0bd8f3949d72badb0">begin</a> (const uint32_t *wordOffsets, const char *wordsBlob, const uint32_t *phonemeOffsets, const uint16_t *phonemeData, size_t count)</td></tr>
+<tr class="separator:aded23aa77fcf1ce0bd8f3949d72badb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec1d4433cd3aba9b5ac870287cdc26b5"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCompactPhonemeDictionary.html#aec1d4433cd3aba9b5ac870287cdc26b5">size</a> () const override</td></tr>
 <tr class="memdesc:aec1d4433cd3aba9b5ac870287cdc26b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of words in the dictionary.  <br /></td></tr>
 <tr class="separator:aec1d4433cd3aba9b5ac870287cdc26b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -153,9 +153,9 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>wordsBlob_</b
 <tr class="memitem:a12423f2472710b1ae5407bedf6fc3274"><td class="memItemLeft" align="right" valign="top"><a id="a12423f2472710b1ae5407bedf6fc3274" name="a12423f2472710b1ae5407bedf6fc3274"></a>
 const uint32_t *&#160;</td><td class="memItemRight" valign="bottom"><b>phonemeOffsets_</b> = nullptr</td></tr>
 <tr class="separator:a12423f2472710b1ae5407bedf6fc3274"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2721255ced17eac358f1d5c71cd6809d"><td class="memItemLeft" align="right" valign="top"><a id="a2721255ced17eac358f1d5c71cd6809d" name="a2721255ced17eac358f1d5c71cd6809d"></a>
-const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>phonemeData_</b> = nullptr</td></tr>
-<tr class="separator:a2721255ced17eac358f1d5c71cd6809d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42dac0987b546fc9d69e3fba61b19380"><td class="memItemLeft" align="right" valign="top"><a id="a42dac0987b546fc9d69e3fba61b19380" name="a42dac0987b546fc9d69e3fba61b19380"></a>
+const uint16_t *&#160;</td><td class="memItemRight" valign="bottom"><b>phonemeData_</b> = nullptr</td></tr>
+<tr class="separator:a42dac0987b546fc9d69e3fba61b19380"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a978267a9ff3ab4514018ea121de12508"><td class="memItemLeft" align="right" valign="top"><a id="a978267a9ff3ab4514018ea121de12508" name="a978267a9ff3ab4514018ea121de12508"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>count_</b> = 0</td></tr>
 <tr class="separator:a978267a9ff3ab4514018ea121de12508"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -166,13 +166,13 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>count_</b> = 0</td>
 <li><code>wordOffsets[count+1]</code>: cumulative offsets into <code>wordsBlob</code></li>
 <li><code>wordsBlob</code>: every word's bytes concatenated, no separators/terminators (word i's length is <code>wordOffsets[i+1]-wordOffsets[i]</code>)</li>
 <li><code>phonemeOffsets[count+1]</code>: cumulative offsets into <code>phonemeData</code></li>
-<li><code>phonemeData</code>: one byte per phoneme, packed as <code>(phoneme_id &lt;&lt; 2) | stress</code>, where phoneme_id indexes Phonemes::getPhonemeById() (see the <code>Phone</code> enum in <a class="el" href="Phonemes_8h.html" title="Phoneme information for TinyTTSTools.">Phonemes.h</a>) and stress is 0 (none), 1 (primary) or 2 (secondary) &ndash; decoded back into a space-separated ARPABET string, e.g. "HH AH0 L OW1".</li>
+<li><code>phonemeData</code>: one <code>uint16_t</code> per phoneme, packed as <code>(phoneme_id &lt;&lt; 2) | stress</code>, with a modifier (see <a class="el" href="PhonemeModifiers_8h.html" title="Draft diacritic/modifier layer for Phone segments.">PhonemeModifiers.h</a>) OR'd in at bit 9 when stress is 0 &ndash; see <a class="el" href="CompactPhonemeDictionaryBuilder_8h.html#a78f826029d80680e2b1fd27abd9c04eb" title="Pack one PH_WORD() segment: a Phone plus an optional modifier.">Seg()</a> in <a class="el" href="CompactPhonemeDictionaryBuilder_8h.html" title="Compile-time builder that packs a readable, enum-typed {&quot;word&quot;, Phone::X, Phone::Y,...">CompactPhonemeDictionaryBuilder.h</a> for exactly how a segment packs. phoneme_id indexes Phonemes::getPhonemeById() (see the <code>Phone</code> enum in <a class="el" href="Phonemes_8h.html" title="Phoneme information for TinyTTSTools.">Phonemes.h</a>, covering both ARPAbet ids 0-42 and the international/IPA extension 43-120) and stress is 0 (none), 1 (primary) or 2 (secondary) &ndash; decoded back into a space-separated string, e.g. "HH AH0 L OW1" or, with a modifier present, "T_j EN" (palatalized T, French nasal EN).</li>
 </ul>
-<p>This drops both the two-pointers-per-entry overhead and the ASCII-text cost of storing phonemes as multi-character tokens with spaces and a null terminator (1 byte per phoneme here vs. 3-4+ ASCII bytes). All four arrays are position-independent (offsets only, never pointers into each other), so they can be built by hand, generated by a script (see setup/dictionary for the full CMU-dictionary port), or &ndash; for hand-maintained tables &ndash; produced at COMPILE TIME from a readable <code>{"word", "PHONEMES"}</code> source table via <a class="el" href="CompactPhonemeDictionaryBuilder_8h.html" title="Compile-time builder that packs a readable, enum-typed {&quot;word&quot;, Phone::X, Phone::Y,...">CompactPhonemeDictionaryBuilder.h</a>, so no separate build step is needed to keep them in sync.</p>
-<p>Entries must be sorted by word (binary search), exactly like the old <a class="el" href="structPhonemeEntry.html" title="Phoneme Dictionary Entry (stored in PROGMEM)">PhonemeEntry</a> tables. </p><dl class="section note"><dt>Note</dt><dd>Memory footprint: ~8 bytes/word of pure index overhead (two 4-byte cumulative offsets), plus 1 byte/phoneme and the raw word text &ndash; e.g. the built-in 535-word default dictionary measures ~10KB total. For larger (&gt;10k word) dictionaries, prefer <a class="el" href="classCompressedPhonemeDictionary.html" title="Same word-&gt;phoneme lookup as CompactPhonemeDictionary, but smaller on flash for large (&gt;10k word) dat...">CompressedPhonemeDictionary</a>, which trades some CPU per lookup for a smaller flash footprint. See <a href="https://github.com/pschatzmann/TinyTTSTools/blob/main/docs/MEMORY.md">https://github.com/pschatzmann/TinyTTSTools/blob/main/docs/MEMORY.md</a> for a comparison table across all vocoders and G2P models. </dd></dl>
+<p>This drops both the two-pointers-per-entry overhead and the ASCII-text cost of storing phonemes as multi-character tokens with spaces and a null terminator (2 bytes per phoneme here vs. 3-4+ ASCII bytes). All four arrays are position-independent (offsets only, never pointers into each other), so they can be built by hand, generated by a script (see setup/dictionary for the full CMU-dictionary port), or &ndash; for hand-maintained tables &ndash; produced at COMPILE TIME from a readable <code>{"word", "PHONEMES"}</code> source table via <a class="el" href="CompactPhonemeDictionaryBuilder_8h.html" title="Compile-time builder that packs a readable, enum-typed {&quot;word&quot;, Phone::X, Phone::Y,...">CompactPhonemeDictionaryBuilder.h</a>, so no separate build step is needed to keep them in sync.</p>
+<p>Entries must be sorted by word (binary search), exactly like the old <a class="el" href="structPhonemeEntry.html" title="Phoneme Dictionary Entry (stored in PROGMEM)">PhonemeEntry</a> tables. </p><dl class="section note"><dt>Note</dt><dd>Memory footprint: ~8 bytes/word of pure index overhead (two 4-byte cumulative offsets), plus 2 bytes/phoneme (widened from 1 byte to fit a modifier tag &ndash; see <a class="el" href="PhonemeModifiers_8h.html" title="Draft diacritic/modifier layer for Phone segments.">PhonemeModifiers.h</a> &ndash; alongside the international/IPA phoneme id range) and the raw word text &ndash; e.g. the built-in 535-word default dictionary measures ~11KB total. For larger (&gt;10k word) dictionaries, prefer <a class="el" href="classCompressedPhonemeDictionary.html" title="Same word-&gt;phoneme lookup as CompactPhonemeDictionary, but smaller on flash for large (&gt;10k word) dat...">CompressedPhonemeDictionary</a>, which trades some CPU per lookup for a smaller flash footprint. See <a href="https://github.com/pschatzmann/TinyTTSTools/blob/main/docs/MEMORY.md">https://github.com/pschatzmann/TinyTTSTools/blob/main/docs/MEMORY.md</a> for a comparison table across all vocoders and G2P models. </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a18ed2aeb0e0f3ef6a6e87172b376752d" name="a18ed2aeb0e0f3ef6a6e87172b376752d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a18ed2aeb0e0f3ef6a6e87172b376752d">&#9670;&#160;</a></span>begin()</h2>
+<a id="aded23aa77fcf1ce0bd8f3949d72badb0" name="aded23aa77fcf1ce0bd8f3949d72badb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aded23aa77fcf1ce0bd8f3949d72badb0">&#9670;&#160;</a></span>begin()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -201,7 +201,7 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>count_</b> = 0</td>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramtype">const uint16_t *&#160;</td>
           <td class="paramname"><em>phonemeData</em>, </td>
         </tr>
         <tr>

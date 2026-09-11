@@ -96,15 +96,16 @@ Collaboration diagram for G2PDictionaryNeuralAndRulesModel:</div>
 <div class="dyncontent">
 <div class="center"><img src="classG2PDictionaryNeuralAndRulesModel__coll__graph.png" border="0" usemap="#aG2PDictionaryNeuralAndRulesModel_coll__map" alt="Collaboration graph"/></div>
 <map name="aG2PDictionaryNeuralAndRulesModel_coll__map" id="aG2PDictionaryNeuralAndRulesModel_coll__map">
-<area shape="rect" title="G2P model chaining dictionary lookup, a neural fallback and rules." alt="" coords="215,240,433,280"/>
-<area shape="rect" href="classG2PHybridModel.html" title="Hybrid G2P model combining multiple approaches." alt="" coords="5,152,136,177"/>
-<area shape="rect" href="classG2PModelBase.html" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="164,13,284,38"/>
-<area shape="rect" href="classG2PDictionaryModel.html" title="Dictionary&#45;based G2P model (fastest, smallest memory)" alt="" coords="535,152,689,177"/>
-<area shape="rect" href="classG2PNeuralModel.html" title="Neural grapheme&#45;to&#45;phoneme fallback for out&#45;of&#45;dictionary words." alt="" coords="345,152,476,177"/>
-<area shape="rect" href="classG2PRuleBasedModel.html" title="Rule&#45;based G2P model with enhanced linguistic rules." alt="" coords="160,152,317,177"/>
-<area shape="rect" href="classPhonemeDictionaryBase.html" title="Common interface implemented by CompactPhonemeDictionary and CompressedPhonemeDictionary,..." alt="" coords="538,13,721,38"/>
-<area shape="rect" href="structPhonemeEntry.html" title="Phoneme Dictionary Entry (stored in PROGMEM)" alt="" coords="745,13,863,38"/>
-<area shape="rect" href="structG2PNeuralModel_1_1QuantizedWeight.html" title="One [rows, hidden_dim_] weight matrix, symmetric per&#45;row INT8." alt="" coords="308,5,513,45"/>
+<area shape="rect" title="G2P model chaining dictionary lookup, a neural fallback and rules." alt="" coords="1127,131,1345,171"/>
+<area shape="rect" href="classG2PHybridModel.html" title="Hybrid G2P model combining multiple approaches." alt="" coords="604,162,735,187"/>
+<area shape="rect" href="classG2PModelBase.html" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="48,146,168,171"/>
+<area shape="rect" href="classG2PDictionaryModel.html" title="Dictionary&#45;based G2P model (fastest, smallest memory)" alt="" coords="408,223,563,249"/>
+<area shape="rect" href="classG2PNeuralModel.html" title="Neural grapheme&#45;to&#45;phoneme fallback for out&#45;of&#45;dictionary words." alt="" coords="420,51,551,77"/>
+<area shape="rect" href="classG2PRuleBasedModelBase.html" title="Abstract base for G2PRuleBasedModelEN/DE/FR/ES – the longest&#45; match rule&#45;engine scaffolding every one..." alt="" coords="391,111,580,137"/>
+<area shape="rect" href="classPhonemeDictionaryBase.html" title="Common interface implemented by CompactPhonemeDictionary and CompressedPhonemeDictionary,..." alt="" coords="17,230,199,255"/>
+<area shape="rect" href="structPhonemeEntry.html" title="Phoneme Dictionary Entry (stored in PROGMEM)" alt="" coords="49,279,167,305"/>
+<area shape="rect" href="structG2PNeuralModel_1_1QuantizedWeight.html" title="One [rows, hidden_dim_] weight matrix, symmetric per&#45;row INT8." alt="" coords="5,44,211,84"/>
+<area shape="rect" href="classG2PRuleBasedModelEN.html" title="Rule&#45;based G2P model with enhanced linguistic rules." alt="" coords="759,113,933,138"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -116,9 +117,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a994c83b5a016c25645fe4b2daf0ce52f"><td class="memItemLeft" align="right" valign="top"><a id="a994c83b5a016c25645fe4b2daf0ce52f" name="a994c83b5a016c25645fe4b2daf0ce52f"></a>
 <a class="el" href="classG2PNeuralModel.html">G2PNeuralModel</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getNeuralModel</b> ()</td></tr>
 <tr class="separator:a994c83b5a016c25645fe4b2daf0ce52f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4095c507081c8e0e5f8676625f05c6d"><td class="memItemLeft" align="right" valign="top"><a id="ad4095c507081c8e0e5f8676625f05c6d" name="ad4095c507081c8e0e5f8676625f05c6d"></a>
-<a class="el" href="classG2PRuleBasedModel.html">G2PRuleBasedModel</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getRuleBasedModel</b> ()</td></tr>
-<tr class="separator:ad4095c507081c8e0e5f8676625f05c6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0796962bb230f2c6184822c964c00669"><td class="memItemLeft" align="right" valign="top"><a id="a0796962bb230f2c6184822c964c00669" name="a0796962bb230f2c6184822c964c00669"></a>
+<a class="el" href="classG2PRuleBasedModelEN.html">G2PRuleBasedModelEN</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getRuleBasedModel</b> ()</td></tr>
+<tr class="separator:a0796962bb230f2c6184822c964c00669"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88d368253f6bb5ac27a62b06655ebf01"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classG2PDictionaryNeuralAndRulesModel.html#a88d368253f6bb5ac27a62b06655ebf01">wordToPhonemes</a> (const std::string &amp;word) override</td></tr>
 <tr class="memdesc:a88d368253f6bb5ac27a62b06655ebf01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert word to phonemes using dictionary, neural model and rules.  <br /></td></tr>
 <tr class="separator:a88d368253f6bb5ac27a62b06655ebf01"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -169,10 +170,10 @@ Protected Attributes</h2></td></tr>
 <a class="el" href="classG2PNeuralModel.html">G2PNeuralModel</a>&#160;</td><td class="memItemRight" valign="bottom"><b>g2pNeuralModel_</b></td></tr>
 <tr class="memdesc:a4660a01bb46c80ec1b5ead6a8465ca39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Neural GRU fallback (weights opt-in via begin()) <br /></td></tr>
 <tr class="separator:a4660a01bb46c80ec1b5ead6a8465ca39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4c468aecbe0481fa25439d12941a4bd"><td class="memItemLeft" align="right" valign="top"><a id="af4c468aecbe0481fa25439d12941a4bd" name="af4c468aecbe0481fa25439d12941a4bd"></a>
-<a class="el" href="classG2PRuleBasedModel.html">G2PRuleBasedModel</a>&#160;</td><td class="memItemRight" valign="bottom"><b>g2pRuleBasedModel_</b></td></tr>
-<tr class="memdesc:af4c468aecbe0481fa25439d12941a4bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rule-based model. <br /></td></tr>
-<tr class="separator:af4c468aecbe0481fa25439d12941a4bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ecb5ed8247bbc2ca5bc63a97b986e75"><td class="memItemLeft" align="right" valign="top"><a id="a6ecb5ed8247bbc2ca5bc63a97b986e75" name="a6ecb5ed8247bbc2ca5bc63a97b986e75"></a>
+<a class="el" href="classG2PRuleBasedModelEN.html">G2PRuleBasedModelEN</a>&#160;</td><td class="memItemRight" valign="bottom"><b>g2pRuleBasedModel_</b></td></tr>
+<tr class="memdesc:a6ecb5ed8247bbc2ca5bc63a97b986e75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rule-based model. <br /></td></tr>
+<tr class="separator:a6ecb5ed8247bbc2ca5bc63a97b986e75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classG2PHybridModel"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classG2PHybridModel')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classG2PHybridModel.html">G2PHybridModel</a></td></tr>
 <tr class="memitem:a23476bd6a19ee7674253c27ee9b8b9f0 inherit pro_attribs_classG2PHybridModel"><td class="memItemLeft" align="right" valign="top"><a id="a23476bd6a19ee7674253c27ee9b8b9f0" name="a23476bd6a19ee7674253c27ee9b8b9f0"></a>
 std::vector&lt; <a class="el" href="classG2PModelBase.html">G2PModelBase</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>models_</b></td></tr>
@@ -206,10 +207,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>initialized_</b> = fa
 <li>Letter-to-sound rules (final safety net; also what's used if the neural model's weights were never loaded, since begin() must be called explicitly &ndash; see below)</li>
 </ol>
 <p>The neural model's weights (~970KB) are NOT loaded automatically &ndash; this class works correctly (falling straight through to rules) even if you never call begin() on it, so the cost is opt-in: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="G2PDictionaryNeuralAndRulesModel_8h.html">TinyTTSTools/G2P/G2PDictionaryNeuralAndRulesModel.h</a>&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;TinyTTSTools/Data/neural/G2PNeuralWeights_data.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;TinyTTSTools/Data/neural/G2PNeuralWeightsEN_data.h&quot;</span></div>
 <div class="line"> </div>
 <div class="line"><a class="code hl_class" href="classG2PDictionaryNeuralAndRulesModel.html">G2PDictionaryNeuralAndRulesModel</a> g2p;</div>
-<div class="line">g2p.getNeuralModel().<a class="code hl_function" href="classG2PNeuralModel.html#acfaa1915630da71b463f6796e2d37127">begin</a>(G2P_NEURAL_MODEL_WEIGHTS, G2P_NEURAL_MODEL_WEIGHTS_LEN);</div>
+<div class="line">g2p.getNeuralModel().<a class="code hl_function" href="classG2PNeuralModel.html#acfaa1915630da71b463f6796e2d37127">begin</a>(G2P_NEURAL_MODEL_WEIGHTS_EN, G2P_NEURAL_MODEL_WEIGHTS_EN_LEN);</div>
 <div class="ttc" id="aG2PDictionaryNeuralAndRulesModel_8h_html"><div class="ttname"><a href="G2PDictionaryNeuralAndRulesModel_8h.html">G2PDictionaryNeuralAndRulesModel.h</a></div><div class="ttdoc">Combined dictionary, neural and rules-based G2P model for TinyTTSTools.</div></div>
 <div class="ttc" id="aclassG2PDictionaryNeuralAndRulesModel_html"><div class="ttname"><a href="classG2PDictionaryNeuralAndRulesModel.html">G2PDictionaryNeuralAndRulesModel</a></div><div class="ttdoc">G2P model chaining dictionary lookup, a neural fallback and rules.</div><div class="ttdef"><b>Definition:</b> G2PDictionaryNeuralAndRulesModel.h:49</div></div>
 <div class="ttc" id="aclassG2PNeuralModel_html_acfaa1915630da71b463f6796e2d37127"><div class="ttname"><a href="classG2PNeuralModel.html#acfaa1915630da71b463f6796e2d37127">G2PNeuralModel::begin</a></div><div class="ttdeci">bool begin(const uint8_t *buf, size_t len)</div><div class="ttdef"><b>Definition:</b> G2PNeuralModel.h:70</div></div>

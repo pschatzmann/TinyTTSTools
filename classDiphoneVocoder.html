@@ -352,7 +352,7 @@ Additional Inherited Members</h2></td></tr>
 Diphone Processing</h2>
 <p>A whole-utterance sequence normally contains silence-class tokens (SIL/ SP) between words &ndash; <a class="el" href="classTinyTTSTools.html#a16adc035ed32e7410b5eba7e57c01009" title="Convert text to phoneme sequence.">TinyTTSTools::toPhonemes()</a> inserts "SP" after every word. <a class="el" href="classDiphoneVocoder.html" title="Diphone-based speech synthesizer with advanced concatenation.">DiphoneVocoder</a> first splits the sequence into silence-free segments at those tokens (typically one word each), renders each silence token as real silence of its own duration, and processes each segment by sliding over every adjacent pair of phonemes within it (not disjoint pairs &ndash; N phonemes need N-1 diphones to capture every real transition between them):</p><ul>
 <li>Brackets the segment with SIL on both ends (unless already present) so the first phoneme's own onset and the last phoneme's own release get their own diphones &ndash; a diphone only ever supplies a phoneme's second half when it's the first half of the pair, and its first half when it's the second half of the pair, so without this the segment's very first and very last phonemes would never be heard in full</li>
-<li>Converts each adjacent phoneme pair to a diphone identifier (e.g., "AA_EH")</li>
+<li>Converts each adjacent phoneme pair to a diphone identifier (e.g., "AA EH")</li>
 <li>Applies advanced concatenation between adjacent diphones</li>
 <li>Uses roughly half of each constituent phoneme's natural duration, matching how the diphone audio itself is generated (half-of-phone1 + half-of-phone2, so consecutive diphones reconstruct each shared phoneme's duration once when played back-to-back)</li>
 </ul>
@@ -470,7 +470,7 @@ Memory footprint: ~893KB flash for the default <code>DiphoneWAVDictionary</code>
 <p>Get audio entry by diphone identifier (implements <a class="el" href="classConcatenatedAudioVocoder.html" title="Abstract base class for audio concatenation with click-free transitions.">ConcatenatedAudioVocoder</a> interface) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">identifier</td><td>Diphone identifier (e.g., "AA_EH") </td></tr>
+    <tr><td class="paramname">identifier</td><td>Diphone identifier (e.g., "AA EH") </td></tr>
   </table>
   </dd>
 </dl>
@@ -777,7 +777,7 @@ Memory footprint: ~893KB flash for the default <code>DiphoneWAVDictionary</code>
 <p>Synthesize one silence-free phoneme segment (typically one word) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">phonemes</td><td>Segment's phonemes, already stress-stripped, no silence tokens </td></tr>
+    <tr><td class="paramname">phonemes</td><td><a class="el" href="structSegment.html" title="A single synthesizable segment: a base Phone id (0-42 ARPAbet or 43-120 international/IPA extension –...">Segment</a>'s phonemes, already stress-stripped, no silence tokens </td></tr>
     <tr><td class="paramname">out</td><td>Output stream for audio data </td></tr>
     <tr><td class="paramname">params</td><td>Optional volume/duration/pitch overrides </td></tr>
     <tr><td class="paramname">phonemeType</td><td>The dictionary's phoneme type </td></tr>

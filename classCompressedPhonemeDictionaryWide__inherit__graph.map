@@ -1,0 +1,4 @@
+<map id="CompressedPhonemeDictionaryWide" name="CompressedPhonemeDictionaryWide">
+<area shape="rect" id="node1" title="Same blocked&#45;offset&#45;index + Huffman&#45;coded&#45;phonemes design as CompressedPhonemeDictionary (see that fi..." alt="" coords="5,79,269,104"/>
+<area shape="rect" id="node2" href="$classPhonemeDictionaryBase.html" title="Common interface implemented by CompactPhonemeDictionary and CompressedPhonemeDictionary,..." alt="" coords="46,5,229,31"/>
+</map>

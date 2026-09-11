@@ -1,0 +1,13 @@
+<map id="src/TinyTTSTools/Basic/PhonemeModifiers.h" name="src/TinyTTSTools/Basic/PhonemeModifiers.h">
+<area shape="rect" id="node1" title="Draft diacritic/modifier layer for Phone segments." alt="" coords="55,5,224,45"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,93,76,119"/>
+<area shape="rect" id="node3" title=" " alt="" coords="106,313,173,339"/>
+<area shape="rect" id="node4" title=" " alt="" coords="221,313,279,339"/>
+<area shape="rect" id="node5" href="$TTSLogger_8h.html" title="Unified logging class for TinyTTSTools library." alt="" coords="410,93,511,119"/>
+<area shape="rect" id="node6" title=" " alt="" coords="567,167,637,192"/>
+<area shape="rect" id="node7" title=" " alt="" coords="430,167,491,192"/>
+<area shape="rect" id="node8" href="$TTSAudioOutput_8h_source.html" title=" " alt="" coords="265,167,405,192"/>
+<area shape="rect" id="node9" title=" " alt="" coords="417,240,491,265"/>
+<area shape="rect" id="node10" title=" " alt="" coords="321,240,392,265"/>
+<area shape="rect" id="node11" href="$TTSTypes_8h.html" title="Core types and structures for TinyTTSTools." alt="" coords="203,240,297,265"/>
+</map>

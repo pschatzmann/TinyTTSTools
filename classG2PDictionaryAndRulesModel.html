@@ -96,13 +96,14 @@ Collaboration diagram for G2PDictionaryAndRulesModel:</div>
 <div class="dyncontent">
 <div class="center"><img src="classG2PDictionaryAndRulesModel__coll__graph.png" border="0" usemap="#aG2PDictionaryAndRulesModel_coll__map" alt="Collaboration graph"/></div>
 <map name="aG2PDictionaryAndRulesModel_coll__map" id="aG2PDictionaryAndRulesModel_coll__map">
-<area shape="rect" title="Default G2P model using basic lookup and rule&#45;based methods." alt="" coords="144,181,360,207"/>
-<area shape="rect" href="classG2PHybridModel.html" title="Hybrid G2P model combining multiple approaches." alt="" coords="187,93,317,119"/>
-<area shape="rect" href="classG2PModelBase.html" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="183,5,303,31"/>
-<area shape="rect" href="classG2PDictionaryModel.html" title="Dictionary&#45;based G2P model (fastest, smallest memory)" alt="" coords="341,93,496,119"/>
-<area shape="rect" href="classG2PRuleBasedModel.html" title="Rule&#45;based G2P model with enhanced linguistic rules." alt="" coords="5,93,163,119"/>
-<area shape="rect" href="classPhonemeDictionaryBase.html" title="Common interface implemented by CompactPhonemeDictionary and CompressedPhonemeDictionary,..." alt="" coords="327,5,510,31"/>
-<area shape="rect" href="structPhonemeEntry.html" title="Phoneme Dictionary Entry (stored in PROGMEM)" alt="" coords="535,5,652,31"/>
+<area shape="rect" title="Default G2P model using basic lookup and rule&#45;based methods." alt="" coords="157,280,373,305"/>
+<area shape="rect" href="classG2PHybridModel.html" title="Hybrid G2P model combining multiple approaches." alt="" coords="176,143,307,168"/>
+<area shape="rect" href="classG2PModelBase.html" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="111,5,231,31"/>
+<area shape="rect" href="classG2PDictionaryModel.html" title="Dictionary&#45;based G2P model (fastest, smallest memory)" alt="" coords="269,93,424,119"/>
+<area shape="rect" href="classG2PRuleBasedModelBase.html" title="Abstract base for G2PRuleBasedModelEN/DE/FR/ES – the longest&#45; match rule&#45;engine scaffolding every one..." alt="" coords="5,93,195,119"/>
+<area shape="rect" href="classPhonemeDictionaryBase.html" title="Common interface implemented by CompactPhonemeDictionary and CompressedPhonemeDictionary,..." alt="" coords="255,5,438,31"/>
+<area shape="rect" href="structPhonemeEntry.html" title="Phoneme Dictionary Entry (stored in PROGMEM)" alt="" coords="463,5,580,31"/>
+<area shape="rect" href="classG2PRuleBasedModelEN.html" title="Rule&#45;based G2P model with enhanced linguistic rules." alt="" coords="13,192,187,217"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -114,9 +115,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab6f414c579c7cc12ae6076b15a733842"><td class="memItemLeft" align="right" valign="top"><a id="ab6f414c579c7cc12ae6076b15a733842" name="ab6f414c579c7cc12ae6076b15a733842"></a>
 <a class="el" href="classG2PDictionaryModel.html">G2PDictionaryModel</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getDictionaryModel</b> ()</td></tr>
 <tr class="separator:ab6f414c579c7cc12ae6076b15a733842"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa90475c682a53b80f18337663e384da4"><td class="memItemLeft" align="right" valign="top"><a id="aa90475c682a53b80f18337663e384da4" name="aa90475c682a53b80f18337663e384da4"></a>
-<a class="el" href="classG2PRuleBasedModel.html">G2PRuleBasedModel</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getRuleBasedModel</b> ()</td></tr>
-<tr class="separator:aa90475c682a53b80f18337663e384da4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05c01b189f75bf024c47d95fac796b2d"><td class="memItemLeft" align="right" valign="top"><a id="a05c01b189f75bf024c47d95fac796b2d" name="a05c01b189f75bf024c47d95fac796b2d"></a>
+<a class="el" href="classG2PRuleBasedModelEN.html">G2PRuleBasedModelEN</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getRuleBasedModel</b> ()</td></tr>
+<tr class="separator:a05c01b189f75bf024c47d95fac796b2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae40331d6d31e4a881c3614d003cc0851"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classG2PDictionaryAndRulesModel.html#ae40331d6d31e4a881c3614d003cc0851">wordToPhonemes</a> (const std::string &amp;word) override</td></tr>
 <tr class="memdesc:ae40331d6d31e4a881c3614d003cc0851"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert word to phonemes using dictionary and rules.  <br /></td></tr>
 <tr class="separator:ae40331d6d31e4a881c3614d003cc0851"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -163,10 +164,10 @@ Protected Attributes</h2></td></tr>
 <a class="el" href="classG2PDictionaryModel.html">G2PDictionaryModel</a>&#160;</td><td class="memItemRight" valign="bottom"><b>g2pDictionaryModel_</b></td></tr>
 <tr class="memdesc:afc860de5e876d2e03a35e0fc009205f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dictionary-based model. <br /></td></tr>
 <tr class="separator:afc860de5e876d2e03a35e0fc009205f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8bf26b667685063c5fb52e36b671c3b"><td class="memItemLeft" align="right" valign="top"><a id="ac8bf26b667685063c5fb52e36b671c3b" name="ac8bf26b667685063c5fb52e36b671c3b"></a>
-<a class="el" href="classG2PRuleBasedModel.html">G2PRuleBasedModel</a>&#160;</td><td class="memItemRight" valign="bottom"><b>g2pRuleBasedModel_</b></td></tr>
-<tr class="memdesc:ac8bf26b667685063c5fb52e36b671c3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rule-based model. <br /></td></tr>
-<tr class="separator:ac8bf26b667685063c5fb52e36b671c3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a074613b24d13d047d6c8db2ba7cee0"><td class="memItemLeft" align="right" valign="top"><a id="a4a074613b24d13d047d6c8db2ba7cee0" name="a4a074613b24d13d047d6c8db2ba7cee0"></a>
+<a class="el" href="classG2PRuleBasedModelEN.html">G2PRuleBasedModelEN</a>&#160;</td><td class="memItemRight" valign="bottom"><b>g2pRuleBasedModel_</b></td></tr>
+<tr class="memdesc:a4a074613b24d13d047d6c8db2ba7cee0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rule-based model. <br /></td></tr>
+<tr class="separator:a4a074613b24d13d047d6c8db2ba7cee0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classG2PHybridModel"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classG2PHybridModel')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classG2PHybridModel.html">G2PHybridModel</a></td></tr>
 <tr class="memitem:a23476bd6a19ee7674253c27ee9b8b9f0 inherit pro_attribs_classG2PHybridModel"><td class="memItemLeft" align="right" valign="top"><a id="a23476bd6a19ee7674253c27ee9b8b9f0" name="a23476bd6a19ee7674253c27ee9b8b9f0"></a>
 std::vector&lt; <a class="el" href="classG2PModelBase.html">G2PModelBase</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>models_</b></td></tr>

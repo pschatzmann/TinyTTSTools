@@ -70,6 +70,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="structPhonemeSynthesisParams-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">PhonemeSynthesisParams Struct Reference</div></div>
@@ -81,6 +82,12 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="VocoderBase_8h_source.html">VocoderBase.h</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a9fbf3db485113f36f6434420e002d65e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPhonemeSynthesisParams.html#a9fbf3db485113f36f6434420e002d65e">setPhonemeModifier</a> (<a class="el" href="PhonemeModifiers_8h.html#a78d62fbcc5c40658778fa21e258260db">PhonemeModifier</a> bit)</td></tr>
+<tr class="memdesc:a9fbf3db485113f36f6434420e002d65e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace modifier (e.g. with <a class="el" href="PhonemeModifiers_8h.html#a013c9ec303211d427c36ff8a2f467996" title="Strip every modifier tag matching kModifierTags off token and return the bare base symbol,...">parsePhonemeModifiers()</a>'s output) and derive volume/speed/voicing from it via deriveModifierEffect() (see <a class="el" href="PhonemeModifiers_8h.html" title="Draft diacritic/modifier layer for Phone segments.">PhonemeModifiers.h</a>) &ndash; the same mapping a vocoder applies for a per-token modifier tag, so caller-level and token-level modifiers behave identically.  <br /></td></tr>
+<tr class="separator:a9fbf3db485113f36f6434420e002d65e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:aeda44bad40782dd00aa36d7dda875d25"><td class="memItemLeft" align="right" valign="top"><a id="aeda44bad40782dd00aa36d7dda875d25" name="aeda44bad40782dd00aa36d7dda875d25"></a>
@@ -99,12 +106,87 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>pitchHz</b> = 0.0f</
 <tr class="separator:ab04ee6eebf2e555b32ea9411b9180560"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6200acca55165b10c319cd5136c410fc"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPhonemeSynthesisParams.html#a6200acca55165b10c319cd5136c410fc">speed</a> = 1.0f</td></tr>
 <tr class="separator:a6200acca55165b10c319cd5136c410fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6436be52553064caca56231f0c9aea76"><td class="memItemLeft" align="right" valign="top"><a id="a6436be52553064caca56231f0c9aea76" name="a6436be52553064caca56231f0c9aea76"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>f0StartRatio</b> = 1.0f</td></tr>
+<tr class="memdesc:a6436be52553064caca56231f0c9aea76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pitch contour: F0 multiplier at this phoneme's. <br /></td></tr>
+<tr class="separator:a6436be52553064caca56231f0c9aea76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae84b2b022d9b9991b43c792d47555640"><td class="memItemLeft" align="right" valign="top"><a id="ae84b2b022d9b9991b43c792d47555640" name="ae84b2b022d9b9991b43c792d47555640"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>f0MidRatio</b> = 1.0f</td></tr>
+<tr class="memdesc:ae84b2b022d9b9991b43c792d47555640"><td class="mdescLeft">&#160;</td><td class="mdescRight">onset/midpoint/offset, relative to whatever f0 <br /></td></tr>
+<tr class="separator:ae84b2b022d9b9991b43c792d47555640"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ea583bfdff7e60d7d9a387abebf4797"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPhonemeSynthesisParams.html#a8ea583bfdff7e60d7d9a387abebf4797">f0EndRatio</a> = 1.0f</td></tr>
+<tr class="separator:a8ea583bfdff7e60d7d9a387abebf4797"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca04547d721714cede8e39b914402047"><td class="memItemLeft" align="right" valign="top"><a class="el" href="PhonemeModifiers_8h.html#a78d62fbcc5c40658778fa21e258260db">PhonemeModifier</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPhonemeSynthesisParams.html#aca04547d721714cede8e39b914402047">modifier</a> = PhonemeModifier::MOD_NONE</td></tr>
+<tr class="separator:aca04547d721714cede8e39b914402047"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Optional per-call synthesis attributes for sayPhoneme() </p>
 <p>All fields are optional overrides of the vocoder's own defaults; a value of 0 (or 1.0 for volume) means "use the vocoder's normal
 behavior" so existing call sites are unaffected by this struct's addition. </p>
-</div><h2 class="groupheader">Member Data Documentation</h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a9fbf3db485113f36f6434420e002d65e" name="a9fbf3db485113f36f6434420e002d65e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fbf3db485113f36f6434420e002d65e">&#9670;&#160;</a></span>setPhonemeModifier()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PhonemeSynthesisParams::setPhonemeModifier </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="PhonemeModifiers_8h.html#a78d62fbcc5c40658778fa21e258260db">PhonemeModifier</a>&#160;</td>
+          <td class="paramname"><em>bit</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Replace modifier (e.g. with <a class="el" href="PhonemeModifiers_8h.html#a013c9ec303211d427c36ff8a2f467996" title="Strip every modifier tag matching kModifierTags off token and return the bare base symbol,...">parsePhonemeModifiers()</a>'s output) and derive volume/speed/voicing from it via deriveModifierEffect() (see <a class="el" href="PhonemeModifiers_8h.html" title="Draft diacritic/modifier layer for Phone segments.">PhonemeModifiers.h</a>) &ndash; the same mapping a vocoder applies for a per-token modifier tag, so caller-level and token-level modifiers behave identically. </p>
+<p>Recomputed from this struct's own 1.0/1.0/1.0 baselines every call, not multiplied onto whatever was already there &ndash; so call this BEFORE setting any other manual override on the same params object, or a later manual assignment; calling it a second time with a different modifier is idempotent rather than compounding.</p>
+<p>durationMs and pitchHz are deliberately left untouched: both are absolute-value-or-"use default" fields (0 = default), while a modifier's effect is inherently relative ("20% longer", "somewhat
+higher pitch") &ndash; expressing that correctly needs the vocoder's own base duration/pitch, which isn't known at this layer. speed already exists as a pure multiplier for exactly this reason (see its own doc above), so duration-affecting modifiers go through it instead of durationMs. f0StartRatio/MidRatio/EndRatio (above) are the pure-multiplier pitch mechanism &ndash; no single modifier maps onto them automatically today (stress's pitch correlate is handled separately, via <a class="el" href="classFormantVocoder.html" title="Compact real-time formant (parallel resonator) speech synthesizer.">FormantVocoder</a>'s existing computeStressPitchRise()), but a future tone-affecting modifier could set them directly.</p>
+<p>See deriveModifierEffect()'s switch for the exact per-modifier mapping (stress/long/half-long scale speed+volume, breathy/devoiced/ voiced scale or override voicing). MOD_CREAKY is deliberately NOT mapped onto voicing: its documented effect is glottal-pulse irregularity, not a voicing <em>amount</em> change, so forcing it onto this scalar would misrepresent it &ndash; it stays a <a class="el" href="classFormantVocoder.html" title="Compact real-time formant (parallel resonator) speech synthesizer.">FormantVocoder</a> source-model concern (see PhonemeModifier' </p><dl class="section note"><dt>Note</dt><dd>). Every other modifier (nasalization, secondary articulation, aspiration, unreleased, syllabic, rhotacized) has no corresponding field on this struct at all &ndash; their effects are formant/timing changes a vocoder would need to apply directly from modifier, not something expressible as a volume/speed/voicing/pitch/duration override. </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a8ea583bfdff7e60d7d9a387abebf4797" name="a8ea583bfdff7e60d7d9a387abebf4797"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ea583bfdff7e60d7d9a387abebf4797">&#9670;&#160;</a></span>f0EndRatio</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float PhonemeSynthesisParams::f0EndRatio = 1.0f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>it would otherwise use (pitchHz override or the vocoder's own default). All 1.0 = flat, no contour. Set directly for a manual contour (e.g. a rising question intonation), or via a PhonemeModifier TONE_* value (see <a class="el" href="PhonemeModifiers_8h.html" title="Draft diacritic/modifier layer for Phone segments.">PhonemeModifiers.h</a> and deriveModifierEffect() &ndash; the two compose multiplicatively). Only <a class="el" href="classFormantVocoder.html" title="Compact real-time formant (parallel resonator) speech synthesizer.">FormantVocoder</a> currently interpolates between them (see its synthesizeSamples()). No tone/ pitch-accent G2P produces TONE_* modifiers yet. </p>
+
+</div>
+</div>
+<a id="aca04547d721714cede8e39b914402047" name="aca04547d721714cede8e39b914402047"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca04547d721714cede8e39b914402047">&#9670;&#160;</a></span>modifier</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="PhonemeModifiers_8h.html#a78d62fbcc5c40658778fa21e258260db">PhonemeModifier</a> PhonemeSynthesisParams::modifier = PhonemeModifier::MOD_NONE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The (single) modifier this phoneme carries &ndash; see <a class="el" href="PhonemeModifiers_8h.html" title="Draft diacritic/modifier layer for Phone segments.">PhonemeModifiers.h</a>. Populate via <a class="el" href="PhonemeModifiers_8h.html#a013c9ec303211d427c36ff8a2f467996" title="Strip every modifier tag matching kModifierTags off token and return the bare base symbol,...">parsePhonemeModifiers()</a> and <a class="el" href="structPhonemeSynthesisParams.html#a9fbf3db485113f36f6434420e002d65e" title="Replace modifier (e.g. with parsePhonemeModifiers()&#39;s output) and derive volume/speed/voicing from it...">setPhonemeModifier()</a>, or set directly. </p>
+
+</div>
+</div>
 <a id="a6200acca55165b10c319cd5136c410fc" name="a6200acca55165b10c319cd5136c410fc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6200acca55165b10c319cd5136c410fc">&#9670;&#160;</a></span>speed</h2>
 

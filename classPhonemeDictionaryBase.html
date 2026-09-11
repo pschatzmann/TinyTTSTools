@@ -85,11 +85,15 @@ Inheritance diagram for PhonemeDictionaryBase:</div>
 <div class="dyncontent">
 <div class="center"><img src="classPhonemeDictionaryBase__inherit__graph.png" border="0" usemap="#aPhonemeDictionaryBase_inherit__map" alt="Inheritance graph"/></div>
 <map name="aPhonemeDictionaryBase_inherit__map" id="aPhonemeDictionaryBase_inherit__map">
-<area shape="rect" title="Common interface implemented by CompactPhonemeDictionary and CompressedPhonemeDictionary,..." alt="" coords="5,84,188,109"/>
-<area shape="rect" href="classCompactPhonemeDictionary.html" title="Binary&#45;search word&#45;&gt;phoneme dictionary backed by four flat, flash&#45;resident arrays." alt="" coords="247,5,455,31"/>
-<area shape="rect" href="classCompressedPhonemeDictionary.html" title="Same word&#45;&gt;phoneme lookup as CompactPhonemeDictionary, but smaller on flash for large (&gt;10k word) dat..." alt="" coords="236,55,467,80"/>
-<area shape="rect" href="classCompressedPhonemeDictionarySD.html" title="Loads a CompressedPhonemeDictionary&#39;s six backing arrays from a single binary file (SD card,..." alt="" coords="236,105,467,145"/>
-<area shape="rect" href="classDynamicPhonemeDictionary.html" title="A word&#45;&gt;phoneme dictionary you can add() to at runtime, one entry at a time." alt="" coords="247,169,455,209"/>
+<area shape="rect" title="Common interface implemented by CompactPhonemeDictionary and CompressedPhonemeDictionary,..." alt="" coords="5,199,188,224"/>
+<area shape="rect" href="classCompactPhonemeDictionary.html" title="Binary&#45;search word&#45;&gt;phoneme dictionary backed by four flat, flash&#45;resident arrays." alt="" coords="264,5,472,31"/>
+<area shape="rect" href="classCompressedPhonemeDictionary.html" title="Same word&#45;&gt;phoneme lookup as CompactPhonemeDictionary, but smaller on flash for large (&gt;10k word) dat..." alt="" coords="253,55,483,80"/>
+<area shape="rect" href="classCompressedPhonemeDictionarySD.html" title="Loads a CompressedPhonemeDictionary&#39;s six backing arrays from a single binary file (SD card,..." alt="" coords="253,105,483,145"/>
+<area shape="rect" href="classCompressedPhonemeDictionaryWide.html" title="Same blocked&#45;offset&#45;index + Huffman&#45;coded&#45;phonemes design as CompressedPhonemeDictionary (see that fi..." alt="" coords="236,169,500,195"/>
+<area shape="rect" href="classCompressedPhonemeDictionaryWideSD.html" title="Loads a CompressedPhonemeDictionaryWide&#39;s six backing arrays from a single binary file (SD card,..." alt="" coords="253,219,483,259"/>
+<area shape="rect" href="classDynamicPhonemeDictionary.html" title="A word&#45;&gt;phoneme dictionary you can add() to at runtime, one entry at a time." alt="" coords="264,283,472,323"/>
+<area shape="rect" href="classFallbackPhonemeDictionary.html" title="Composes two PhonemeDictionaryBase&#45;implementing dictionaries into one: lookup() tries primary first,..." alt="" coords="267,348,469,373"/>
+<area shape="rect" href="classRuntimePhonemeDictionary.html" title="Small runtime&#45;built word&#45;&gt;phoneme dictionary for words authored via the extended phoneme&#45;string synta..." alt="" coords="265,397,471,423"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -167,7 +171,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>lookup</b> (co
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classCompactPhonemeDictionary.html#aec1d4433cd3aba9b5ac870287cdc26b5">CompactPhonemeDictionary</a>.</p>
+<p>Implemented in <a class="el" href="classCompactPhonemeDictionary.html#aec1d4433cd3aba9b5ac870287cdc26b5">CompactPhonemeDictionary</a>, and <a class="el" href="classFallbackPhonemeDictionary.html#a6a9effcdd7f84c679f43bc87b52ed631">FallbackPhonemeDictionary</a>.</p>
 
 </div>
 </div>

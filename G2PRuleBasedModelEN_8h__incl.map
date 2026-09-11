@@ -1,0 +1,12 @@
+<map id="src/TinyTTSTools/G2P/G2PRuleBasedModelEN.h" name="src/TinyTTSTools/G2P/G2PRuleBasedModelEN.h">
+<area shape="rect" id="node1" title="Rule&#45;based G2P model for TinyTTSTools." alt="" coords="5,5,196,45"/>
+<area shape="rect" id="node2" title=" " alt="" coords="70,167,137,192"/>
+<area shape="rect" id="node3" title=" " alt="" coords="323,313,382,339"/>
+<area shape="rect" id="node4" href="$G2PRuleBasedModelBase_8h.html" title="Shared scaffolding for the per&#45;language rule&#45;based G2P models." alt="" coords="139,93,340,119"/>
+<area shape="rect" id="node5" href="$G2PModelBase_8h.html" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="391,167,523,192"/>
+<area shape="rect" id="node8" href="$StringUtils_8h.html" title="String utility functions for TinyTTSTools." alt="" coords="161,167,315,192"/>
+<area shape="rect" id="node6" href="$TTSTypes_8h.html" title="Core types and structures for TinyTTSTools." alt="" coords="441,240,587,265"/>
+<area shape="rect" id="node7" title=" " alt="" coords="481,313,547,339"/>
+<area shape="rect" id="node9" title=" " alt="" coords="91,240,177,265"/>
+<area shape="rect" id="node10" title=" " alt="" coords="201,240,264,265"/>
+</map>

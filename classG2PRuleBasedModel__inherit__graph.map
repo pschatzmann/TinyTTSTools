@@ -1,4 +1,0 @@
-<map id="G2PRuleBasedModel" name="G2PRuleBasedModel">
-<area shape="rect" id="node1" title="Rule&#45;based G2P model with enhanced linguistic rules." alt="" coords="5,79,163,104"/>
-<area shape="rect" id="node2" href="$classG2PModelBase.html" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="24,5,144,31"/>
-</map>

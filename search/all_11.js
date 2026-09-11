@@ -8,5 +8,7 @@ var searchData=
   ['resetphonemedictionary_5',['resetPhonemeDictionary',['../classG2PDictionaryModel.html#a1b7a0200386c6d6b7ccc47c759d7ed24',1,'G2PDictionaryModel']]],
   ['resolveduration_6',['resolveDuration',['../classVocoderBase.html#adbe1ea23f5b4862ee7f94d75d5bd023a',1,'VocoderBase']]],
   ['rmsadaptrate_7',['rmsAdaptRate',['../structFormantVoiceConfig.html#a43fe4e0e5499d9947e0cfa22aa6768ea',1,'FormantVoiceConfig']]],
-  ['rule_8',['Rule',['../structG2PRuleBasedModel_1_1Rule.html',1,'G2PRuleBasedModel']]]
+  ['rule_8',['Rule',['../structG2PRuleBasedModelBase_1_1Rule.html',1,'G2PRuleBasedModelBase']]],
+  ['runtimephonemedictionary_9',['RuntimePhonemeDictionary',['../classRuntimePhonemeDictionary.html',1,'']]],
+  ['runtimephonemedictionary_2eh_10',['RuntimePhonemeDictionary.h',['../RuntimePhonemeDictionary_8h.html',1,'']]]
 ];
