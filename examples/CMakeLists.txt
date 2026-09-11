@@ -1,6 +1,10 @@
 
-# Download miniaudio.h to examples-libraries if it doesn't exist
-set(MINIAUDIO_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../examples-libraries/miniaudio.h")
+# Download miniaudio.h to examples-libraries if it doesn't exist. Must
+# match add_tinytts_example()'s own include dir (top-level CMakeLists.txt:
+# ${CMAKE_SOURCE_DIR}/examples-libraries) -- using CMAKE_SOURCE_DIR here
+# too, rather than a relative ../../ off CMAKE_CURRENT_SOURCE_DIR, avoids
+# the two silently drifting apart again.
+set(MINIAUDIO_PATH "${CMAKE_SOURCE_DIR}/examples-libraries/miniaudio.h")
 if(NOT EXISTS ${MINIAUDIO_PATH})
     file(DOWNLOAD https://raw.githubusercontent.com/mackron/miniaudio/master/miniaudio.h
         ${MINIAUDIO_PATH})
