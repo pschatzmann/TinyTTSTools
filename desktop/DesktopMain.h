@@ -28,6 +28,9 @@
 #include "TinyTTSTools/SoundDictionary/DiphoneWAVDictionary.h"
 #include "TinyTTSTools/Vocoder/PSOLAVocoder.h"
 #include "TinyTTSTools/Data/dictionary/CompactCmuDictionaryEN_data.h"
+#include "TinyTTSTools/Data/dictionary/CompactOlaphDE_data.h"
+#include "TinyTTSTools/Data/dictionary/CompactOlaphFR_data.h"
+#include "TinyTTSTools/Data/dictionary/CompactOlaphES_data.h"
 #include "TinyTTSTools/PhonemeDictionary/PhonemeDictionaryDE.h"
 #include "TinyTTSTools/PhonemeDictionary/PhonemeDictionaryFR.h"
 #include "TinyTTSTools/PhonemeDictionary/PhonemeDictionaryES.h"
@@ -99,13 +102,14 @@ class DesktopMain {
     if (!buildG2P(opt)) return 1;
     if (!buildVocoder(opt)) return 1;
     if (opt.full_dict) {
-      if (opt.language == "en") {
-        g2pDictionaryModel_.useCompactDictionary(COMPACT_CMUDICT_EN);
+      if (opt.language == "de") {
+        g2pDictionaryModel_.useCompactDictionary(COMPACT_OLAPH_DE);
+      } else if (opt.language == "fr") {
+        g2pDictionaryModel_.useCompactDictionary(COMPACT_OLAPH_FR);
+      } else if (opt.language == "es") {
+        g2pDictionaryModel_.useCompactDictionary(COMPACT_OLAPH_ES);
       } else {
-        std::fprintf(stderr,
-                      "--full-dict is English-only (no equivalent bundled for --language %s) "
-                      "-- ignoring\n",
-                      opt.language.c_str());
+        g2pDictionaryModel_.useCompactDictionary(COMPACT_CMUDICT_EN);
       }
     }
 
@@ -278,9 +282,10 @@ class DesktopMain {
                   "                        truncate pre-recorded audio, never lengthen it, so a\n"
                   "                        slower request there just plays the same clip unchanged\n"
                   "                        once it's already shorter than the slowed-down target.\n"
-                  "  --full-dict           Use the full ~123k-word CMU dictionary instead of the\n"
-                  "                        small built-in one (see docs/TUTORIAL.md). English\n"
-                  "                        (--language en) only -- ignored otherwise.\n"
+                  "  --full-dict           Use the full compressed dictionary instead of the small\n"
+                  "                        built-in one (see docs/TUTORIAL.md): the ~123k-word CMU\n"
+                  "                        dictionary for English, or the ~93k/60k/62k-word OLaPh-\n"
+                  "                        derived dictionary for --language de/fr/es respectively.\n"
                   "  --neural              Add the neural GRU G2P fallback (~970KB-1.1MB weights,\n"
                   "                        depending on --language) for genuinely novel words\n"
                   "                        (proper nouns, made-up words) that the dictionary\n"
