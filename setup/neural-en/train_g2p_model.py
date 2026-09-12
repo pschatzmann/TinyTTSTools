@@ -88,6 +88,8 @@ def main():
     ap.add_argument("--batch-size", type=int, default=256)
     ap.add_argument("--epochs", type=int, default=15)
     ap.add_argument("--lr", type=float, default=1e-3)
+    ap.add_argument("--dropout", type=float, default=0.0)
+    ap.add_argument("--weight-decay", type=float, default=0.0)
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument("--output", type=Path, default=HERE / "g2p_model.pt")
     args = ap.parse_args()
@@ -105,11 +107,11 @@ def main():
     val_entries = load_split(args.val)
     print(f"Train: {len(train_entries)}, Val: {len(val_entries)}")
 
-    model = G2PModel(hidden_dim=args.hidden_dim).to(device)
+    model = G2PModel(hidden_dim=args.hidden_dim, dropout=args.dropout).to(device)
     n_params = sum(p.numel() for p in model.parameters())
     print(f"Model params: {n_params:,}")
 
-    optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
+    optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
     criterion = nn.CrossEntropyLoss(ignore_index=PAD)
 
     best_acc = -1.0
