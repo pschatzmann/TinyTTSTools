@@ -174,7 +174,8 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Lowercase version of the input string </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Lowercase version of the input string</dd></dl>
+<p>ASCII-only: bytes &gt;= 0x80 (continuation/lead bytes of a multi-byte UTF-8 character) are passed through unchanged rather than given to ::tolower(), which (a) is undefined behavior for a negative signed-char value outside EOF/unsigned-char range, and (b) can't correctly case-fold a multi-byte character one byte at a time anyway. A non-ASCII letter already in lowercase (as every accented entry in PhonemeDictionaryFR/DE/ES.h is) round-trips correctly; an uppercase accented letter (e.g. "É") is a known limitation &ndash; it won't be lowercased &ndash; since real Unicode case folding needs a mapping table this library doesn't carry. </p>
 
 </div>
 </div>

@@ -1,11 +1,12 @@
 <map id="src/TinyTTSTools/G2P/G2PRuleBasedModelBase.h" name="src/TinyTTSTools/G2P/G2PRuleBasedModelBase.h">
-<area shape="rect" id="node1" title="Shared scaffolding for the per&#45;language rule&#45;based G2P models." alt="" coords="59,5,264,45"/>
+<area shape="rect" id="node1" title="Shared scaffolding for the per&#45;language rule&#45;based G2P models." alt="" coords="112,5,317,45"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,93,72,119"/>
-<area shape="rect" id="node3" title=" " alt="" coords="143,240,201,265"/>
-<area shape="rect" id="node4" href="$G2PModelBase_8h.html" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="147,93,279,119"/>
-<area shape="rect" id="node7" href="$StringUtils_8h.html" title="String utility functions for TinyTTSTools." alt="" coords="345,93,498,119"/>
-<area shape="rect" id="node5" href="$TTSTypes_8h.html" title="Core types and structures for TinyTTSTools." alt="" coords="197,167,344,192"/>
-<area shape="rect" id="node6" title=" " alt="" coords="237,240,304,265"/>
-<area shape="rect" id="node8" title=" " alt="" coords="419,167,504,192"/>
-<area shape="rect" id="node9" title=" " alt="" coords="529,167,591,192"/>
+<area shape="rect" id="node3" title=" " alt="" coords="212,240,271,265"/>
+<area shape="rect" id="node4" href="$G2PModelBase_8h.html" title="Base class for Grapheme&#45;to&#45;Phoneme conversion models." alt="" coords="97,93,229,119"/>
+<area shape="rect" id="node7" href="$StringUtils_8h.html" title="String utility functions for TinyTTSTools." alt="" coords="310,93,463,119"/>
+<area shape="rect" id="node5" href="$TTSTypes_8h.html" title="Core types and structures for TinyTTSTools." alt="" coords="32,167,179,192"/>
+<area shape="rect" id="node6" title=" " alt="" coords="72,240,139,265"/>
+<area shape="rect" id="node8" title=" " alt="" coords="443,167,528,192"/>
+<area shape="rect" id="node9" title=" " alt="" coords="553,167,618,192"/>
+<area shape="rect" id="node10" title=" " alt="" coords="355,167,418,192"/>
 </map>
