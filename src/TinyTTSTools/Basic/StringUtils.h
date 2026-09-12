@@ -11,6 +11,7 @@
 #pragma once
 
 #include <algorithm>
+#include <cctype>
 #include <string>
 #include <vector>
 
@@ -25,10 +26,24 @@ class StringUtils {
    * @brief Convert string to lowercase
    * @param str Input string
    * @return Lowercase version of the input string
+   * @details ASCII-only: bytes >= 0x80 (continuation/lead bytes of a
+   * multi-byte UTF-8 character) are passed through unchanged rather than
+   * given to ::tolower(), which (a) is undefined behavior for a negative
+   * signed-char value outside EOF/unsigned-char range, and (b) can't
+   * correctly case-fold a multi-byte character one byte at a time anyway.
+   * A non-ASCII letter already in lowercase (as every accented entry in
+   * PhonemeDictionaryFR/DE/ES.h is) round-trips correctly; an uppercase
+   * accented letter (e.g. "É") is a known limitation -- it won't be
+   * lowercased -- since real Unicode case folding needs a mapping table
+   * this library doesn't carry.
    */
   static std::string toLowerCase(const std::string& str) {
     std::string result = str;
-    std::transform(result.begin(), result.end(), result.begin(), ::tolower);
+    std::transform(result.begin(), result.end(), result.begin(),
+                   [](unsigned char c) -> char {
+                     return c < 0x80 ? static_cast<char>(std::tolower(c))
+                                     : static_cast<char>(c);
+                   });
     return result;
   }
 

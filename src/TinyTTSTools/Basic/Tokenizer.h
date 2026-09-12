@@ -45,9 +45,20 @@ class Tokenizer {
 
     // Remove punctuation and normalize
     std::string normalized;
-    for (char c : result) {
-      if (std::isalpha(c) || std::isspace(c)) {
-        normalized += c;
+    for (unsigned char c : result) {
+      if (c >= 0x80) {
+        // Continuation/lead byte of a multi-byte UTF-8 sequence -- never
+        // a valid ASCII letter/space/punctuation on its own, so <cctype>
+        // (ASCII-only) can't classify it. Passing it to isalpha()/
+        // isspace() as a plain (possibly signed) char is also undefined
+        // behavior per the standard (they only accept values representable
+        // as unsigned char or EOF). Pass it through untouched instead of
+        // running it through <cctype> -- dropping it would corrupt any
+        // accented word (see PhonemeDictionaryFR/DE/ES.h, whose entries
+        // are keyed by their UTF-8-accented spelling, e.g. "café", "chéri").
+        normalized += static_cast<char>(c);
+      } else if (std::isalpha(c) || std::isspace(c)) {
+        normalized += static_cast<char>(c);
       } else if (c == '.' || c == '!' || c == '?') {
         normalized += " . ";  // Convert sentence endings to pauses
       }
